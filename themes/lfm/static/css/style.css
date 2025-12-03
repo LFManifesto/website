@@ -1496,6 +1496,59 @@ audio {
 @media (max-width: 768px) {
   .resource-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .resource-section {
+    margin-bottom: 32px;
+  }
+
+  .resource-section-title {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .resource-card {
+    padding: 16px;
+  }
+
+  .resource-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .resource-card-desc {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .resource-code {
+    padding: 10px 12px;
+  }
+
+  .resource-code code {
+    font-size: 0.65rem;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+
+  .resource-config pre {
+    font-size: 0.65rem;
+    padding: 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .resource-link-card {
+    padding: 14px;
+  }
+
+  .resource-link-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .resource-link-card p {
+    font-size: 0.8rem;
   }
 }
 
@@ -1579,35 +1632,61 @@ audio {
   h3 { font-size: 1.25rem; }
   .article-title { font-size: 1.5rem; }
 
+  /* Mobile hamburger button */
   .nav-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1001;
   }
 
+  /* Mobile menu - fullscreen overlay */
   .nav-menu {
-    display: flex;
     position: fixed;
-    top: var(--nav-height);
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: #0a0a0a;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    background-color: #0a0a0a;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-lg);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    border-top: 1px solid var(--border-color);
-    z-index: 999;
+    gap: 24px;
+    padding: 80px 20px 40px;
+    box-sizing: border-box;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.3s, opacity 0.3s ease;
   }
 
   .nav-menu.active {
-    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.3s ease;
+  }
+
+  .nav-item {
+    width: 100%;
+    text-align: center;
   }
 
   .nav-link {
-    font-size: 1.1rem;
-    padding: var(--space-md) var(--space-lg);
+    display: block;
+    font-size: 1.25rem;
+    padding: 16px 24px;
+    color: #f0f0f0;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #c92a2a;
+    background-color: rgba(201, 42, 42, 0.1);
   }
 
   .main-content {
