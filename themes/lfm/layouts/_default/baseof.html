@@ -80,24 +80,27 @@
         var navToggle = document.querySelector('.nav-toggle');
         var navMenu = document.querySelector('.nav-menu');
 
-        if (navToggle && navMenu) {
-          navToggle.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (navMenu.classList.contains('active')) {
-              navMenu.classList.remove('active');
-            } else {
-              navMenu.classList.add('active');
-            }
-          };
+        if (!navToggle || !navMenu) return;
 
-          // Close menu when clicking a link
-          var links = navMenu.querySelectorAll('.nav-link');
-          for (var i = 0; i < links.length; i++) {
-            links[i].onclick = function() {
-              navMenu.classList.remove('active');
-            };
-          }
+        function toggleMenu(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          navMenu.classList.toggle('active');
+        }
+
+        // Use both click and touchend for maximum compatibility
+        navToggle.addEventListener('click', toggleMenu, false);
+        navToggle.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          toggleMenu(e);
+        }, {passive: false});
+
+        // Close menu when clicking a link
+        var links = navMenu.querySelectorAll('.nav-link');
+        for (var i = 0; i < links.length; i++) {
+          links[i].addEventListener('click', function() {
+            navMenu.classList.remove('active');
+          }, false);
         }
       }
 
