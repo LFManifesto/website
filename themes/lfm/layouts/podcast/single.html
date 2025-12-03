@@ -1,0 +1,35 @@
+{{ define "main" }}
+<article class="article-single">
+  <header class="article-header">
+    <h1 class="article-title">{{ .Title }}</h1>
+    <div class="article-meta">
+      Episode {{ .Params.episode }} &middot; {{ .Date.Format "January 2, 2006" }}
+      {{ with .Params.duration }} &middot; {{ . }}{{ end }}
+    </div>
+  </header>
+
+  {{ with .Params.audio }}
+  <div class="audio-player mb-lg">
+    <audio controls preload="metadata" style="width: 100%;">
+      <source src="{{ . }}" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  {{ end }}
+
+  <div class="article-content">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.links }}
+  <div class="mt-lg">
+    <h3>Links Mentioned</h3>
+    <ul>
+      {{ range . }}
+      <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+</article>
+{{ end }}

@@ -1,0 +1,32 @@
+{{ define "main" }}
+<h1 class="page-title-centered">{{ .Title }}</h1>
+
+<div class="article-list">
+  {{ range .Paginator.Pages }}
+  <article class="article-card">
+    <h2 class="article-card-title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h2>
+    <div class="article-card-meta">
+      {{ .Date.Format "January 2, 2006" }}
+      {{ with .Params.author }} &middot; {{ . }}{{ end }}
+    </div>
+    <p class="article-card-excerpt">{{ .Description }}</p>
+  </article>
+  {{ end }}
+</div>
+
+{{ if gt .Paginator.TotalPages 1 }}
+<nav class="pagination">
+  {{ if .Paginator.HasPrev }}
+  <a href="{{ .Paginator.Prev.URL }}" class="pagination-link">&larr; Newer</a>
+  {{ end }}
+
+  <span class="pagination-current">Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
+
+  {{ if .Paginator.HasNext }}
+  <a href="{{ .Paginator.Next.URL }}" class="pagination-link">Older &rarr;</a>
+  {{ end }}
+</nav>
+{{ end }}
+{{ end }}

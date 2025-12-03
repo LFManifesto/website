@@ -1,0 +1,28 @@
+{{ define "main" }}
+<article class="tool-page">
+  <header class="tool-header">
+    <h1 class="tool-title">{{ .Title }}</h1>
+    {{ with .Description }}
+    <p class="tool-description">{{ . }}</p>
+    {{ end }}
+    {{ with .Params.tags }}
+    <div class="tool-tags">
+      {{ range . }}
+      <span class="tool-tag">{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
+  </header>
+
+  <div class="tool-content">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.related_article }}
+  <div class="tool-related">
+    <h3>Related Article</h3>
+    <a href="{{ . }}" class="btn btn-secondary">Read the full article &rarr;</a>
+  </div>
+  {{ end }}
+</article>
+{{ end }}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Feasibility Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; color: #1f2937; }
+        .dossier-panel { background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; }
+        .dossier-title { font-size: 1.125rem; font-weight: 600; color: #4b5563; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.75rem; margin-bottom: 1rem; }
+        .intel-block { font-family: 'monospace'; background-color: #f9fafb; border: 1px solid #e5e7eb; padding: 1rem; border-radius: 0.375rem; }
+        .decision-btn { font-size: 1.25rem; font-weight: bold; padding: 1rem 2rem; border-radius: 0.5rem; transition: transform 0.1s; }
+        .decision-btn:hover { transform: scale(1.02); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 bg-gray-100">
+
+    <div class="w-full max-w-4xl mx-auto space-y-6">
+        <div class="flex justify-between items-center">
+             <h1 class="text-3xl font-bold text-gray-800">Mission Feasibility Assessment</h1>
+             <div>
+                 <span class="text-xs text-gray-500">OPERATOR ID:</span>
+                 <span id="user-id-display" class="font-mono text-sm text-gray-700">Authenticating...</span>
+            </div>
+        </div>
+
+        <details class="dossier-panel bg-gray-50">
+            <summary class="font-semibold text-gray-700 cursor-pointer">Show/Hide Reference Guides</summary>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-4 text-xs font-mono">
+                <div>
+                    <h4 class="font-bold mb-2 border-b pb-1">METAR Report Key</h4>
+                    <p><strong>KCSG 311953Z 29019G28KT 10SM BKN040 31/22 A3009</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>KCSG:</strong> Airport Identifier</li>
+                        <li><strong>311953Z:</strong> Date (31st) and Time (1953 Zulu)</li>
+                        <li><strong>29019G28KT:</strong> Wind from 290° at 19 knots, gusting to 28 knots</li>
+                        <li><strong>10SM:</strong> Visibility (10 Statute Miles)</li>
+                        <li><strong>BKN040:</strong> Broken clouds at 4,000 ft AGL</li>
+                        <li><strong>31/22:</strong> Temp 31°C / Dew Point 22°C</li>
+                        <li><strong>A3009:</strong> Altimeter setting</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2 border-b pb-1">NOTAM Key</h4>
+                    <p><strong>!FDC 5/4321 ATL ... 5NM RADIUS ... SFC TO 10000FT AGL</strong></p>
+                     <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>!FDC:</strong> Flight Data Center (National Security)</li>
+                        <li><strong>5NM RADIUS:</strong> Radius of the restriction</li>
+                        <li><strong>3344N/08425W:</strong> Latitude/Longitude of center point</li>
+                        <li><strong>SFC TO 10000FT AGL:</strong> Altitude from Surface to 10,000 ft Above Ground</li>
+                        <li><strong>2508011200-2508011800:</strong> Valid from August 1st, 12:00Z to 18:00Z</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="font-bold mb-2 border-b pb-1">Link Margin Key</h4>
+                     <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong class="text-green-600">> 15 dB:</strong> Nominal (GO) - Strong, reliable link.</li>
+                        <li><strong class="text-yellow-600">10-15 dB:</strong> Marginal (Use Caution) - Link may degrade.</li>
+                        <li><strong class="text-red-600">< 10 dB:</strong> Critical (NO-GO) - High risk of failsafe.</li>
+                    </ul>
+                </div>
+            </div>
+        </details>
+
+        <div id="dossier-container" class="dossier-panel">
+            </div>
+
+        <div id="debrief-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden">
+            <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg text-center">
+                <h2 id="debrief-title" class="text-2xl font-bold mb-4"></h2>
+                <p class="text-gray-600 mb-2">Your Decision:</p>
+                <p id="debrief-user-answer" class="text-xl font-bold mb-4"></p>
+                <div class="bg-gray-100 p-4 rounded-md">
+                    <h3 class="font-semibold text-gray-800 mb-2">Instructor's Debrief</h3>
+                    <p id="debrief-text" class="text-gray-700"></p>
+                </div>
+                <button id="next-challenge-btn" class="w-full mt-6 p-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-bold">Next Challenge</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyBgGcRPxEy47tAAybaOgqp2NFNCmXq8U2s",
+            authDomain: "ulfc-mss.firebaseapp.com",
+            projectId: "ulfc-mss",
+            storageBucket: "ulfc-mss.firebasestorage.app",
+            messagingSenderId: "925555368763",
+            appId: "1:925555368763:web:607da1e80ef19685988d1e",
+            measurementId: "G-XZWME3J2T1"
+        };
+
+        let db, auth, userId, currentScenario;
+        const appId = firebaseConfig.projectId;
+        
+        const DOMElements = {
+            userIdDisplay: document.getElementById('user-id-display'),
+            dossierContainer: document.getElementById('dossier-container'),
+            debriefModal: document.getElementById('debrief-modal'),
+            debriefTitle: document.getElementById('debrief-title'),
+            debriefUserAnswer: document.getElementById('debrief-user-answer'),
+            debriefText: document.getElementById('debrief-text'),
+            nextChallengeBtn: document.getElementById('next-challenge-btn')
+        };
+        
+        async function initializeFirebase() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                await signInAnonymously(auth);
+                onAuthStateChanged(auth, (user) => {
+                    userId = user ? user.uid : "error";
+                    DOMElements.userIdDisplay.textContent = userId;
+                });
+            } catch (error) { console.error("Firebase Error:", error); }
+        }
+        
+        async function saveAssessment(assessment) {
+            if (!db || !userId) return;
+            try {
+                await addDoc(collection(db, `feasibility_assessments/${appId}/operators/${userId}/reports`), { ...assessment, timestamp: serverTimestamp() });
+            } catch (error) { console.error("Error saving assessment:", error); }
+        }
+
+        const scenarios = [
+            { mission: "Map a power substation in a rural area.", drone: "DJI Mavic 3 Pro", cloudRF: { margin: 25, status: "NOMINAL" }, metar: "KOPN 311955Z AUTO 28008KT 10SM CLR 33/14 A3011", notam: "No conflicting NOTAMs.", adsb: "No conflicting traffic.", correctAnswer: "GO", debriefText: "All conditions are favorable. The link margin is excellent, weather is within limits, and the airspace is clear." },
+            { mission: "Autonomous payload delivery to a specified coordinate.", drone: "Custom ArduCopter Quad", cloudRF: { margin: 5, status: "CRITICAL" }, metar: "KOPN 311955Z AUTO 28008KT 10SM CLR 33/14 A3011", notam: "No conflicting NOTAMs.", adsb: "No conflicting traffic.", correctAnswer: "NO-GO", debriefText: "Mission is NO-GO. The CloudRF report shows a link margin of only 5 dB, which is below the 15 dB minimum for a reliable autonomous flight." },
+            { mission: "Thermal survey of a commercial rooftop in Columbus.", drone: "Autel Evo II", cloudRF: { margin: 22, status: "NOMINAL" }, metar: "KCSG 311953Z 29019G28KT 10SM BKN040 31/22 A3009", notam: "No conflicting NOTAMs.", adsb: "N987CD - LIFEFLIGHT - 800ft - 2NM NE (Inbound)", correctAnswer: "NO-GO", debriefText: "Mission is NO-GO. The METAR shows wind at 19 knots gusting to 28 knots, exceeding safe operational limits." },
+            { mission: "Map a downtown Atlanta block for network vulnerability analysis.", drone: "DJI Mavic 2 Pro", cloudRF: { margin: 18, status: "NOMINAL" }, metar: "KFTY 311953Z 30005KT 10SM SCT045 33/19 A3011", notam: "!FDC 5/4321 ATL TFR WI 10NM RADIUS 3344N/08425W SFC TO 10000FT AGL", adsb: "No conflicting traffic.", correctAnswer: "NO-GO", debriefText: "Mission is NO-GO. A Temporary Flight Restriction (TFR) is active over the target area, making any drone flight illegal and unsafe." },
+            { mission: "Survey a construction site near a hospital.", drone: "DJI Mavic 3 Pro", cloudRF: { margin: 20, status: "NOMINAL" }, metar: "KFTY 311953Z 30005KT 10SM CLR 33/19 A3011", notam: "No conflicting NOTAMs.", adsb: "N987CD - LIFEFLIGHT - 800ft - 1NM East (Departing)", correctAnswer: "GO", debriefText: "Mission is GO. Although a helicopter is nearby, it is departing the area. All other conditions are nominal." },
+            { mission: "Long-range payload delivery over a wooded area.", drone: "Custom ArduCopter Quad", cloudRF: { margin: 12, status: "MARGINAL" }, metar: "KOPN 311955Z AUTO 28008KT 10SM CLR 33/14 A3011", notam: "No conflicting NOTAMs.", adsb: "No conflicting traffic.", correctAnswer: "NO-GO", debriefText: "Mission is NO-GO. The link margin is only 12 dB, which is marginal. For a high-risk BVLOS flight, a stronger link is required." },
+            { mission: "Rooftop inspection in a dense urban area.", drone: "Autel Evo II", cloudRF: { margin: 16, status: "NOMINAL" }, metar: "KCSG 311953Z 29010KT 5SM BR BKN010 25/20 A3010", notam: "No conflicting NOTAMs.", adsb: "No conflicting traffic.", correctAnswer: "NO-GO", debriefText: "Mission is NO-GO. The METAR shows a broken cloud ceiling at 1,000 ft and mist (BR), which may obscure the target and violate line-of-sight rules." },
+            { mission: "Facade inspection of a skyscraper in Atlanta.", drone: "DJI Mavic 2 Pro", cloudRF: { margin: 19, status: "NOMINAL" }, metar: "KFTY 311953Z 30005KT 10SM CLR 33/19 A3011", notam: "No conflicting NOTAMs.", adsb: "N224PD - Police Helicopter - 900ft - 1NM Orbiting", correctAnswer: "NO-GO", debriefText: "Mission is NO-GO. A police helicopter is orbiting the area at low altitude, creating a significant deconfliction risk." },
+            { mission: "Powerline survey over rural terrain.", drone: "DJI Mavic 3 Pro", cloudRF: { margin: 28, status: "NOMINAL" }, metar: "KOPN 311955Z AUTO 28004KT 10SM CLR 33/14 A3011", notam: "No conflicting NOTAMs.", adsb: "N123AB - C172 - 2500ft - 5NM West", correctAnswer: "GO", debriefText: "Mission is GO. All conditions are ideal for a powerline survey." },
+            { mission: "Emergency response mapping of a simulated train derailment.", drone: "Autel Evo II", cloudRF: { margin: 24, status: "NOMINAL" }, metar: "KCSG 311953Z 29010KT 10SM CLR 31/22 A3009", notam: "!FDC 5/1111 OPN EMERGENCY RESPONSE UAS OPS WI 2NM RADIUS... SFC TO 600FT AGL", adsb: "No conflicting traffic.", correctAnswer: "GO", debriefText: "Mission is GO. The NOTAM is for your own operation, clearing the airspace. All other factors are nominal." },
+            { mission: "Nighttime surveillance training.", drone: "DJI Mavic 3 Pro (Thermal)", cloudRF: { margin: 21, status: "NOMINAL" }, metar: "KOPN 010455Z AUTO 27003KT 10SM CLR 25/18 A3012", notam: "No conflicting NOTAMs.", adsb: "No conflicting traffic.", correctAnswer: "GO", debriefText: "Mission is GO. Conditions are perfect for a nighttime flight." },
+            { mission: "Assess a potential vehicle-based moving nest site.", drone: "Custom ArduCopter Quad", cloudRF: { margin: 9, status: "CRITICAL" }, metar: "KOPN 311955Z AUTO 28008KT 10SM CLR 33/14 A3011", notam: "No conflicting NOTAMs.", adsb: "No conflicting traffic.", correctAnswer: "NO-GO", debriefText: "Mission is NO-GO. A link margin of 9 dB is critical and unacceptable, especially for a complex moving operation." },
+            { mission: "Real estate photography in a suburban neighborhood.", drone: "DJI Mavic 2 Pro", cloudRF: { margin: 17, status: "NOMINAL" }, metar: "KFTY 311953Z 30005KT 10SM SCT045 33/19 A3011", notam: "No conflicting NOTAMs.", adsb: "N4425G - R44 - 1000ft - 3NM NE", correctAnswer: "GO", debriefText: "Mission is GO. The helicopter is at a safe distance and altitude. Other conditions are nominal." },
+            { mission: "Mapping mission near Hartsfield-Jackson Airport (KATL).", drone: "DJI Mavic 3 Pro", cloudRF: { margin: 25, status: "NOMINAL" }, metar: "KATL 311953Z 29012KT 10SM BKN035 32/21 A3010", notam: "All UAS operations prohibited within 5NM of KATL without LAANC authorization.", adsb: "Heavy commercial traffic above 2000ft.", correctAnswer: "NO-GO", debriefText: "Mission is NO-GO. The NOTAM explicitly prohibits UAS operations in this Class B airspace without specific authorization." },
+            { mission: "Search and rescue training over a state park.", drone: "Autel Evo II", cloudRF: { margin: 23, status: "NOMINAL" }, metar: "KOPN 311955Z AUTO 28008KT 10SM CLR 33/14 A3011", notam: "No conflicting NOTAMs.", adsb: "No conflicting traffic.", correctAnswer: "GO", debriefText: "Mission is GO. All factors are nominal and safe for the training exercise." }
+        ];
+
+        function presentScenario(index) {
+            currentScenario = scenarios[index];
+            const { mission, drone, cloudRF, metar, notam, adsb } = currentScenario;
+
+            DOMElements.dossierContainer.innerHTML = `
+                <div class="dossier-title">Mission Dossier</div>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-gray-700">Objective</h4>
+                        <p>${mission} using a ${drone}.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700">1. Simulated CloudRF Report</h4>
+                        <div class="intel-block">Link Margin: <strong class="${cloudRF.margin < 10 ? 'text-red-500' : cloudRF.margin < 15 ? 'text-yellow-500' : 'text-green-500'}">${cloudRF.margin} dB (${cloudRF.status})</strong></div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700">2. METAR Report</h4>
+                        <div class="intel-block">${metar}</div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700">3. NOTAM Report</h4>
+                        <div class="intel-block">${notam}</div>
+                    </div>
+                     <div>
+                        <h4 class="font-semibold text-gray-700">4. ADS-B Summary</h4>
+                        <div class="intel-block">${adsb}</div>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Based on this complete data package, is this mission feasible?</h3>
+                    <div class="flex justify-center gap-6">
+                        <button class="decision-btn bg-green-500 hover:bg-green-600 text-white" onclick="checkAnswer('GO')">FEASIBLE (GO)</button>
+                        <button class="decision-btn bg-red-500 hover:bg-red-600 text-white" onclick="checkAnswer('NO-GO')">NOT FEASIBLE (NO-GO)</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.checkAnswer = (userChoice) => {
+            const wasCorrect = userChoice === currentScenario.correctAnswer;
+            
+            DOMElements.debriefTitle.textContent = wasCorrect ? 'Correct Assessment' : 'Incorrect Assessment';
+            DOMElements.debriefTitle.className = `text-2xl font-bold mb-4 ${wasCorrect ? 'text-green-600' : 'text-red-600'}`;
+            DOMElements.debriefUserAnswer.textContent = `You chose: ${userChoice}`;
+            DOMElements.debriefText.textContent = currentScenario.debriefText;
+            DOMElements.debriefModal.classList.remove('hidden');
+
+            saveAssessment({
+                mission: currentScenario.mission,
+                userDecision: userChoice,
+                correctDecision: currentScenario.correctAnswer,
+                wasCorrect: wasCorrect
+            });
+        }
+
+        function startNewChallenge() {
+            DOMElements.debriefModal.classList.add('hidden');
+            const scenarioIndex = Math.floor(Math.random() * scenarios.length);
+            presentScenario(scenarioIndex);
+        }
+
+        // --- Event Listeners ---
+        DOMElements.nextChallengeBtn.addEventListener('click', startNewChallenge);
+        
+        // --- Initial Setup ---
+        initializeFirebase();
+        startNewChallenge();
+    </script>
+</body>
+</html>

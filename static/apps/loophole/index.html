@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loophole Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1c1b1b;
+        }
+        .glass-effect {
+            background: rgba(41, 41, 41, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .modal-active { opacity: 1; pointer-events: auto; }
+        .modal-inactive { opacity: 0; pointer-events: none; }
+        .go { background-color: rgba(16, 185, 129, 0.8); color: white; }
+        .no-go { background-color: rgba(239, 68, 68, 0.8); color: white; }
+        .tab {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-active {
+            color: #ef4444; /* red-500 */
+            border-bottom-color: #ef4444;
+        }
+    </style>
+</head>
+<body class="text-white antialiased">
+
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+            <header class="text-center mb-8">
+                <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-red-500">Loophole Calculator</h1>
+            </header>
+
+            <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Calculator Inputs -->
+                <div class="glass-effect rounded-2xl p-6 shadow-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-semibold text-red-400">Calculators</h2>
+                        <button id="infoBtn" class="text-red-400 hover:text-red-300 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Tabs -->
+                    <div class="flex border-b border-gray-700 mb-4 text-sm sm:text-base flex-wrap">
+                        <div id="tabClearance" class="tab tab-active">Clearance</div>
+                        <div id="tabRange" class="tab">Range Estimation</div>
+                        <div id="tabConvert" class="tab">Conversions</div>
+                    </div>
+
+                    <div id="panels">
+                        <!-- Panel for Clearance -->
+                        <div id="panelClearance" class="space-y-4">
+                            <p class="text-sm text-gray-400">Enter your data to determine the bullet's path through the loophole.</p>
+                            <div><label for="cl_bh" class="block text-sm font-medium text-gray-300 mb-1">Height Over Bore (cm)</label><input type="number" id="cl_bh" value="6.86" step="0.1" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none"></div>
+                            <div><label for="cl_d" class="block text-sm font-medium text-gray-300 mb-1">Distance to Loophole (meters)</label><input type="number" id="cl_d" value="10" step="0.5" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none"></div>
+                            <div><label for="cl_de" class="block text-sm font-medium text-gray-300 mb-1">Dialed Elevation for Target (Mils)</label><input type="number" id="cl_de" value="5.2" step="0.1" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none"></div>
+                            <div><label for="cl_ls" class="block text-sm font-medium text-gray-300 mb-1">Loophole Height (Mils)</label><input type="number" id="cl_ls" value="4.0" step="0.1" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none"></div>
+                            
+                            <div class="pt-4 border-t border-gray-700/50 space-y-2">
+                                <div id="aimPointRecommendation" class="text-center text-lg font-semibold text-white bg-gray-900/50 p-3 rounded-lg">--</div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gray-900/50 p-3 rounded-lg border border-gray-700 text-center">
+                                    <p class="text-gray-400 text-sm">Bullet Path vs LOS</p>
+                                    <p id="clearanceResult" class="text-2xl font-bold">--</p>
+                                </div>
+                                <div id="goNoGoResult" class="p-3 rounded-lg flex items-center justify-center bg-gray-900/50 border border-gray-700 cursor-pointer">
+                                    <p id="goNoGoText" class="text-2xl font-bold">--</p>
+                                </div>
+                            </div>
+                            <div id="goNoGoReason" class="text-center text-sm text-gray-400 min-h-[40px] flex items-center justify-center p-2 bg-gray-900/50 rounded-lg"></div>
+                        </div>
+
+                        <!-- Panel for Range Estimation -->
+                        <div id="panelRange" class="hidden space-y-4">
+                            <p class="text-sm text-gray-400">Estimate range to a target of a known size.</p>
+                            <div><label for="r_ts" class="block text-sm font-medium text-gray-300 mb-1">Target Size (cm)</label><input type="number" id="r_ts" value="45" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none"></div>
+                            <div><label for="r_m" class="block text-sm font-medium text-gray-300 mb-1">Mils Read in Reticle</label><input type="number" id="r_m" value="1.2" step="0.1" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none"></div>
+                            <div class="pt-4 text-center">
+                                <p class="text-gray-400 text-sm">Estimated Range</p>
+                                <p id="resultR" class="text-3xl font-bold text-red-400">--</p>
+                            </div>
+                        </div>
+
+                        <!-- Panel for Conversions -->
+                        <div id="panelConvert" class="hidden space-y-4">
+                            <p class="text-sm text-gray-400">Quickly convert units for use in other tabs.</p>
+                            <div class="space-y-3">
+                                <div>
+                                    <label for="conv_in_cm" class="block text-sm font-medium text-gray-300 mb-1">Inches to cm</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="conv_in_cm" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="in">
+                                        <span class="text-gray-400">&rarr;</span>
+                                        <input type="text" id="conv_cm_out" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white" readonly placeholder="cm">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="conv_ft" class="block text-sm font-medium text-gray-300 mb-1">Feet to meters</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="conv_ft" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="ft">
+                                        <span class="text-gray-400">&rarr;</span>
+                                        <input type="text" id="conv_m_out1" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white" readonly placeholder="meters">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="conv_yd" class="block text-sm font-medium text-gray-300 mb-1">Yards to meters</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="conv_yd" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="yd">
+                                        <span class="text-gray-400">&rarr;</span>
+                                        <input type="text" id="conv_m_out2" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white" readonly placeholder="meters">
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-gray-700">
+                                    <label for="conv_in_mil" class="block text-sm font-medium text-gray-300 mb-1">Inches to Mil</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="conv_in_mil" class="w-1/2 bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="inches">
+                                        <input type="number" id="conv_in_mil_dist" class="w-1/2 bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="dist (yds)">
+                                        <span class="text-gray-400">&rarr;</span>
+                                        <input type="text" id="conv_mil_out1" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white" readonly placeholder="Mils">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="conv_moa" class="block text-sm font-medium text-gray-300 mb-1">MOA to Mil</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="conv_moa" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="MOA">
+                                        <span class="text-gray-400">&rarr;</span>
+                                        <input type="text" id="conv_mil_out2" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white" readonly placeholder="Mils">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Reticle Display -->
+                <div class="glass-effect rounded-2xl p-6 shadow-lg flex flex-col items-center justify-center">
+                     <h2 class="text-2xl font-semibold mb-4 text-red-400 border-b border-red-500/30 pb-3 w-full text-center">Sight Picture</h2>
+                    <canvas id="reticleCanvas" class="bg-gray-800/50 rounded-lg border border-gray-700" style="width: 100%; height: auto; aspect-ratio: 1 / 1;"></canvas>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal modal-inactive fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="glass-effect rounded-2xl p-6 shadow-lg w-full max-w-3xl max-h-full overflow-y-auto text-gray-300">
+            <div class="flex justify-between items-center border-b border-red-500/30 pb-3 mb-4">
+                <h3 class="text-2xl font-semibold text-red-400">How To Use & Formula Confirmation</h3>
+                <button id="closeInfoModalBtn" class="text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
+            </div>
+            <div class="space-y-6 text-left">
+                <div>
+                    <h4 class="text-lg font-semibold text-red-400 mb-2">The Problem: Bullet Path vs. Line of Sight</h4>
+                    <p class="text-sm text-gray-400">When you dial elevation for a distant target, your barrel tilts up. At the same time, your barrel is physically below your scope (mechanical offset). This calculator determines the bullet's final path through a close obstacle by combining these two factors.</p>
+                </div>
+                <div class="pt-4 border-t border-gray-700">
+                    <h4 class="text-lg font-semibold text-red-400 mb-2">Why Is My Bullet Path Positive?</h4>
+                    <p class="text-sm text-gray-400">This is counter-intuitive but correct. At the short distance of the loophole, the bullet is still on the <em>rising</em> portion of its arc to the distant target. The upward angle from your dialed elevation is much greater than the downward mechanical offset, so the bullet passes through the loophole <strong>above</strong> your line of sight.</p>
+                    <div class="mt-2 text-center text-xs text-gray-500 bg-gray-900/50 p-2 rounded-lg">
+                        <p>SCOPE -----&gt; (Line of Sight)</p>
+                        <p>BARREL Tilted Up &uarr; ..... (Line of Departure / Bullet Path) &uarr;</p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-red-400 mb-2">How To Use</h4>
+                    <ol class="list-decimal list-inside space-y-2 mt-2 pl-2 text-sm text-gray-400">
+                        <li><strong>Measure Height Over Bore:</strong> Use calipers or a tape measure to find the distance from the center of your barrel to the center of your scope. Enter this value in <strong>centimeters (cm)</strong>.</li>
+                        <li><strong>Measure Distance to Loophole:</strong> Measure the distance from your scope's turret to the loophole. Enter this value in <strong>meters (m)</strong>.</li>
+                        <li><strong>Enter Dialed Elevation:</strong> Input the elevation you have dialed on your turret for your long-range target in <strong>Mils</strong>.</li>
+                        <li><strong>Measure Loophole Height:</strong> Use your reticle to measure the total height of the loophole opening. Enter this value in <strong>Mils</strong>.</li>
+                        <li><strong>Check Results:</strong> The calculator provides the final <strong>Bullet Path vs LOS</strong> and a <strong>GO / NO-GO</strong> decision based on the recommended aim point.</li>
+                    </ol>
+                    <div class="mt-4 p-3 bg-gray-900/50 rounded-lg border border-gray-700">
+                        <p class="text-sm font-semibold text-red-400">Practical Example:</p>
+                        <p class="text-xs text-gray-400 mt-1">
+                            You dial <strong>5.2 Mils</strong> for a 600m target. Your loophole is 10m away and your Height Over Bore is 6.86cm. The calculator determines your mechanical offset is -6.86 Mils. It then calculates the final path: <code>-6.86 + 5.2 = -1.66 Mils</code>. This means your bullet will pass <strong>1.66 Mils below</strong> your crosshair. The app will recommend you "Aim Top 1/3rd" to ensure clearance.
+                        </p>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-gray-700 space-y-4">
+                     <h4 class="text-lg font-semibold text-red-400 mb-2">Formula Confirmation</h4>
+                     <div class="space-y-4 text-sm text-gray-400">
+                        <p><strong>Mechanical Offset Correction:</strong></p>
+                        <p class="pl-4"><code>Offset (Mils) = -1 * (Height Over Bore_cm * 10) / Distance_m</code></p>
+                        <p class="text-xs pl-4 text-gray-500">This calculates the drop in Mils caused by your scope's height over the bore.</p>
+                        
+                        <p><strong>Final Bullet Path vs. Line of Sight (LOS):</strong></p>
+                        <p class="pl-4"><code>Bullet Path (Mils) = Offset (Mils) + Dialed Elevation (Mils)</code></p>
+                        <p class="text-xs pl-4 text-gray-500">This combines the downward offset with the upward angle from your dialed elevation to find the bullet's true path relative to your crosshair.</p>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        // --- Firebase Setup (for future use) ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        
+        const firebaseConfig = {
+          apiKey: "AIzaSyBgGcRPxEy47tAAybaOgqp2NFNCmXq8U2s",
+          authDomain: "ulfc-mss.firebaseapp.com",
+          projectId: "ulfc-mss",
+          storageBucket: "ulfc-mss.firebasestorage.app",
+          messagingSenderId: "925555368763",
+          appId: "1:925555368763:web:294878dec68d7ad1988d1e",
+          measurementId: "G-5QTKJ65YGB"
+        };
+
+        // Initialize Firebase
+        // const app = initializeApp(firebaseConfig);
+        // Note: Firebase is initialized but not used in the current version of the calculator.
+
+        // --- DOM Elements ---
+        const allInputs = document.querySelectorAll('input');
+        const infoBtn = document.getElementById('infoBtn');
+        const closeInfoModalBtn = document.getElementById('closeInfoModalBtn');
+        const infoModal = document.getElementById('infoModal');
+        const canvas = document.getElementById('reticleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const tabs = {
+            clearance: document.getElementById('tabClearance'),
+            range: document.getElementById('tabRange'),
+            convert: document.getElementById('tabConvert'),
+        };
+        const panels = {
+            clearance: document.getElementById('panelClearance'),
+            range: document.getElementById('panelRange'),
+            convert: document.getElementById('panelConvert'),
+        };
+        
+        // --- Canvas Setup ---
+        let centerX, centerY, pixelsPerMil;
+
+        function setupCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            
+            centerX = canvas.width / 2;
+            centerY = canvas.height / 2;
+            pixelsPerMil = canvas.width / 20; // Represents a 20 Mil total view
+        }
+
+        function drawReticle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 1.5;
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0); ctx.lineTo(centerX, canvas.height);
+            ctx.moveTo(0, centerY); ctx.lineTo(canvas.width, centerY);
+            ctx.stroke();
+
+            ctx.font = `${pixelsPerMil / 2.5}px Inter`;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+
+            for (let i = 1; i <= 10; i++) {
+                const tickSize = (i % 5 === 0) ? 10 : 5;
+                ctx.beginPath();
+                ctx.moveTo(centerX - tickSize, centerY + i * pixelsPerMil); ctx.lineTo(centerX + tickSize, centerY + i * pixelsPerMil);
+                ctx.moveTo(centerX - tickSize, centerY - i * pixelsPerMil); ctx.lineTo(centerX + tickSize, centerY - i * pixelsPerMil);
+                ctx.moveTo(centerX + i * pixelsPerMil, centerY - tickSize); ctx.lineTo(centerX + i * pixelsPerMil, centerY + tickSize);
+                ctx.moveTo(centerX - i * pixelsPerMil, centerY - tickSize); ctx.lineTo(centerX - i * pixelsPerMil, centerY + tickSize);
+                ctx.stroke();
+
+                if (i % 2 === 0 && i > 0) {
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(i, centerX + tickSize + 5, centerY + i * pixelsPerMil);
+                    ctx.fillText(i, centerX + tickSize + 5, centerY - i * pixelsPerMil);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText(i, centerX + i * pixelsPerMil, centerY + tickSize + 5);
+                    ctx.fillText(i, centerX - i * pixelsPerMil, centerY + tickSize + 5);
+                }
+            }
+        }
+
+        function drawScene(loopholeSizeMils, bulletPathVsLOS) {
+            if (isNaN(loopholeSizeMils) || loopholeSizeMils <= 0 || isNaN(bulletPathVsLOS)) return;
+            
+            const loopholeHeightPx = loopholeSizeMils * pixelsPerMil;
+            const loopholeWidthPx = 4 * pixelsPerMil;
+            const loopholeCenterOffsetMils = loopholeSizeMils / 6;
+            
+            let loopholeCenterY;
+            // If bullet path is high, aim low (bottom 1/3rd), so loophole appears above crosshair
+            if (bulletPathVsLOS > 0) {
+                loopholeCenterY = centerY - (loopholeCenterOffsetMils * pixelsPerMil);
+            } else { // If bullet path is low, aim high (top 1/3rd), so loophole appears below crosshair
+                loopholeCenterY = centerY + (loopholeCenterOffsetMils * pixelsPerMil);
+            }
+
+            ctx.fillStyle = 'rgba(107, 114, 128, 0.3)';
+            ctx.strokeStyle = 'rgba(156, 163, 175, 0.5)';
+            ctx.lineWidth = 2;
+            const loopholeTopY = loopholeCenterY - (loopholeHeightPx / 2);
+            ctx.fillRect(centerX - loopholeWidthPx / 2, loopholeTopY, loopholeWidthPx, loopholeHeightPx);
+            ctx.strokeRect(centerX - loopholeWidthPx / 2, loopholeTopY, loopholeWidthPx, loopholeHeightPx);
+            
+            const bulletPathY = centerY - (bulletPathVsLOS * pixelsPerMil);
+            ctx.beginPath();
+            ctx.arc(centerX, bulletPathY, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = 'rgba(239, 68, 68, 1)';
+            ctx.fill();
+        }
+
+        // --- Calculation Functions ---
+
+        function calculateClearance() {
+            const cl_bh_cm = parseFloat(document.getElementById('cl_bh').value);
+            const cl_d_m = parseFloat(document.getElementById('cl_d').value);
+            const cl_de_mils = parseFloat(document.getElementById('cl_de').value);
+            const cl_ls_mils = parseFloat(document.getElementById('cl_ls').value);
+
+            if (isNaN(cl_bh_cm) || isNaN(cl_d_m) || isNaN(cl_de_mils) || isNaN(cl_ls_mils) || cl_d_m <= 0) {
+                resetClearanceUI();
+                return;
+            }
+
+            const offsetCorrection = -1 * (cl_bh_cm * 10) / cl_d_m;
+            const bulletPathVsLOS = offsetCorrection + cl_de_mils;
+            
+            let isGo;
+            let aimPointRecommendation;
+            const availableClearance = (cl_ls_mils * 2) / 3;
+
+            if (bulletPathVsLOS < 0) { // Bullet is low, aim high
+                aimPointRecommendation = "Aim Top 1/3rd";
+                isGo = Math.abs(bulletPathVsLOS) < availableClearance;
+            } else { // Bullet is high, aim low
+                aimPointRecommendation = "Aim Bottom 1/3rd";
+                isGo = bulletPathVsLOS < availableClearance;
+            }
+
+            updateClearanceUI(isGo, bulletPathVsLOS, cl_ls_mils, aimPointRecommendation);
+        }
+        
+        function calculateRange() {
+            const r_ts_cm = parseFloat(document.getElementById('r_ts').value);
+            const r_m_mils = parseFloat(document.getElementById('r_m').value);
+            const resultR = document.getElementById('resultR');
+
+            if (isNaN(r_ts_cm) || isNaN(r_m_mils) || r_m_mils <= 0) {
+                resultR.textContent = '--';
+                return;
+            }
+            const range_m = (r_ts_cm * 10) / r_m_mils;
+            resultR.textContent = `${range_m.toFixed(0)} m`;
+        }
+
+        function handleConversions() {
+            const inches_cm = parseFloat(document.getElementById('conv_in_cm').value);
+            const feet = parseFloat(document.getElementById('conv_ft').value);
+            const yards = parseFloat(document.getElementById('conv_yd').value);
+            const inches_mil = parseFloat(document.getElementById('conv_in_mil').value);
+            const dist_yds = parseFloat(document.getElementById('conv_in_mil_dist').value);
+            const moa = parseFloat(document.getElementById('conv_moa').value);
+
+            document.getElementById('conv_cm_out').value = !isNaN(inches_cm) ? (inches_cm * 2.54).toFixed(2) : '';
+            document.getElementById('conv_m_out1').value = !isNaN(feet) ? (feet * 0.3048).toFixed(2) : '';
+            document.getElementById('conv_m_out2').value = !isNaN(yards) ? (yards * 0.9144).toFixed(2) : '';
+            document.getElementById('conv_mil_out2').value = !isNaN(moa) ? (moa / 3.438).toFixed(2) : '';
+
+            if (!isNaN(inches_mil) && !isNaN(dist_yds) && dist_yds > 0) {
+                const mils = (inches_mil / 36 / dist_yds) * 1000;
+                document.getElementById('conv_mil_out1').value = mils.toFixed(2);
+            } else {
+                 document.getElementById('conv_mil_out1').value = '';
+            }
+        }
+
+        // --- UI Update Functions ---
+
+        function updateClearanceUI(isGo, bulletPathVsLOS, loopholeSize, aimPoint) {
+            const clearanceResult = document.getElementById('clearanceResult');
+            const goNoGoResultDiv = document.getElementById('goNoGoResult');
+            const goNoGoText = document.getElementById('goNoGoText');
+            const goNoGoReason = document.getElementById('goNoGoReason');
+            const aimPointDiv = document.getElementById('aimPointRecommendation');
+            
+            aimPointDiv.textContent = aimPoint;
+
+            const roundedBulletPath = bulletPathVsLOS.toFixed(2);
+
+            if (bulletPathVsLOS >= 0) {
+                clearanceResult.innerHTML = `<span class="text-red-400">&uarr; ${roundedBulletPath} Mils</span>`;
+            } else {
+                clearanceResult.innerHTML = `<span class="text-blue-400">&darr; ${roundedBulletPath} Mils</span>`;
+            }
+            
+            if (isGo) {
+                goNoGoText.textContent = 'GO';
+                goNoGoResultDiv.className = 'p-3 rounded-lg flex items-center justify-center go';
+                goNoGoReason.innerHTML = `The calculated path is clear.`;
+            } else {
+                goNoGoText.textContent = 'NO-GO';
+                goNoGoResultDiv.className = 'p-3 rounded-lg flex items-center justify-center no-go';
+                goNoGoReason.innerHTML = `The calculated path will impact the obstacle.`;
+            }
+            
+            drawReticle();  
+            drawScene(loopholeSize, bulletPathVsLOS);
+        }
+
+        function resetClearanceUI() {
+            document.getElementById('clearanceResult').textContent = '--';
+            document.getElementById('goNoGoText').textContent = '--';
+            document.getElementById('aimPointRecommendation').textContent = '--';
+            document.getElementById('goNoGoResult').className = 'p-3 rounded-lg flex items-center justify-center bg-gray-900/50 border border-gray-700';
+            document.getElementById('goNoGoReason').textContent = 'Enter valid parameters.';
+            drawReticle();
+        }
+        
+        function calculateActiveTab() {
+            if (!panels.clearance.classList.contains('hidden')) {
+                calculateClearance();
+            } else if (!panels.range.classList.contains('hidden')) {
+                calculateRange();
+            } else if (!panels.convert.classList.contains('hidden')) {
+                handleConversions();
+            }
+        }
+
+        function switchTab(tabKey) {
+            Object.keys(tabs).forEach(key => {
+                tabs[key].classList.remove('tab-active');
+                panels[key].classList.add('hidden');
+            });
+            tabs[tabKey].classList.add('tab-active');
+            panels[tabKey].classList.remove('hidden');
+            
+            setupCanvas();
+            calculateActiveTab();
+        }
+
+        // --- Event Listeners ---
+        allInputs.forEach(input => input.addEventListener('input', calculateActiveTab));
+        Object.keys(tabs).forEach(key => tabs[key].addEventListener('click', () => switchTab(key)));
+        infoBtn.addEventListener('click', () => infoModal.classList.replace('modal-inactive', 'modal-active'));
+        closeInfoModalBtn.addEventListener('click', () => infoModal.classList.replace('modal-active', 'modal-inactive'));
+        
+        window.addEventListener('resize', () => {
+            setupCanvas();
+            calculateActiveTab();
+        });
+
+        // --- Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCanvas();
+            calculateClearance();
+        });
+    </script>
+</body>
+</html>

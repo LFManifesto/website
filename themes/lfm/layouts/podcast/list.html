@@ -1,0 +1,58 @@
+{{ define "main" }}
+<h1 class="page-title-centered">{{ .Title }}</h1>
+
+{{ with .Site.Params.podcast_feed }}
+<p class="text-center mb-lg">
+  <a href="{{ . }}" target="_blank" rel="noopener" class="btn btn-secondary">Subscribe via RSS</a>
+</p>
+{{ end }}
+
+<div class="podcast-list">
+  {{ range .Paginator.Pages }}
+  <div class="podcast-card">
+    <div class="podcast-card-header">
+      <div>
+        {{ with .Params.episode }}
+        <span class="podcast-card-episode">Episode {{ . }}</span>
+        {{ end }}
+        <h2 class="podcast-card-title">
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h2>
+        <span class="podcast-card-date">
+          {{ .Date.Format "January 2, 2006" }}
+          {{ with .Params.duration }} &middot; {{ . }}{{ end }}
+        </span>
+      </div>
+    </div>
+    <p class="podcast-card-description">{{ .Description }}</p>
+    {{ with .Params.audio }}
+    <div class="audio-player">
+      <audio controls preload="metadata">
+        <source src="{{ . }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    {{ end }}
+    {{ with .Params.buzzsprout_episode_id }}
+    <div class="audio-player">
+      <iframe src="https://www.buzzsprout.com/{{ $.Site.Params.buzzsprout_id }}/{{ . }}?client_source=small_player&iframe=true" loading="lazy" width="100%" height="200" frameborder="0" scrolling="no" title="{{ $.Title }}"></iframe>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+
+{{ if gt .Paginator.TotalPages 1 }}
+<nav class="pagination">
+  {{ if .Paginator.HasPrev }}
+  <a href="{{ .Paginator.Prev.URL }}" class="pagination-link">&larr; Newer</a>
+  {{ end }}
+
+  <span class="pagination-current">Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
+
+  {{ if .Paginator.HasNext }}
+  <a href="{{ .Paginator.Next.URL }}" class="pagination-link">Older &rarr;</a>
+  {{ end }}
+</nav>
+{{ end }}
+{{ end }}

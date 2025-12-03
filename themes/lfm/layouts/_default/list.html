@@ -1,0 +1,22 @@
+{{ define "main" }}
+<header class="page-header">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Description }}
+  <p class="page-description">{{ . }}</p>
+  {{ end }}
+</header>
+
+<div class="article-list">
+  {{ range .Pages }}
+  <article class="article-card">
+    <h2 class="article-card-title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h2>
+    <div class="article-card-meta">
+      {{ .Date.Format "January 2, 2006" }}
+    </div>
+    <p class="article-card-excerpt">{{ .Description }}</p>
+  </article>
+  {{ end }}
+</div>
+{{ end }}

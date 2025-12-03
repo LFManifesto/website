@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Team OSINT Tutorial</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Fira Code for terminal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #030712; color: #d1d5db; }
+        .panel { background-color: #111827; border: 1px solid #374151; border-radius: 0.5rem; }
+        .terminal-font { font-family: 'Fira Code', monospace; }
+        .tool-tab.active { background-color: #4f46e5; color: white; border-color: #4f46e5; }
+        .tool-locked { color: #6b7280; pointer-events: none; opacity: 0.5; }
+        .intel-highlight { background-color: #a78bfa; color: #1e1b4b; padding: 0 4px; border-radius: 2px; font-weight: bold; }
+        .tutorial-step { border-left: 4px solid #374151; transition: all 0.3s ease; }
+        .tutorial-step.active { border-left-color: #4f46e5; background-color: #1f2937; }
+        .tutorial-step.completed { border-left-color: #10b981; opacity: 0.7; }
+        .feedback-correct { color: #34d399; }
+        .feedback-incorrect { color: #f87171; }
+        .strategy-card { background-color: #1f2937; border-left: 4px solid #374151; }
+        .strategy-step { color: #a78bfa; }
+        .copy-btn { cursor: pointer; opacity: 0.6; transition: opacity 0.2s; }
+        .copy-btn:hover { opacity: 1; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+
+    <div class="w-full max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold text-white terminal-font"><i class="fas fa-user-secret text-indigo-400"></i> OSINT Tutorial</h1>
+            <div class="text-sm text-gray-400">
+                Operator ID: <span id="user-id-display" class="font-mono">Authenticating...</span>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Left Column: Tutorial & Notes -->
+            <div class="lg:col-span-1 space-y-4">
+                <div class="panel p-4">
+                    <h2 class="text-xl font-semibold mb-3 text-indigo-400 terminal-font">Training Modules</h2>
+                    <div id="tutorial-panel" class="space-y-3">
+                        <!-- Tutorial steps will be dynamically inserted here -->
+                    </div>
+                </div>
+                <div class="panel p-4">
+                    <h2 class="text-xl font-semibold mb-2 text-green-400 terminal-font">Field Notes</h2>
+                    <textarea id="intel-dossier" class="terminal-font text-sm w-full h-64 bg-gray-900 border border-gray-700 rounded-md p-2" placeholder="Compile your findings here. Copy and paste critical intel as you discover it."></textarea>
+                </div>
+            </div>
+
+            <!-- Right Column: Tools -->
+            <div class="lg:col-span-2">
+                <div class="panel">
+                    <div class="flex border-b border-gray-700">
+                        <button data-tool="browser" class="tool-tab p-3 text-sm flex-1 font-semibold active"><i class="fas fa-globe mr-2"></i>Google</button>
+                        <button id="shodan-tab-btn" data-tool="shodan" class="tool-tab p-3 text-sm flex-1 font-semibold tool-locked"><i class="fas fa-server mr-2"></i>Shodan</button>
+                        <button data-tool="strategy" class="tool-tab p-3 text-sm flex-1 font-semibold"><i class="fas fa-book mr-2"></i>Strategy Guide</button>
+                    </div>
+                    <div class="p-2">
+                        <!-- Browser Tool -->
+                        <div id="browser-tool">
+                            <div class="flex items-center bg-gray-800 p-2 rounded-t-lg">
+                                <input id="browser-input" type="text" class="flex-1 bg-gray-700 text-white terminal-font focus:outline-none p-1 rounded" placeholder="Enter Google Dork...">
+                                <button id="browser-search-btn" class="ml-2 bg-indigo-600 text-white px-3 py-1 rounded text-sm">Search</button>
+                            </div>
+                            <div id="browser-output" class="terminal-font text-sm h-[32rem] overflow-y-auto p-2 bg-black rounded-b-lg"></div>
+                        </div>
+                        <!-- Shodan Terminal Tool -->
+                        <div id="shodan-tool" class="hidden">
+                             <div id="shodan-output" class="terminal-font text-sm h-[32rem] overflow-y-auto p-2 bg-black rounded-t-lg"></div>
+                             <div class="flex items-center bg-black p-2 rounded-b-lg border-t border-gray-700">
+                                 <span class="text-green-400 terminal-font mr-2">&gt;</span>
+                                 <input id="shodan-input" type="text" class="flex-1 bg-transparent text-white terminal-font focus:outline-none" placeholder="Enter Shodan command...">
+                             </div>
+                        </div>
+                        <!-- Strategy Guide Tool -->
+                        <div id="strategy-tool" class="hidden">
+                             <div id="strategy-output" class="text-sm h-[33.5rem] overflow-y-auto p-3 space-y-4">
+                                <!-- Strategy content will be dynamically inserted here -->
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Debrief Modal -->
+    <div id="debrief-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-2xl text-center border border-indigo-500 transform transition-all scale-95 opacity-0" id="debrief-modal-content">
+            <h2 id="debrief-title" class="text-3xl font-bold mb-4 text-green-400 terminal-font"></h2>
+            <div id="debrief-content" class="space-y-4 text-left text-lg"></div>
+            <button id="restart-btn" class="w-full mt-6 p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-bold">Restart Simulation</button>
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase imports - using v11 for modern features
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBgGcRPxEy47tAAybaOgqp2NFNCmXq8U2s",
+            authDomain: "ulfc-mss.firebaseapp.com",
+            projectId: "ulfc-mss",
+            storageBucket: "ulfc-mss.firebasestorage.app",
+            messagingSenderId: "925555368763",
+            appId: "1:925555368763:web:932fe35f2e1aa97b988d1e",
+            measurementId: "G-Z875XTWD3P"
+        };
+        
+        // Use provided config if available (for Canvas environment), otherwise use the one above
+        const finalFirebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : firebaseConfig;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : finalFirebaseConfig.projectId;
+
+
+        let db, auth, userId;
+
+        const DOMElements = {
+            userIdDisplay: document.getElementById('user-id-display'),
+            intelDossier: document.getElementById('intel-dossier'),
+            tutorialPanel: document.getElementById('tutorial-panel'),
+            browserTool: document.getElementById('browser-tool'),
+            browserInput: document.getElementById('browser-input'),
+            browserSearchBtn: document.getElementById('browser-search-btn'),
+            browserOutput: document.getElementById('browser-output'),
+            shodanTool: document.getElementById('shodan-tool'),
+            shodanTabBtn: document.getElementById('shodan-tab-btn'),
+            shodanInput: document.getElementById('shodan-input'),
+            shodanOutput: document.getElementById('shodan-output'),
+            strategyTool: document.getElementById('strategy-tool'),
+            strategyOutput: document.getElementById('strategy-output'),
+            debriefModal: document.getElementById('debrief-modal'),
+            debriefModalContent: document.getElementById('debrief-modal-content'),
+            debriefTitle: document.getElementById('debrief-title'),
+            debriefContent: document.getElementById('debrief-content'),
+            restartBtn: document.getElementById('restart-btn'),
+        };
+
+        const tutorialModules = [
+            {
+                id: 'subdomain_enum',
+                title: 'Module 1: Subdomain Enumeration',
+                description: "Our target is 'Quantum-Leap Innovations' (domain: qleap.io). First, find all indexed subdomains, but exclude the main 'www' site to reduce noise.",
+                tool: 'browser',
+                task: "Use `site:` to find subdomains of `qleap.io`.",
+                validate: (input) => input.includes('site:*.qleap.io') && input.includes('-www'),
+                successOutput: `Search Results:\n1. <span class="intel-highlight">vpn.qleap.io</span>\n2. <span class="intel-highlight">dev.qleap.io</span>\n3. <span class="intel-highlight">files.qleap.io</span>\n\n<span class="feedback-correct">Excellent. You've uncovered several subdomains. 'vpn' and 'dev' are high-value targets.</span>`,
+                correctCommand: 'site:*.qleap.io -www.qleap.io',
+                strategy: [
+                    { step: 1, detail: 'To find all subdomains of a target, use the `site:` operator with a wildcard `*`.' },
+                    { step: 2, detail: 'To remove the main "www" page from the results, use the exclusion operator `-`.' },
+                    { step: 3, detail: 'Combine them to form the query: `site:*.qleap.io -www.qleap.io`' }
+                ]
+            },
+            {
+                id: 'find_exposed_pages',
+                title: 'Module 2: Find Exposed Pages',
+                description: "Now, search across all discovered subdomains for pages that shouldn't be public, like admin panels or dashboards.",
+                tool: 'browser',
+                task: "Use `intitle:` and `inurl:` to find admin pages.",
+                validate: (input) => input.includes('site:*.qleap.io') && (input.includes('intitle:dashboard') || input.includes('inurl:admin')),
+                successOutput: `Search Results:\n1. dev.qleap.io/admin/login.php - <span class="intel-highlight">PHP-Nuke Admin Panel</span>\n\n<span class="feedback-correct">Good find. An exposed admin panel on a development server is a common but critical misconfiguration.</span>`,
+                correctCommand: 'site:*.qleap.io inurl:admin',
+                strategy: [
+                    { step: 1, detail: 'Continue to use `site:*.qleap.io` to keep the search focused on our target.' },
+                    { step: 2, detail: 'Look for keywords in the URL with the `inurl:` operator. Common admin paths include "admin", "login", or "dashboard".' },
+                    { step: 3, detail: 'Combine them: `site:*.qleap.io inurl:admin`' }
+                ]
+            },
+            {
+                id: 'find_sensitive_files',
+                title: 'Module 3: Locate Leaked Config Files',
+                description: "Developers sometimes accidentally commit configuration files with sensitive data. Search for ` .env ` files, which often contain credentials or API keys.",
+                tool: 'browser',
+                task: "Use `filetype:` to find `.env` files.",
+                validate: (input) => input.includes('site:dev.qleap.io') && input.includes('filetype:env'),
+                successOutput: `Search Results:\n1. dev.qleap.io/.env - File Contents:\n<span class="intel-highlight">DB_HOST=203.0.113.10</span>\nDB_USER=dev_admin\n<span class="intel-highlight">AWS_ACCESS_KEY_ID=AKIA...</span>\n\n<span class="feedback-correct">Critical finding! This leaked file contains an internal IP and an AWS access key. This intel unlocks the Shodan tool.</span>`,
+                correctCommand: 'site:dev.qleap.io filetype:env',
+                strategy: [
+                    { step: 1, detail: 'Focus your search on the most promising subdomain, `dev.qleap.io`, using `site:dev.qleap.io`.' },
+                    { step: 2, detail: 'Use the `filetype:` operator to hunt for specific kinds of files. Environment configuration files (`.env`) are a prime target.' },
+                    { step: 3, detail: 'Combine them: `site:dev.qleap.io filetype:env`' }
+                ]
+            },
+            {
+                id: 'shodan_host',
+                title: 'Module 4: Shodan Host Analysis',
+                description: "Switch to Shodan. Let's analyze the database server IP you found (`203.0.113.10`) to see what services are exposed to the internet.",
+                tool: 'shodan',
+                task: "Use `shodan host` to get details for the IP.",
+                validate: (input) => input.trim() === 'shodan host 203.0.113.10',
+                successOutput: `IP: 203.0.113.10\nOrganization: Quantum-Leap Innovations\nOpen Ports:\n  22/tcp   - OpenSSH 7.6p1\n  <span class="intel-highlight">8086/tcp - InfluxDB</span>\n\n<span class="feedback-correct">Confirmed. The host has an InfluxDB instance exposed. Time-series databases can contain valuable telemetry and metrics.</span>`,
+                correctCommand: 'shodan host 203.0.113.10',
+                strategy: [
+                    { step: 1, detail: 'To get all known information about a single IP address, use the `shodan host` command.' },
+                    { step: 2, detail: 'Provide the IP address you found in the previous step as the argument: `shodan host 203.0.113.10`' }
+                ]
+            },
+            {
+                id: 'shodan_vuln_search',
+                title: 'Module 5: Find Vulnerable Services',
+                description: "InfluxDB has a known authentication bypass vulnerability (CVE-2019-20933) in older versions. Search Shodan for all hosts in the Quantum-Leap organization that are vulnerable.",
+                tool: 'shodan',
+                task: "Search for CVE-2019-20933 within the org.",
+                validate: (input) => input.includes('quantum-leap') && input.includes('cve-2019-20933'),
+                successOutput: `Results found: 1\n  <span class="intel-highlight">203.0.113.10</span>\n    Product: InfluxDB\n    <span class="intel-highlight">Vulnerability: CVE-2019-20933 (Auth Bypass)</span>\n\n<span class="feedback-correct">Target locked. You've confirmed the database server is vulnerable to an authentication bypass. This is an actionable entry point.</span>`,
+                correctCommand: 'shodan search org:"Quantum-Leap Innovations" vuln:cve-2019-20933',
+                strategy: [
+                    { step: 1, detail: 'Use `shodan search` to query the entire Shodan database.' },
+                    { step: 2, detail: 'Limit the search to our target company with the `org:"Quantum-Leap Innovations"` filter.' },
+                    { step: 3, detail: 'Search for the specific vulnerability using the `vuln:cve-2019-20933` filter.' },
+                    { step: 4, detail: 'Combine the filters to create the final query.' }
+                ]
+            },
+        ];
+
+        let state = {
+            currentStep: 0,
+        };
+
+        function renderTutorial() {
+            DOMElements.tutorialPanel.innerHTML = '';
+            tutorialModules.forEach((module, index) => {
+                const stepEl = document.createElement('div');
+                stepEl.className = 'tutorial-step p-3 rounded-md';
+                if (index < state.currentStep) stepEl.classList.add('completed');
+                else if (index === state.currentStep) stepEl.classList.add('active');
+
+                stepEl.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-md ${index <= state.currentStep ? 'text-white' : 'text-gray-400'}">${module.title}</h3>
+                        ${index < state.currentStep ? '<i class="fas fa-check-circle text-green-400"></i>' : ''}
+                        ${index === state.currentStep ? '<i class="fas fa-arrow-right text-indigo-400"></i>' : ''}
+                    </div>
+                    ${index === state.currentStep ? `<p class="text-sm text-gray-300 mt-2">${module.description}</p><p class="text-sm text-indigo-300 mt-1 font-mono">${module.task}</p>` : ''}
+                `;
+                DOMElements.tutorialPanel.appendChild(stepEl);
+            });
+            renderStrategyGuide(); 
+        }
+
+        function renderStrategyGuide() {
+            const module = tutorialModules[state.currentStep];
+            if (!module || !module.strategy) {
+                DOMElements.strategyOutput.innerHTML = '<p>No specific strategy for this step. Rely on your instincts.</p>';
+                return;
+            }
+            DOMElements.strategyOutput.innerHTML = module.strategy.map(item => `
+                <div class="strategy-card p-4 rounded-lg">
+                    <h4 class="font-bold strategy-step">Step ${item.step}</h4>
+                    <p class="text-sm text-gray-300 mt-1">${item.detail}</p>
+                </div>
+            `).join('');
+        }
+
+        function appendToOutput(tool, text, isInput = false) {
+            const outputEl = tool === 'browser' ? DOMElements.browserOutput : DOMElements.shodanOutput;
+            const prompt = isInput ? `<span class="text-gray-400">${tool === 'browser' ? 'Search:' : '>'}</span> ` : '';
+            const sanitizedText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            const finalHtml = isInput ? sanitizedText : text;
+            outputEl.innerHTML += `<div class="terminal-output-line mb-2">${prompt}${finalHtml}</div>`;
+            outputEl.scrollTop = outputEl.scrollHeight;
+        }
+
+        function handleInput(tool) {
+            const module = tutorialModules[state.currentStep];
+            if (!module || module.tool !== tool) return;
+
+            const inputEl = tool === 'browser' ? DOMElements.browserInput : DOMElements.shodanInput;
+            const query = inputEl.value.toLowerCase().trim();
+            appendToOutput(tool, inputEl.value, true);
+            inputEl.value = '';
+
+            if (module.validate(query)) {
+                appendToOutput(tool, module.successOutput);
+                state.currentStep++;
+                if (state.currentStep < tutorialModules.length) {
+                    const nextModule = tutorialModules[state.currentStep];
+                    if (nextModule.tool === 'shodan' && DOMElements.shodanTabBtn.classList.contains('tool-locked')) {
+                         DOMElements.shodanTabBtn.classList.remove('tool-locked');
+                         appendToOutput('browser', `<span class="text-yellow-400 font-bold mt-4 block">INFO: Shodan tool unlocked. Switch to the Shodan tab to continue.</span>`);
+                    }
+                    renderTutorial();
+                } else {
+                    completeTutorial();
+                }
+            } else {
+                const correctCommand = module.correctCommand;
+                const feedbackHTML = `
+                    <span class="feedback-incorrect">Incorrect. The correct command is shown below. Try entering it to continue.</span>
+                    <div class="relative">
+                        <pre class="terminal-font text-sm bg-gray-900 p-2 mt-2 rounded-md text-green-300 pr-10">${correctCommand}</pre>
+                        <button class="absolute top-2 right-2 text-gray-400 hover:text-white copy-btn" title="Copy command" data-copy-text="${correctCommand}">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                `;
+                appendToOutput(tool, feedbackHTML);
+            }
+        }
+        
+        function completeTutorial() {
+            DOMElements.debriefTitle.textContent = 'Mission Complete, Operator!';
+            DOMElements.debriefContent.innerHTML = `
+                <p>You have successfully completed the advanced OSINT training simulation.</p>
+                <p class="font-bold text-green-400 mt-4">Key Findings:</p>
+                <ul class="list-disc list-inside mt-2 space-y-1 font-mono text-gray-300">
+                    <li>Discovered Subdomains: vpn.qleap.io, dev.qleap.io</li>
+                    <li>Leaked Credentials: AWS Key and DB Host IP from .env file</li>
+                    <li>Exposed Service: InfluxDB on 203.0.113.10</li>
+                    <li>Actionable Vulnerability: CVE-2019-20933 (Auth Bypass) on DB server</li>
+                </ul>
+                <p class="mt-4">This simulation demonstrates a realistic workflow: from broad domain discovery to finding leaked credentials, and pivoting to Shodan to identify a specific, exploitable vulnerability on a key asset.</p>
+            `;
+            DOMElements.debriefModal.classList.remove('hidden');
+            setTimeout(() => { DOMElements.debriefModalContent.classList.remove('scale-95', 'opacity-0'); }, 50);
+            saveResult({ progress: 'completed', finalStep: state.currentStep });
+        }
+
+        async function saveResult(result) {
+            if (!db || !userId) return;
+            const docRef = doc(db, `red_team_tutorial/${appId}/users/${userId}`);
+            try {
+                await setDoc(docRef, { ...result, lastUpdated: serverTimestamp() }, { merge: true });
+            } catch (e) { console.error("Error saving result: ", e); }
+        }
+
+        function switchTool(tool) {
+            DOMElements.browserTool.classList.add('hidden');
+            DOMElements.shodanTool.classList.add('hidden');
+            DOMElements.strategyTool.classList.add('hidden');
+            
+            document.querySelectorAll('.tool-tab').forEach(t => t.classList.remove('active'));
+
+            const activeTab = document.querySelector(`.tool-tab[data-tool="${tool}"]`);
+            if(activeTab) activeTab.classList.add('active');
+
+            if (tool === 'browser') {
+                DOMElements.browserTool.classList.remove('hidden');
+            } else if (tool === 'shodan' && !DOMElements.shodanTabBtn.classList.contains('tool-locked')) {
+                DOMElements.shodanTool.classList.remove('hidden');
+            } else if (tool === 'strategy') {
+                DOMElements.strategyTool.classList.remove('hidden');
+            } else {
+                 DOMElements.browserTool.classList.remove('hidden');
+                 document.querySelector('.tool-tab[data-tool="browser"]').classList.add('active');
+            }
+        }
+        
+        function copyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed'; // Prevent scrolling to bottom of page in MS Edge.
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                return true;
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+                return false;
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // --- Event Listeners and Initial Load ---
+        DOMElements.browserSearchBtn.addEventListener('click', () => handleInput('browser'));
+        DOMElements.browserInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleInput('browser'); });
+        DOMElements.shodanInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleInput('shodan'); });
+        DOMElements.restartBtn.addEventListener('click', () => location.reload());
+        document.querySelectorAll('.tool-tab').forEach(btn => btn.addEventListener('click', (e) => switchTool(e.currentTarget.dataset.tool)));
+        
+        document.addEventListener('click', (e) => {
+            const copyBtn = e.target.closest('.copy-btn');
+            if (copyBtn) {
+                const textToCopy = copyBtn.dataset.copyText;
+                if (copyToClipboard(textToCopy)) {
+                    const icon = copyBtn.querySelector('i');
+                    const originalClass = icon.className;
+                    icon.className = 'fas fa-check text-green-400';
+                    setTimeout(() => {
+                        icon.className = originalClass;
+                    }, 1500);
+                }
+            }
+        });
+
+        async function initializeAppWithAuth() {
+            try {
+                const app = initializeApp(finalFirebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        if (DOMElements.userIdDisplay) DOMElements.userIdDisplay.textContent = userId;
+                        renderTutorial();
+                    }
+                });
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+            } catch (error) {
+                console.error("Firebase Init Error:", error);
+                if (DOMElements.userIdDisplay) DOMElements.userIdDisplay.textContent = "Auth Error";
+                renderTutorial();
+            }
+        }
+
+        // Initial call to start the application
+        initializeAppWithAuth();
+    </script>
+</body>
+</html>

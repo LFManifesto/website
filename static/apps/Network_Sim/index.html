@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Team OSINT Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; color: #1f2937; }
+        .container { max-width: 1024px; }
+        .tab-btn { transition: background-color 0.2s, color 0.2s; }
+        .tab-btn.active { background-color: #4f46e5; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4">
+
+    <div class="container mx-auto bg-white rounded-lg shadow-xl p-8 space-y-8">
+        <h1 class="text-3xl font-bold text-center text-gray-900">Red Team OSINT Simulator</h1>
+        
+        <div class="text-sm text-gray-600 text-right">
+            Operator ID: <span id="user-id-display" class="font-mono font-semibold text-gray-800">Authenticating...</span>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-md p-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-blue-800 mb-3">Mission Briefing</h2>
+            <p class="text-gray-700 leading-relaxed space-y-1">
+                <span><strong>Operation:</strong> <span id="scenario-mission" class="font-medium">Loading...</span></span><br>
+                <span><strong>Target Area:</strong> <span id="scenario-target" class="font-medium">Loading...</span></span><br>
+                <span><strong>Intel Requirement:</strong> <span id="scenario-intel" class="font-medium">Loading...</span></span>
+            </p>
+        </div>
+        
+        <div class="bg-gray-50 border border-gray-200 rounded-md p-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-gray-800 mb-3">Red Team Reconnaissance Guide</h2>
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <h3 class="font-semibold text-indigo-700">Interpreting WiGLE Data</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1 text-gray-600">
+                        <li><strong>SSID Names:</strong> Look for patterns. "Corp-Guest" vs. "Floor4-Dev" reveals internal structure. Generic names like "HP-Print" can expose device types.</li>
+                        <li><strong>Encryption:</strong> <strong class="text-red-600">"Open"</strong> is a primary vector. "WEP" is obsolete and easily cracked. "WPA/WPA2" are strong but can be vulnerable to brute-force if passwords are weak.</li>
+                        <li><strong>Vendor:</strong> Identifying the hardware vendor (e.g., Cisco, HP, Aruba) allows you to research default credentials and known exploits for that equipment.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-indigo-700">Interpreting Shodan Data</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1 text-gray-600">
+                        <li><strong>Banners:</strong> Service banners often reveal software versions (e.g., "Apache/2.2.15"). Old versions can be cross-referenced with exploit databases (CVEs).</li>
+                        <li><strong>Open Ports:</strong> Insecure ports like <strong class="text-red-600">21 (FTP)</strong> and <strong class="text-red-600">23 (Telnet)</strong> transmit data in cleartext and are high-value targets.</li>
+                        <li><strong>Device Types:</strong> Exposed IoT/ICS devices (cameras, building controls, NVRs) are often poorly secured and may provide a foothold into the internal network.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="border border-gray-300 rounded-lg overflow-hidden">
+            <div class="flex bg-gray-100">
+                <button id="wigle-tab-btn" class="tab-btn flex-1 p-4 font-semibold text-gray-600 active">WiGLE Scan Results</button>
+                <button id="shodan-tab-btn" class="tab-btn flex-1 p-4 font-semibold text-gray-600">Shodan Scan Results</button>
+            </div>
+            
+            <div id="wigle-content" class="tab-content active p-4">
+                <p class="text-sm text-gray-600 mb-4">Simulated Wi-Fi networks detected in the target area.</p>
+                <div id="wigle-data" class="space-y-2"></div>
+            </div>
+
+            <div id="shodan-content" class="tab-content p-4">
+                <p class="text-sm text-gray-600 mb-4">Simulated internet-facing devices discovered in the target's IP range.</p>
+                <div id="shodan-data" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-md p-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Vulnerability Checklist</h2>
+            <form id="vulnerability-form" class="space-y-4">
+                <div id="checklist-items" class="space-y-4"></div>
+                <div class="flex justify-end items-center pt-4">
+                    <button type="button" id="generate-new-scan-btn" class="px-6 py-2 mr-4 bg-gray-600 text-white rounded-md shadow-md hover:bg-gray-700">New Scenario</button>
+                    <button type="submit" class="px-8 py-3 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 text-base font-medium">Submit Report</button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="feedback-area" class="bg-yellow-50 border border-yellow-200 rounded-md p-6 shadow-sm hidden">
+            <h2 class="text-xl font-semibold text-yellow-800 mb-3">Assessment Debrief</h2>
+            <div id="assessment-results" class="text-gray-700 space-y-2"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Your Firebase configuration object
+        const firebaseConfig = {
+            apiKey: "AIzaSyBgGcRPxEy47tAAybaOgqp2NFNCmXq8U2s",
+            authDomain: "ulfc-mss.firebaseapp.com",
+            projectId: "ulfc-mss",
+            storageBucket: "ulfc-mss.firebasestorage.app",
+            messagingSenderId: "925555368763",
+            appId: "1:925555368763:web:f9f1d6ae46c051a0988d1e",
+            measurementId: "G-4EVT74CHV2"
+        };
+
+        // --- Global State ---
+        let currentScenario = {};
+        let db, auth, userId;
+        const appId = firebaseConfig.projectId;
+
+        // --- DOM Elements ---
+        const userIdDisplay = document.getElementById('user-id-display');
+        const scenarioMission = document.getElementById('scenario-mission');
+        const scenarioTarget = document.getElementById('scenario-target');
+        const scenarioIntel = document.getElementById('scenario-intel');
+        const wigleTabBtn = document.getElementById('wigle-tab-btn');
+        const shodanTabBtn = document.getElementById('shodan-tab-btn');
+        const wigleContent = document.getElementById('wigle-content');
+        const shodanContent = document.getElementById('shodan-content');
+        const wigleDataContainer = document.getElementById('wigle-data');
+        const shodanDataContainer = document.getElementById('shodan-data');
+        const vulnerabilityForm = document.getElementById('vulnerability-form');
+        const generateNewScanBtn = document.getElementById('generate-new-scan-btn');
+        const feedbackArea = document.getElementById('feedback-area');
+        const assessmentResults = document.getElementById('assessment-results');
+        const checklistItemsContainer = document.getElementById('checklist-items');
+
+        // --- Firebase Initialization ---
+        async function initializeFirebase() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                await signInAnonymously(auth);
+                onAuthStateChanged(auth, (user) => {
+                    userId = user ? user.uid : 'anonymous-' + crypto.randomUUID();
+                    userIdDisplay.textContent = user ? userId : 'Anonymous';
+                    generateScenario();
+                });
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                userIdDisplay.textContent = 'Auth Error';
+                generateScenario();
+            }
+        }
+
+        // --- Firestore Save Function ---
+        async function saveReportToFirestore(reportData) {
+            if (!db || !userId) return; 
+            try {
+                const reportsCollectionRef = collection(db, `osint_assessments/${appId}/operators/${userId}/reports`);
+                await addDoc(reportsCollectionRef, { ...reportData, timestamp: serverTimestamp() });
+            } catch (error) {
+                console.error("Error saving report to Firestore:", error);
+            }
+        }
+
+
+        // --- Scenarios ---
+        const scenarios = [
+            {
+                target: "Aflac Global HQ, Columbus, GA",
+                mission: "Perform clandestine RF and network reconnaissance to identify vulnerabilities for a future penetration test.",
+                intel: "Identify wireless network naming conventions and any exposed, unpatched internet-facing devices.",
+                wigleData: [
+                    { ssid: "Aflac-Guest", bssid: "00:1A:2B:3C:4D:5E", encryption: "Open", vendor: "Cisco" },
+                    { ssid: "Aflac-Secure", bssid: "00:1A:2B:3C:4D:5F", encryption: "WPA2", vendor: "Cisco" },
+                    { ssid: "HP-Print-A4B5C6", bssid: "DA:B5:C6:A4:B5:C6", encryption: "WPA2", vendor: "HP" },
+                    { ssid: "ATT_WiFi_2G", bssid: "FE:DC:BA:98:76:54", encryption: "WPA2", vendor: "Arris" }
+                ],
+                shodanData: [
+                    { ip: "192.0.2.10", device: "Cisco Router", ports: ["80/tcp", "443/tcp"], banner: "Cisco IOS 15.1" },
+                    { ip: "192.0.2.11", device: "HP LaserJet Printer", ports: ["80/tcp", "21/tcp FTP", "23/tcp Telnet"], banner: "HP-UX B.11.31" },
+                    { ip: "192.0.2.12", device: "Web Server", ports: ["443/tcp"], banner: "Apache/2.4.53 (Ubuntu)" }
+                ],
+                answers: { openWifi: "yes", vulnerableService: "yes", iotDevice: "no", primaryVector: "open-wifi" }
+            },
+            {
+                target: "Mercedes-Benz Stadium, Atlanta, GA",
+                mission: "Assess the network fingerprint of the stadium's public and operational infrastructure.",
+                intel: "Identify IoT devices like security cameras and determine the primary wireless technology in use.",
+                wigleData: [
+                    { ssid: "MBS_Free_WiFi", bssid: "12:34:56:78:9A:BC", encryption: "Open", vendor: "Aruba" },
+                    { ssid: "Stadium-POS", bssid: "12:34:56:78:9A:BD", encryption: "WPA2/EAP", vendor: "Aruba" },
+                    { ssid: "AMB_Operations", bssid: "12:34:56:78:9A:BE", encryption: "WPA2/EAP", vendor: "Aruba" }
+                ],
+                shodanData: [
+                    { ip: "198.51.100.5", device: "Hikvision NVR", ports: ["80/tcp", "554/tcp RTSP", "8000/tcp"], banner: "Hikvision DVR-200 v3.4.80" },
+                    { ip: "198.51.100.6", device: "Building Management System", ports: ["80/tcp", "443/tcp"], banner: "Johnson Controls Metasys" },
+                    { ip: "198.51.100.7", device: "Public Web Server", ports: ["443/tcp"], banner: "nginx/1.18.0" }
+                ],
+                answers: { openWifi: "yes", vulnerableService: "no", iotDevice: "yes", primaryVector: "weak-creds" }
+            },
+            {
+                target: "TSYS Campus, Columbus, GA",
+                mission: "Map the corporate network to find legacy systems for a social engineering pretext.",
+                intel: "Identify any servers running outdated software that could be easily exploited.",
+                 wigleData: [
+                    { ssid: "TSYS-Guest", bssid: "AC:CF:85:11:22:33", encryption: "Open", vendor: "Ruckus" },
+                    { ssid: "CORP-WIFI", bssid: "AC:CF:85:11:22:34", encryption: "WPA2/EAP", vendor: "Ruckus" }
+                ],
+                shodanData: [
+                    { ip: "203.0.113.20", device: "VMware ESXi Server", ports: ["443/tcp"], banner: "VMware ESXi 6.7.0" },
+                    { ip: "203.0.113.21", device: "Unknown Web Server", ports: ["80/tcp"], banner: "Apache/2.2.15 (CentOS)" }, // Very old, vulnerable
+                    { ip: "203.0.113.22", device: "Windows Server", ports: ["3389/tcp RDP"], banner: "Microsoft Remote Desktop" }
+                ],
+                answers: { openWifi: "yes", vulnerableService: "yes", iotDevice: "no", primaryVector: "exploit-service" }
+            },
+            {
+                target: "Atlanta Warehouse District",
+                mission: "Identify physical access control systems and other IoT devices for potential exploitation.",
+                intel: "Find any exposed building management or security systems.",
+                wigleData: [
+                    { ssid: "Warehouse_WiFi", bssid: "B8:EE:65:01:02:03", encryption: "WPA2", vendor: "Ubiquiti" },
+                    { ssid: "tmobile_hotspot", bssid: "10:BF:48:04:05:06", encryption: "WPA2", vendor: "T-Mobile" }
+                ],
+                shodanData: [
+                    { ip: "209.18.47.61", device: "WebcamXP", ports: ["8080/tcp"], banner: "WebcamXP 5" },
+                    { ip: "209.18.47.62", device: "Building Access Control", ports: ["443/tcp"], banner: "Honeywell NetAXS-123" }
+                ],
+                answers: { openWifi: "no", vulnerableService: "no", iotDevice: "yes", primaryVector: "weak-creds" }
+            }
+        ];
+
+        function buildChecklistHTML() {
+            checklistItemsContainer.innerHTML = `
+                <div class="p-3 border-b">
+                    <label class="font-medium text-gray-700">1. Was an open (unencrypted) Wi-Fi network identified?</label>
+                    <div class="flex gap-4 mt-2">
+                        <label><input type="radio" name="open-wifi" value="yes" required> Yes</label>
+                        <label><input type="radio" name="open-wifi" value="no"> No</label>
+                    </div>
+                </div>
+                <div class="p-3 border-b">
+                    <label class="font-medium text-gray-700">2. Was a device with a known-vulnerable service (e.g., Telnet, FTP) discovered?</label>
+                    <div class="flex gap-4 mt-2">
+                        <label><input type="radio" name="vulnerable-service" value="yes" required> Yes</label>
+                        <label><input type="radio" name="vulnerable-service" value="no"> No</label>
+                    </div>
+                </div>
+                <div class="p-3 border-b">
+                    <label class="font-medium text-gray-700">3. Was a sensitive internet-facing device (e.g., Security Camera, ICS) identified?</label>
+                    <div class="flex gap-4 mt-2">
+                        <label><input type="radio" name="iot-device" value="yes" required> Yes</label>
+                        <label><input type="radio" name="iot-device" value="no"> No</label>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <label for="primary-vector" class="font-medium text-gray-700">4. What is the most promising initial attack vector?</label>
+                    <select id="primary-vector" class="mt-2 block w-full p-2 border border-gray-300 rounded-md" required>
+                        <option value="">Select a vector...</option>
+                        <option value="open-wifi">Exploit the open Wi-Fi network</option>
+                        <option value="weak-creds">Attempt default credentials on an exposed device</option>
+                        <option value="exploit-service">Exploit an outdated, vulnerable service</option>
+                        <option value="no-vector">No obvious vector identified</option>
+                    </select>
+                </div>
+            `;
+        }
+
+        function generateScenario() {
+            vulnerabilityForm.reset();
+            feedbackArea.classList.add('hidden');
+            currentScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+            
+            scenarioMission.textContent = currentScenario.mission;
+            scenarioTarget.textContent = currentScenario.target;
+            scenarioIntel.textContent = currentScenario.intel;
+            
+            wigleDataContainer.innerHTML = '';
+            currentScenario.wigleData.forEach(net => {
+                const isEncrypted = net.encryption !== 'Open';
+                wigleDataContainer.innerHTML += `
+                    <div class="p-3 border rounded-md ${isEncrypted ? 'border-gray-200' : 'border-red-400 bg-red-50'}">
+                        <div class="flex justify-between items-center"><span class="font-mono font-semibold text-gray-800">${net.ssid}</span><span class="px-2 py-1 text-xs rounded-full ${isEncrypted ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}">${net.encryption}</span></div>
+                        <div class="text-sm text-gray-500 mt-1"><span class="font-mono">${net.bssid}</span> | <span>Vendor: ${net.vendor}</span></div>
+                    </div>`;
+            });
+
+            shodanDataContainer.innerHTML = '';
+            currentScenario.shodanData.forEach(dev => {
+                shodanDataContainer.innerHTML += `
+                    <div class="p-3 border border-gray-200 rounded-md">
+                        <div class="flex justify-between items-center"><span class="font-semibold text-gray-800">${dev.device}</span><span class="font-mono text-sm text-gray-600">${dev.ip}</span></div>
+                        <div class="text-sm text-gray-500 mt-2">
+                            <p><strong>Open Ports:</strong> <span class="font-mono text-indigo-600">${dev.ports.join(', ')}</span></p>
+                            <p><strong>Banner:</strong> <span class="font-mono">${dev.banner}</span></p>
+                        </div>
+                    </div>`;
+            });
+            buildChecklistHTML();
+        }
+
+        function assessReport(userData) {
+            const feedback = [];
+            const answers = currentScenario.answers;
+            
+            if (userData.openWifi === answers.openWifi) feedback.push('<p class="text-green-600">✅ **Open Wi-Fi:** Correctly identified.</p>');
+            else feedback.push('<p class="text-red-600">❌ **Open Wi-Fi:** Incorrect assessment.</p>');
+
+            if (userData.vulnerableService === answers.vulnerableService) feedback.push('<p class="text-green-600">✅ **Vulnerable Services:** Correctly identified.</p>');
+            else feedback.push('<p class="text-red-600">❌ **Vulnerable Services:** Incorrect assessment.</p>');
+
+            if (userData.iotDevice === answers.iotDevice) feedback.push('<p class="text-green-600">✅ **Sensitive Devices:** Correctly identified.</p>');
+            else feedback.push('<p class="text-red-600">❌ **Sensitive Devices:** Incorrect assessment.</p>');
+
+            if (userData.primaryVector === answers.primaryVector) feedback.push(`<p class="text-green-600">✅ **Primary Vector:** Correctly identified the most promising attack vector.</p>`);
+            else feedback.push(`<p class="text-red-600">❌ **Primary Vector:** Incorrect. The instructor identified <span class="font-semibold">${answers.primaryVector.replace(/-/g, ' ')}</span> as the primary vector.</p>`);
+
+            return { feedback };
+        }
+
+        // --- Event Listeners ---
+        wigleTabBtn.addEventListener('click', () => {
+            wigleTabBtn.classList.add('active'); shodanTabBtn.classList.remove('active');
+            wigleContent.classList.add('active'); shodanContent.classList.remove('active');
+        });
+
+        shodanTabBtn.addEventListener('click', () => {
+            shodanTabBtn.classList.add('active'); wigleTabBtn.classList.remove('active');
+            shodanContent.classList.add('active'); wigleContent.classList.remove('active');
+        });
+
+        generateNewScanBtn.addEventListener('click', generateScenario);
+
+        vulnerabilityForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const userData = {
+                openWifi: document.querySelector('input[name="open-wifi"]:checked')?.value,
+                vulnerableService: document.querySelector('input[name="vulnerable-service"]:checked')?.value,
+                iotDevice: document.querySelector('input[name="iot-device"]:checked')?.value,
+                primaryVector: document.getElementById('primary-vector').value
+            };
+            if (!userData.openWifi || !userData.vulnerableService || !userData.iotDevice || !userData.primaryVector) return;
+
+            assessmentResults.innerHTML = '';
+            const assessment = assessReport(userData);
+            assessment.feedback.forEach(line => assessmentResults.innerHTML += line);
+            
+            feedbackArea.classList.remove('hidden');
+            feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            await saveReportToFirestore({ scenario: currentScenario.target, userChecklist: userData, assessment: assessment.feedback });
+        });
+        
+        initializeFirebase();
+    </script>
+</body>
+</html>

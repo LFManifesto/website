@@ -1,0 +1,8 @@
+# Light Fighter Manifesto - robots.txt
+# https://lightfightermanifesto.org
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://lightfightermanifesto.org/sitemap.xml

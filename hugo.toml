@@ -1,0 +1,92 @@
+# Light Fighter Manifesto - Site Configuration
+# https://gohugo.io/getting-started/configuration/
+
+baseURL = 'https://lightfightermanifesto.org/'
+languageCode = 'en-us'
+title = 'Light Fighter Manifesto'
+theme = 'lfm'
+
+# Pagination
+[pagination]
+  pagerSize = 10
+
+# Site description for SEO
+[params]
+  description = "Tactical zines covering OSINT, survival, communications, and emergent warfare. By practitioners, for practitioners."
+  author = "Light Fighter Manifesto L.L.C."
+  tagline = "Unfiltered. Uncensored. Unconventional."
+
+  # Social links (used in footer)
+  discord = "https://discord.com/invite/light-fighter-manifesto-963878135718371408"
+  github = "https://github.com/LFManifesto"
+  matrix = "https://matrix.lightfightermanifesto.net"
+
+  # Payment info (used on shop page)
+  monero_address = "84mtLpJmncKRp5TsRv9xC3Xx8KmSXvoKuJ5PduNqPM4MR2cj44hnYsc6VGJ6St7WwvHQAM4jnHJ1HD255ALeiazeNz9w4Mo"
+  mailing_address = "PO Box 220, Meansville, GA 30256"
+  mixam_url = "https://mixam.com/print-on-demand/62d9c5ca4c449f220b98de74"
+
+  # Podcast (Buzzsprout)
+  podcast_feed = ""  # Add Buzzsprout RSS feed URL when ready
+  buzzsprout_id = ""  # Add Buzzsprout podcast ID for embeds
+
+# Menu configuration (alphabetical order)
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+  [[menus.main]]
+    name = 'Apps'
+    pageRef = '/tools'
+    weight = 20
+  [[menus.main]]
+    name = 'Articles'
+    pageRef = '/articles'
+    weight = 30
+  [[menus.main]]
+    name = 'Podcast'
+    pageRef = '/podcast'
+    weight = 40
+  [[menus.main]]
+    name = 'Resources'
+    pageRef = '/resources'
+    weight = 50
+  [[menus.main]]
+    name = 'Shop'
+    pageRef = '/shop'
+    weight = 60
+
+# Podcast RSS feed settings
+[outputFormats]
+  [outputFormats.RSS]
+    mediaType = "application/rss+xml"
+    baseName = "feed"
+
+# Enable useful features
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Allows HTML in markdown (for embeds, calculators, etc.)
+
+# Build settings
+[build]
+  writeStats = true
+
+# Sitemap configuration
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# Enable sitemap and RSS outputs
+[outputs]
+  home = ["HTML", "RSS", "sitemap"]
+  section = ["HTML", "RSS"]
+
+# Minify HTML output for production
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableSVG = false

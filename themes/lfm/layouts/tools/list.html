@@ -1,0 +1,28 @@
+{{ define "main" }}
+<h1 class="page-title-centered">{{ .Title }}</h1>
+
+<div class="tools-grid">
+  {{ range .Pages }}
+  <a href="{{ .Permalink }}" class="tool-card">
+    <div class="tool-card-icon">
+      {{ partial "tool-icon.html" .Params.icon }}
+    </div>
+    <h2 class="tool-card-title">{{ .Title }}</h2>
+    <p class="tool-card-description">{{ .Description }}</p>
+    {{ with .Params.tags }}
+    <div class="tool-card-tags">
+      {{ range . }}
+      <span class="tool-tag">{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
+  </a>
+  {{ end }}
+</div>
+
+{{ if eq (len .Pages) 0 }}
+<div class="empty-state">
+  <p>Tools coming soon.</p>
+</div>
+{{ end }}
+{{ end }}
