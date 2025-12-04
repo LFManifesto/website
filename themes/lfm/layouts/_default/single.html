@@ -1,6 +1,9 @@
 {{ define "main" }}
 <article class="article-single" itemscope itemtype="https://schema.org/Article">
 
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="reading-progress"></div>
+
   <!-- Article Header -->
   <header class="article-header">
     {{ if .Params.tags }}
@@ -16,17 +19,24 @@
     {{ end }}
 
     <div class="article-meta">
-      <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">
-        {{ .Date.Format "January 2, 2006" }}
-      </time>
-      {{ with .Params.author }}
-      <span class="meta-separator">·</span>
-      <span class="article-author" itemprop="author">{{ . }}</span>
-      {{ end }}
-      <span class="meta-separator">·</span>
-      <span class="reading-time">{{ math.Round (div (countwords .Content) 200.0) }} min read</span>
+      <div class="meta-row">
+        <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">
+          {{ .Date.Format "January 2, 2006" }}
+        </time>
+
+        {{ with .Params.author }}
+        <span class="meta-separator">·</span>
+        <span class="article-author" itemprop="author">{{ . }}</span>
+        {{ end }}
+
+        <span class="meta-separator">·</span>
+        <span class="reading-time">{{ math.Round (div (countwords .Content) 200.0) }} min read</span>
+      </div>
     </div>
   </header>
+
+  <!-- Decorative Divider -->
+  <div class="article-divider"></div>
 
   <!-- Article Content -->
   <div class="article-content" itemprop="articleBody">
@@ -37,7 +47,7 @@
   <footer class="article-footer">
     {{ if .Params.tags }}
     <div class="article-tags-section">
-      <span class="tags-label">Tagged:</span>
+      <span class="tags-label">Tagged</span>
       <div class="article-tags">
         {{ range .Params.tags }}
         <span class="article-tag">{{ . }}</span>
@@ -48,11 +58,11 @@
 
     <!-- Share Section -->
     <div class="article-share">
-      <span class="share-label">Share:</span>
+      <span class="share-label">Share this article</span>
       <div class="share-buttons">
-        <a href="https://twitter.com/intent/tweet?text={{ .Title | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" rel="noopener" class="share-btn">X</a>
-        <a href="https://www.reddit.com/submit?url={{ .Permalink | urlquery }}&title={{ .Title | urlquery }}" target="_blank" rel="noopener" class="share-btn">Reddit</a>
-        <button class="share-btn copy-link" onclick="copyLink()">Copy Link</button>
+        <a href="https://twitter.com/intent/tweet?text={{ .Title | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" rel="noopener" class="share-btn" title="Share on X">X</a>
+        <a href="https://www.reddit.com/submit?url={{ .Permalink | urlquery }}&title={{ .Title | urlquery }}" target="_blank" rel="noopener" class="share-btn" title="Share on Reddit">Reddit</a>
+        <button class="share-btn copy-link" onclick="copyLink()" title="Copy link">Link</button>
       </div>
     </div>
   </footer>
@@ -78,12 +88,44 @@
 
 </article>
 
+<!-- Reading Progress Script -->
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const progressBar = document.getElementById('reading-progress');
+  const article = document.querySelector('.article-content');
+
+  if (progressBar && article) {
+    window.addEventListener('scroll', function() {
+      const articleTop = article.offsetTop;
+      const articleHeight = article.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.scrollY;
+
+      const start = articleTop - windowHeight;
+      const end = articleTop + articleHeight - windowHeight;
+
+      let progress = 0;
+      if (scrollTop > start && scrollTop < end) {
+        progress = ((scrollTop - start) / (end - start)) * 100;
+      } else if (scrollTop >= end) {
+        progress = 100;
+      }
+
+      progressBar.style.width = progress + '%';
+    });
+  }
+});
+
 function copyLink() {
   navigator.clipboard.writeText(window.location.href);
   const btn = document.querySelector('.copy-link');
+  const original = btn.textContent;
   btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Copy Link', 2000);
+  btn.classList.add('copied');
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.classList.remove('copied');
+  }, 2000);
 }
 </script>
 {{ end }}

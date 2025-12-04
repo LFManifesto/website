@@ -1025,12 +1025,8 @@ audio {
   max-width: var(--content-width);
   margin: 0 auto var(--space-xl);
   padding: 0 var(--space-lg);
-  color: var(--border-color);
-}
-
-.article-divider svg {
-  width: 100%;
-  height: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
 }
 
 /* Article footer with tags */
@@ -1119,14 +1115,17 @@ audio {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5em 1em;
+  padding: 0.6em 1.2em;
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 4px;
   color: var(--text-secondary);
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   transition: all 0.2s ease;
   cursor: pointer;
 }
