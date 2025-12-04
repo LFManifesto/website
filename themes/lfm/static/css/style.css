@@ -215,7 +215,7 @@ strong {
   height: 2px;
   background-color: var(--text-primary);
   position: relative;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s ease;
 }
 
 .hamburger::before,
@@ -226,11 +226,26 @@ strong {
   height: 100%;
   background-color: var(--text-primary);
   left: 0;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease, top 0.3s ease;
 }
 
 .hamburger::before { top: -6px; }
 .hamburger::after { top: 6px; }
+
+/* Hamburger to X animation when menu is active */
+.nav-toggle.active .hamburger {
+  background-color: transparent;
+}
+
+.nav-toggle.active .hamburger::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav-toggle.active .hamburger::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
 
 /* --------------------------------------------------------------------------
    Main Content

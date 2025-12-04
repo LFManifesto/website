@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danger Space Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #242424;
+            --accent: #dc2626;
+            --accent-dim: #991b1b;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a3a3a3;
+            --text-muted: #737373;
+            --success: #22c55e;
+            --warning: #eab308;
+            --danger: #ef4444;
+            --border: #333333;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Card styles */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        /* Input styles - 44px min touch target */
+        .input-field {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 16px;
+            color: var(--text-primary);
+            width: 100%;
+            min-height: 44px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Label styles */
+        .label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .label-hint {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Tab styles */
+        .tab-container {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-tertiary);
+            padding: 4px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 44px;
+        }
+
+        .tab:hover {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .tab.active {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Result card styles */
+        .result-card {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .result-value {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .result-primary { color: var(--accent); }
+        .result-success { color: var(--success); }
+        .result-warning { color: var(--warning); }
+        .result-danger { color: var(--danger); }
+
+        /* Summary box */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(220,38,38,0.1) 0%, rgba(220,38,38,0.05) 100%);
+            border: 1px solid rgba(220,38,38,0.2);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Canvas container */
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .canvas-container canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            max-width: 640px;
+            max-height: 85vh;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        /* Reference table */
+        .ref-table {
+            width: 100%;
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+
+        .ref-table th,
+        .ref-table td {
+            padding: 8px 6px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ref-table th {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Input group for compact layout */
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .input-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utility classes */
+        .mt-3 { margin-top: 12px; }
+        .mt-4 { margin-top: 16px; }
+        .mt-5 { margin-top: 20px; }
+        .mb-3 { margin-bottom: 12px; }
+        .mb-4 { margin-bottom: 16px; }
+        .text-sm { font-size: 14px; }
+        .text-xs { font-size: 12px; }
+        .text-muted { color: var(--text-muted); }
+        .text-center { text-align: center; }
+        .font-medium { font-weight: 500; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen p-4 sm:p-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <header class="text-center mb-6">
+                <h1 class="text-2xl sm:text-3xl font-bold text-white mb-1">Danger Space Calculator</h1>
+                <p class="text-sm text-gray-400">Trajectory analysis for long-range precision shooting</p>
+            </header>
+
+            <!-- Main Layout -->
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Calculator Panel -->
+                <div class="card p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-semibold">Calculator</h2>
+                        <button id="infoBtn" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition" aria-label="Information">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="tab-container">
+                        <button class="tab active" data-tab="danger-space">Danger Space</button>
+                        <button class="tab" data-tab="single-hold">Single Hold</button>
+                        <button class="tab" data-tab="wind">Wind Margin</button>
+                    </div>
+
+                    <!-- Panel: Danger Space -->
+                    <div id="panel-danger-space" class="panel">
+                        <p class="text-sm text-muted mb-4">Calculate ranging error tolerance based on your ballistic data.</p>
+
+                        <div class="input-group mb-3">
+                            <div>
+                                <label class="label" for="ds-target">Target Height</label>
+                                <div class="flex gap-2">
+                                    <input type="number" id="ds-target" class="input-field" value="18" min="1" max="72">
+                                    <select id="ds-target-unit" class="input-field" style="width: auto; min-width: 70px;">
+                                        <option value="in">in</option>
+                                        <option value="cm">cm</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="label" for="ds-range">Aimed Range</label>
+                                <div class="flex gap-2">
+                                    <input type="number" id="ds-range" class="input-field" value="600" min="100" max="2000" step="50">
+                                    <select id="ds-range-unit" class="input-field" style="width: auto; min-width: 70px;">
+                                        <option value="m">m</option>
+                                        <option value="yd">yd</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="label" for="ds-hold">Come-up / Hold at Aimed Range (Mils)</label>
+                            <input type="number" id="ds-hold" class="input-field" value="4.3" step="0.1" min="0" max="30">
+                        </div>
+
+                        <div class="mb-4">
+                            <p class="label">Drop Table (enter data from your solver)</p>
+                            <div class="bg-black/20 rounded-lg p-3">
+                                <div class="grid grid-cols-3 gap-2 text-xs font-medium text-gray-400 mb-2 px-1">
+                                    <span>Range</span>
+                                    <span>Hold (Mils)</span>
+                                    <span>Path</span>
+                                </div>
+                                <div id="drop-table" class="space-y-2"></div>
+                            </div>
+                            <p class="label-hint mt-2">Path shows bullet position relative to aim point at each range</p>
+                        </div>
+
+                        <!-- Results -->
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <div class="result-card">
+                                <div class="result-label">Target Size</div>
+                                <div id="ds-result-size" class="result-value result-primary">--</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">Danger Space</div>
+                                <div id="ds-result-space" class="result-value result-success">--</div>
+                            </div>
+                        </div>
+                        <div id="ds-summary" class="summary-box mt-3">
+                            Enter your ballistic data to calculate danger space.
+                        </div>
+                    </div>
+
+                    <!-- Panel: Single Hold -->
+                    <div id="panel-single-hold" class="panel hidden">
+                        <p class="text-sm text-muted mb-4">Calculate a single elevation hold to engage targets from 0 to max range.</p>
+
+                        <div class="input-group mb-3">
+                            <div>
+                                <label class="label" for="sh-max-range">Max Engagement Range</label>
+                                <div class="flex gap-2">
+                                    <input type="number" id="sh-max-range" class="input-field" value="400" min="100" max="1000" step="50">
+                                    <select id="sh-range-unit" class="input-field" style="width: auto; min-width: 70px;">
+                                        <option value="m">m</option>
+                                        <option value="yd">yd</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="label" for="sh-max-hold">Hold at Max Range (Mils)</label>
+                                <input type="number" id="sh-max-hold" class="input-field" value="2.5" step="0.1" min="0" max="20">
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-4">
+                            <div>
+                                <label class="label" for="sh-ord-range">Max Ordinate Distance</label>
+                                <input type="number" id="sh-ord-range" class="input-field" value="220" min="50" max="500" step="10">
+                                <p class="label-hint">Where bullet reaches highest point</p>
+                            </div>
+                            <div>
+                                <label class="label" for="sh-ord-hold">Hold at Max Ordinate (Mils)</label>
+                                <input type="number" id="sh-ord-hold" class="input-field" value="0.6" step="0.1" min="0" max="10">
+                            </div>
+                        </div>
+
+                        <!-- Results -->
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <div class="result-card">
+                                <div class="result-label">Mils Above LOS</div>
+                                <div id="sh-result-mils" class="result-value result-primary">--</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">Max Height</div>
+                                <div id="sh-result-height" class="result-value result-warning">--</div>
+                            </div>
+                        </div>
+                        <div id="sh-summary" class="summary-box mt-3">
+                            Enter data from your ballistic solver.
+                        </div>
+                    </div>
+
+                    <!-- Panel: Wind Margin -->
+                    <div id="panel-wind" class="panel hidden">
+                        <p class="text-sm text-muted mb-4">Calculate wind tolerance — how much wind error before missing the target.</p>
+
+                        <div class="input-group mb-3">
+                            <div>
+                                <label class="label" for="wm-width">Target Width</label>
+                                <div class="flex gap-2">
+                                    <input type="number" id="wm-width" class="input-field" value="18" min="1" max="48">
+                                    <select id="wm-width-unit" class="input-field" style="width: auto; min-width: 70px;">
+                                        <option value="in">in</option>
+                                        <option value="cm">cm</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="label" for="wm-range">Range to Target</label>
+                                <div class="flex gap-2">
+                                    <input type="number" id="wm-range" class="input-field" value="400" min="100" max="2000" step="50">
+                                    <select id="wm-range-unit" class="input-field" style="width: auto; min-width: 70px;">
+                                        <option value="m">m</option>
+                                        <option value="yd">yd</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="label" for="wm-wind">1 MPH Wind Value (Mils)</label>
+                            <input type="number" id="wm-wind" class="input-field" value="0.10" step="0.01" min="0.01" max="1">
+                            <p class="label-hint">From your ballistic solver at this range</p>
+                        </div>
+
+                        <!-- Results -->
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <div class="result-card">
+                                <div class="result-label">Target Width</div>
+                                <div id="wm-result-mils" class="result-value result-primary">--</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">Wind Tolerance</div>
+                                <div id="wm-result-mph" class="result-value">--</div>
+                            </div>
+                        </div>
+                        <div id="wm-summary" class="summary-box mt-3">
+                            Enter values to calculate wind tolerance.
+                        </div>
+
+                        <!-- Reference Table -->
+                        <div class="mt-5">
+                            <p class="text-xs font-medium text-gray-400 mb-2">M118LR Reference (175gr SMK @ 2600fps)</p>
+                            <div class="overflow-x-auto">
+                                <table class="ref-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Range</th>
+                                            <th>1 MPH</th>
+                                            <th>18" Width</th>
+                                            <th>Tolerance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ref-table-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization Panel -->
+                <div class="card p-5 flex flex-col">
+                    <h2 id="viz-title" class="text-lg font-semibold mb-4">Visualization</h2>
+                    <div class="canvas-container flex-grow">
+                        <canvas id="viz-canvas"></canvas>
+                    </div>
+                    <p id="viz-desc" class="text-xs text-muted text-center mt-3">Interactive trajectory visualization</p>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-center mt-6 text-xs text-gray-500">
+                <p>Educational tool based on Applied Ballistics principles. Always verify with your ballistic solver.</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-5 border-b border-gray-700 flex items-center justify-between">
+                <h3 class="text-lg font-semibold">Understanding Danger Space</h3>
+                <button id="closeModal" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-5 space-y-5">
+                <section>
+                    <h4 class="font-semibold text-red-400 mb-2">1. Danger Space (Ranging Tolerance)</h4>
+                    <p class="text-sm text-gray-300 mb-2">"Danger space is the true measure of merit for a trajectory." — Bryan Litz</p>
+                    <p class="text-sm text-gray-400">The range window within which your bullet will still hit a target of a given size despite ranging error. Flatter trajectories = more danger space = more forgiving.</p>
+                    <div class="bg-black/30 rounded-lg p-3 mt-3 text-sm">
+                        <p class="font-medium text-white mb-1">Formula:</p>
+                        <p class="text-gray-400">Find ranges where bullet path = ±(target height ÷ 2)</p>
+                        <p class="text-gray-400">Danger Space = Max Range − Min Range</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h4 class="font-semibold text-red-400 mb-2">2. Single Hold (Tactical Technique)</h4>
+                    <p class="text-sm text-gray-400">Use one elevation hold to engage all targets from 0 to max range. Dial for max range, aim beltline. Know how high the bullet travels at max ordinate.</p>
+                    <div class="bg-black/30 rounded-lg p-3 mt-3 text-sm">
+                        <p class="font-medium text-white mb-1">Example (400m max):</p>
+                        <p class="text-gray-400">Hold at 400m: 2.5 Mils | Hold at 220m: 0.6 Mils</p>
+                        <p class="text-gray-400">Max height = (2.5 − 0.6) mils × range conversion = ~16"</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h4 class="font-semibold text-red-400 mb-2">3. Wind Tolerance (Target Width in MPH)</h4>
+                    <p class="text-sm text-gray-400">Calculate how many MPH of wind (or wind call error) it takes to miss when aiming at the upwind edge.</p>
+                    <div class="bg-black/30 rounded-lg p-3 mt-3 text-sm">
+                        <p class="font-medium text-white mb-1">Formula:</p>
+                        <p class="text-gray-400">Wind Tolerance = Target Width (mils) ÷ 1 MPH Wind Value (mils)</p>
+                        <p class="text-gray-400 mt-1">Example: 1.14 mils ÷ 0.10 mils = 11.4 MPH tolerance</p>
+                    </div>
+                </section>
+
+                <section class="pt-4 border-t border-gray-700">
+                    <p class="text-xs text-gray-500">Sources: Applied Ballistics (Bryan Litz), Fort Benning 316th Cav Sniper School, Bison Tactical</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ==================== CONSTANTS ====================
+        // Conversion: 1 mil = 3.6 inches at 100 yards = 3.438 MOA
+        // Mils to inches: inches = mils × (range_yards × 0.036)
+        // Inches to mils: mils = inches / (range_yards × 0.036)
+        const MILS_PER_100YD = 3.6; // inches per mil at 100 yards
+        const METERS_TO_YARDS = 1.0936;
+        const CM_TO_INCHES = 0.3937;
+
+        // M118LR reference data (175gr SMK @ 2600fps, 60°F, 29.92 inHg)
+        const REF_DATA = [
+            { range: 100, wind: 0.02, width: 4.57, tol: 228.5 },
+            { range: 200, wind: 0.04, width: 2.29, tol: 57.25 },
+            { range: 300, wind: 0.07, width: 1.52, tol: 21.71 },
+            { range: 400, wind: 0.10, width: 1.14, tol: 11.4 },
+            { range: 500, wind: 0.12, width: 0.91, tol: 7.58 },
+            { range: 600, wind: 0.16, width: 0.76, tol: 4.75 },
+            { range: 700, wind: 0.19, width: 0.65, tol: 3.42 },
+            { range: 800, wind: 0.23, width: 0.57, tol: 2.47 },
+            { range: 900, wind: 0.26, width: 0.50, tol: 1.92 },
+            { range: 1000, wind: 0.30, width: 0.46, tol: 1.53 },
+        ];
+
+        // ==================== UTILITY FUNCTIONS ====================
+
+        function toYards(value, unit) {
+            return unit === 'm' ? value * METERS_TO_YARDS : value;
+        }
+
+        function toInches(value, unit) {
+            return unit === 'cm' ? value * CM_TO_INCHES : value;
+        }
+
+        function milsToInches(mils, rangeYards) {
+            // inches = mils × (range_yards / 100) × 3.6
+            return mils * (rangeYards / 100) * MILS_PER_100YD;
+        }
+
+        function inchesToMils(inches, rangeYards) {
+            // mils = inches / ((range_yards / 100) × 3.6)
+            if (rangeYards <= 0) return 0;
+            return inches / ((rangeYards / 100) * MILS_PER_100YD);
+        }
+
+        function lerp(a, b, t) {
+            return a + (b - a) * t;
+        }
+
+        function clamp(val, min, max) {
+            return Math.max(min, Math.min(max, val));
+        }
+
+        // ==================== DOM ELEMENTS ====================
+
+        const canvas = document.getElementById('viz-canvas');
+        const ctx = canvas.getContext('2d');
+        const vizTitle = document.getElementById('viz-title');
+        const vizDesc = document.getElementById('viz-desc');
+        const modal = document.getElementById('modal');
+
+        const tabs = document.querySelectorAll('.tab');
+        const panels = {
+            'danger-space': document.getElementById('panel-danger-space'),
+            'single-hold': document.getElementById('panel-single-hold'),
+            'wind': document.getElementById('panel-wind')
+        };
+
+        let activeTab = 'danger-space';
+        let dropTableData = [];
+
+        // ==================== CANVAS SETUP ====================
+
+        function setupCanvas() {
+            const container = canvas.parentElement;
+            const dpr = window.devicePixelRatio || 1;
+            const rect = container.getBoundingClientRect();
+
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+
+            ctx.scale(dpr, dpr);
+            ctx.font = '12px Inter, sans-serif';
+        }
+
+        // ==================== DROP TABLE ====================
+
+        function createDropTable() {
+            const container = document.getElementById('drop-table');
+            const ranges = [500, 550, 600, 650, 700];
+            const holds = [2.9, 3.6, 4.3, 5.1, 6.0];
+
+            container.innerHTML = '';
+            dropTableData = [];
+
+            ranges.forEach((r, i) => {
+                const row = document.createElement('div');
+                row.className = 'grid grid-cols-3 gap-2 items-center';
+
+                const rangeInput = document.createElement('input');
+                rangeInput.type = 'number';
+                rangeInput.className = 'input-field text-sm';
+                rangeInput.style.padding = '8px 10px';
+                rangeInput.value = r;
+                rangeInput.dataset.index = i;
+                rangeInput.dataset.field = 'range';
+
+                const holdInput = document.createElement('input');
+                holdInput.type = 'number';
+                holdInput.className = 'input-field text-sm';
+                holdInput.style.padding = '8px 10px';
+                holdInput.value = holds[i];
+                holdInput.step = '0.1';
+                holdInput.dataset.index = i;
+                holdInput.dataset.field = 'hold';
+
+                const pathSpan = document.createElement('span');
+                pathSpan.className = 'text-sm font-medium px-2';
+                pathSpan.id = `path-${i}`;
+                pathSpan.textContent = '--';
+
+                row.appendChild(rangeInput);
+                row.appendChild(holdInput);
+                row.appendChild(pathSpan);
+                container.appendChild(row);
+
+                dropTableData.push({ range: r, hold: holds[i] });
+
+                rangeInput.addEventListener('input', (e) => {
+                    dropTableData[i].range = parseFloat(e.target.value) || 0;
+                    calculateDangerSpace();
+                });
+
+                holdInput.addEventListener('input', (e) => {
+                    dropTableData[i].hold = parseFloat(e.target.value) || 0;
+                    calculateDangerSpace();
+                });
+            });
+        }
+
+        // ==================== DANGER SPACE CALCULATOR ====================
+
+        function calculateDangerSpace() {
+            const targetHeight = toInches(
+                parseFloat(document.getElementById('ds-target').value) || 0,
+                document.getElementById('ds-target-unit').value
+            );
+            const aimedRange = toYards(
+                parseFloat(document.getElementById('ds-range').value) || 0,
+                document.getElementById('ds-range-unit').value
+            );
+            const holdAtRange = parseFloat(document.getElementById('ds-hold').value) || 0;
+
+            const targetMils = inchesToMils(targetHeight, aimedRange);
+            const halfTargetInches = targetHeight / 2;
+
+            // Calculate bullet path at each range
+            const pathData = dropTableData.map((d, i) => {
+                const rangeYards = toYards(d.range, document.getElementById('ds-range-unit').value);
+                const pathMils = holdAtRange - d.hold;
+                const pathInches = milsToInches(pathMils, rangeYards);
+
+                // Update display
+                const pathEl = document.getElementById(`path-${i}`);
+                if (pathEl) {
+                    if (Math.abs(d.range - parseFloat(document.getElementById('ds-range').value)) < 1) {
+                        pathEl.textContent = 'AIM';
+                        pathEl.className = 'text-sm font-medium px-2 text-red-400';
+                    } else {
+                        const sign = pathInches >= 0 ? '+' : '';
+                        pathEl.textContent = `${sign}${pathInches.toFixed(1)}"`;
+                        pathEl.className = 'text-sm font-medium px-2 text-gray-400';
+                    }
+                }
+
+                return { range: d.range, rangeYards, hold: d.hold, pathMils, pathInches };
+            });
+
+            // Sort by range
+            pathData.sort((a, b) => a.range - b.range);
+
+            // Find where trajectory crosses ±halfTargetInches
+            let minRange = null, maxRange = null;
+
+            for (let i = 0; i < pathData.length - 1; i++) {
+                const curr = pathData[i];
+                const next = pathData[i + 1];
+
+                // Crossing from above +half to below +half (entering target zone from above)
+                if (curr.pathInches > halfTargetInches && next.pathInches <= halfTargetInches) {
+                    const t = (halfTargetInches - curr.pathInches) / (next.pathInches - curr.pathInches);
+                    minRange = lerp(curr.range, next.range, t);
+                }
+
+                // Crossing from above -half to below -half (exiting target zone below)
+                if (curr.pathInches >= -halfTargetInches && next.pathInches < -halfTargetInches) {
+                    const t = (-halfTargetInches - curr.pathInches) / (next.pathInches - curr.pathInches);
+                    maxRange = lerp(curr.range, next.range, t);
+                }
+            }
+
+            // Update results
+            document.getElementById('ds-result-size').textContent = `${targetMils.toFixed(2)} mils`;
+
+            let dangerSpace = '--';
+            let summary = 'Need more drop data to calculate danger space.';
+
+            if (minRange !== null && maxRange !== null) {
+                const space = maxRange - minRange;
+                dangerSpace = `${space.toFixed(0)}${document.getElementById('ds-range-unit').value}`;
+                summary = `Your ranging can be off by ±${(space/2).toFixed(0)}${document.getElementById('ds-range-unit').value} (from ${minRange.toFixed(0)} to ${maxRange.toFixed(0)}) and still hit the ${targetHeight.toFixed(0)}" target.`;
+            }
+
+            document.getElementById('ds-result-space').textContent = dangerSpace;
+            document.getElementById('ds-summary').textContent = summary;
+
+            drawDangerSpaceViz(pathData, targetHeight, halfTargetInches, minRange, maxRange, aimedRange);
+        }
+
+        function drawDangerSpaceViz(pathData, targetHeight, halfTarget, minR, maxR, aimedRangeYards) {
+            const w = canvas.width / (window.devicePixelRatio || 1);
+            const h = canvas.height / (window.devicePixelRatio || 1);
+
+            ctx.clearRect(0, 0, w, h);
+
+            if (pathData.length < 2) return;
+
+            const pad = { t: 40, r: 20, b: 45, l: 50 };
+            const gw = w - pad.l - pad.r;
+            const gh = h - pad.t - pad.b;
+
+            const minRange = Math.min(...pathData.map(d => d.range));
+            const maxRange = Math.max(...pathData.map(d => d.range));
+            const maxPath = Math.max(...pathData.map(d => Math.abs(d.pathInches)), halfTarget * 1.5);
+
+            const xScale = (r) => pad.l + ((r - minRange) / (maxRange - minRange)) * gw;
+            const yScale = (p) => pad.t + gh/2 - (p / maxPath) * (gh/2);
+
+            // Grid lines
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 4]);
+
+            // Zero line
+            ctx.beginPath();
+            ctx.moveTo(pad.l, yScale(0));
+            ctx.lineTo(w - pad.r, yScale(0));
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Target zone fill
+            ctx.fillStyle = 'rgba(34, 197, 94, 0.1)';
+            ctx.fillRect(pad.l, yScale(halfTarget), gw, yScale(-halfTarget) - yScale(halfTarget));
+
+            // Target zone lines
+            ctx.strokeStyle = 'rgba(34, 197, 94, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([6, 4]);
+            ctx.beginPath();
+            ctx.moveTo(pad.l, yScale(halfTarget));
+            ctx.lineTo(w - pad.r, yScale(halfTarget));
+            ctx.moveTo(pad.l, yScale(-halfTarget));
+            ctx.lineTo(w - pad.r, yScale(-halfTarget));
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Danger space highlight
+            if (minR !== null && maxR !== null) {
+                ctx.fillStyle = 'rgba(220, 38, 38, 0.15)';
+                ctx.fillRect(xScale(minR), pad.t, xScale(maxR) - xScale(minR), gh);
+
+                // Danger space labels
+                ctx.fillStyle = '#ef4444';
+                ctx.font = '11px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(`${minR.toFixed(0)}`, xScale(minR), h - pad.b + 30);
+                ctx.fillText(`${maxR.toFixed(0)}`, xScale(maxR), h - pad.b + 30);
+            }
+
+            // Draw smooth trajectory curve using quadratic bezier
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+
+            pathData.forEach((d, i) => {
+                const x = xScale(d.range);
+                const y = yScale(d.pathInches);
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    // Use quadratic curve for smoother line
+                    const prev = pathData[i - 1];
+                    const px = xScale(prev.range);
+                    const py = yScale(prev.pathInches);
+                    const cx = (px + x) / 2;
+                    ctx.quadraticCurveTo(px, py, cx, (py + y) / 2);
+                    if (i === pathData.length - 1) {
+                        ctx.quadraticCurveTo(cx, (py + y) / 2, x, y);
+                    }
+                }
+            });
+            ctx.stroke();
+
+            // Data points
+            pathData.forEach(d => {
+                const x = xScale(d.range);
+                const y = yScale(d.pathInches);
+
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
+                ctx.fillStyle = '#dc2626';
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+
+            // Axis labels
+            ctx.fillStyle = '#888';
+            ctx.font = '11px Inter';
+            ctx.textAlign = 'center';
+
+            // X-axis
+            pathData.forEach(d => {
+                ctx.fillText(d.range.toString(), xScale(d.range), h - pad.b + 15);
+            });
+            ctx.fillText('Range', w/2, h - 8);
+
+            // Y-axis
+            ctx.textAlign = 'right';
+            ctx.fillText(`+${halfTarget.toFixed(0)}"`, pad.l - 8, yScale(halfTarget) + 4);
+            ctx.fillText('0"', pad.l - 8, yScale(0) + 4);
+            ctx.fillText(`-${halfTarget.toFixed(0)}"`, pad.l - 8, yScale(-halfTarget) + 4);
+
+            // Title
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 13px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText('Bullet Path vs Target Zone', w/2, 20);
+
+            vizTitle.textContent = 'Danger Space';
+            vizDesc.textContent = 'Green zone = target height. Red shading = danger space (hit zone).';
+        }
+
+        // ==================== SINGLE HOLD CALCULATOR ====================
+
+        function calculateSingleHold() {
+            const maxRange = parseFloat(document.getElementById('sh-max-range').value) || 0;
+            const maxRangeYards = toYards(maxRange, document.getElementById('sh-range-unit').value);
+            const maxHold = parseFloat(document.getElementById('sh-max-hold').value) || 0;
+            const ordRange = parseFloat(document.getElementById('sh-ord-range').value) || 0;
+            const ordRangeYards = toYards(ordRange, document.getElementById('sh-range-unit').value);
+            const ordHold = parseFloat(document.getElementById('sh-ord-hold').value) || 0;
+
+            // Mils above LOS at max ordinate
+            const milsAbove = maxHold - ordHold;
+
+            // Convert to inches at max ordinate distance
+            const heightInches = milsToInches(milsAbove, ordRangeYards);
+
+            document.getElementById('sh-result-mils').textContent = `${milsAbove.toFixed(2)} mils`;
+            document.getElementById('sh-result-height').textContent = `${heightInches.toFixed(1)}"`;
+
+            const unit = document.getElementById('sh-range-unit').value;
+            document.getElementById('sh-summary').textContent =
+                `Dial ${maxHold} mils, aim beltline. All targets 0-${maxRange}${unit} will be hit. ` +
+                `Max bullet height: ${heightInches.toFixed(1)}" above aim at ${ordRange}${unit}.`;
+
+            drawSingleHoldViz(maxRange, ordRange, heightInches, maxHold, document.getElementById('sh-range-unit').value);
+        }
+
+        function drawSingleHoldViz(maxRange, ordRange, heightInches, holdValue, unit) {
+            const w = canvas.width / (window.devicePixelRatio || 1);
+            const h = canvas.height / (window.devicePixelRatio || 1);
+
+            ctx.clearRect(0, 0, w, h);
+
+            const pad = { t: 50, r: 30, b: 50, l: 40 };
+            const gw = w - pad.l - pad.r;
+            const gh = h - pad.t - pad.b;
+
+            const xScale = (r) => pad.l + (r / maxRange) * gw;
+            const losY = pad.t + gh * 0.65;
+            const yScale = heightInches > 0 ? gh * 0.5 / (heightInches * 1.3) : 1;
+
+            // Line of sight
+            ctx.strokeStyle = '#555';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([6, 4]);
+            ctx.beginPath();
+            ctx.moveTo(pad.l, losY);
+            ctx.lineTo(w - pad.r, losY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#666';
+            ctx.font = '10px Inter';
+            ctx.textAlign = 'left';
+            ctx.fillText('Line of Sight (Beltline)', pad.l + 5, losY - 8);
+
+            // Draw trajectory arc
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+
+            for (let x = 0; x <= maxRange; x += maxRange / 100) {
+                // Parabolic trajectory
+                let height;
+                if (x <= ordRange) {
+                    height = heightInches * Math.pow(x / ordRange, 0.8);
+                } else {
+                    const t = (x - ordRange) / (maxRange - ordRange);
+                    height = heightInches * Math.pow(1 - t, 1.2);
+                }
+
+                const px = xScale(x);
+                const py = losY - height * yScale;
+
+                if (x === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+
+            // Max ordinate point
+            const ordX = xScale(ordRange);
+            const ordY = losY - heightInches * yScale;
+
+            ctx.beginPath();
+            ctx.arc(ordX, ordY, 7, 0, Math.PI * 2);
+            ctx.fillStyle = '#dc2626';
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Height indicator line
+            ctx.strokeStyle = '#60a5fa';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4, 3]);
+            ctx.beginPath();
+            ctx.moveTo(ordX, ordY + 10);
+            ctx.lineTo(ordX, losY - 5);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Height label
+            ctx.fillStyle = '#60a5fa';
+            ctx.font = 'bold 13px Inter';
+            ctx.textAlign = 'left';
+            ctx.fillText(`${heightInches.toFixed(1)}"`, ordX + 12, (ordY + losY) / 2 + 4);
+
+            // Target silhouettes
+            ctx.fillStyle = 'rgba(255,255,255,0.08)';
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            ctx.lineWidth = 1;
+            const targetH = 50;
+            const targetW = 12;
+
+            for (let r = Math.ceil(maxRange / 4); r <= maxRange; r += Math.ceil(maxRange / 4)) {
+                const x = xScale(r);
+                ctx.fillRect(x - targetW/2, losY - targetH, targetW, targetH);
+                ctx.strokeRect(x - targetW/2, losY - targetH, targetW, targetH);
+            }
+
+            // X-axis labels
+            ctx.fillStyle = '#888';
+            ctx.font = '11px Inter';
+            ctx.textAlign = 'center';
+
+            for (let r = 0; r <= maxRange; r += Math.ceil(maxRange / 4)) {
+                ctx.fillText(`${r}${unit}`, xScale(r), h - pad.b + 18);
+            }
+            ctx.fillText('Range', w/2, h - 8);
+
+            // Title
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 13px Inter';
+            ctx.fillText(`Single Hold: ${holdValue} mils for 0-${maxRange}${unit}`, w/2, 22);
+
+            vizTitle.textContent = 'Single Hold Engagement';
+            vizDesc.textContent = `Bullet peaks ${heightInches.toFixed(1)}" above aim point at ${ordRange}${unit}.`;
+        }
+
+        // ==================== WIND MARGIN CALCULATOR ====================
+
+        function calculateWindMargin() {
+            const targetWidth = toInches(
+                parseFloat(document.getElementById('wm-width').value) || 0,
+                document.getElementById('wm-width-unit').value
+            );
+            const range = toYards(
+                parseFloat(document.getElementById('wm-range').value) || 0,
+                document.getElementById('wm-range-unit').value
+            );
+            const wind1mph = parseFloat(document.getElementById('wm-wind').value) || 0;
+
+            const targetMils = inchesToMils(targetWidth, range);
+            const windTolerance = wind1mph > 0 ? targetMils / wind1mph : 0;
+
+            document.getElementById('wm-result-mils').textContent = `${targetMils.toFixed(2)} mils`;
+
+            let tolClass = 'result-danger';
+            let tolText = `${windTolerance.toFixed(1)} MPH`;
+            let summary = '';
+
+            if (windTolerance > 10) {
+                tolClass = 'result-success';
+                summary = `Good tolerance. Aim upwind edge — any wind under ${windTolerance.toFixed(0)} MPH = hit.`;
+            } else if (windTolerance > 5) {
+                tolClass = 'result-warning';
+                summary = `Moderate tolerance. Careful wind reading needed. Max ${windTolerance.toFixed(0)} MPH error.`;
+            } else {
+                summary = `Critical. Precise wind call required. Only ${windTolerance.toFixed(1)} MPH margin.`;
+            }
+
+            const tolEl = document.getElementById('wm-result-mph');
+            tolEl.textContent = tolText;
+            tolEl.className = `result-value ${tolClass}`;
+
+            document.getElementById('wm-summary').textContent = summary;
+
+            drawWindViz(targetWidth, targetMils, windTolerance, parseFloat(document.getElementById('wm-range').value), document.getElementById('wm-range-unit').value);
+        }
+
+        function drawWindViz(targetWidthInches, targetMils, windMPH, range, unit) {
+            const w = canvas.width / (window.devicePixelRatio || 1);
+            const h = canvas.height / (window.devicePixelRatio || 1);
+
+            ctx.clearRect(0, 0, w, h);
+
+            const cx = w / 2;
+            const cy = h / 2;
+
+            // Target dimensions
+            const targetW = Math.min(120, w * 0.25);
+            const targetH = targetW * 2;
+
+            // Draw target (IPSC silhouette shape)
+            ctx.fillStyle = 'rgba(100, 100, 100, 0.3)';
+            ctx.strokeStyle = 'rgba(150, 150, 150, 0.5)';
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            ctx.moveTo(cx - targetW/2, cy - targetH/2 + 25);
+            ctx.lineTo(cx - targetW/2 + 15, cy - targetH/2);
+            ctx.lineTo(cx + targetW/2 - 15, cy - targetH/2);
+            ctx.lineTo(cx + targetW/2, cy - targetH/2 + 25);
+            ctx.lineTo(cx + targetW/2, cy + targetH/2);
+            ctx.lineTo(cx - targetW/2, cy + targetH/2);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Wind arrow
+            const arrowStart = cx - targetW - 50;
+            const arrowEnd = cx - targetW/2 - 12;
+
+            ctx.strokeStyle = '#60a5fa';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(arrowStart, cy);
+            ctx.lineTo(arrowEnd, cy);
+            ctx.stroke();
+
+            // Arrowhead
+            ctx.fillStyle = '#60a5fa';
+            ctx.beginPath();
+            ctx.moveTo(arrowEnd, cy);
+            ctx.lineTo(arrowEnd - 10, cy - 6);
+            ctx.lineTo(arrowEnd - 10, cy + 6);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.font = 'bold 12px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText('WIND', (arrowStart + arrowEnd) / 2, cy - 18);
+
+            // Aim point (upwind edge)
+            const aimX = cx - targetW/2 + 18;
+
+            // Crosshair
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(aimX - 18, cy);
+            ctx.lineTo(aimX + 18, cy);
+            ctx.moveTo(aimX, cy - 18);
+            ctx.lineTo(aimX, cy + 18);
+            ctx.stroke();
+
+            // Aim point dot
+            ctx.beginPath();
+            ctx.arc(aimX, cy, 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#ef4444';
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Drift indicators
+            const driftMPH = [5, 10, 15];
+            const colors = ['#22c55e', '#eab308', '#ef4444'];
+            const pixelsPerMPH = windMPH > 0 ? (targetW * 0.75) / windMPH : 10;
+
+            driftMPH.forEach((mph, i) => {
+                if (mph <= windMPH * 1.3) {
+                    const driftX = aimX + mph * pixelsPerMPH;
+
+                    if (driftX < cx + targetW/2 - 5) {
+                        ctx.beginPath();
+                        ctx.arc(driftX, cy, 4, 0, Math.PI * 2);
+                        ctx.fillStyle = colors[i];
+                        ctx.fill();
+
+                        ctx.fillStyle = colors[i];
+                        ctx.font = '10px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(`${mph}`, driftX, cy + 18);
+                    }
+                }
+            });
+
+            // Labels
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 14px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText(`${range}${unit} — ${targetWidthInches.toFixed(0)}" Target`, cx, cy - targetH/2 - 35);
+
+            ctx.font = '12px Inter';
+            ctx.fillStyle = '#aaa';
+            ctx.fillText(`${targetMils.toFixed(2)} mils wide`, cx, cy - targetH/2 - 18);
+
+            // Tolerance display
+            const tolColor = windMPH > 10 ? '#22c55e' : windMPH > 5 ? '#eab308' : '#ef4444';
+            ctx.fillStyle = tolColor;
+            ctx.font = 'bold 18px Inter';
+            ctx.fillText(`${windMPH.toFixed(1)} MPH Tolerance`, cx, cy + targetH/2 + 35);
+
+            ctx.fillStyle = '#888';
+            ctx.font = '11px Inter';
+            ctx.fillText('Aim upwind edge. Wind under tolerance = hit.', cx, cy + targetH/2 + 55);
+
+            vizTitle.textContent = 'Wind Tolerance';
+            vizDesc.textContent = 'Colored dots show bullet position at different wind speeds.';
+        }
+
+        function populateRefTable() {
+            const tbody = document.getElementById('ref-table-body');
+            tbody.innerHTML = '';
+
+            REF_DATA.forEach(row => {
+                const tr = document.createElement('tr');
+                const tolClass = row.tol > 10 ? 'result-success' : row.tol > 5 ? 'result-warning' : 'result-danger';
+
+                tr.innerHTML = `
+                    <td>${row.range}m</td>
+                    <td>${row.wind.toFixed(2)}</td>
+                    <td>${row.width.toFixed(2)}</td>
+                    <td class="${tolClass}" style="font-weight: 600;">${row.tol.toFixed(1)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ==================== TAB SWITCHING ====================
+
+        function switchTab(tabId) {
+            activeTab = tabId;
+
+            tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tabId));
+            Object.keys(panels).forEach(k => panels[k].classList.toggle('hidden', k !== tabId));
+
+            setupCanvas();
+
+            if (tabId === 'danger-space') {
+                calculateDangerSpace();
+            } else if (tabId === 'single-hold') {
+                calculateSingleHold();
+            } else if (tabId === 'wind') {
+                calculateWindMargin();
+                populateRefTable();
+            }
+        }
+
+        // ==================== EVENT LISTENERS ====================
+
+        // Tabs
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+        });
+
+        // Danger Space inputs
+        ['ds-target', 'ds-target-unit', 'ds-range', 'ds-range-unit', 'ds-hold'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateDangerSpace);
+            document.getElementById(id).addEventListener('change', calculateDangerSpace);
+        });
+
+        // Single Hold inputs
+        ['sh-max-range', 'sh-range-unit', 'sh-max-hold', 'sh-ord-range', 'sh-ord-hold'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateSingleHold);
+            document.getElementById(id).addEventListener('change', calculateSingleHold);
+        });
+
+        // Wind Margin inputs
+        ['wm-width', 'wm-width-unit', 'wm-range', 'wm-range-unit', 'wm-wind'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateWindMargin);
+            document.getElementById(id).addEventListener('change', calculateWindMargin);
+        });
+
+        // Modal
+        document.getElementById('infoBtn').addEventListener('click', () => modal.classList.add('active'));
+        document.getElementById('closeModal').addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        // Window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                setupCanvas();
+                if (activeTab === 'danger-space') calculateDangerSpace();
+                else if (activeTab === 'single-hold') calculateSingleHold();
+                else if (activeTab === 'wind') calculateWindMargin();
+            }, 100);
+        });
+
+        // ==================== INITIALIZATION ====================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createDropTable();
+            setupCanvas();
+            calculateDangerSpace();
+        });
+
+    })();
+    </script>
+</body>
+</html>

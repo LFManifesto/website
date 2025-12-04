@@ -4,11 +4,11 @@
       <span class="logo-text">Light Fighter Manifesto</span>
     </a>
 
-    <button class="nav-toggle" aria-label="Toggle navigation">
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
       <span class="hamburger"></span>
     </button>
 
-    <ul class="nav-menu">
+    <ul class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
       {{ range .Site.Menus.main }}
         <li class="nav-item">
           <a href="{{ .URL }}" class="nav-link {{ if $.IsMenuCurrent "main" . }}active{{ end }}">

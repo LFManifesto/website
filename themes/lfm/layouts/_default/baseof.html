@@ -17,23 +17,31 @@
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Site.Params.ogimage }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
   <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta name="twitter:image" content="{{ .Site.BaseURL }}{{ .Site.Params.ogimage }}">
 
   <title>{{ if .IsHome }}{{ .Site.Title }} - Tactical Zines{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
   <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/images/logo.png">
+  <meta name="theme-color" content="#0a0a0a">
 
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css">
+  <!-- Styles with cache busting -->
+  <link rel="stylesheet" href="/css/style.css?v=2.1">
 
   <!-- RSS Feed -->
   {{ range .AlternativeOutputFormats -}}
@@ -74,8 +82,26 @@
   </div>
 
   <script>
-    // Mobile navigation toggle
+    // Mobile navigation toggle with body scroll lock
     (function() {
+      var scrollPosition = 0;
+
+      function lockScroll() {
+        scrollPosition = window.pageYOffset;
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + scrollPosition + 'px';
+        document.body.style.width = '100%';
+      }
+
+      function unlockScroll() {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollPosition);
+      }
+
       function initNav() {
         var navToggle = document.querySelector('.nav-toggle');
         var navMenu = document.querySelector('.nav-menu');
@@ -85,7 +111,22 @@
         function toggleMenu(e) {
           e.preventDefault();
           e.stopPropagation();
-          navMenu.classList.toggle('active');
+          var isActive = navMenu.classList.toggle('active');
+          navToggle.classList.toggle('active', isActive);
+          navToggle.setAttribute('aria-expanded', isActive);
+
+          if (isActive) {
+            lockScroll();
+          } else {
+            unlockScroll();
+          }
+        }
+
+        function closeMenu() {
+          navMenu.classList.remove('active');
+          navToggle.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+          unlockScroll();
         }
 
         // Use both click and touchend for maximum compatibility
@@ -98,10 +139,22 @@
         // Close menu when clicking a link
         var links = navMenu.querySelectorAll('.nav-link');
         for (var i = 0; i < links.length; i++) {
-          links[i].addEventListener('click', function() {
-            navMenu.classList.remove('active');
-          }, false);
+          links[i].addEventListener('click', closeMenu, false);
         }
+
+        // Close menu when clicking outside (on the overlay)
+        navMenu.addEventListener('click', function(e) {
+          if (e.target === navMenu) {
+            closeMenu();
+          }
+        }, false);
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            closeMenu();
+          }
+        });
       }
 
       if (document.readyState === 'loading') {

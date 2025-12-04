@@ -20,6 +20,11 @@ theme = 'lfm'
   discord = "https://discord.com/invite/light-fighter-manifesto-963878135718371408"
   github = "https://github.com/LFManifesto"
   matrix = "https://matrix.lightfightermanifesto.net"
+  instagram = "https://www.instagram.com/light_fighter_manifesto/"
+  tiktok = "https://www.tiktok.com/@lfmanifesto"
+
+  # Social sharing image (for og:image and twitter:image)
+  ogimage = "/images/og-image.png"
 
   # Payment info (used on shop page)
   monero_address = "84mtLpJmncKRp5TsRv9xC3Xx8KmSXvoKuJ5PduNqPM4MR2cj44hnYsc6VGJ6St7WwvHQAM4jnHJ1HD255ALeiazeNz9w4Mo"
