@@ -27,7 +27,7 @@
   <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
   <meta name="twitter:image" content="{{ .Site.BaseURL }}{{ .Site.Params.ogimage }}">
 
-  <title>{{ if .IsHome }}{{ .Site.Title }} - Tactical Zines{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
