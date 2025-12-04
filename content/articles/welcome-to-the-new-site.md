@@ -9,7 +9,7 @@ We ditched the GoDaddy template site. It was limiting what we could do, and fran
 
 The new site runs on Hugo, a static site generator. Pages load fast because there's no database, no WordPress bloat, and no server-side processing. Just HTML files served from a CDN.
 
-More importantly, there are no trackers. No Google Analytics, no Facebook pixels, no third-party scripts watching what you read. Your browser talks to our server and that's it.
+More importantly, we've minimized tracking. No Google Analytics, no Facebook pixels, no third-party advertising scripts. The site is hosted on Cloudflare Pages, which provides basic analytics (page views, countries) but doesn't use cookies or track individual users across the web.
 
 ## What Changed
 
