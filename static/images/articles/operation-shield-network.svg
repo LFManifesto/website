@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380">
+  <!-- Background -->
+  <rect width="800" height="380" fill="#0d0d0d"/>
+  <rect x="20" y="20" width="760" height="340" fill="#111111" rx="8" stroke="#222" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="400" y="50" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.15em">OPERATION SHIELD CAMERA NETWORK</text>
+
+  <!-- Central Hub -->
+  <circle cx="400" cy="180" r="50" fill="#1a1a1a" stroke="#c92a2a" stroke-width="2"/>
+  <text x="400" y="175" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700">VIDEO</text>
+  <text x="400" y="188" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700">INTEGRATION</text>
+  <text x="400" y="201" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700">CENTER</text>
+
+  <!-- Connection lines -->
+  <g stroke="#333" stroke-width="1">
+    <line x1="350" y1="180" x2="180" y2="100"/>
+    <line x1="350" y1="180" x2="180" y2="180"/>
+    <line x1="350" y1="180" x2="180" y2="260"/>
+    <line x1="450" y1="180" x2="620" y2="100"/>
+    <line x1="450" y1="180" x2="620" y2="180"/>
+    <line x1="450" y1="180" x2="620" y2="260"/>
+  </g>
+
+  <!-- Left side sources -->
+  <g>
+    <rect x="80" y="80" width="100" height="40" fill="#1a1a1a" stroke="#444" rx="4"/>
+    <text x="130" y="100" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="500">CONNECT ATL</text>
+    <text x="130" y="113" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700">19,000+</text>
+  </g>
+
+  <g>
+    <rect x="80" y="160" width="100" height="40" fill="#1a1a1a" stroke="#444" rx="4"/>
+    <text x="130" y="180" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="500">MARTA</text>
+    <text x="130" y="193" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700">20,000</text>
+  </g>
+
+  <g>
+    <rect x="80" y="240" width="100" height="40" fill="#1a1a1a" stroke="#444" rx="4"/>
+    <text x="130" y="260" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="500">TRAFFIC CAMS</text>
+    <text x="130" y="273" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700">2,600+</text>
+  </g>
+
+  <!-- Right side sources -->
+  <g>
+    <rect x="620" y="80" width="100" height="40" fill="#1a1a1a" stroke="#444" rx="4"/>
+    <text x="670" y="100" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="500">APD BODY CAMS</text>
+    <text x="670" y="113" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700">1,200</text>
+  </g>
+
+  <g>
+    <rect x="620" y="160" width="100" height="40" fill="#1a1a1a" stroke="#444" rx="4"/>
+    <text x="670" y="180" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="500">VEHICLE CAMS</text>
+    <text x="670" y="193" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700">~900</text>
+  </g>
+
+  <g>
+    <rect x="620" y="240" width="100" height="40" fill="#1a1a1a" stroke="#444" rx="4"/>
+    <text x="670" y="260" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="500">PRIVATE/HOA</text>
+    <text x="670" y="273" text-anchor="middle" fill="#666" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700">17,000+</text>
+  </g>
+
+  <!-- Bottom stats -->
+  <rect x="200" y="310" width="160" height="35" fill="#1a1a1a" stroke="#333" rx="4"/>
+  <text x="280" y="330" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="9">Integrated (real-time)</text>
+  <text x="280" y="340" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700">17,000+</text>
+
+  <rect x="440" y="310" width="160" height="35" fill="#1a1a1a" stroke="#333" rx="4"/>
+  <text x="520" y="330" text-anchor="middle" fill="#888" font-family="Inter, system-ui, sans-serif" font-size="9">Registered (on request)</text>
+  <text x="520" y="340" text-anchor="middle" fill="#c92a2a" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700">19,000+</text>
+
+  <!-- Source -->
+  <text x="400" y="370" text-anchor="middle" fill="#444" font-family="Inter, system-ui, sans-serif" font-size="8">Source: Atlanta Police Foundation, Atlanta Magazine</text>
+</svg>
