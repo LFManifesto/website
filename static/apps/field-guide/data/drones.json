@@ -1,0 +1,701 @@
+{
+  "id": "drones",
+  "number": "1",
+  "title": "Unmanned Aerial Systems",
+  "description": "From reconnaissance to payload delivery, UAS have become indispensable tools in modern unconventional warfare. This section covers operational employment, tactical considerations, and countermeasures derived from ongoing conflicts.",
+  "icon": "drone",
+  "subsections": [
+    {
+      "id": "uas-overview",
+      "number": "1.1",
+      "title": "UAS Overview",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "In recent years, small drones have played an increasingly significant role in modern warfare, and their utilization in the conflict in Ukraine exemplifies their versatility and effectiveness. Analysts estimate drones account for roughly 70% of battlefield losses for both Russian and Ukrainian forces, with FPV drones inflicting up to 80% of Russian battlefield casualties. Ukraine became the first country to create a military branch exclusively dedicated to drone warfare with its Unmanned Systems Forces in June 2024."
+        },
+        {
+          "type": "paragraph",
+          "text": "In the domain of Unmanned Aerial Systems, communication protocols serve as the backbone for facilitating seamless data exchange between Ground Control Stations and UAVs. These protocols govern the transmission of crucial control, telemetry, and video data by establishing rules, syntax, semantics, and synchronization mechanisms. While some drones adhere to standardized protocols, others rely on proprietary ones developed by manufacturers."
+        },
+        {
+          "type": "paragraph",
+          "text": "Modern drones typically employ serial-based protocols, ensuring synchronization among peripherals and enabling seamless communication across components. However, older models may utilize alternative methods such as Pulse Position Modulation or Pulse Width Modulation."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "UAS-Specific Protocols"
+        },
+        {
+          "type": "table",
+          "headers": ["Protocol", "Type", "Description"],
+          "rows": [
+            ["Lightbridge", "DJI Proprietary", "Legacy DJI video transmission system"],
+            ["Ocusync 3.0/4.0", "DJI Proprietary", "Current DJI platform standard with 15km range"],
+            ["MAVLink", "Open Source", "Widely supported, customizable for DIY builds"],
+            ["ExpressLRS", "Open Source", "Long-range RC link for FPV applications"],
+            ["Crossfire", "TBS Proprietary", "Extended range control link"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Frequency Bands"
+        },
+        {
+          "type": "paragraph",
+          "text": "Most COTS UAVs and their GCS use the same radio bands as Wi-Fi compatible devices to both control the UAV and transmit telemetry information from the UAV to the operator. More advanced and hobbyist platforms can be fitted with modems that transmit and receive data at 433 MHz or 915 MHz for extended range."
+        },
+        {
+          "type": "table",
+          "headers": ["Band", "Regulation", "Primary Use"],
+          "rows": [
+            ["433 MHz", "Amateur Radio (License required)", "Long-range control links"],
+            ["868 MHz", "ISM (EU regions)", "Extended range telemetry"],
+            ["915 MHz", "ISM (No license)", "Extended range control/telemetry"],
+            ["1.2/1.3 GHz", "Amateur Radio", "Analog video transmission"],
+            ["2.4 GHz", "ISM (No license)", "Standard control and telemetry"],
+            ["5.8 GHz", "ISM (No license)", "Video transmission, less congested"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "ISM Bands",
+          "text": "Three of the four primary radio bands (2.4 GHz, 5.8 GHz, and 915 MHz) are part of the industrial, scientific, and medical radio bands. Per FCC Regulations, these do not require licenses for use to transmit. The FCC states that 433 MHz is a regulated band reserved for amateur radio operators, although internationally 433 MHz is considered an ISM band."
+        }
+      ]
+    },
+    {
+      "id": "platform-specifications",
+      "number": "1.2",
+      "title": "Platform Specifications",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Understanding the capabilities and limitations of common drone platforms enables effective mission planning. The DJI Mavic series remains the predominant reconnaissance platform in modern conflicts, while purpose-built FPV drones have emerged as the primary kinetic strike platform."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "DJI Mavic 3 Series"
+        },
+        {
+          "type": "paragraph",
+          "text": "The DJI Mavic 3 Enterprise and Mavic 3T have become standard reconnaissance platforms. The triple-camera setup provides operators a clear battlefield view, detecting enemy movements, monitoring troop and vehicle movement, and identifying minefields. The Mavic 3 Pro can transmit real-time coordinates to artillery units for precise targeting."
+        },
+        {
+          "type": "table",
+          "headers": ["Specification", "Mavic 3 Enterprise", "Mavic 3T (Thermal)"],
+          "rows": [
+            ["Weight", "1050g", "1050g"],
+            ["Max Flight Time", "45 minutes", "45 minutes"],
+            ["Max Speed", "21 m/s (47 mph)", "21 m/s (47 mph)"],
+            ["Max Range", "30 km", "30 km"],
+            ["Zoom Capability", "56x hybrid", "56x hybrid"],
+            ["Thermal Sensor", "No", "640x512 resolution"],
+            ["Service Ceiling", "6000m", "6000m"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "FPV Drone Characteristics"
+        },
+        {
+          "type": "paragraph",
+          "text": "An FPV drone consists of a simple quadcopter, a remote control station, and goggles so an operator can see what the drone sees when flying. These drones cost approximately $200 to $1,000 and can fly 5-15 kilometers on average. FPV drones have been getting progressively larger, starting with 7-inch frames in 2022 and increasing to 10-13 inch frames in 2024-2025 to carry heavier payloads."
+        },
+        {
+          "type": "table",
+          "headers": ["Frame Size", "Typical Payload", "Flight Time", "Range"],
+          "rows": [
+            ["5-inch", "Grenade (200-400g)", "5-8 min", "3-5 km"],
+            ["7-inch", "RPG warhead (500-800g)", "6-10 min", "5-8 km"],
+            ["10-inch", "Artillery shell (1-2kg)", "8-12 min", "8-12 km"],
+            ["13-inch", "Heavy ordnance (2-4kg)", "10-15 min", "10-15 km"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Security Considerations",
+          "text": "The use of DJI drones by military forces is controversial due to security concerns. The U.S. Department of Defense banned the purchase of all commercial consumer drones for official purposes in 2018 and specifically blacklisted DJI in 2022. Consider OPSEC implications when using any network-connected commercial platform."
+        }
+      ]
+    },
+    {
+      "id": "operational-considerations",
+      "number": "1.3",
+      "title": "Operational Considerations",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Implement a multi-team structure to enhance operational success. One team establishes relay locations, another plans and executes missions, a third deploys counter platforms, and a potential fourth facilitates communications between teams at a retransmission site."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Launch and Landing Protocols"
+        },
+        {
+          "type": "paragraph",
+          "text": "Pre-designated primary, alternate, and compromised locations for launch and landing ensure flexibility and security. Avoid direct flights from launch sites to enemy locations and vice versa. Utilize sporadic or zig-zag movements in flight plans to obscure launch or landing zones."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Counter Team Coordination"
+        },
+        {
+          "type": "paragraph",
+          "text": "Coordinate with all elements to understand friendly drone operations, threat locations, and objective locations. Maintain clear deconfliction between friendly UAS operations to prevent fratricide or mission interference."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Drone Modification Tactics"
+        },
+        {
+          "type": "paragraph",
+          "text": "Modify hobbyist drones pre, during, and post-mission for increased survivability. Install software to obfuscate or remove drone ID information. Employ automated waypoints with pre-programmed missions to reduce reliance on controllers and vulnerability to jamming."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Secure Data Handling Procedures"
+        },
+        {
+          "type": "checklist",
+          "id": "data-handling",
+          "items": [
+            "Sanitize SD cards before and after use (simple deletion is insufficient, use secure erase)",
+            "Use blank tablet computers or cell phones without SIM cards kept in airplane mode",
+            "Pair devices with GNSS spoofing mobile applications but avoid internet connection",
+            "Install new software or scripts using air gap computers or removable media scanned by antivirus programs",
+            "Remove or disable all telemetry logging features that record flight paths"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Drone Function Settings"
+        },
+        {
+          "type": "info",
+          "title": "Return-to-Home Hazard",
+          "text": "Disable Return-To-Home function and set link lost setting to hover in place or land immediately. This prevents threats from tracking the drone back to launch location, preserving pilot anonymity. If RTH cannot be disabled, set the RTH point to a decoy location away from actual operating position."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Operational Safety"
+        },
+        {
+          "type": "paragraph",
+          "text": "Never operate drones acquired from enemy sources, as they may be sabotaged, booby-trapped, or digitally altered to compromise operator security. Treat recovered drones as potential threats and handle them with caution, considering the possibility of sabotage or decoy tactics. Exploitation should only occur in isolated environments with proper technical support."
+        }
+      ]
+    },
+    {
+      "id": "camouflage-signature",
+      "number": "1.4",
+      "title": "Camouflage and Signature Management",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Match drone color patterns to specific environmental conditions for optimal camouflage. The goal is to minimize visual detection by matching the drone's appearance to the sky or background when observed from the ground."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Visual Camouflage"
+        },
+        {
+          "type": "table",
+          "headers": ["Range", "Conditions", "Recommended Color"],
+          "rows": [
+            ["Close range", "Clear days", "Blue color pattern"],
+            ["Close range", "Cloudy/overcast weather", "Grey color pattern"],
+            ["Close range", "Fog/snow", "White color pattern"],
+            ["Medium to long range", "All conditions", "Matte pale grey"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Avoid discontinuities in color patterns to minimize visual detection. Matte finishes reduce reflections that can catch sunlight and draw attention."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Night Operations"
+        },
+        {
+          "type": "paragraph",
+          "text": "Disable or cover LED lights and paint drones fully black with matte colors to reduce visibility under moonlight or artificial light. Blacked-out drones are harder to identify with Night Vision but can still be detected with IR or thermal imaging. Fly at low altitudes and utilize obstructing terrain to minimize thermal observation."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Acoustic Signature Management"
+        },
+        {
+          "type": "paragraph",
+          "text": "Be mindful of rotor noises and how they vary with temperature and weather conditions. Exploit atmospheric phenomena to minimize acoustic signature."
+        },
+        {
+          "type": "checklist",
+          "id": "acoustic-management",
+          "items": [
+            "Approach target areas from downwind locations to suppress sound transmission",
+            "Utilize natural acoustic interference sources like traffic and natural sounds to disrupt acoustic detection",
+            "Avoid flying during atmospheric inversions, which amplify sound transmission over water or on warm evenings",
+            "Consider lower RPM propeller configurations that trade speed for reduced noise",
+            "Time operations to coincide with ambient noise peaks (traffic hours, industrial activity)"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Decoy Tactics"
+        },
+        {
+          "type": "paragraph",
+          "text": "Teams can use a smaller, secondary drone in an area where the adversary threat is unknown. Depending on the countermeasures targeting the decoy drone, mitigation TTPs can be employed with the primary drone. This may also provide a means of testing adversary C-UAS capabilities before committing primary assets. Approach the target with more than one drone from different vectors. This simulates a drone swarm that has the potential to surprise and confuse an adversary, forcing them to split their defensive attention."
+        }
+      ]
+    },
+    {
+      "id": "suas-ttps",
+      "number": "1.5",
+      "title": "sUAS Tactical Procedures",
+      "content": [
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Pre-flight OPSEC Measures"
+        },
+        {
+          "type": "checklist",
+          "id": "preflight-opsec",
+          "items": [
+            "Avoid powering on the drone in areas where the camera may capture sensitive imagery as drones may start recording upon activation",
+            "Wait until the drone is safely away from the launch point before using the camera",
+            "Select take-off sites with consideration for the risk of adversary detection and indirect fire keeping a minimum distance of 1km from friendly forces",
+            "Cover the camera with tape or cloth until just before take-off to prevent unintentional recording of sensitive information",
+            "Verify all network/telemetry connections are disabled before powering on in sensitive areas"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "In-flight OPSEC Protocols"
+        },
+        {
+          "type": "checklist",
+          "id": "inflight-opsec",
+          "items": [
+            "Fly the drone with the camera facing directly skyward during take-off and avoid viewing the surrounding area until reaching a safe distance",
+            "Use the camera for flight and recording only when the drone is approximately 500m from the take-off site",
+            "Cease recording at least 500m from the landing zone",
+            "Establish an offset pilot site located 100-150m away from the take-off site to minimize risk to the operator"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Landing and Post-flight OPSEC Procedures"
+        },
+        {
+          "type": "checklist",
+          "id": "postflight-opsec",
+          "items": [
+            "Conduct a mock landing near the ground before quickly moving to the actual landing zone to obfuscate the true landing location",
+            "Immediately power down the controller and drone upon landing",
+            "Move at least 500m away from the landing site",
+            "Refrain from approaching the site for at least 10 minutes after retrieving the drone",
+            "Avoid reusing the same take-off or landing zones to prevent detection patterns",
+            "Set Return to Home points to different locations for each mission"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Countermeasures against GPS Jamming"
+        },
+        {
+          "type": "paragraph",
+          "text": "Detect GPS jamming by monitoring for off-course movements, erratic behavior, or unresponsive controls. Flying without GPS reduces the risk of jamming but requires manual pilot corrections and may shorten battery life due to increased pilot workload."
+        },
+        {
+          "type": "checklist",
+          "id": "gps-jamming",
+          "items": [
+            "Physically disconnect the GPS receiver module or cover the GPS antenna with aluminum foil to mitigate GPS jamming effects",
+            "DJI drones can be switched to Attitude Mode (ATTI) to maintain control during GPS jamming incidents",
+            "Practice ATTI mode flight regularly to maintain proficiency under degraded conditions",
+            "Consider fiber-optic tethered FPV systems which are immune to RF jamming entirely"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tactical-flight-profiles",
+      "number": "1.6",
+      "title": "Tactical Flight Profiles",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Recognize the critical role of tactical flight profiles in optimizing aerial reconnaissance missions. These profiles aim to balance the need for detailed intelligence gathering with the imperative to minimize the risk of detection by hostile forces."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Optimal Altitude Selection"
+        },
+        {
+          "type": "paragraph",
+          "text": "Depart from the misconception that flying at higher altitudes always provides the best vantage point. Instead, prioritize maintaining a lower altitude to enhance detail and reduce the risk of detection. Embrace the concept of treating natural elements such as trees as military crests, staying below their tops to avoid being silhouetted against the sky."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Disruptive Backgrounds"
+        },
+        {
+          "type": "paragraph",
+          "text": "Employ natural features and terrain elements as disruptive backgrounds to conceal the presence of the drone. Mimic the tactics used by combat helicopters like Apache Longbows, which utilize natural cover to remain hidden from enemy observation. Experiment with flying closer to terrain features to exploit their disruptive effects on the drone's visibility."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Close-in Reconnaissance"
+        },
+        {
+          "type": "paragraph",
+          "text": "Train operators to conduct reconnaissance at closer distances, particularly in permissive environments where the risk of detection is reduced. Emphasize the importance of maintaining situational awareness and adapting to changing threats. Explore the use of zoom capabilities at closer ranges to capture detailed imagery and intelligence without compromising operational security."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Background Noise Exploitation"
+        },
+        {
+          "type": "paragraph",
+          "text": "Leverage background noise from sources such as highways or high-traffic roadways to mask the sound of the drone's motor and minimize acoustic detection by adversaries. Position the drone strategically between noise sources and target areas to obscure the sound of zooming in or adjusting altitude."
+        },
+        {
+          "type": "info",
+          "title": "Experiment and Adapt",
+          "text": "Encourage operators to experiment with different flight profiles and techniques to find the optimal balance between detail and stealth. Incorporate feedback from reconnaissance missions to refine tactics and improve operational effectiveness over time. Document successful techniques for the team's TTP library."
+        }
+      ]
+    },
+    {
+      "id": "payload-delivery",
+      "number": "1.7",
+      "title": "Payload Delivery Request",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "The following provides a standard format for requesting sUAS payload delivery support. While it includes elements of a CAS 9-Line, it may be used for deliveries other than ordnance against enemy positions. Examples include battery resupply and smoke obscuration. This format requires a read-back from the sUAS operator for every line, including all remarks or restrictions."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "SPD Mission Types"
+        },
+        {
+          "type": "paragraph",
+          "text": "There are three primary mission types for sUAS payload delivery: Attack missions for kinetic effects against enemy positions, Smoke missions for obscuration of enemy observation, and Resupply missions for delivering critical supplies to forward positions."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "5-Line Format"
+        },
+        {
+          "type": "table",
+          "headers": ["Line", "Content", "Example"],
+          "rows": [
+            ["Line 1", "Warning Order", "SkyRaider, this is Alpha 11, sUAS attack, over"],
+            ["Line 2", "Location (Grid)", "Grid: 11SNT 79652 89123"],
+            ["Line 3", "Target/Drop Description", "Fire team in trench line / Drop on vs-17 panel"],
+            ["Line 4", "Nearest Friendlies", "400 meters Southwest"],
+            ["Line 5", "Remarks/Restrictions", "See detailed considerations below"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Line 5 Remarks and Restrictions"
+        },
+        {
+          "type": "checklist",
+          "id": "line5-remarks",
+          "items": [
+            "Desired Effects: Provided to ensure understanding of intent (e.g., obscure EN observation west of my position)",
+            "Time on Target (NET, NLT, At My Command): Timing restrictions for deconfliction",
+            "Alternate Signal: Air panel or other signal for at-my-command releases if radio communications fail",
+            "Routing Restrictions: May include checkpoints, stay-above, stay-below, or stay-away restrictions",
+            "Estimated Wind Speed and Direction: Assists operator in adjusting drop points for ballistic effects",
+            "Actions on Jamming: Instructions for what to do if sUAS link quality indicates possible enemy jamming"
+          ]
+        },
+        {
+          "type": "tool",
+          "toolId": "payload-request"
+        }
+      ]
+    },
+    {
+      "id": "cuas-passive",
+      "number": "1.8",
+      "title": "Counter-UAS Passive Techniques",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "sUAS provide significant advantages to tactical units, but they can be defeated. Methods of defeat include both active and so-called passive measures, although the second label is misleading. There is nothing passive about continual setup, teardown, and improvement of camouflage, overhead cover, and decoys. Russia has shifted from heavy armored columns to smaller assault units using motorbikes and dune buggies specifically to evade drone detection."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Dispersion"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tactical dispersion has been necessary on the battlefield since the introduction of breech-loading and repeating rifles over 150 years ago. sUAS proliferation introduces additional considerations. While dispersion may help reduce visual signature to enemy ground forces, it may actually increase visual signature to passing or loitering enemy sUAS. A widely dispersed force provides more chances, over a larger area, for visual or thermal detection within the system's field of view."
+        },
+        {
+          "type": "paragraph",
+          "text": "Dispersion may therefore primarily be a means to limit or slow collections on the size and composition of friendly forces and to protect them against the effects of dropped munitions, rather than a means to avoid outright detection from sUAS."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Visual and Thermal Camouflage"
+        },
+        {
+          "type": "paragraph",
+          "text": "Avoiding detection will usually require some elements of camouflage. Camouflage should make it difficult for enemy sUAS operators to discern the presence of friendly forces through their systems' cameras and video screens. Most sUAS do not currently operate with timely, reliable automatic object detection software, though this capability is rapidly advancing. When AI-enabled detection becomes common, camouflage efforts will need to adapt to confuse those algorithms as well."
+        },
+        {
+          "type": "paragraph",
+          "text": "The most critical elements of visual signature are color, outline, motion, and heat. The first three are the traditional focus of camouflage efforts. Heat is added because many sUAS carry electro-optical/infrared cameras that provide the operator a colorized representation of objects' relative thermal radiation levels."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Thermal Masking"
+        },
+        {
+          "type": "paragraph",
+          "text": "For ground forces, only marginal reductions in thermal radiation levels relative to the surrounding environment are usually attainable since human beings are warm-blooded. If thermal radiation cannot be reduced, it must be masked. Heat can be masked from a thermal sensor by placing an object or screen between its source and the sensor."
+        },
+        {
+          "type": "paragraph",
+          "text": "Individual measures like ponchos and thermal blankets are most effective only when used for limited periods, perhaps on-call when enemy sUAS is detected in the area. Longer continuous use will eventually produce a detectable heat signature wherever hot air escapes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Standard camouflage netting, properly elevated, can achieve thermal masking even for large heat sources such as vehicles and generators. Double layering the netting can also help ensure the sensor cannot see through the netting to the heat sources below."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Physical Countermeasures"
+        },
+        {
+          "type": "paragraph",
+          "text": "To counter direct attack drones, forces have developed physical countermeasures such as nets and wires that trigger early detonation, protecting troops and equipment. Cage armor and improvised mesh screens on vehicles can detonate shaped charge warheads before they impact the main armor."
+        },
+        {
+          "type": "info",
+          "title": "Day vs Night Operations",
+          "text": "Ground forces on the move will be most challenged to mask their heat signatures. It may be far more difficult to blend in with the surrounding environment's thermal colors at night than with its optical wavelengths during the day. Against prior expectations, it may be easier to avoid detection from most sUAS during the day than at night when thermal contrast is highest."
+        }
+      ]
+    },
+    {
+      "id": "cuas-active",
+      "number": "1.9",
+      "title": "Counter-UAS Active Techniques",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Active counter-UAS measures include electronic warfare, kinetic defeat, and interceptor systems. Modern forces employ a layered defense approach where signals intelligence identifies what drones are in the area, followed by jamming and electronic warfare, followed by physical protection and kinetic countermeasures."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Electronic Warfare"
+        },
+        {
+          "type": "paragraph",
+          "text": "Jammers interfere with the communications link between the drone and the control station. By severing the transmission link, jammers cause the drone to enter its safety protocols, typically landing in place or navigating back to its launch location. GPS spoofing can redirect drones to false coordinates."
+        },
+        {
+          "type": "paragraph",
+          "text": "Out of 188 Shahed drones Russia launched in a November 2024 attack, 76 were downed kinetically while 95 were diverted by spoofing their satellite coordinates. Only 17 evaded all countermeasures. This demonstrates the effectiveness of layered electronic and kinetic defenses."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Portable C-UAS Systems"
+        },
+        {
+          "type": "table",
+          "headers": ["System Type", "Method", "Effective Range", "Limitations"],
+          "rows": [
+            ["RF Jammer (handheld)", "Disrupts control link", "500-1000m", "No effect on autonomous/fiber-optic"],
+            ["GPS Spoofer", "Redirects navigation", "Variable", "Requires GPS-dependent target"],
+            ["Shotgun/Rifle", "Kinetic defeat", "50-150m", "Requires visual acquisition"],
+            ["Interceptor Drone", "Physical collision", "1-3 km", "Requires detection and tracking"],
+            ["Directed Energy", "Disables electronics", "500m-2km", "Power requirements, line of sight"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Fiber-Optic Drone Challenge"
+        },
+        {
+          "type": "paragraph",
+          "text": "Fiber-optic FPV drones represent a significant challenge for electronic warfare. Unlike conventional drones which rely on radio frequencies vulnerable to jamming, fiber-optic drones transmit control signals and video feeds through fiber-optic cables, making them immune to RF jamming. These drones can operate up to 20 kilometers depending on cable length."
+        },
+        {
+          "type": "info",
+          "title": "Fiber-Optic Countermeasures",
+          "text": "Fiber-optic UAVs can only be stopped with kinetic means such as shotguns, small arms fire, or physical interception. Electronic warfare has no effect on these systems. Early detection and engagement before they reach their target is critical."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Detection Methods"
+        },
+        {
+          "type": "checklist",
+          "id": "detection-methods",
+          "items": [
+            "RF detection: Monitor for control link transmissions in common UAS bands",
+            "Acoustic detection: Listen for distinctive rotor noise signatures",
+            "Visual observation: Maintain air watch with designated observers",
+            "Radar: Small UAS radar can detect Group 1/2 drones at short range",
+            "EO/IR sensors: Thermal and visual cameras for tracking"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fpv-tactics",
+      "number": "1.10",
+      "title": "FPV Drone Tactics",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Innovative tactics involving Enemy FPV drones have emerged, adding a new dimension to ambush strategies. These tactics often involve coordinated actions between FPV drone operators and ground-based support teams equipped with repeaters or relay drones. Understanding these enemy tactics enables development of effective countermeasures."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Reconnaissance and Coordination"
+        },
+        {
+          "type": "paragraph",
+          "text": "Enemy FPV drone operators, often working in pairs, scout the area for potential targets. Ground-based support teams deploy repeaters or relay drones to extend the flight range of FPV drones, enabling them to surveil areas deep within friendly territory."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "FPV Ambush Sequence"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Utilizing extended flight range from repeaters, enemy FPV drones deploy to strategic positions near friendly rear areas",
+            "FPV drones land discreetly along roadways to observe key routes and monitor potential targets without arousing suspicion",
+            "An observer drone monitors the area and identifies potential targets such as support units or evacuation vehicles",
+            "When target is detected, observer drone relays information to FPV drone operators",
+            "Upon confirmation, FPV drone is activated and deployed to engage the target with precision",
+            "Ground-based teams with Mavic or fixed-wing drones monitor target movements for optimal timing"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Tactical Considerations"
+        },
+        {
+          "type": "paragraph",
+          "text": "To minimize the risk of detection, transportation and assembly of ambush teams are conducted at the smallest possible level, reducing their signature and avoiding detection by enemy surveillance. Assembly points are chosen to be as forward as possible, facilitating rapid deployment and maximizing the element of surprise."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Cloud RF Software"
+        },
+        {
+          "type": "paragraph",
+          "text": "When dealing with poor range issues from a patrol base, Cloud RF emerges as a valuable tool for visualizing radio frequency scenarios using lidar data and employing link budget calculations. It serves as a comprehensive platform to understand the reasons behind signal loss or difficulties encountered in challenging environments."
+        },
+        {
+          "type": "paragraph",
+          "text": "In complex RF environments, Cloud RF allows users to simulate scenarios where the noise floor is raised, providing insights into potential jamming effects at the receiver station. For planning a maximum range one-way flight, input parameters such as transmitter power, antenna gains, frequency, and receiver sensitivity to analyze link performance."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Fresnel Zone"
+        },
+        {
+          "type": "paragraph",
+          "text": "In radio communications, a Fresnel zone is one of a theoretically infinite number of concentric ellipsoids of revolution which define volumes in the radiation pattern. To maximize receiver strength, you need to minimize the effect of out of phase signals by making sure the strongest signals do not bump into anything. The strongest signals are closest to the direct line between transmitter and receiver and always lie in the 1st Fresnel Zone."
+        },
+        {
+          "type": "paragraph",
+          "text": "The first zone must be kept largely free from obstructions to avoid interfering with radio reception. As a rule of thumb, the maximum obstruction allowable is 40%, but the recommended obstruction is 20% or less. At 250 meters, the radius of the Fresnel zone for a 5.8GHz signal is still 1.8 meters. Anything within this zone, including the ground, will start to degrade your signal."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Free Space Path Loss"
+        },
+        {
+          "type": "paragraph",
+          "text": "Free Space Path Loss is a mathematical equation used to calculate the attenuation of RF signals as they propagate through free space. Key factors include transmitter antenna gain, receiver antenna gain, system losses from connectors and transmission lines, signal frequency, and receiver sensitivity."
+        },
+        {
+          "type": "table",
+          "headers": ["Parameter", "Example Value", "Notes"],
+          "rows": [
+            ["VTX Power Output", "35.44 dBm (3.5W)", "Video transmitter power"],
+            ["TX Antenna Gain", "1.26 dBic", "TBS Triumph 5.8GHz"],
+            ["RX Antenna Gain", "8.4 dBic", "Lumenier AXII Patch"],
+            ["RX Sensitivity", "-96 dBm", "Rapidfire VRX module"],
+            ["Link Budget", "141 dB", "Total available margin"],
+            ["Safety Margin", "-6 dB", "Recommended reserve"],
+            ["Usable Budget", "135 dB", "Maximum FSPL allowable"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Repeater Types"
+        },
+        {
+          "type": "table",
+          "headers": ["Type", "Receive Freq", "Transmit Freq", "Notes"],
+          "rows": [
+            ["Ground Video Repeater", "1.2 GHz", "5.8 GHz", "Fixed position, requires LOS to both ends"],
+            ["Aerial Video Repeater", "1.2 GHz", "5.8 GHz", "Mounted on Mavic or fixed-wing platform"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Repeater Placement",
+          "text": "When deploying a repeater, position it in direct line of sight to both the FPV drone and the ground control station, ideally at an elevated location that surpasses the surrounding terrain. For 1.3GHz video systems, maximum theoretical range in free space can exceed 70km with proper antenna configuration."
+        }
+      ]
+    }
+  ]
+}

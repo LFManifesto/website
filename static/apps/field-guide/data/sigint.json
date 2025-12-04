@@ -1,0 +1,790 @@
+{
+  "id": "sigint",
+  "number": "3",
+  "title": "Signals Intelligence",
+  "description": "Signals Intelligence (SIGINT) encompasses interception, analysis, and exploitation of electronic signals. This section covers SDR platforms, signal identification, RF emitter analysis, and direction finding techniques for small team operations.",
+  "icon": "signal",
+  "subsections": [
+    {
+      "id": "sigint-fundamentals",
+      "number": "3.1",
+      "title": "SIGINT Fundamentals",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Signals Intelligence (SIGINT) is the interception, analysis, and exploitation of electronic signals for intelligence purposes. It involves monitoring and deciphering communication signals, including voice, data, and other electronic transmissions, to gather information about adversaries, threats, or targets of interest."
+        },
+        {
+          "type": "paragraph",
+          "text": "Small teams can effectively leverage Software-Defined Radios (SDRs) along with online resources like the Signal Identification Wiki (sigidwiki.com) to enhance their SIGINT capabilities. The combination of affordable hardware and specialized software enables meaningful collection operations without massive budgets traditionally associated with signals intelligence."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "SIGINT Categories"
+        },
+        {
+          "type": "paragraph",
+          "text": "SIGINT divides into two primary categories. Communications Intelligence (COMINT) focuses on intercepting and analyzing communications between parties, whether voice, text, or data. Electronic Intelligence (ELINT) focuses on non-communication emissions such as radar systems, navigation beacons, and unintentional emanations."
+        },
+        {
+          "type": "table",
+          "headers": ["Category", "Focus", "Examples"],
+          "rows": [
+            ["COMINT", "Communications between people", "Voice radio, digital messaging, data links"],
+            ["ELINT", "Non-communication emissions", "Radar, navigation beacons, telemetry"],
+            ["FISINT", "Foreign instrumentation signals", "Missile telemetry, weapons test data"],
+            ["MASINT", "Measurement and signature", "Unintentional emanations, radar fingerprinting"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "The Intelligence Cycle"
+        },
+        {
+          "type": "paragraph",
+          "text": "SIGINT collection follows the intelligence cycle: planning and direction, collection, processing, analysis, and dissemination. Before deploying collection assets, define your intelligence requirements. What do you need to know? What signals might answer those questions? What frequencies and locations should you monitor?"
+        },
+        {
+          "type": "info",
+          "title": "Passive Collection Advantage",
+          "text": "SIGINT collection is inherently passive. You receive electromagnetic energy that others transmit without transmitting yourself. This provides significant operational security advantages: no emission for adversaries to detect, no signal to direction-find, and no indicator of your presence. The only requirement is placing your receiver where the target signals can reach it."
+        }
+      ]
+    },
+    {
+      "id": "sdr-overview",
+      "number": "3.2",
+      "title": "Software Defined Radio",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Software Defined Radio (SDR) implements radio functions in software rather than hardware. Traditional radios use fixed circuits for modulation, demodulation, and filtering. SDRs digitize signals at the antenna and process them with software, enabling a single device to receive virtually any signal type within its frequency range."
+        },
+        {
+          "type": "paragraph",
+          "text": "SDR technology democratizes signals intelligence by providing flexible, affordable platforms that can be reconfigured through software. The same hardware can decode FM broadcasts, track aircraft via ADS-B, monitor amateur radio, or analyze unknown signals simply by running different software."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "SDR Architecture"
+        },
+        {
+          "type": "paragraph",
+          "text": "An SDR consists of an RF front end that filters and amplifies incoming signals, an analog-to-digital converter (ADC) that digitizes the signal, and software that processes the digital data. Key specifications include frequency range, instantaneous bandwidth, and ADC resolution (bit depth)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Higher bandwidth allows capturing more spectrum simultaneously. Greater bit depth provides better dynamic range to distinguish weak signals near strong ones. Frequency range determines what signals you can receive. Each specification involves tradeoffs with cost and complexity."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "SDR Software Ecosystem"
+        },
+        {
+          "type": "table",
+          "headers": ["Software", "Platform", "Primary Use"],
+          "rows": [
+            ["SDR#", "Windows", "General purpose receiver, beginner friendly"],
+            ["GQRX", "Linux/Mac", "General purpose receiver, GNU Radio based"],
+            ["GNU Radio", "Linux/Mac/Windows", "Advanced signal processing, custom decoders"],
+            ["SDR++", "Cross-platform", "Modern interface, plugin architecture"],
+            ["Artemis", "Cross-platform", "Offline signal identification database"],
+            ["SigintOS", "Linux", "Dedicated SIGINT distribution with integrated tools"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Security Warning",
+          "text": "Some SDR software applications beacon your location via internet connection or transmit identification data. Always operate collection systems in air-gapped configurations with all network connectivity disabled during sensitive operations. Verify software behavior before deploying for collection."
+        }
+      ]
+    },
+    {
+      "id": "rtl-sdr",
+      "number": "3.3",
+      "title": "RTL-SDR Dongle",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "The RTL-SDR dongle is an entry-level software defined radio providing remarkable capability for its price point. Originally designed as a digital TV receiver, the RTL2832U chipset can be repurposed for wideband reception across VHF and UHF frequencies. At approximately $30, it provides an accessible entry point into SDR and SIGINT."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Specifications"
+        },
+        {
+          "type": "table",
+          "headers": ["Parameter", "Value", "Notes"],
+          "rows": [
+            ["Frequency Range", "24 MHz to 1.7 GHz", "RTL-SDR Blog V3 and V4 models"],
+            ["Bandwidth", "Up to 2.4 MHz", "3.2 MHz possible with some host controllers"],
+            ["ADC Resolution", "8-bit", "Limits dynamic range compared to higher-end SDRs"],
+            ["Sample Rate", "Up to 3.2 MSPS", "2.4 MSPS recommended for stability"],
+            ["Sensitivity", "-130 dBm typical", "Varies by frequency"],
+            ["Cost", "~$30", "V4 model with improved performance"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Common Applications"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "FM broadcast and amateur radio monitoring",
+            "Aviation communications (118-137 MHz) and ADS-B tracking (1090 MHz)",
+            "Weather satellite imagery (137 MHz NOAA, 1.7 GHz GOES)",
+            "Marine AIS vessel tracking (161-162 MHz)",
+            "Trunked radio monitoring (P25, DMR, NXDN)",
+            "ISM band device analysis (433 MHz, 915 MHz)",
+            "Amateur radio digital modes (APRS, FT8, JS8Call)",
+            "General spectrum survey and signal identification"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Limitations"
+        },
+        {
+          "type": "paragraph",
+          "text": "The RTL-SDR's 8-bit ADC provides limited dynamic range compared to higher-end receivers. Strong signals can overload the front end, masking weaker signals of interest. The 2.4 MHz bandwidth restricts simultaneous monitoring to a narrow slice of spectrum. No transmit capability exists. Despite these limitations, the RTL-SDR remains an excellent tool for learning and many practical applications."
+        },
+        {
+          "type": "info",
+          "title": "Practical Tip",
+          "text": "Use appropriate filtering for your application. Band-pass filters reduce out-of-band interference that can overload the RTL-SDR's limited dynamic range. An LNA (low noise amplifier) improves sensitivity for weak signals but can worsen overload with strong nearby transmitters. Match your signal chain to the specific monitoring task."
+        }
+      ]
+    },
+    {
+      "id": "hackrf",
+      "number": "3.4",
+      "title": "HackRF One",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "The HackRF One represents a significant step up in capability from entry-level SDRs. Its wide frequency range, transmit capability, and open-source design make it suitable for advanced SIGINT operations and RF research. Created by Great Scott Gadgets, it has become a standard tool in security research communities."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Specifications"
+        },
+        {
+          "type": "table",
+          "headers": ["Parameter", "Value", "Notes"],
+          "rows": [
+            ["Frequency Range", "1 MHz to 6 GHz", "Covers HF through SHF bands"],
+            ["Bandwidth", "Up to 20 MHz", "Wide instantaneous bandwidth"],
+            ["ADC/DAC Resolution", "8-bit", "Same as RTL-SDR"],
+            ["Sample Rate", "Up to 20 MSPS", "Matched to bandwidth"],
+            ["TX Power", "Up to +15 dBm", "Band dependent, ~30mW"],
+            ["Operation", "Half-duplex", "TX or RX, not simultaneous"],
+            ["Cost", "~$350", "Open source hardware"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "SIGINT Applications"
+        },
+        {
+          "type": "paragraph",
+          "text": "Wideband Spectrum Analysis enables surveying large frequency ranges to identify and characterize signals of interest. The 20 MHz bandwidth captures more spectrum simultaneously than narrower devices, speeding initial reconnaissance."
+        },
+        {
+          "type": "paragraph",
+          "text": "RF Protocol Analysis allows capturing and decoding proprietary wireless protocols. Security researchers use HackRF to analyze IoT devices, wireless sensors, key fobs, and other RF-enabled systems for vulnerability assessment."
+        },
+        {
+          "type": "paragraph",
+          "text": "Signal Replay and Testing uses the transmit capability to replay captured signals for testing or to understand protocol behavior. This requires appropriate authorization and should only be done in controlled environments."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Accessories and Enhancements"
+        },
+        {
+          "type": "table",
+          "headers": ["Accessory", "Purpose"],
+          "rows": [
+            ["ANT500", "Telescopic antenna for basic receiving 75-1000 MHz"],
+            ["Opera Cake", "Antenna switching for automated multi-band monitoring"],
+            ["Portapack H2", "Standalone operation without computer"],
+            ["External Clock", "Improved frequency accuracy and stability"],
+            ["Filtered Preamps", "Enhanced sensitivity for specific bands"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "HackRF Pro",
+          "text": "HackRF Pro is available for preorder as of 2025, introducing updated features while maintaining software and accessory compatibility with the original HackRF One. Check the Great Scott Gadgets website for current specifications and availability."
+        }
+      ]
+    },
+    {
+      "id": "krakensdr",
+      "number": "3.5",
+      "title": "KrakenSDR Direction Finding",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "The KrakenSDR is a coherent 5-channel software-defined radio platform designed specifically for direction finding and passive radar applications. By using five synchronized RTL-SDR receivers with a calibrated antenna array, it enables locating the physical source of RF transmissions from 100 MHz to 1 GHz."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "System Components"
+        },
+        {
+          "type": "table",
+          "headers": ["Component", "Description"],
+          "rows": [
+            ["KrakenSDR Unit", "5 coherent RTL-SDR receivers with noise source for calibration"],
+            ["Antenna Array", "5 magnetic mount antennas with calibrated spacing"],
+            ["Computing", "Raspberry Pi 4/5 with pre-built software image"],
+            ["Mobile Device", "Android phone/tablet for direction display"],
+            ["Power", "USB-C power, ~15W draw"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Direction Finding Technique"
+        },
+        {
+          "type": "paragraph",
+          "text": "KrakenSDR uses correlative interferometry to determine signal direction. Five antennas arranged in a known geometric pattern receive the same signal. By comparing phase differences between antennas, the software calculates the angle of arrival. The antenna array geometry and spacing must be calibrated for accurate results."
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Antenna array receives signal simultaneously on all five elements",
+            "Noise source calibrates phase relationships between receivers",
+            "Software compares phase differences across antenna pairs",
+            "Correlative interferometry algorithm computes bearing",
+            "Bearing displayed on map overlay in mobile app",
+            "Multiple bearings from different locations triangulate transmitter position"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Setup and Operation"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Burn KrakenSDR DF image to SD card (8GB minimum for Pi4, 16GB for Pi5)",
+            "Mount antenna array on vehicle roof with proper spacing using paper templates",
+            "Connect antennas to KrakenSDR in correct order (numbering matters)",
+            "Power KrakenSDR and Raspberry Pi",
+            "Create WiFi hotspot on Android device (SSID: KrakenAndroid, Password: KrakenAndroid)",
+            "Access web interface to configure frequency and parameters",
+            "Enable noise source calibration before taking bearings",
+            "Drive to different positions to collect multiple bearings for triangulation"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Practical Applications"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Locating interference sources affecting communications",
+            "Amateur radio fox hunting and transmitter hunts",
+            "Finding unauthorized transmitters or repeaters",
+            "Tracking wildlife with radio collars",
+            "Educational demonstration of RF direction finding",
+            "Locating cellular towers and analyzing coverage"
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Accuracy Considerations",
+          "text": "Direction finding accuracy depends on antenna array calibration, multipath reflections, and signal characteristics. Urban environments with buildings cause reflections that produce false bearings. Best results occur in open areas with clear line of sight to the transmitter. Take multiple bearings from different angles and positions to improve location accuracy."
+        }
+      ]
+    },
+    {
+      "id": "signal-identification",
+      "number": "3.6",
+      "title": "Signal Identification",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Signal identification is the process of determining what type of transmission you are receiving. This requires recognizing signal characteristics such as bandwidth, modulation type, timing patterns, and frequency behavior. Reference databases and analysis tools help match unknown signals to known types."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Signal Characteristics"
+        },
+        {
+          "type": "table",
+          "headers": ["Characteristic", "What It Reveals"],
+          "rows": [
+            ["Bandwidth", "Signal type, data rate, modulation complexity"],
+            ["Modulation", "AM, FM, SSB, digital mode, spread spectrum"],
+            ["Timing", "Continuous, periodic, bursty, time-slotted"],
+            ["Frequency Behavior", "Fixed, hopping, chirped, drifting"],
+            ["Center Frequency", "Frequency allocation, likely user type"],
+            ["Signal Shape", "Waterfall appearance, distinctive patterns"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Signal Identification Wiki (sigidwiki.com)"
+        },
+        {
+          "type": "paragraph",
+          "text": "The Signal Identification Wiki is a community-maintained database with over 500 cataloged signal types. Each entry includes waterfall images, audio samples, technical parameters, and contextual information. The database is searchable by frequency band, signal type, and various characteristics."
+        },
+        {
+          "type": "paragraph",
+          "text": "When encountering an unknown signal, capture a waterfall screenshot and audio recording. Compare visual patterns and sound to database entries. Note the frequency, bandwidth, and any timing patterns. The wiki's Unknown Digital and Unknown Analog categories can help identify submissions or find similar unidentified signals."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Artemis Offline Database"
+        },
+        {
+          "type": "paragraph",
+          "text": "Artemis is an open-source application that brings the sigidwiki database offline for field use without internet connectivity. Version 4 (released June 2024) includes substantial improvements and prepares for future machine learning-based identification. The searchable database includes waterfall images and audio samples from the wiki."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Common Signal Types"
+        },
+        {
+          "type": "table",
+          "headers": ["Signal Type", "Visual Appearance", "Frequency Range"],
+          "rows": [
+            ["FM Broadcast", "Wide (~200 kHz), symmetric", "88-108 MHz"],
+            ["P25 Digital Voice", "Narrow (12.5 kHz), choppy bursts", "VHF/UHF public safety"],
+            ["DMR", "Narrow (12.5 kHz), two time slots visible", "VHF/UHF"],
+            ["ADS-B", "Short bursts at 1090 MHz", "1090 MHz"],
+            ["Weather Satellite", "Wide FM with sync pulses", "137 MHz (NOAA)"],
+            ["Pager (POCSAG/FLEX)", "Narrow bursts, periodic", "VHF/UHF"],
+            ["Radar", "Swept or pulsed, often wideband", "Various"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Pattern Recognition",
+          "text": "Developing signal identification skills requires practice. Spend time monitoring known signals to learn their visual and audio characteristics. When you encounter something unfamiliar, systematically analyze its properties before searching reference databases. Over time, you will recognize common signal types at a glance."
+        }
+      ]
+    },
+    {
+      "id": "sdr-sigint-operations",
+      "number": "3.7",
+      "title": "SDR Collection Operations",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "SDR collection operations transform passive monitoring into structured intelligence gathering. This requires planning, systematic execution, accurate documentation, and security awareness. The techniques apply regardless of specific hardware platform."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Spectrum Survey"
+        },
+        {
+          "type": "paragraph",
+          "text": "Begin with a broad spectrum survey to understand the local RF environment. Scan across frequency bands to identify active signals, their characteristics, and temporal patterns. Note which frequencies are busy, which are quiet, and how usage patterns change over time. This baseline informs targeted collection."
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Define frequency ranges of interest based on intelligence requirements",
+            "Configure SDR for maximum bandwidth to scan quickly",
+            "Record waterfall displays to capture time-varying patterns",
+            "Note signal frequencies, bandwidths, and timing characteristics",
+            "Identify signals for detailed analysis or continued monitoring",
+            "Document the RF environment as a baseline for detecting changes"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Targeted Collection"
+        },
+        {
+          "type": "paragraph",
+          "text": "After identifying signals of interest, configure for detailed collection. Narrow the frequency range to the target signal. Adjust gain settings to optimize reception. Record raw IQ data for later processing or enable real-time demodulation if the signal type is known."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Traffic Analysis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Even without decoding content, observing transmission patterns provides intelligence. Note when transmissions occur, how long they last, and how traffic volume changes. Correlating RF activity with known events can reveal adversary communication patterns, operating rhythms, and organizational structure."
+        },
+        {
+          "type": "table",
+          "headers": ["Observation", "Potential Intelligence"],
+          "rows": [
+            ["Transmission timing", "Activity schedules, shift changes, check-in times"],
+            ["Traffic volume changes", "Increased activity before operations"],
+            ["New frequencies appearing", "Network expansion, new units deployed"],
+            ["Frequencies going silent", "Unit movement, equipment failure, EMCON"],
+            ["Duration patterns", "Procedural vs. substantive communications"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Geolocation"
+        },
+        {
+          "type": "paragraph",
+          "text": "Multiple SDR receivers at known locations can estimate transmitter position through triangulation or time-difference-of-arrival techniques. The KrakenSDR automates this process. For ad-hoc geolocation, take directional bearings from multiple positions and plot intersections on a map."
+        },
+        {
+          "type": "info",
+          "title": "Collection Security",
+          "text": "Protect your collection operations. Use air-gapped systems with no network connectivity during sensitive operations. Disable GPS and location services on collection devices. Be aware that collection positions can potentially be determined if you are transmitting. Maintain OPSEC discipline regarding what you collect and how you use it."
+        }
+      ]
+    },
+    {
+      "id": "rf-emitter-analysis",
+      "number": "3.8",
+      "title": "RF Emitter Analysis",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Systematic analysis of the electromagnetic environment enables effective operational planning and threat assessment. The following framework applies to both friendly force emissions (to reduce vulnerability) and adversary emissions (to understand their capabilities and intentions)."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Propagation Analysis"
+        },
+        {
+          "type": "checklist",
+          "id": "propagation-questions",
+          "items": [
+            "How far do emissions propagate under current conditions?",
+            "How will terrain features affect signal coverage?",
+            "What impact does weather have on propagation?",
+            "How will reducing transmit power affect detection range?",
+            "How will directional antennas concentrate or mask emissions?"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Local RF Environment"
+        },
+        {
+          "type": "checklist",
+          "id": "local-rf-questions",
+          "items": [
+            "What frequencies does the local population use?",
+            "Can RF usage be adjusted to blend with normal local traffic?",
+            "How will your RF usage affect the local environment?",
+            "How will adversary RF usage affect your systems?",
+            "What unintentional interference risks exist?"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Communications Architecture"
+        },
+        {
+          "type": "checklist",
+          "id": "comms-architecture-questions",
+          "items": [
+            "Are there automatic link establishment or 'always on' systems that emit without user action?",
+            "How can units minimize emissions inside threat weapons engagement zones?",
+            "What receive-only communications assets exist?",
+            "Can forward units operate receive-only while inside threat WEZ?",
+            "What is minimum information required to complete critical tasks?"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Threat Assessment"
+        },
+        {
+          "type": "checklist",
+          "id": "threat-questions",
+          "items": [
+            "What adversary SIGINT capability exists in the area?",
+            "What is the likely detection range for your emissions?",
+            "How quickly can the adversary geolocate transmitters?",
+            "What response capabilities does the adversary possess?",
+            "What emissions can the adversary correlate with your activities?"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Signature Management"
+        },
+        {
+          "type": "paragraph",
+          "text": "Every RF emission creates a signature that can be detected, analyzed, and exploited. Manage your electromagnetic signature by minimizing transmission time, reducing power to minimum necessary, using terrain masking, varying emission patterns, and considering timing relative to activities you want to conceal."
+        },
+        {
+          "type": "info",
+          "title": "Analysis Framework",
+          "text": "Work through each category methodically before and during operations. The questions form a systematic framework for electromagnetic environment assessment. Answers inform PACE plan development, operating procedures, and risk mitigation measures."
+        }
+      ]
+    },
+    {
+      "id": "comint-techniques",
+      "number": "3.9",
+      "title": "COMINT Techniques",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Communications Intelligence (COMINT) focuses on intercepting and analyzing communications between parties. Even when content cannot be decoded, metadata and traffic patterns provide valuable intelligence. COMINT requires understanding common communication systems and their vulnerabilities."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Voice Communications"
+        },
+        {
+          "type": "paragraph",
+          "text": "Analog voice communications (AM, FM, SSB) can be monitored directly with an SDR and appropriate demodulation. Content is immediately accessible. Digital voice modes (P25, DMR, NXDN, D-STAR) require decoding software but many transmissions use unencrypted modes that can be monitored once decoded."
+        },
+        {
+          "type": "table",
+          "headers": ["Mode", "Encryption", "Decoder Software"],
+          "rows": [
+            ["Analog FM", "None", "Any SDR software"],
+            ["P25 Phase 1", "Optional", "DSD+, OP25, SDRTrunk"],
+            ["DMR", "Optional", "DSD+, SDRTrunk"],
+            ["NXDN", "Optional", "DSD+"],
+            ["D-STAR", "None", "DSD+"],
+            ["Encrypted", "AES-256", "Not decodable without keys"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Data Communications"
+        },
+        {
+          "type": "paragraph",
+          "text": "Many data protocols transmit in the clear and can be decoded with appropriate software. ADS-B aircraft tracking, AIS ship tracking, APRS amateur position reports, and pager messages (POCSAG/FLEX) are commonly monitored. IoT devices often use poorly secured protocols that reveal information about their users."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Trunked Radio Systems"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trunked systems dynamically assign channels to talk groups, requiring the monitor to follow control channel assignments. Software like SDRTrunk automates this process, simultaneously monitoring control and voice channels to follow conversations across a trunked system."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Network Identification"
+        },
+        {
+          "type": "paragraph",
+          "text": "Radio networks often transmit identifiers that reveal organizational structure. DMR systems broadcast radio IDs and talk group IDs. P25 systems include NAC (Network Access Code) and talk group information. These identifiers can be cataloged to build understanding of an organization's radio network structure."
+        },
+        {
+          "type": "info",
+          "title": "Legal Considerations",
+          "text": "Laws regarding interception of communications vary by jurisdiction. In many countries, receiving unencrypted over-the-air transmissions is legal, but recording or sharing content may be restricted. Cellular communications interception typically requires authorization. Know and comply with applicable laws in your area of operations."
+        }
+      ]
+    },
+    {
+      "id": "elint-basics",
+      "number": "3.10",
+      "title": "ELINT Fundamentals",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Electronic Intelligence (ELINT) focuses on non-communication electronic emissions, primarily radar systems. By analyzing radar signals, you can determine the type of system, its purpose (surveillance, fire control, missile guidance), and potentially its location. ELINT provides warning of threats and understanding of adversary sensor coverage."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Radar Signal Parameters"
+        },
+        {
+          "type": "table",
+          "headers": ["Parameter", "What It Indicates"],
+          "rows": [
+            ["Frequency", "Radar type, band (S, C, X, Ku, etc.)"],
+            ["Pulse Width", "Range resolution, system type"],
+            ["Pulse Repetition Frequency (PRF)", "Unambiguous range, velocity measurement"],
+            ["Scan Pattern", "Surveillance vs tracking, coverage"],
+            ["Power", "Range capability, system size"],
+            ["Modulation", "Pulse compression, FMCW, etc."]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Common Radar Types"
+        },
+        {
+          "type": "paragraph",
+          "text": "Surveillance radars continuously scan to detect targets over a wide area. They typically use lower frequencies (L, S, C bands) with longer range but lower resolution. Fire control radars track specific targets with narrow beams and higher frequencies (X, Ku bands) for precision. Missile guidance radars illuminate targets for semi-active missiles or track targets for command guidance."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Radar Warning Receiver Concepts"
+        },
+        {
+          "type": "paragraph",
+          "text": "Radar warning receivers (RWR) detect and classify radar emissions to alert crews of threats. The same principles apply to SDR-based ELINT. Captured signals are compared against a library of known emitter parameters to identify the radar type. Changes in received signal characteristics indicate changing threat status."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Surveillance radar scanning past your position: periodic illumination",
+            "Track radar locked onto your position: continuous illumination",
+            "Missile guidance radar active: imminent threat",
+            "New emitters appearing: changing tactical situation",
+            "Emitters going silent: possible EMCON, repositioning"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "SDR Limitations for ELINT"
+        },
+        {
+          "type": "paragraph",
+          "text": "Consumer SDRs have bandwidth and frequency limitations that restrict ELINT capability. Many radar systems operate above 6 GHz, beyond HackRF range. Wideband signals may exceed SDR instantaneous bandwidth. Professional ELINT systems use specialized wideband receivers with extensive signal libraries. SDR-based ELINT is useful for education and limited applications but not comprehensive threat warning."
+        },
+        {
+          "type": "info",
+          "title": "Passive Radar",
+          "text": "Passive radar uses existing RF transmissions (FM broadcast, cellular, DVB-T) as illuminators to detect targets without emitting. The KrakenSDR with appropriate software can perform basic passive radar experiments. This technique offers detection capability without revealing your position through emissions."
+        }
+      ]
+    },
+    {
+      "id": "sigint-tools",
+      "number": "3.11",
+      "title": "SIGINT Tools Reference",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "This section provides quick reference for common SIGINT tools and resources. Each tool has specific strengths for different collection and analysis tasks."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Hardware Platforms"
+        },
+        {
+          "type": "table",
+          "headers": ["Platform", "Frequency", "Bandwidth", "TX", "Cost", "Best For"],
+          "rows": [
+            ["RTL-SDR V4", "24 MHz - 1.7 GHz", "2.4 MHz", "No", "$35", "Entry-level, VHF/UHF monitoring"],
+            ["Airspy Mini", "24 MHz - 1.7 GHz", "6 MHz", "No", "$100", "Better dynamic range than RTL"],
+            ["Airspy HF+", "9 kHz - 31 MHz", "660 kHz", "No", "$200", "HF reception, shortwave"],
+            ["HackRF One", "1 MHz - 6 GHz", "20 MHz", "Yes", "$350", "Wideband, research, replay"],
+            ["KrakenSDR", "24 MHz - 1.7 GHz", "2.4 MHz × 5", "No", "$500", "Direction finding"],
+            ["SDRplay RSPdx", "1 kHz - 2 GHz", "10 MHz", "No", "$250", "Wideband, HF-UHF"],
+            ["USRP B200", "70 MHz - 6 GHz", "56 MHz", "Yes", "$1200", "Research grade, GNU Radio"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Software Tools"
+        },
+        {
+          "type": "table",
+          "headers": ["Tool", "Platform", "Function"],
+          "rows": [
+            ["SDR#", "Windows", "General receiver, plugins for many modes"],
+            ["SDR++", "Win/Lin/Mac", "Modern receiver, modular design"],
+            ["GQRX", "Linux/Mac", "GNU Radio based receiver"],
+            ["GNU Radio", "All", "Signal processing framework"],
+            ["SDRTrunk", "All (Java)", "Trunked radio decoding (P25, DMR)"],
+            ["DSD+", "Windows", "Digital voice decoder"],
+            ["Artemis", "All", "Offline signal ID database"],
+            ["Inspectrum", "Linux", "IQ file analysis and visualization"],
+            ["Universal Radio Hacker", "All", "Protocol analysis and reverse engineering"],
+            ["SigintOS", "Linux", "Dedicated SIGINT distribution"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Online Resources"
+        },
+        {
+          "type": "table",
+          "headers": ["Resource", "URL", "Purpose"],
+          "rows": [
+            ["Signal ID Wiki", "sigidwiki.com", "Signal identification database"],
+            ["RTL-SDR Blog", "rtl-sdr.com", "News, tutorials, project guides"],
+            ["RadioReference", "radioreference.com", "Frequency databases (US focus)"],
+            ["WebSDR", "websdr.org", "Online SDR receivers worldwide"],
+            ["KiwiSDR", "kiwisdr.com", "HF online receivers network"]
+          ]
+        },
+        {
+          "type": "tool",
+          "name": "Frequency Reference",
+          "description": "Common frequencies for SIGINT monitoring",
+          "inputs": [],
+          "url": "#frequency-reference"
+        },
+        {
+          "type": "table",
+          "headers": ["Band", "Frequencies", "Content"],
+          "rows": [
+            ["Aviation Voice", "118-137 MHz AM", "ATC, air-to-ground"],
+            ["ADS-B", "1090 MHz", "Aircraft position broadcasts"],
+            ["Marine VHF", "156-162 MHz FM", "Ship-to-shore, ship-to-ship"],
+            ["AIS", "161.975, 162.025 MHz", "Ship position broadcasts"],
+            ["2m Amateur", "144-148 MHz", "Ham radio, repeaters, digital"],
+            ["70cm Amateur", "420-450 MHz", "Ham radio, digital modes"],
+            ["FRS/GMRS", "462-467 MHz", "Consumer radios"],
+            ["Public Safety", "Various VHF/UHF", "Police, fire, EMS (check local)"],
+            ["NOAA Weather", "162.4-162.55 MHz FM", "Weather broadcasts"],
+            ["Pagers", "929-932 MHz", "POCSAG/FLEX paging"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Getting Started",
+          "text": "Begin with an RTL-SDR and SDR# or SDR++ software. Monitor known signals (FM broadcast, NOAA weather, amateur repeaters) to learn your equipment. Progress to identifying unknown signals using sigidwiki. Build toward targeted collection operations as your skills develop."
+        }
+      ]
+    }
+  ]
+}

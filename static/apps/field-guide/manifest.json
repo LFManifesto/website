@@ -1,0 +1,27 @@
+{
+  "name": "LFM Field Guide",
+  "short_name": "Field Guide",
+  "description": "Light Fighter Course Field Guide - Interactive quick reference for drones, communications, SIGINT, and marksmanship.",
+  "start_url": "/apps/field-guide/",
+  "scope": "/apps/field-guide/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "reference"],
+  "lang": "en-US"
+}

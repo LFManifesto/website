@@ -1,0 +1,646 @@
+{
+  "id": "marksmanship",
+  "number": "4",
+  "title": "Precision Marksmanship",
+  "description": "Precision shooting demands mastery of fundamentals combined with systematic observation, range estimation, wind reading, and team communication. This section covers the complete shot process from detection through correction.",
+  "icon": "crosshair",
+  "subsections": [
+    {
+      "id": "shot-process",
+      "number": "4.1",
+      "title": "The Shot Process",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "The shot process is the structured sequence every shooter follows during an engagement, regardless of weapon system. It integrates fundamentals into a repeatable system that removes shooter influence from the outcome. Strict adherence to the shot process, shot after shot, produces consistent results."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "SAMC: The Four Pillars"
+        },
+        {
+          "type": "paragraph",
+          "text": "The shot process consists of four interconnected elements: Stability, Aim, Control, and Movement. Each element must be addressed before, during, and after the shot."
+        },
+        {
+          "type": "table",
+          "headers": ["Element", "Description", "Key Points"],
+          "rows": [
+            ["Stability", "Weapon support and shooter position", "Consistent base of fire, natural point of aim, bone support"],
+            ["Aim", "Sight alignment and target acquisition", "Proper eye relief, parallax elimination, hold determination"],
+            ["Control", "Trigger manipulation and breathing", "Smooth press, respiratory pause, mental focus"],
+            ["Movement", "Shooter and weapon manipulation", "Recoil management, follow-through, recovery"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Natural Point of Aim"
+        },
+        {
+          "type": "paragraph",
+          "text": "Natural Point of Aim (NPOA) is where your rifle naturally settles when you are relaxed in your shooting position. With proper NPOA, you are behind and directly in line with the rifle, which rests naturally aligned with the target without muscular tension. Test NPOA by dry-firing and cycling the bolt; if your reticle returns to the same point without adjustment, you have achieved NPOA."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Follow Through"
+        },
+        {
+          "type": "paragraph",
+          "text": "Follow through is the forgotten fundamental. Many shooters disengage mentally the moment they press the trigger. Proper follow through means accepting recoil straight back into the shoulder while maintaining sight picture until impact is observed. The reticle should remain on or near the target through the recoil pulse. Do not anticipate recoil; accept it."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Pre-Shot Routine"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Verify stable position with bone support",
+            "Confirm natural point of aim aligns with target",
+            "Check parallax and ensure sight picture is clear",
+            "Apply safety to fire when ready to engage",
+            "Verify round is chambered",
+            "Confirm hold determination (elevation and windage)",
+            "Begin controlled breathing cycle"
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Calling Your Shot",
+          "text": "Always know where your reticle was at the moment of trigger break. This 'shot call' allows you to predict impact location before observing it. If your call matches the observed impact, your system is working. If they differ, investigate the cause before the next shot."
+        }
+      ]
+    },
+    {
+      "id": "target-detection",
+      "number": "4.2",
+      "title": "Target Detection",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "All direct fire engagements begin with detection. The shooter who sees first holds decisive advantage. Detection skills are built on four core fundamentals that transform passive observation into active target acquisition."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Detection Fundamentals"
+        },
+        {
+          "type": "table",
+          "headers": ["Skill", "Description"],
+          "rows": [
+            ["Scan and Search", "Rapid sequence of techniques to identify potential threats"],
+            ["Scanning Skills", "Determining areas where threats are most likely to appear"],
+            ["Acquire", "Refining initial scan based on environmental irregularities"],
+            ["Locate", "Determining general location and range for precise engagement"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Detection Indicators"
+        },
+        {
+          "type": "paragraph",
+          "text": "Targets reveal themselves through indicators that contrast with the natural environment. Movement is the most powerful indicator; the human eye detects lateral motion at extreme distances. Shape exposes targets that remain still, with head-and-shoulders silhouettes being particularly distinctive. Shine from optics, exposed skin, or metallic objects catches light unnaturally. Shadow cast by hidden positions often reveals what concealment hides."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Detection Challenges"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Peripheral targets at the edge of field of view",
+            "Camouflaged, masked, or innocuous-appearing targets",
+            "Mirage effects from high temperatures and ground heat",
+            "Small single targets in complex environments",
+            "Urban or jungle terrain with multiple visual layers",
+            "Natural and man-made obscurants",
+            "Observer fatigue and physical deficiencies"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Detection Best Practices"
+        },
+        {
+          "type": "checklist",
+          "id": "detection-practices",
+          "items": [
+            "Scan with unaided eye first, then escalate to magnified optics",
+            "Understand capabilities and limitations of night vision and thermal",
+            "Apply collective search techniques with assigned sectors",
+            "Shield eyes from blinding effects of sun",
+            "Maintain systematic search pattern without fixating",
+            "Periodically return to previously cleared areas"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Optics Employment"
+        },
+        {
+          "type": "table",
+          "headers": ["Tool", "Best For", "Advantage", "Limitation"],
+          "rows": [
+            ["Naked Eye", "Initial detection", "Wide field of view", "Limited detail at range"],
+            ["Binoculars", "Identification", "Stable magnification", "Narrower field of view"],
+            ["Spotting Scope", "Detailed observation", "High magnification, mirage reading", "Very narrow field, tripod required"],
+            ["Rifle Scope", "Engagement", "Point of aim reference", "Narrow field, weapon commitment"],
+            ["Thermal/NV", "Low light, concealment", "See through camouflage", "Cost, weight, batteries"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "range-estimation",
+      "number": "4.3",
+      "title": "Range Estimation",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Accurate range estimation separates hits from near misses. Three primary factors affect range estimation: nature of the target, nature of the terrain, and light conditions. Error in range translates directly to error in elevation, causing misses above or below the target."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "The Mil-Relation Formula"
+        },
+        {
+          "type": "paragraph",
+          "text": "When you know the size of what you are looking at and can measure it through your reticle, mathematics provides range. The formula works in both meters and yards with different constants."
+        },
+        {
+          "type": "info",
+          "title": "Mil-Relation Formula",
+          "text": "For meters: Multiply 25.4 by object size in inches to get the constant. Divide by mil reading to get range in meters. For yards: Multiply 27.78 by object size in inches. Divide by mil reading to get range in yards. Before milling, eliminate parallax by adjusting the objective until the target is sharp and the reticle does not shift when you move your head."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Example Calculation"
+        },
+        {
+          "type": "paragraph",
+          "text": "Target is a standing person (72 inches / 1.83 meters). Constant for meters: 25.4 x 72 = 1829. Target measures 2.4 mils in your reticle. Range: 1829 / 2.4 = 762 meters."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Standard Target Sizes"
+        },
+        {
+          "type": "table",
+          "headers": ["Target", "Height (in)", "Height (m)", "Width (in)", "Width (m)"],
+          "rows": [
+            ["Standing Person", "72", "1.83", "20", "0.51"],
+            ["Kneeling Person", "51", "1.30", "20", "0.51"],
+            ["Prone Person", "20", "0.51", "20", "0.51"],
+            ["Head and Shoulders", "12", "0.30", "18", "0.46"],
+            ["Average Male Torso", "25", "0.64", "18", "0.46"],
+            ["Standard Door", "80", "2.03", "36", "0.91"],
+            ["Pickup Truck (height)", "72", "1.83", "—", "—"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Milling Best Practices"
+        },
+        {
+          "type": "paragraph",
+          "text": "Take caution when milling human targets. For better accuracy, use the mil-relation formula on solid objects of known sizes such as vehicles, building components, or weapons. Height measurements are generally more accurate because a standing person's height is less variable than their apparent width, which changes with body angle."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Environmental Factors"
+        },
+        {
+          "type": "table",
+          "headers": ["Condition", "Effect on Perception"],
+          "rows": [
+            ["Bright illumination", "Targets appear closer"],
+            ["Looking uphill", "Targets appear closer"],
+            ["Over water or snow", "Targets appear closer"],
+            ["Low light", "Targets appear farther"],
+            ["Looking downhill", "Targets appear farther"],
+            ["Narrow field of view", "Targets appear farther"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wind-reading",
+      "number": "4.4",
+      "title": "Wind Reading",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Wind is the marksman's greatest environmental challenge. Gravity is constant and predictable. Wind varies in speed, direction, and effect along the bullet path. Before a mission, teams build appropriate data cards with elevation and wind holds for their weapon system and ammunition."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Wind Value by Direction"
+        },
+        {
+          "type": "table",
+          "headers": ["Wind Direction", "Clock Position", "Wind Value"],
+          "rows": [
+            ["Full Value", "3 or 9 o'clock", "100%"],
+            ["Half Value", "1, 2, 4, 5, 7, 8, 10, 11 o'clock", "50%"],
+            ["No Value", "12 or 6 o'clock", "0%"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Wind Speed Indicators"
+        },
+        {
+          "type": "table",
+          "headers": ["Speed (mph)", "Observable Effect"],
+          "rows": [
+            ["1-3", "Wind barely felt, smoke drifts lazily"],
+            ["3-5", "Leaves rustle, wind felt on exposed skin"],
+            ["5-8", "Leaves in constant motion, light flags extend"],
+            ["8-12", "Small branches move, dust and paper raised"],
+            ["12-15", "Small trees sway, flags fully extended"],
+            ["15-20", "Large branches move, difficult to walk against"],
+            ["20+", "Whole trees in motion, considerable walking resistance"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Reading Mirage"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mirage is visual distortion from heat rising off the ground. Experienced shooters use mirage as a precision wind indicator. Observe mirage through spotting scope at 15-20x magnification. Focus the scope between you and the target, not on the target itself. Mirage will be easy to see on bright sunny days and difficult on overcast days."
+        },
+        {
+          "type": "table",
+          "headers": ["Mirage Appearance", "Wind Speed"],
+          "rows": [
+            ["Boiling (rising vertically)", "0-2 mph"],
+            ["Leaning 45-60 degrees", "3-5 mph"],
+            ["Leaning strongly", "5-8 mph"],
+            ["Nearly horizontal", "8-12 mph"],
+            ["Flat/invisible", "12+ mph"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Making the Wind Call"
+        },
+        {
+          "type": "paragraph",
+          "text": "Assess wind conditions with three questions: Is it present or not? Is it stable or unstable? Is it predictable or unpredictable? Your confidence in the shot depends on these answers."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Present, stable, predictable (4-5 mph constant from 9 o'clock): High hit probability if you read correctly. Skill required: READING.",
+            "Present, unstable, predictable (gusting 6-10 mph from 9-10 o'clock): Moderate hit probability if you can time the gusts. Skill required: TIMING.",
+            "Present, unstable, unpredictable (changing 5-10 mph, variable direction): Low hit probability. Wait for better conditions or accept risk."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Target Width in MPH"
+        },
+        {
+          "type": "paragraph",
+          "text": "Using your 1 mph wind value from your ballistic program, you can determine what the width of your target represents in miles per hour at that range. This helps you know how much windage error you can tolerate. Example: At 800 meters, your 1 mph wind value is 0.1 mil. Your target measures 0.57 mils wide. Target width represents 5.7 mph of wind error (0.57 / 0.1 = 5.7)."
+        },
+        {
+          "type": "info",
+          "title": "Wind at the Muzzle",
+          "text": "Wind conditions near the shooter have more effect on bullet path than wind near the target. The bullet spends more time in the first portion of its flight, and deflection accumulates. Focus wind reading on the first third of the bullet's path."
+        }
+      ]
+    },
+    {
+      "id": "rapid-engagement",
+      "number": "4.5",
+      "title": "Rapid Target Engagement",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Not every engagement allows time for deliberate solutions. Fleeting targets and dynamic environments demand rapid engagement techniques. Modern ballistic calculators provide several techniques for quick engagements within defined parameters."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Danger Space Method"
+        },
+        {
+          "type": "paragraph",
+          "text": "Danger Space uses your bullet's trajectory arc to engage targets within a range bracket without adjusting elevation for each specific distance. You dial for the maximum range and hold at the target's beltline. The bullet arc stays within target height across the entire range."
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Select your gun profile in ballistic calculator",
+            "Go to BALLISTICS menu",
+            "Set Range to maximum engagement distance (e.g., 500m)",
+            "Check MaxO (maximum ordinate). If MaxO does not exceed target height (e.g., 28 inches vs 30 inch target), the method works",
+            "Go to RANGE CARD, note elevation for your max range (e.g., 3.9 mils)",
+            "Dial this elevation. For any target 100-500m, hold at beltline and fire"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Max Point Blank Range (MPBR)"
+        },
+        {
+          "type": "paragraph",
+          "text": "MPBR establishes a single dial setting that keeps your bullet within a target-sized vital zone from muzzle to maximum effective range. Best for hunting or situations where range estimation time is limited."
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Select GUN in ballistic calculator",
+            "Go to ZR (Zero Range) menu",
+            "Select MaxPBR",
+            "Change Target Size to 25 inches (average male torso)",
+            "Note MPBhld (MPBR hold), e.g., 2.19U mil. Dial this on your turret",
+            "MaxPBR shows maximum effective range with this hold",
+            "No-go value tells you minimum target size in mils. If target mils greater than No-go, you can use MPBR"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Speed Drop"
+        },
+        {
+          "type": "paragraph",
+          "text": "Speed Drop provides a simplified elevation solution for rapid engagement within specific range brackets. It calculates a single mil value that, when used as a holdover per 100 meters of distance, gives acceptable accuracy."
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Go to Accuracy 1st menu in ballistic calculator",
+            "Select SpdDrp",
+            "Select Calculate",
+            "Note SpdDrp# value (e.g., 1.3 mil per 100m)",
+            "Note Rng Min and Rng Max for effective range of this technique",
+            "In the field: Estimate range in hundreds, multiply by speed drop value for holdover"
+          ]
+        },
+        {
+          "type": "table",
+          "headers": ["Technique", "Best For", "Tradeoff"],
+          "rows": [
+            ["Danger Space", "Known area, multiple targets at various ranges", "Limited to max ordinate below target height"],
+            ["MPBR", "Hunting, single-shot opportunities", "Reduced precision at range extremes"],
+            ["Speed Drop", "Rapid mental calculation", "Requires knowing range in 100m increments"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "team-communication",
+      "number": "4.6",
+      "title": "Shooter-Observer Team",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "The primary shooter depends on the observer for information about target, environmental conditions, and shot observation. Communication must be concise, accurate, and follow a standardized sequence. The cognitive load of precision engagement distributes between team members for better results than either could achieve alone."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Observer Setup"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Position in line with shooter's gun-target line",
+            "Set spotting scope magnification to 15-20x for optimal trace observation and FOV",
+            "Focus between shooter and target. Turn focus ring clockwise until target goes clear then fuzzy, then back off until target is sharp",
+            "Scan for wind indicators: mirage and vegetation movement",
+            "Prepare to observe trace (rising branch, max ordinate, falling branch)"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Trace Observation"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trace is the visible disturbance caused by the bullet in flight. It has three components: rising branch, maximum ordinate, and falling branch. The arc at max ordinate is easiest to see. Trace is visible on cloudy or overcast days and difficult on bright sunny days. Follow the trace on its falling branch into the target. Do not shift focus to the target for results; watch the trace all the way to impact."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Target Indication Dialogue"
+        },
+        {
+          "type": "paragraph",
+          "text": "Observer uses one of the following methods: direct method, reference point method, clock ray method, or pre-made range card. The call moves from general to specific."
+        },
+        {
+          "type": "table",
+          "headers": ["Speaker", "Call", "Purpose"],
+          "rows": [
+            ["Observer", "FROM BUILDING 4, GO 9 O'CLOCK 10 MILS. ONE MAM, RED SHIRT, BLUE JEANS.", "Target indication with reference point"],
+            ["Shooter", "ONE MAM, RED SHIRT, BLUE JEANS, STANDING NEXT TO WHITE HILUX.", "Confirms target with distinguishing features"],
+            ["Observer", "CHECK PARALLAX AND MIL.", "Directs shooter to range target"],
+            ["Shooter", "HEIGHT, 2.0 MILS.", "Provides mil measurement"],
+            ["Observer", "UP 6.2 MIL.", "Provides elevation solution"],
+            ["Shooter", "UP 6.2 MIL, READY.", "Confirms solution, signals ready"],
+            ["Observer", "LEFT 0.5 MIL.", "Provides wind call"],
+            ["Shooter", "LEFT 0.5 MIL.", "Confirms wind, executes shot"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Shot Correction"
+        },
+        {
+          "type": "paragraph",
+          "text": "If the shooter misses, the observer immediately relays a correction based on observed trace and the shooter's call. Use the target's mil dimensions to bound corrections. For elevation miss, use up to the full mil height. For windage miss, use up to the full mil width."
+        },
+        {
+          "type": "paragraph",
+          "text": "Example: Observer called 0.5 mil left for first shot (target width 0.65 mil). Round missed just off the right side. Add up to the target width to get new wind call: LEFT 1.0 MIL (0.5 original + 0.5 target width)."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Subsequent Corrections"
+        },
+        {
+          "type": "info",
+          "title": "Correction Formula",
+          "text": "Make subsequent corrections using: What is happening now + What shooter called on last shot + What was your last wind call. Corrections state the direction and amount the shooter needs to adjust, not where the round hit."
+        }
+      ]
+    },
+    {
+      "id": "ballistic-solutions",
+      "number": "4.7",
+      "title": "Ballistic Solutions",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Hitting targets at distance requires applying correct elevation and windage adjustments to compensate for bullet drop and wind deflection. These adjustments can be dialed onto scope turrets or held in the reticle. Either method requires knowing the correct values from ballistic calculation."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Data On Previous Engagement (DOPE)"
+        },
+        {
+          "type": "paragraph",
+          "text": "The most reliable ballistic data comes from your own rifle, fired under similar conditions, at known distances. A DOPE card documents actual adjustments required for your specific system at various ranges. Empirical data supersedes calculated values because it accounts for all variables specific to your rifle, ammunition, and conditions."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Ballistic Calculator Inputs"
+        },
+        {
+          "type": "paragraph",
+          "text": "When using a ballistic calculator, accuracy depends on input quality. The more accurately you provide muzzle velocity, ballistic coefficient, temperature, altitude, and atmospheric pressure, the more accurate the output."
+        },
+        {
+          "type": "table",
+          "headers": ["Input", "Effect on Solution", "How to Obtain"],
+          "rows": [
+            ["Muzzle Velocity", "Primary effect on elevation", "Chronograph, factory data"],
+            ["Ballistic Coefficient", "Affects drop and drift rates", "Manufacturer data, calculated from testing"],
+            ["Temperature", "Affects air density and MV", "Weather meter, phone app"],
+            ["Altitude/Pressure", "Affects air density", "Weather meter, altimeter"],
+            ["Humidity", "Minor effect on density", "Weather meter"],
+            ["Wind Speed/Direction", "Primary effect on windage", "Weather meter, visual indicators"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Spin Drift and Coriolis"
+        },
+        {
+          "type": "paragraph",
+          "text": "At extended ranges (800+ meters), secondary effects become significant. Spin drift causes the bullet to move in the direction of rifling twist (right for right-hand twist). The Coriolis effect causes deflection based on latitude and direction of fire. Modern ballistic calculators account for these effects when enabled."
+        },
+        {
+          "type": "paragraph",
+          "text": "When extracting 1 mph wind values for your baseline chart, set spin drift to OFF and latitude to 0 to isolate wind effect. Then re-enable these for actual firing solutions."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Loophole Considerations"
+        },
+        {
+          "type": "paragraph",
+          "text": "Shooting through openings introduces mechanical offset concerns. The bullet's path differs from your line of sight due to the scope mounted above the bore. At close distances to the loophole, this offset is significant. With elevation dialed for a distant target, the bore angles upward relative to your sight line. Verify bullet clearance before shooting through any opening."
+        },
+        {
+          "type": "info",
+          "title": "Trust Your Rifle",
+          "text": "Calculator output is a starting point. Your rifle is the final authority. When calculator predictions differ from observed impacts, trust what you see. Verify against actual impacts and refine your data accordingly."
+        }
+      ]
+    },
+    {
+      "id": "fundamentals-review",
+      "number": "4.8",
+      "title": "Fundamentals Review",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "The fundamentals of marksmanship are the building blocks upon which all precision shooting rests. Only strict adherence to these fundamentals, shot after shot, removes shooter influence from the outcome. It is not enough to recite them; you must live them during dry fire and live fire."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Prone Position Fundamentals"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Spine aligned with bore axis to target",
+            "Feet separated comfortably, ankles down, toes out for ground contact",
+            "Shoulders squared behind stock at approximately 90 degrees",
+            "Support hand controls buttstock or bipod for stability",
+            "Firing hand grip consistent, trigger finger isolated",
+            "Cheek weld consistent for repeatable eye relief"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Trigger Control"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trigger control is the most important fundamental. The trigger must be pressed straight to the rear without disturbing sight alignment. Use the pad of the distal phalanx (first joint to fingertip). Press should be smooth, continuous, and independent of breathing cycle. The shot should surprise you; if you know exactly when it will break, you may be anticipating."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Breathing"
+        },
+        {
+          "type": "paragraph",
+          "text": "Breathing causes the rifle to move. Fire during the natural respiratory pause after exhaling. Do not hold your breath so long that you begin oxygen deprivation. If the shot is not breaking within 3-5 seconds of the respiratory pause, restart the breathing cycle and begin again."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Mental Focus"
+        },
+        {
+          "type": "paragraph",
+          "text": "Precision shooting requires focused attention on the fundamentals, not on the target or the outcome. Focus on what you can control: position, sight picture, trigger press. Let the result happen as a consequence of correct execution. Target fixation and outcome anxiety degrade performance."
+        },
+        {
+          "type": "checklist",
+          "id": "pre-shot-mental",
+          "items": [
+            "Clear your mind of distractions and outcome focus",
+            "Confirm position stability and natural point of aim",
+            "Verify sight picture and hold determination",
+            "Begin controlled breathing cycle",
+            "Focus attention on front sight or reticle",
+            "Begin smooth trigger press during respiratory pause",
+            "Accept recoil, maintain sight picture through impact"
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Dry Fire",
+          "text": "Dry fire builds fundamentals without the distraction of recoil and noise. A serious shooter dry fires far more than they live fire. The fundamentals practiced in dry fire transfer directly to live fire. Make dry fire a regular part of your training routine."
+        }
+      ]
+    }
+  ]
+}

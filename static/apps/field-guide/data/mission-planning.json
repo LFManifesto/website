@@ -1,0 +1,359 @@
+{
+  "id": "mission-planning",
+  "number": "5",
+  "title": "Mission Planning",
+  "description": "Effective operations begin with thorough planning. This section covers the systematic processes that translate objectives into executable plans, from initial assessment through mission execution.",
+  "icon": "compass",
+  "subsections": [
+    {
+      "id": "planning-fundamentals",
+      "number": "5.1",
+      "title": "Planning Fundamentals",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "No plan survives first contact with the enemy, but the planning process itself is invaluable. Planning forces you to think through contingencies, identify resource requirements, and develop shared understanding among participants. Even when circumstances force deviation from the original plan, the mental frameworks developed during planning enable faster adaptation."
+        },
+        {
+          "type": "paragraph",
+          "text": "Mission planning follows a logical progression from understanding the problem, through developing solutions, to preparing for execution. Each phase builds on the previous, and skipping steps leads to gaps that become apparent only when it is too late to correct them. Time pressure tempts planners to shortcut the process, but disciplined adherence to methodology produces better outcomes even under time constraints."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "The Planning Sequence"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Receive or develop the mission statement",
+            "Conduct mission analysis to understand requirements and constraints",
+            "Develop courses of action that could accomplish the mission",
+            "Analyze and compare courses of action against criteria",
+            "Select and refine the best course of action",
+            "Produce the operations order that communicates the plan",
+            "Brief and rehearse until all participants understand their roles",
+            "Execute, assess, and adapt as the situation develops"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Mission Analysis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mission analysis transforms vague guidance into specific, achievable tasks. It begins with identifying the specified tasks that higher authority explicitly directs. It continues by inferring implied tasks that must be accomplished to enable the specified tasks. Finally, it identifies essential tasks without which the mission cannot succeed. These essential tasks focus planning effort on what truly matters."
+        },
+        {
+          "type": "info",
+          "title": "Commander's Intent",
+          "text": "Beyond the specific tasks, understand the intent behind the mission. What does success look like? What is the purpose this mission serves within a larger context? When circumstances force deviation from the plan, understanding intent enables intelligent adaptation that still achieves the desired outcome."
+        }
+      ]
+    },
+    {
+      "id": "intelligence-preparation",
+      "number": "5.2",
+      "title": "Intelligence Preparation",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Intelligence drives planning. The better you understand the operational environment, friendly capabilities, and adversary dispositions, the better your plan will account for reality. Intelligence preparation of the battlefield, or IPB, is the systematic process of analyzing the environment and threat to support planning and execution."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Define the Operational Environment"
+        },
+        {
+          "type": "paragraph",
+          "text": "Begin by establishing the boundaries of your analysis. What geographic area matters? What time period are you planning for? What adjacent activities might affect your operation? Defining these limits focuses subsequent analysis on relevant factors rather than attempting to understand everything about everywhere."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Describe Environmental Effects"
+        },
+        {
+          "type": "paragraph",
+          "text": "Terrain and weather shape what is possible. Analyze the ground for observation and fields of fire, cover and concealment, obstacles, key terrain, and avenues of approach. These military aspects of terrain determine where you can move, where you can fight effectively, and where the enemy likely positions. Weather affects visibility, mobility, and human performance in ways that must be accounted for."
+        },
+        {
+          "type": "checklist",
+          "id": "terrain-analysis",
+          "items": [
+            "Observation and fields of fire: Where can you see? Where can you shoot?",
+            "Cover and concealment: Where can you protect yourself?",
+            "Obstacles: What impedes movement?",
+            "Key terrain: What ground provides decisive advantage?",
+            "Avenues of approach: What routes support movement?"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Evaluate the Threat"
+        },
+        {
+          "type": "paragraph",
+          "text": "Understanding adversary capabilities and likely actions enables you to plan against what the enemy might actually do rather than what you assume they will do. Develop threat models that describe enemy organization, equipment, tactics, and patterns of operation. From these models, identify the enemy's most likely course of action and their most dangerous course of action."
+        },
+        {
+          "type": "table",
+          "headers": ["Analysis", "Purpose"],
+          "rows": [
+            ["Most Likely", "Plan primary approach to counter expected actions"],
+            ["Most Dangerous", "Develop contingencies for worst-case scenarios"],
+            ["Capabilities", "Understand what the enemy can do"],
+            ["Vulnerabilities", "Identify opportunities to exploit"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aviation-planning",
+      "number": "5.3",
+      "title": "Aviation Operations",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "UAS operations require planning that accounts for airspace, weather, communications, and contingencies that differ from ground operations. The preflight planning process establishes conditions under which the operation proceeds and conditions that require mission abort."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Airspace Coordination"
+        },
+        {
+          "type": "paragraph",
+          "text": "Understanding aviation weather products and airspace restrictions prevents operations that endanger other aircraft or violate regulations. METAR reports provide current weather observations at airports. NOTAMs announce temporary changes to airspace and hazards. ADS-B displays show traffic that may conflict with your operation."
+        },
+        {
+          "type": "table",
+          "headers": ["Code", "Meaning", "Example"],
+          "rows": [
+            ["METAR Element", "Reading Format", "KCSG 311953Z 29019G28KT 10SM BKN040"],
+            ["Station ID", "Airport identifier", "KCSG = Columbus, GA"],
+            ["Date/Time", "Day + Zulu time", "311953Z = 31st day, 1953 Zulu"],
+            ["Wind", "Direction/Speed/Gusts", "29019G28KT = 290 degrees at 19 gusting 28"],
+            ["Visibility", "Statute miles", "10SM = 10 statute miles"],
+            ["Clouds", "Coverage at height", "BKN040 = Broken at 4000 ft AGL"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Go/No-Go Criteria"
+        },
+        {
+          "type": "paragraph",
+          "text": "Establish specific criteria before the operation that determine whether conditions permit the mission to proceed. These criteria should be objective and measurable to prevent rationalization when conditions are marginal. When any criterion is not met, the mission does not proceed."
+        },
+        {
+          "type": "checklist",
+          "id": "go-nogo-criteria",
+          "items": [
+            "Wind speed below platform operating limits",
+            "Visibility sufficient for visual line of sight",
+            "No precipitation that affects platform performance",
+            "RF link margin exceeds minimum threshold",
+            "No conflicting NOTAMs or TFRs in effect",
+            "No conflicting traffic that cannot be deconflicted",
+            "Battery charge and condition verified",
+            "All required personnel present and briefed"
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Decision Point",
+          "text": "The go/no-go decision occurs at a designated time before planned launch. At this point, all criteria are evaluated against current conditions. If all criteria are met, the operation proceeds. If any criterion fails, the operation is delayed or cancelled. There is no partial go."
+        }
+      ]
+    },
+    {
+      "id": "communications-planning",
+      "number": "5.4",
+      "title": "Communications Planning",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Communications planning ensures that all elements can exchange necessary information throughout the operation. The plan specifies what equipment is required, what frequencies are used, how to establish contact, and what to do when primary communications fail. Communications plans must account for electronic warfare and have layered backup options."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "The PACE Plan"
+        },
+        {
+          "type": "paragraph",
+          "text": "PACE stands for Primary, Alternate, Contingency, and Emergency. Each represents a complete communications capability that can support the mission if higher-priority options fail. A robust PACE plan uses different technologies at each tier to ensure that a single failure mode does not eliminate all communication options."
+        },
+        {
+          "type": "table",
+          "headers": ["Tier", "Example", "When to Use"],
+          "rows": [
+            ["Primary", "DMR Radio", "Normal operations"],
+            ["Alternate", "VHF FM Radio", "When DMR unavailable"],
+            ["Contingency", "Cell Phone", "When radio links fail"],
+            ["Emergency", "Messenger / Signal", "When all else fails"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Frequency Allocation"
+        },
+        {
+          "type": "paragraph",
+          "text": "Assign specific frequencies for specific purposes and publish them in a communications schedule. Include primary and alternate frequencies for each net. Specify when frequency changes occur and how they are signaled. Document encryption keys or authentication codes required for each net."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Signal Operating Instructions"
+        },
+        {
+          "type": "paragraph",
+          "text": "Signal operating instructions, or SOI, provide the detailed reference that operators need to communicate correctly. Include callsigns for each element, frequencies organized by time and purpose, authentication procedures, brevity codes, and emergency procedures. Distribute the SOI to all participants before the operation and verify they understand it."
+        },
+        {
+          "type": "checklist",
+          "id": "soi-contents",
+          "items": [
+            "Callsign roster for all elements",
+            "Frequency allocation with primary and alternate",
+            "Authentication procedures and tables",
+            "Brevity codes and prowords",
+            "Check-in schedule and format",
+            "Emergency and distress procedures",
+            "PACE plan for each element"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rehearsals",
+      "number": "5.5",
+      "title": "Rehearsals and Preparation",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Rehearsals bridge the gap between plans on paper and execution in the field. Through rehearsal, participants develop shared understanding of the plan, identify problems before they occur in execution, and build the confidence that comes from practicing actions before performing them under pressure."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Types of Rehearsals"
+        },
+        {
+          "type": "paragraph",
+          "text": "Different rehearsal techniques serve different purposes. Full-scale rehearsals with all participants physically executing their roles provide the highest fidelity but require the most time and resources. Reduced-scale rehearsals use terrain models or maps to walk through actions with key personnel. Communications rehearsals verify that all elements can establish and maintain contact. Specific actions can be rehearsed in isolation to develop proficiency."
+        },
+        {
+          "type": "table",
+          "headers": ["Type", "Best For", "Resource Requirement"],
+          "rows": [
+            ["Full Scale", "Complex operations, final validation", "High: time, space, personnel"],
+            ["Key Leader", "Coordinating actions between elements", "Moderate: key personnel only"],
+            ["Terrain Model", "Understanding scheme of maneuver", "Low: map or model, leaders"],
+            ["Communications", "Verifying connectivity and procedures", "Low: radios and operators"],
+            ["Actions On", "Specific drills and contingencies", "Variable: depends on action"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Rehearsal Principles"
+        },
+        {
+          "type": "paragraph",
+          "text": "Effective rehearsals follow certain principles. Conduct them on terrain similar to the objective when possible. Use the actual equipment that will be employed. Execute under conditions as close to actual as practical, including time of day, weather, and visibility. Involve all participants who will execute the operation. Identify and correct problems during rehearsal rather than discovering them during execution."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Pre-Combat Checks and Inspections"
+        },
+        {
+          "type": "paragraph",
+          "text": "Before execution, verify that all equipment functions and all preparations are complete. Pre-combat checks are conducted by individuals on their own equipment. Pre-combat inspections are conducted by leaders to verify checks were completed and to identify any remaining deficiencies."
+        },
+        {
+          "type": "checklist",
+          "id": "pci-checklist",
+          "items": [
+            "All required equipment present and functional",
+            "Batteries charged and spares available",
+            "Communications verified on all nets",
+            "Navigation aids functional and current",
+            "Contingency equipment accessible",
+            "All participants know their role and actions on contact",
+            "Emergency procedures understood and reviewed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "execution-adaptation",
+      "number": "5.6",
+      "title": "Execution and Adaptation",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Execution is where plans meet reality. No matter how thorough the planning, circumstances will differ from expectations. The quality of execution depends on how well participants understand the plan and intent, how effectively they communicate as the situation develops, and how intelligently they adapt when conditions change."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Decision Points"
+        },
+        {
+          "type": "paragraph",
+          "text": "During planning, identify points in the operation where decisions must be made based on conditions at that moment. These decision points force leaders to assess the situation against criteria established during planning and select from predetermined options. Having thought through these decisions in advance accelerates response when they occur."
+        },
+        {
+          "type": "paragraph",
+          "text": "Decision points often correspond to branch plans that address likely contingencies. If the primary route is blocked, what is the alternate? If the objective is unoccupied, what changes? If communication is lost, what are default actions? Thinking through these branches during planning enables rapid execution when circumstances trigger them."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Assessment and Adjustment"
+        },
+        {
+          "type": "paragraph",
+          "text": "Throughout execution, continuously assess whether the operation is progressing toward the intended end state. When assessment reveals deviation from the plan, determine whether the deviation is acceptable or requires correction. Small deviations that do not affect mission accomplishment may be accepted. Larger deviations require adjustment, which may range from minor course corrections to major replanning."
+        },
+        {
+          "type": "info",
+          "title": "The 70% Solution",
+          "text": "A good plan executed with vigor now is better than a perfect plan executed too late. When time pressure forces decision-making with incomplete information, accept that uncertainty is inherent and act decisively. Waiting for perfect information often means waiting too long."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "After Action Review"
+        },
+        {
+          "type": "paragraph",
+          "text": "After execution, conduct a structured review to extract lessons. What was supposed to happen? What actually happened? Why did it happen that way? What should we do differently next time? This disciplined reflection transforms experience into improved capability for future operations."
+        },
+        {
+          "type": "checklist",
+          "id": "aar-format",
+          "items": [
+            "State the mission and intent",
+            "Describe what was planned to happen",
+            "Describe what actually happened",
+            "Analyze why events occurred as they did",
+            "Identify specific actions to sustain or improve",
+            "Document lessons for future reference",
+            "Brief relevant findings to higher and adjacent elements"
+          ]
+        }
+      ]
+    }
+  ]
+}

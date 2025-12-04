@@ -1423,11 +1423,14 @@ audio {
   height: auto;
   border-radius: 6px;
   margin: 2rem 0;
-  min-height: 300px;
   object-fit: contain;
 }
 
-/* Ensure SVG graphics are readable on desktop */
+/* SVG infographics need minimum height to be readable */
+.article-content img[src$=".svg"] {
+  min-height: 280px;
+}
+
 @media (min-width: 768px) {
   .article-content img[src$=".svg"] {
     min-height: 350px;

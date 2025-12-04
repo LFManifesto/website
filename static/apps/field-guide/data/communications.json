@@ -1,0 +1,813 @@
+{
+  "id": "communications",
+  "number": "2",
+  "title": "Communications",
+  "description": "Radio communications fundamentals, DMR digital radios, HF operations with JS8Call, RF theory, antenna systems, and signal propagation for tactical small team operations.",
+  "icon": "radio",
+  "subsections": [
+    {
+      "id": "rf-fundamentals",
+      "number": "2.1",
+      "title": "RF Fundamentals",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Electromagnetic energy consists of electric and magnetic waves paired together moving through space. RF energy travels at the speed of light, approximately 300,000,000 meters per second. Understanding basic RF concepts is essential for effective radio communications and informed equipment selection."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Frequency and Wavelength"
+        },
+        {
+          "type": "paragraph",
+          "text": "The wavelength of a signal is the distance over which the wave shape repeats, measured from crest to crest. The number of cycles per second defines frequency, measured in hertz. One thousand hertz is one kilohertz (kHz), one million hertz is one megahertz (MHz), and one billion hertz is one gigahertz (GHz)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Wavelength and frequency are inversely related. To find wavelength in meters, divide 300 by the frequency in MHz. To find frequency in MHz, divide 300 by wavelength in meters. Example: 144 MHz equals 300 divided by 144, approximately 2 meters."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "The Decibel System"
+        },
+        {
+          "type": "paragraph",
+          "text": "Decibels (dB) express ratios between power levels logarithmically. Decibel milliwatt (dBm) measures absolute power referenced to one milliwatt. The baseline is 1 watt equals 30 dBm. Two rules simplify mental calculations: doubling power adds 3 dB, and multiplying power by 10 adds 10 dB."
+        },
+        {
+          "type": "table",
+          "headers": ["Power", "dBm", "Calculation"],
+          "rows": [
+            ["1 milliwatt", "0 dBm", "Reference point"],
+            ["10 milliwatts", "10 dBm", "10× reference = +10 dB"],
+            ["100 milliwatts", "20 dBm", "100× reference = +20 dB"],
+            ["500 milliwatts", "27 dBm", "1W - 3dB (half of 1W)"],
+            ["1 watt", "30 dBm", "1000× reference = +30 dB"],
+            ["5 watts", "37 dBm", "30 + 10 - 3 (10× then ÷2)"],
+            ["10 watts", "40 dBm", "30 + 10 (10× from 1W)"],
+            ["50 watts", "47 dBm", "40 + 10 - 3"],
+            ["100 watts", "50 dBm", "30 + 20 (100× from 1W)"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Frequency Bands"
+        },
+        {
+          "type": "table",
+          "headers": ["Band", "Range", "Propagation", "Common Uses"],
+          "rows": [
+            ["HF", "3-30 MHz", "Skywave via ionosphere", "Long-range, NVIS, maritime"],
+            ["VHF", "30-300 MHz", "Line of sight, some diffraction", "FM broadcast, aviation, 2m amateur"],
+            ["UHF", "300 MHz-3 GHz", "Line of sight", "TV, cellular, 70cm amateur, GPS"],
+            ["SHF", "3-30 GHz", "Highly directional", "Radar, satellite, microwave links"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Practical Rule",
+          "text": "Lower frequencies travel farther and penetrate obstacles better but require larger antennas. Higher frequencies offer more bandwidth and smaller antennas but need line of sight. Choose frequency bands based on your terrain, range requirements, and antenna constraints."
+        }
+      ]
+    },
+    {
+      "id": "signal-propagation",
+      "number": "2.2",
+      "title": "Signal Propagation",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Radio signals travel from transmitter to receiver through various paths, each affecting signal strength and quality. Understanding propagation mechanisms enables better antenna placement, frequency selection, and link planning."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Propagation Effects"
+        },
+        {
+          "type": "paragraph",
+          "text": "Attenuation reduces signal strength as it travels. All signals weaken with distance following predictable patterns. Reflection occurs when RF waves bounce off surfaces at equal angles. Metal structures, water, and the ground all reflect radio waves."
+        },
+        {
+          "type": "paragraph",
+          "text": "Refraction bends RF waves when they pass between media of different densities, like atmospheric layers. Diffraction allows waves to bend around obstacles, which is why VHF signals can sometimes reach beyond hills. Absorption converts RF energy to heat when passing through materials like walls, foliage, or rain."
+        },
+        {
+          "type": "paragraph",
+          "text": "Multipath occurs when signals take multiple routes to the receiver through combinations of reflection, diffraction, and refraction. The signals may arrive at slightly different times and phases, causing constructive or destructive interference. Moving a few feet can dramatically change reception quality in multipath environments."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Path Loss Calculations"
+        },
+        {
+          "type": "paragraph",
+          "text": "Path loss describes signal attenuation over distance. In free space with no obstructions, signal strength decreases by 6 dB each time distance doubles, or 20 dB when distance increases tenfold. With buildings, trees, or terrain, expect 12 dB loss per distance doubling and 40 dB per tenfold increase."
+        },
+        {
+          "type": "table",
+          "headers": ["Environment", "2× Distance", "10× Distance"],
+          "rows": [
+            ["Free space", "-6 dB", "-20 dB"],
+            ["Urban/obstructed", "-12 dB", "-40 dB"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Weather Effects"
+        },
+        {
+          "type": "paragraph",
+          "text": "Atmospheric conditions significantly affect propagation. Temperature inversions can create ducting that extends VHF/UHF range dramatically. High humidity increases absorption at microwave frequencies. Rain causes significant attenuation above 10 GHz. Fog has minimal effect below 30 GHz but can degrade optical links."
+        },
+        {
+          "type": "info",
+          "title": "Field Expedient",
+          "text": "When experiencing poor communications, try relocating. Moving 50 feet to a different position, raising the antenna a few feet, or simply changing body orientation can overcome multipath or obstruction effects. Small changes often produce dramatic improvements."
+        }
+      ]
+    },
+    {
+      "id": "ionosphere",
+      "number": "2.3",
+      "title": "The Ionosphere",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "The ionosphere extends from approximately 48 km to 400 km above Earth. Solar radiation ionizes atmospheric gases in this region, creating layers that can refract HF radio waves back to Earth. This refraction enables long-distance communication without satellites or repeaters."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Ionospheric Layers"
+        },
+        {
+          "type": "paragraph",
+          "text": "The ionosphere contains four primary layers designated D, E, F1, and F2 from lowest to highest. Each layer has different characteristics that affect radio propagation. Layer heights and ionization levels vary with time of day, season, and solar activity."
+        },
+        {
+          "type": "table",
+          "headers": ["Layer", "Height", "Characteristics"],
+          "rows": [
+            ["D Layer", "48-88 km", "Only present during daylight. Absorbs frequencies below 10 MHz. Disappears at night, improving HF propagation."],
+            ["E Layer", "88-136 km", "Present during daylight. Supports sporadic E propagation for VHF. Height varies with sun angle."],
+            ["F1 Layer", "136-248 km", "Present during daylight. Merges with F2 at night. Variable ionization density."],
+            ["F2 Layer", "248-400 km", "Primary layer for long-distance HF. Present day and night. Most reliable for communications."]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "MUF and LUF"
+        },
+        {
+          "type": "paragraph",
+          "text": "Each ionospheric layer has a Maximum Usable Frequency (MUF) above which signals pass through to space and a Lowest Usable Frequency (LUF) below which absorption prevents propagation. The usable frequency range falls between these limits. Both values change constantly based on ionospheric conditions."
+        },
+        {
+          "type": "paragraph",
+          "text": "During daytime, the D layer absorbs lower HF frequencies, pushing the LUF higher. At night, the D layer disappears, allowing lower frequencies to propagate. The MUF typically peaks during afternoon hours when solar radiation maximizes F layer ionization."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Take-Off Angles and Distance"
+        },
+        {
+          "type": "paragraph",
+          "text": "The angle at which your signal enters the ionosphere determines how far it travels before returning to Earth. Low angles produce long skip distances; high angles produce shorter distances or Near Vertical Incidence Skywave (NVIS) for regional coverage."
+        },
+        {
+          "type": "table",
+          "headers": ["Take-Off Angle", "F2 Daytime Range", "F2 Nighttime Range"],
+          "rows": [
+            ["5°", "4000+ km", "4000+ km"],
+            ["10°", "3200 km", "3600 km"],
+            ["20°", "2200 km", "2500 km"],
+            ["30°", "1600 km", "1800 km"],
+            ["45°", "1000 km", "1100 km"],
+            ["60°", "600 km", "650 km"],
+            ["75°", "300 km", "320 km"],
+            ["90° (NVIS)", "0-100 km", "0-100 km"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "NVIS Operations",
+          "text": "Near Vertical Incidence Skywave uses high take-off angles (75-90°) to bounce signals nearly straight up and back down, covering a regional area of 0-300 miles with no skip zone. NVIS requires frequencies between 2-8 MHz and horizontally polarized antennas mounted low (1/8 wavelength or less above ground). This technique provides reliable regional coverage over mountains and jungle where line-of-sight fails."
+        }
+      ]
+    },
+    {
+      "id": "antenna-theory",
+      "number": "2.4",
+      "title": "Antenna Systems",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Antennas convert electrical energy to electromagnetic waves for transmission and reverse the process for reception. Antenna selection directly affects range, coverage pattern, and communication reliability. Understanding basic antenna principles enables informed equipment choices and field improvisation."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Antenna Length Calculations"
+        },
+        {
+          "type": "paragraph",
+          "text": "Antenna elements resonate at specific frequencies based on their electrical length. A half-wave dipole is the fundamental reference antenna. Quarter-wave verticals use a ground plane to simulate the missing half. Calculating proper lengths ensures efficient energy transfer."
+        },
+        {
+          "type": "table",
+          "headers": ["Frequency", "1/2 Wave (ft)", "1/4 Wave (ft)", "NVIS Dipole Height (ft)"],
+          "rows": [
+            ["2 MHz", "234", "117", "29"],
+            ["3 MHz", "156", "78", "19"],
+            ["4 MHz", "117", "58", "15"],
+            ["5 MHz", "94", "47", "12"],
+            ["7 MHz", "67", "33", "8"],
+            ["10 MHz", "47", "23", "6"],
+            ["14 MHz", "33", "17", "4"],
+            ["18 MHz", "26", "13", "3"],
+            ["21 MHz", "22", "11", "3"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Antenna Types"
+        },
+        {
+          "type": "paragraph",
+          "text": "The half-wave dipole consists of two quarter-wave elements fed at the center. It provides a baseline gain of 2.15 dBi with a figure-eight pattern perpendicular to the wire axis. Dipoles are simple to build and deploy."
+        },
+        {
+          "type": "paragraph",
+          "text": "Quarter-wave verticals use a single radiating element with ground plane radials. They produce omnidirectional horizontal coverage with low take-off angles suited for long-distance work. The ground plane can be wire radials, vehicle body, or earth."
+        },
+        {
+          "type": "paragraph",
+          "text": "Long wire antennas run multiple wavelengths and produce gain in the direction of the wire. They require termination resistors to prevent standing waves. Practical for fixed installations where space permits."
+        },
+        {
+          "type": "table",
+          "headers": ["Antenna Type", "Pattern", "Gain", "Best Use"],
+          "rows": [
+            ["Half-wave dipole", "Figure-eight", "2.15 dBi", "General purpose, NVIS when low"],
+            ["Quarter-wave vertical", "Omnidirectional", "2-5 dBi", "Mobile, low-angle DX"],
+            ["Ground plane", "Omnidirectional", "2-3 dBi", "Base station VHF/UHF"],
+            ["Yagi", "Directional", "6-15 dBi", "Point-to-point, weak signal"],
+            ["Long wire", "Bidirectional", "3-6 dBi", "Fixed HF installations"],
+            ["Inverted V", "Omnidirectional", "2 dBi", "Field expedient, single support"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Gain and Beamwidth"
+        },
+        {
+          "type": "paragraph",
+          "text": "Antenna gain measures how effectively an antenna focuses energy in a particular direction compared to a reference. Gain expressed in dBi references an isotropic radiator; dBd references a dipole. Add 2.15 to convert dBd to dBi."
+        },
+        {
+          "type": "paragraph",
+          "text": "Beamwidth describes the angular width of the main radiation lobe, measured between half-power (-3 dB) points. Narrower beamwidth indicates higher gain and more directional coverage. A typical Yagi might have 30-60° beamwidth while an omnidirectional antenna covers 360°."
+        },
+        {
+          "type": "info",
+          "title": "Field Expedient Antennas",
+          "text": "When commercial antennas are unavailable, wire antennas can be constructed from any conductive material. For a quick dipole: cut wire to half-wavelength, strip insulation at center for feedpoint, attach coax (center to one side, shield to other), and suspend between supports. Performance may not match commercial antennas but functional communications are achievable."
+        }
+      ]
+    },
+    {
+      "id": "link-budget",
+      "number": "2.5",
+      "title": "Radio Link Budget",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "A link budget accounts for all gains and losses between transmitter and receiver to predict whether communication is possible. Understanding link budgets enables informed decisions about power levels, antenna selection, and range expectations."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "EIRP Calculation"
+        },
+        {
+          "type": "paragraph",
+          "text": "Effective Isotropic Radiated Power (EIRP) represents the total power leaving your antenna system in the direction of maximum radiation. Calculate EIRP by adding transmitter power (in dBm or dBW), subtracting feedline losses (in dB), and adding antenna gain (in dBi)."
+        },
+        {
+          "type": "paragraph",
+          "text": "EIRP = Transmitter Power + Antenna Gain - Feedline Loss"
+        },
+        {
+          "type": "paragraph",
+          "text": "Example: A 5-watt transmitter (37 dBm) connected through 2 dB of cable loss to a 6 dBi antenna produces 37 + 6 - 2 = 41 dBm EIRP, equivalent to 12.6 watts radiated toward the target."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Receiver Sensitivity"
+        },
+        {
+          "type": "paragraph",
+          "text": "Receiver sensitivity specifies the minimum signal level that produces usable output, typically measured in dBm. Lower numbers indicate better sensitivity. Amateur HF receivers typically achieve -130 to -140 dBm sensitivity. Commercial VHF/UHF radios range from -115 to -125 dBm."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Link Margin"
+        },
+        {
+          "type": "paragraph",
+          "text": "Link margin is the difference between received signal strength and receiver sensitivity. Positive margin indicates the link should work; negative margin indicates failure. Practical systems require 10-20 dB margin to account for fading, interference, and environmental variations."
+        },
+        {
+          "type": "table",
+          "headers": ["Component", "Example Value", "Notes"],
+          "rows": [
+            ["Transmitter power", "+37 dBm (5W)", "Measure actual output"],
+            ["TX feedline loss", "-2 dB", "Depends on cable type/length"],
+            ["TX antenna gain", "+6 dBi", "Per manufacturer spec"],
+            ["EIRP", "+41 dBm", "Sum of above"],
+            ["Path loss", "-100 dB", "Distance dependent"],
+            ["RX antenna gain", "+6 dBi", "Adds to received signal"],
+            ["RX feedline loss", "-2 dB", "Subtracts from received"],
+            ["Received power", "-55 dBm", "EIRP - path loss + RX gain - RX loss"],
+            ["Receiver sensitivity", "-120 dBm", "Minimum usable signal"],
+            ["Link margin", "+65 dB", "Received - sensitivity"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Planning Rule",
+          "text": "When planning communications, work the link budget in both directions. RF propagation is reciprocal, but equipment often differs between stations. The weakest direction determines whether the link works. A powerful base station means nothing if the handheld cannot reach it."
+        }
+      ]
+    },
+    {
+      "id": "dmr-fundamentals",
+      "number": "2.6",
+      "title": "Digital Mobile Radio",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "DMR (Digital Mobile Radio) is an open digital radio standard for professional two-way communication. It offers significant advantages over analog systems including improved voice quality, enhanced features, increased spectrum efficiency, and encryption capability."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "DMR Technology"
+        },
+        {
+          "type": "paragraph",
+          "text": "DMR uses Time Division Multiple Access (TDMA) to fit two voice channels into a single 12.5 kHz frequency allocation. Each channel occupies one of two time slots, effectively doubling spectrum capacity compared to analog or FDMA digital systems."
+        },
+        {
+          "type": "paragraph",
+          "text": "Digital modulation provides cleaner audio than analog FM, especially at the edges of coverage where analog becomes noisy. DMR maintains full quality until the signal drops below the decode threshold, then fails abruptly rather than degrading gradually."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Advantages Over Analog"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Better voice quality through digital error correction",
+            "Enhanced coverage and signal reliability in marginal conditions",
+            "Two simultaneous conversations per frequency (TDMA)",
+            "Extended battery life from efficient duty cycle (transmitting only 50% of time)",
+            "Built-in encryption options from basic to AES-256",
+            "Data capabilities including text messaging and GPS tracking",
+            "Interoperability between manufacturers using open standard"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "DMR Encryption"
+        },
+        {
+          "type": "paragraph",
+          "text": "DMR supports multiple encryption levels. Basic Privacy uses a simple scrambling algorithm with 16-bit keys that provides minimal security against determined adversaries. Enhanced Privacy uses 40-bit keys with proprietary algorithms offering moderate protection."
+        },
+        {
+          "type": "paragraph",
+          "text": "AES-256 encryption provides the strongest protection available in commercial DMR. It uses 256-bit keys with the Advanced Encryption Standard algorithm. When properly implemented with good key management, AES-256 is considered secure against all known attacks."
+        },
+        {
+          "type": "table",
+          "headers": ["Encryption Type", "Key Length", "Security Level"],
+          "rows": [
+            ["Basic Privacy", "16-bit", "Minimal - easily defeated"],
+            ["Enhanced Privacy", "40-bit", "Moderate - deters casual intercept"],
+            ["AES-256", "256-bit", "Strong - military/government grade"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Encryption Reality",
+          "text": "Encryption protects content but not metadata. Direction finding, traffic analysis, and pattern recognition remain possible even with encrypted communications. Adversaries can locate, jam, and analyze encrypted transmissions. Encryption provides confidentiality, not invisibility."
+        }
+      ]
+    },
+    {
+      "id": "vhf-uhf-operations",
+      "number": "2.7",
+      "title": "VHF/UHF Operations",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "VHF (30-300 MHz) and UHF (300 MHz-3 GHz) frequencies provide reliable short-to-medium range communications for tactical operations. These bands offer reasonable antenna sizes, predictable line-of-sight propagation, and numerous equipment options from consumer to professional grade."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Common Frequency Allocations"
+        },
+        {
+          "type": "table",
+          "headers": ["Service", "Frequencies", "Power Limit", "License Required"],
+          "rows": [
+            ["2m Amateur", "144-148 MHz", "1500W PEP", "Yes - Technician+"],
+            ["MURS", "151.82-154.60 MHz", "2W", "No"],
+            ["70cm Amateur", "420-450 MHz", "1500W PEP", "Yes - Technician+"],
+            ["FRS", "462.5625-467.7125 MHz", "2W (0.5W some channels)", "No"],
+            ["GMRS", "462.55-467.7125 MHz", "50W (5W some channels)", "Yes - GMRS license"],
+            ["CB", "26.965-27.405 MHz", "4W AM, 12W SSB", "No"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "MURS Channels"
+        },
+        {
+          "type": "paragraph",
+          "text": "Multi-Use Radio Service provides five license-free VHF channels with 2-watt power limit. The lower frequencies offer slightly better penetration than UHF alternatives. MURS sees less congestion than FRS/GMRS in most areas."
+        },
+        {
+          "type": "table",
+          "headers": ["Channel", "Frequency", "Bandwidth"],
+          "rows": [
+            ["1", "151.820 MHz", "11.25 kHz"],
+            ["2", "151.880 MHz", "11.25 kHz"],
+            ["3", "151.940 MHz", "11.25 kHz"],
+            ["4", "154.570 MHz", "20 kHz"],
+            ["5", "154.600 MHz", "20 kHz"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Range Expectations"
+        },
+        {
+          "type": "paragraph",
+          "text": "Realistic VHF/UHF range depends on terrain, antenna height, and obstructions far more than transmitter power. Handheld to handheld in flat terrain: 1-5 miles. Handheld to elevated base: 5-20 miles. Base to base with both elevated: 20-50+ miles. Urban environments reduce these figures significantly."
+        },
+        {
+          "type": "paragraph",
+          "text": "Increasing power from 5 to 50 watts adds only 10 dB, roughly doubling effective range in ideal conditions. Raising antenna height from 6 feet to 30 feet often provides greater improvement than any practical power increase. Prioritize antenna position over power for better results."
+        },
+        {
+          "type": "info",
+          "title": "Urban Operations",
+          "text": "In built-up areas, UHF often outperforms VHF for handheld operations. UHF wavelengths reflect efficiently off buildings, allowing signals to bounce around corners and into structures. VHF's better foliage penetration makes it preferable in heavily vegetated areas."
+        }
+      ]
+    },
+    {
+      "id": "hf-operations",
+      "number": "2.8",
+      "title": "HF Radio Operations",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "High Frequency (3-30 MHz) radio enables long-distance communication without infrastructure. HF signals refract off the ionosphere to reach distances from regional to global scale. For teams requiring communications independence, HF provides capability that no other technology matches."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "The Xiegu G90"
+        },
+        {
+          "type": "paragraph",
+          "text": "The Xiegu G90 is a compact, portable HF transceiver covering 0.5-30 MHz receive and amateur bands 160m through 10m for transmit. At 20 watts output and under 2 pounds, it provides deployable HF capability with voice and digital modes."
+        },
+        {
+          "type": "table",
+          "headers": ["Parameter", "Specification"],
+          "rows": [
+            ["Frequency Coverage", "0.5-30 MHz RX, amateur bands TX"],
+            ["Output Power", "1-20 watts adjustable"],
+            ["Modes", "SSB, CW, AM, FM, Digital"],
+            ["Weight", "1.9 lbs (radio only)"],
+            ["Built-in ATU", "Yes, automatic antenna tuner"],
+            ["Display", "Color spectrum/waterfall"],
+            ["Power Requirement", "13.8V DC, ~6A TX"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Band Selection"
+        },
+        {
+          "type": "paragraph",
+          "text": "HF band selection depends on time of day, season, and desired range. Lower frequencies (3-7 MHz) work best at night for long distance and daytime for NVIS. Higher frequencies (14-28 MHz) provide best daytime long-distance propagation but may not support NVIS."
+        },
+        {
+          "type": "table",
+          "headers": ["Band", "Frequency", "Best Conditions"],
+          "rows": [
+            ["80m", "3.5-4.0 MHz", "Night: regional to continental. Day: NVIS regional."],
+            ["40m", "7.0-7.3 MHz", "Night: continental to worldwide. Day: excellent NVIS."],
+            ["20m", "14.0-14.35 MHz", "Day: worldwide. Poor at night. Primary DX band."],
+            ["15m", "21.0-21.45 MHz", "Day: worldwide when sunspots high. Dead at solar minimum."],
+            ["10m", "28.0-29.7 MHz", "Day: sporadic worldwide. Solar cycle dependent."]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Operating Tip",
+          "text": "Start with 40m (7 MHz) for the most consistent results across varying conditions. It provides NVIS coverage during day, extends to continental range at night, and works reasonably well regardless of solar cycle. As you gain experience, expand to other bands based on conditions."
+        }
+      ]
+    },
+    {
+      "id": "js8call-operations",
+      "number": "2.9",
+      "title": "JS8Call Digital Mode",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "JS8Call is a weak-signal digital mode designed for keyboard-to-keyboard messaging over HF radio. Derived from FT8, it enables readable communications at signal levels far below voice capability. Where SSB requires +10 dB SNR, JS8 works at -24 dB, a difference of over 30 dB or 1000× less power for equivalent range."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Key Features"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Weak signal performance: reliable at -24 dB SNR",
+            "Store-and-forward messaging between stations",
+            "Automatic message relay through network of stations",
+            "Keyboard-to-keyboard QSO capability unlike FT8",
+            "Heartbeat feature announces station presence",
+            "Multiple speed modes: Slow, Normal, Fast, Turbo",
+            "Integration with radio CAT control for automatic operation"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Speed Modes"
+        },
+        {
+          "type": "table",
+          "headers": ["Mode", "Sensitivity", "Speed", "Best Use"],
+          "rows": [
+            ["Slow", "-28 dB", "8 WPM", "Extreme weak signal, long range"],
+            ["Normal", "-24 dB", "16 WPM", "Standard operations"],
+            ["Fast", "-20 dB", "24 WPM", "Good conditions, faster throughput"],
+            ["Turbo", "-18 dB", "40 WPM", "Strong signals, rapid exchange"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Operating Procedures"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Ensure computer clock is synchronized within 2 seconds (JS8 displays UTC, not local time)",
+            "Launch JS8Call and verify connection to radio",
+            "Select appropriate frequency (40m: 7.078 MHz, 20m: 14.078 MHz are common)",
+            "Configure digital settings and audio levels per radio specifications",
+            "Set power output appropriately - 5 watts is often sufficient",
+            "Position on quiet spot in waterfall between 1000-1800 Hz (1500 Hz recommended)",
+            "For G90: Long press TUNE button to enable automatic antenna tuner",
+            "Monitor waterfall for activity before transmitting"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Requesting SNR Report"
+        },
+        {
+          "type": "paragraph",
+          "text": "Signal-to-noise ratio reports establish link quality. An SNR of 0 dB or better indicates voice (SSB) or faster JS8 modes are likely possible. Negative values down to -24 dB can still support normal JS8 messaging."
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Verify your waterfall offset is clear of other activity",
+            "Right-click on target callsign or group in the callsign window",
+            "Select Directed to [callsign] followed by SNR? command",
+            "Wait for response - may take several transmission cycles",
+            "If no response in Normal mode, try Slow mode for better sensitivity",
+            "If still no response, send heartbeat (HB button) to announce presence"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Sending Messages"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Verify waterfall offset is clear",
+            "Right-click target callsign in callsign window",
+            "Select Directed to [callsign] then MSG [MESSAGE] - store in inbox",
+            "Replace [MESSAGE] with your actual message text",
+            "Press ENTER or Send button to transmit"
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Message Protocol",
+          "text": "Keep messages concise to minimize transmission time. End with BTU (back to you) for conversation or OUT if complete. If you receive a broken message, send AGN to request retransmission. Use @ prefix for group calls (e.g., @ALLCALL, @LFC). The inbox feature ensures messages are stored for later retrieval."
+        }
+      ]
+    },
+    {
+      "id": "pace-planning",
+      "number": "2.10",
+      "title": "PACE Communications Planning",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "PACE stands for Primary, Alternate, Contingency, and Emergency. This framework ensures communications resilience by establishing multiple independent paths between elements. When the primary method fails, operators progress through alternatives in order until communication is restored."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "PACE Framework"
+        },
+        {
+          "type": "table",
+          "headers": ["Tier", "Purpose", "Characteristics"],
+          "rows": [
+            ["Primary", "Normal operations", "Most capable, most used, most familiar"],
+            ["Alternate", "Primary unavailable", "Similar capability, different technology or path"],
+            ["Contingency", "P and A both down", "May have reduced capability, reliability focused"],
+            ["Emergency", "All else fails", "Minimal capability, maximum reliability"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Example PACE Plan"
+        },
+        {
+          "type": "table",
+          "headers": ["Tier", "Method", "Details"],
+          "rows": [
+            ["Primary", "DMR Radio", "CH 1, encryption enabled, full duplex"],
+            ["Alternate", "VHF FM", "146.52 MHz simplex, call signs"],
+            ["Contingency", "HF JS8Call", "7.078 MHz, @TEAM group, store-forward"],
+            ["Emergency", "Cell/Signal", "Predetermined group chat, location enabled"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "PACE Principles"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Each tier should use different technology or path to avoid common failure modes",
+            "All participants must know and have tested each tier",
+            "Transition triggers should be explicit (time, event, or command)",
+            "Lower tiers may have reduced capability but must work reliably",
+            "Exercise all tiers regularly to maintain proficiency"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Signal Operating Instructions"
+        },
+        {
+          "type": "paragraph",
+          "text": "Document PACE plans in Signal Operating Instructions (SOI) distributed before operations. SOI should include callsigns, frequencies, authentication procedures, brevity codes, check-in schedules, and transition protocols. All operators must have current SOI and understand its contents."
+        },
+        {
+          "type": "checklist",
+          "id": "soi-contents",
+          "items": [
+            "Callsign roster for all elements",
+            "PACE frequencies and channels for each tier",
+            "Authentication tables or procedures",
+            "Brevity codes and prowords",
+            "Check-in schedule (times, formats, responses)",
+            "Transition triggers and procedures",
+            "Emergency distress procedures",
+            "Encryption keys or key changeover schedule"
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Testing Protocol",
+          "text": "Before any operation, conduct communications checks on all PACE tiers. This verifies equipment function, operator knowledge, and link viability. Discovering that your alternate is non-functional during an emergency defeats the purpose of having alternatives."
+        }
+      ]
+    },
+    {
+      "id": "direction-finding",
+      "number": "2.11",
+      "title": "Direction Finding Awareness",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Every transmission reveals your location to adversaries with direction finding capability. Understanding DF techniques enables both protective measures for your own emissions and potential collection against adversary transmitters."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "DF Techniques"
+        },
+        {
+          "type": "paragraph",
+          "text": "Time Difference of Arrival (TDOA) compares signal arrival times at multiple receivers. Known receiver positions and timing differences calculate transmitter location. Requires synchronized receivers with microsecond-level timing accuracy."
+        },
+        {
+          "type": "paragraph",
+          "text": "Frequency Difference of Arrival (FDOA) uses Doppler shift measured at moving receivers. Platform motion creates measurable frequency variations that correlate to transmitter direction. Commonly used by aircraft and satellites."
+        },
+        {
+          "type": "paragraph",
+          "text": "Watson-Watt technique compares amplitude at two perpendicular antenna loops plus a vertical sense antenna. Simple hardware produces bearing estimates in real time. Accuracy limited by multipath and near-field effects."
+        },
+        {
+          "type": "paragraph",
+          "text": "Correlative Interferometry compares phase relationships between multiple antenna elements. More complex than Watson-Watt but higher accuracy. Used in most modern tactical DF systems."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Protective Measures"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Minimize transmission time - shorter is harder to locate",
+            "Reduce power to minimum necessary for communications",
+            "Use directional antennas pointed away from threat areas",
+            "Vary transmission locations when possible",
+            "Use terrain masking between you and known DF sites",
+            "Consider receive-only operation when inside threat WEZ",
+            "Digital modes with short burst transmissions reduce exposure"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Geolocation Accuracy"
+        },
+        {
+          "type": "paragraph",
+          "text": "Modern systems achieve varying accuracy depending on technique, geometry, and conditions. Single bearing from one DF site provides direction but not distance. Multiple bearings triangulate position within an error ellipse. TDOA/FDOA with good geometry can locate transmitters to within 10-100 meters at tactical ranges."
+        },
+        {
+          "type": "table",
+          "headers": ["Technique", "Typical Accuracy", "Requirements"],
+          "rows": [
+            ["Single bearing", "Direction only", "One DF receiver"],
+            ["Triangulation", "100m - 1km", "Multiple DF sites, bearings intersect"],
+            ["TDOA", "10 - 100m", "3+ synchronized receivers, GPS timing"],
+            ["FDOA", "50 - 500m", "Moving platforms, Doppler processing"]
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Emission Control",
+          "text": "The only certain protection against DF is not transmitting. Consider whether each transmission is operationally necessary. Reception creates no emission and cannot be detected. When possible, push information to forward elements via receive-only means rather than requiring them to transmit from positions near adversary capability."
+        }
+      ]
+    }
+  ]
+}
