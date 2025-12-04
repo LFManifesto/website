@@ -1423,10 +1423,9 @@ audio {
   height: auto;
   border-radius: 6px;
   margin: 2rem 0;
-  object-fit: contain;
 }
 
-/* SVG infographics need minimum height to be readable */
+/* SVG infographics need minimum height */
 .article-content img[src$=".svg"] {
   min-height: 280px;
 }

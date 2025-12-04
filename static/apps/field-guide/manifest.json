@@ -1,7 +1,7 @@
 {
-  "name": "LFM Field Guide",
-  "short_name": "Field Guide",
-  "description": "Light Fighter Course Field Guide - Interactive quick reference for drones, communications, SIGINT, and marksmanship.",
+  "name": "Light Fighter Web Guide",
+  "short_name": "Web Guide",
+  "description": "Light Fighter Web Guide - Interactive quick reference for drones, communications, SIGINT, marksmanship, and mission planning.",
   "start_url": "/apps/field-guide/",
   "scope": "/apps/field-guide/",
   "display": "standalone",

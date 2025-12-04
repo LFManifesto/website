@@ -1,5 +1,5 @@
 /**
- * Light Fighter Manifesto - Field Guide App
+ * Light Fighter Manifesto - Web Guide App
  * Interactive reference guide with search, checklists, and form generators
  */
 
@@ -34,7 +34,7 @@
       initializeApp();
     } catch (error) {
       console.error('Failed to load data:', error);
-      showError('Failed to load field guide data. Please refresh the page.');
+      showError('Failed to load Web Guide data. Please refresh the page.');
     }
   }
 
@@ -208,9 +208,9 @@
     const content = document.getElementById('contentArea');
     content.innerHTML = `
       <div class="section-header">
-        <div class="section-number">Light Fighter Course</div>
-        <h1 class="section-title">Field Guide</h1>
-        <p class="section-description">Interactive quick reference for drones, communications, SIGINT, and marksmanship. Select a section from the sidebar or search above.</p>
+        <div class="section-number">Light Fighter Manifesto</div>
+        <h1 class="section-title">Light Fighter Web Guide</h1>
+        <p class="section-description">Interactive quick reference for drones, communications, SIGINT, marksmanship, and mission planning. Select a section from the sidebar or search above.</p>
       </div>
 
       <div class="content-card">
@@ -320,86 +320,118 @@
   }
 
   function renderContent(contentArray) {
-    return contentArray.map(item => {
-      switch (item.type) {
-        case 'paragraph':
-          return `<div class="content-card"><p>${item.text}</p></div>`;
+    // Group content into sections based on headings
+    const sections = [];
+    let currentSection = { heading: null, items: [] };
 
-        case 'heading':
-          return `<h${item.level} style="margin-top: 2rem; margin-bottom: 1rem;">${item.text}</h${item.level}>`;
+    contentArray.forEach(item => {
+      if (item.type === 'heading') {
+        // Start a new section
+        if (currentSection.items.length > 0 || currentSection.heading) {
+          sections.push(currentSection);
+        }
+        currentSection = { heading: item, items: [] };
+      } else {
+        currentSection.items.push(item);
+      }
+    });
 
-        case 'list':
-          const tag = item.ordered ? 'ol' : 'ul';
-          return `
+    // Push the last section
+    if (currentSection.items.length > 0 || currentSection.heading) {
+      sections.push(currentSection);
+    }
+
+    return sections.map(section => {
+      const headingHtml = section.heading
+        ? `<h${section.heading.level} class="content-heading">${section.heading.text}</h${section.heading.level}>`
+        : '';
+
+      const contentHtml = section.items.map(item => renderItem(item)).join('');
+
+      if (section.heading) {
+        return `
+          <div class="content-section">
+            ${headingHtml}
             <div class="content-card">
-              <${tag}>
-                ${item.items.map(i => `<li>${i}</li>`).join('')}
-              </${tag}>
+              ${contentHtml}
             </div>
-          `;
-
-        case 'table':
-          return `
-            <div class="content-card" style="overflow-x: auto;">
-              <table class="quick-ref-table">
-                <thead>
-                  <tr>${item.headers.map(h => `<th>${h}</th>`).join('')}</tr>
-                </thead>
-                <tbody>
-                  ${item.rows.map(row => `
-                    <tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>
-                  `).join('')}
-                </tbody>
-              </table>
-            </div>
-          `;
-
-        case 'info':
-          return `
-            <div class="info-box">
-              <div class="info-box-title">${item.title}</div>
-              <p>${item.text}</p>
-            </div>
-          `;
-
-        case 'checklist':
-          return renderChecklist(item);
-
-        case 'tool':
-          if (item.toolId === 'payload-request') {
-            return `
-              <div class="content-card" style="text-align: center;">
-                <p>Generate a formatted Payload Delivery Request:</p>
-                <a href="#payload-request" class="form-btn" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
-                  Open Request Generator
-                </a>
-              </div>
-            `;
-          } else if (item.toolId === 'mil-calculator') {
-            return `
-              <div class="content-card" style="text-align: center;">
-                <p>Calculate range using mil-relation formula:</p>
-                <a href="#mil-calculator" class="form-btn" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
-                  Open Mil Calculator
-                </a>
-              </div>
-            `;
-          } else if (item.toolId === 'link-margin') {
-            return `
-              <div class="content-card" style="text-align: center;">
-                <p>Assess RF link margin for site selection:</p>
-                <a href="#link-margin" class="form-btn" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
-                  Open Link Margin Tool
-                </a>
-              </div>
-            `;
-          }
-          return '';
-
-        default:
-          return '';
+          </div>
+        `;
+      } else {
+        // Intro content without heading
+        return `<div class="content-card">${contentHtml}</div>`;
       }
     }).join('');
+  }
+
+  function renderItem(item) {
+    switch (item.type) {
+      case 'paragraph':
+        return `<p>${item.text}</p>`;
+
+      case 'list':
+        const tag = item.ordered ? 'ol' : 'ul';
+        return `
+          <${tag} class="content-list">
+            ${item.items.map(i => `<li>${i}</li>`).join('')}
+          </${tag}>
+        `;
+
+      case 'table':
+        return `
+          <div class="table-wrapper">
+            <table class="quick-ref-table">
+              <thead>
+                <tr>${item.headers.map(h => `<th>${h}</th>`).join('')}</tr>
+              </thead>
+              <tbody>
+                ${item.rows.map(row => `
+                  <tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+      case 'info':
+        return `
+          <div class="info-box">
+            <div class="info-box-title">${item.title}</div>
+            <p>${item.text}</p>
+          </div>
+        `;
+
+      case 'checklist':
+        return renderChecklist(item);
+
+      case 'tool':
+        if (item.toolId === 'payload-request') {
+          return `
+            <div class="tool-link">
+              <p>Generate a formatted Payload Delivery Request:</p>
+              <a href="#payload-request" class="form-btn">Open Request Generator</a>
+            </div>
+          `;
+        } else if (item.toolId === 'mil-calculator') {
+          return `
+            <div class="tool-link">
+              <p>Calculate range using mil-relation formula:</p>
+              <a href="#mil-calculator" class="form-btn">Open Mil Calculator</a>
+            </div>
+          `;
+        } else if (item.toolId === 'link-margin') {
+          return `
+            <div class="tool-link">
+              <p>Assess RF link margin for site selection:</p>
+              <a href="#link-margin" class="form-btn">Open Link Margin Tool</a>
+            </div>
+          `;
+        }
+        return '';
+
+      default:
+        return '';
+    }
   }
 
   function getPrevLink(section, subsection) {

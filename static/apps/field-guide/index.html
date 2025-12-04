@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Light Fighter Course Field Guide - Interactive quick reference for drones, communications, SIGINT, and marksmanship.">
+  <meta name="description" content="Light Fighter Web Guide - Interactive quick reference for drones, communications, SIGINT, marksmanship, and mission planning.">
   <meta name="author" content="Light Fighter Manifesto L.L.C.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a0a0a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="LFM Field Guide">
+  <meta name="apple-mobile-web-app-title" content="LFM Web Guide">
 
-  <title>Field Guide | Light Fighter Manifesto</title>
+  <title>Light Fighter Web Guide | Light Fighter Manifesto</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/images/logo.png">
@@ -453,6 +453,58 @@
       margin-bottom: var(--space-sm);
     }
 
+    .content-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Content Sections */
+    .content-section {
+      margin-bottom: var(--space-lg);
+    }
+
+    .content-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .content-list {
+      margin: var(--space-md) 0;
+      padding-left: var(--space-lg);
+    }
+
+    .content-list li {
+      margin-bottom: var(--space-sm);
+      color: var(--text-secondary);
+    }
+
+    /* Table wrapper for horizontal scroll on mobile */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: var(--space-md) 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Tool links */
+    .tool-link {
+      text-align: center;
+      padding: var(--space-md) 0;
+      margin: var(--space-md) 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .tool-link p {
+      margin-bottom: var(--space-md);
+    }
+
+    .tool-link .form-btn {
+      display: inline-block;
+      text-decoration: none;
+    }
+
     /* Interactive Checklist */
     .checklist {
       list-style: none;
@@ -853,6 +905,27 @@
       .form-generator {
         padding: var(--space-md);
       }
+
+      .content-heading {
+        font-size: 1rem;
+      }
+
+      .quick-ref-table {
+        font-size: 0.85rem;
+      }
+
+      .quick-ref-table th,
+      .quick-ref-table td {
+        padding: var(--space-sm);
+      }
+
+      .info-box {
+        padding: var(--space-md);
+      }
+
+      .checklist-item {
+        padding: var(--space-sm) var(--space-md);
+      }
     }
 
     /* Print styles */
@@ -894,7 +967,7 @@
         </svg>
       </button>
 
-      <a href="/apps/field-guide/" class="app-title">LFM Field Guide</a>
+      <a href="/apps/field-guide/" class="app-title">Light Fighter Web Guide</a>
 
       <div class="search-container">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
