@@ -78,6 +78,10 @@ theme = 'lfm'
 [build]
   writeStats = true
 
+# Taxonomies (for tag pages)
+[taxonomies]
+  tag = "tags"
+
 # Sitemap configuration
 [sitemap]
   changefreq = "weekly"

@@ -1073,6 +1073,7 @@ audio {
 }
 
 .article-tag {
+  display: inline-block;
   font-size: 0.75rem;
   padding: 0.5em 1em;
   background-color: var(--bg-secondary);
@@ -1081,8 +1082,9 @@ audio {
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  text-decoration: none;
   transition: all 0.2s ease;
-  cursor: default;
+  cursor: pointer;
 }
 
 .article-tag:hover {
@@ -2548,4 +2550,175 @@ audio {
     font-size: 12pt;
   }
 }
-/* Cache bust: 1764886933 */
+/* ==========================================================================
+   Tags Page Styles
+   ========================================================================== */
+
+/* Tags list page */
+.tags-page {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+
+.tag-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.75em 1.25em;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tag-link:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.tag-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.tag-count {
+  font-size: 0.75rem;
+  padding: 0.2em 0.5em;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  color: var(--text-muted);
+}
+
+.tag-link:hover .tag-count {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Single tag page */
+.tag-page {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.tag-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.5em 1em;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 4px;
+  margin-bottom: var(--space-md);
+}
+
+.articles-list {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.article-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.article-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.article-card-link {
+  display: block;
+  padding: var(--space-lg);
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-card-date {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.article-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+
+.article-card:hover .article-card-title {
+  color: var(--accent);
+}
+
+.article-card-excerpt {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.article-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.article-card-tag {
+  font-size: 0.7rem;
+  padding: 0.3em 0.7em;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tag-nav {
+  margin-top: var(--space-xl);
+  text-align: center;
+}
+
+.tag-nav-link {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tag-nav-link:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}

@@ -1,9 +1,9 @@
 /**
- * Service Worker for Light Fighter Web Guide
+ * Service Worker for LFM Field Guide
  * Enables offline functionality by caching app shell and data
  */
 
-const CACHE_NAME = 'lfm-web-guide-v2';
+const CACHE_NAME = 'lfm-field-guide-v1';
 
 // Files to cache on install
 const PRECACHE_URLS = [
@@ -15,7 +15,6 @@ const PRECACHE_URLS = [
   '/apps/field-guide/data/communications.json',
   '/apps/field-guide/data/sigint.json',
   '/apps/field-guide/data/marksmanship.json',
-  '/apps/field-guide/data/mission-planning.json',
   '/images/logo.png'
 ];
 
