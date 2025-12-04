@@ -588,6 +588,25 @@ strong {
 }
 
 /* --------------------------------------------------------------------------
+   Shop Promo (Homepage)
+   -------------------------------------------------------------------------- */
+.shop-promo {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.shop-promo-text {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto var(--space-lg);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
    Podcast Cards
    -------------------------------------------------------------------------- */
 /* Podcast format info */
@@ -1396,6 +1415,18 @@ audio {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: var(--space-lg);
+}
+
+.resource-card-link {
+  display: block;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.resource-card-link:hover {
+  border-color: var(--accent);
+  background-color: var(--bg-card-hover);
+  transform: translateY(-2px);
 }
 
 .resource-card-header {

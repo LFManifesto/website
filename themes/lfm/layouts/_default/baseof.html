@@ -41,7 +41,7 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
   <!-- Styles with cache busting -->
-  <link rel="stylesheet" href="/css/style.css?v=2.1">
+  <link rel="stylesheet" href="/css/style.css?v=2.2">
 
   <!-- RSS Feed -->
   {{ range .AlternativeOutputFormats -}}
@@ -129,12 +129,21 @@
           unlockScroll();
         }
 
-        // Use both click and touchend for maximum compatibility
-        navToggle.addEventListener('click', toggleMenu, false);
+        // Prevent double-firing on touch devices
+        var touchHandled = false;
+
         navToggle.addEventListener('touchend', function(e) {
           e.preventDefault();
+          touchHandled = true;
           toggleMenu(e);
+          setTimeout(function() { touchHandled = false; }, 300);
         }, {passive: false});
+
+        navToggle.addEventListener('click', function(e) {
+          if (!touchHandled) {
+            toggleMenu(e);
+          }
+        }, false);
 
         // Close menu when clicking a link
         var links = navMenu.querySelectorAll('.nav-link');
