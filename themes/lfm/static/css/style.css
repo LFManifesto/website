@@ -1747,6 +1747,102 @@ audio {
 /* --------------------------------------------------------------------------
    Tools Page
    -------------------------------------------------------------------------- */
+/* Page Notice */
+.page-notice {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-xl);
+}
+
+/* Apps List */
+.apps-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.app-card {
+  display: block;
+  background-color: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  padding: var(--space-lg);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.app-card:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.app-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--text-primary);
+}
+
+.app-card-desc {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.app-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.app-tag {
+  font-size: 0.75rem;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--bg-tertiary);
+  border-radius: 4px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* App Page */
+.app-page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.app-intro {
+  margin-bottom: var(--space-xl);
+}
+
+.app-content {
+  margin-bottom: var(--space-xl);
+}
+
+.app-content h2 {
+  font-size: 1.5rem;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-content p {
+  margin-bottom: var(--space-md);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.app-content ul, .app-content ol {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-lg);
+  color: var(--text-secondary);
+}
+
+.app-content li {
+  margin-bottom: var(--space-sm);
+  line-height: 1.6;
+}
+
+/* Legacy tools styles - keeping for backward compatibility */
 .tools-notice {
   text-align: center;
   color: var(--text-muted);

@@ -1,20 +1,22 @@
 {{ define "main" }}
-<h1 class="page-title-centered">{{ .Title }}</h1>
+<div class="section-header">
+  <h1 class="section-title">
+    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    {{ .Title }}
+  </h1>
+</div>
 
-<p class="tools-notice">These applications are optimized for desktop and tablet displays.</p>
+<p class="page-notice">These applications are optimized for desktop and tablet displays.</p>
 
-<div class="tools-grid">
+<div class="apps-list">
   {{ range .Pages }}
-  <a href="{{ .Permalink }}" class="tool-card">
-    <div class="tool-card-icon">
-      {{ partial "tool-icon.html" .Params.icon }}
-    </div>
-    <h2 class="tool-card-title">{{ .Title }}</h2>
-    <p class="tool-card-description">{{ .Description }}</p>
+  <a href="{{ .Permalink }}" class="app-card">
+    <h2 class="app-card-title">{{ .Title }}</h2>
+    <p class="app-card-desc">{{ .Description }}</p>
     {{ with .Params.tags }}
-    <div class="tool-card-tags">
+    <div class="app-card-tags">
       {{ range . }}
-      <span class="tool-tag">{{ . }}</span>
+      <span class="app-tag">{{ . }}</span>
       {{ end }}
     </div>
     {{ end }}
@@ -23,8 +25,8 @@
 </div>
 
 {{ if eq (len .Pages) 0 }}
-<div class="empty-state">
-  <p>Tools coming soon.</p>
+<div class="home-card">
+  <p class="home-card-desc">Apps coming soon.</p>
 </div>
 {{ end }}
 {{ end }}
