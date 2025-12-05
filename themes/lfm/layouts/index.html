@@ -16,31 +16,7 @@
     </div>
   </div>
   <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
-  <p class="hero-intro">A veteran-owned publication delivering field-tested knowledge on intelligence gathering, communications infrastructure, and unconventional operations.</p>
 </div>
-
-<!-- Featured: Light Fighter Guide App -->
-<section class="home-section home-featured">
-  <div class="section-header">
-    <h2 class="section-title">
-      <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      Light Fighter Guide
-    </h2>
-    <a href="/tools/" class="section-link">All Apps &rarr;</a>
-  </div>
-  <div class="featured-app-card">
-    <div class="featured-app-content">
-      <h3 class="featured-app-title">Interactive Field Reference</h3>
-      <p class="featured-app-desc">A comprehensive web application covering drones, communications, SIGINT, marksmanship, and mission planning. Features full-text search, interactive checklists, and nine calculation tools.</p>
-      <ul class="featured-app-features">
-        <li>Searchable content across five operational domains</li>
-        <li>Works offline after first load</li>
-        <li>Nine interactive calculators and tools</li>
-      </ul>
-      <a href="/apps/field-guide/" class="btn btn-primary">Open Field Guide</a>
-    </div>
-  </div>
-</section>
 
 <!-- Latest Podcast Episode -->
 {{ $podcasts := where .Site.RegularPages "Section" "podcast" }}
@@ -54,24 +30,19 @@
     <a href="/podcast/" class="section-link">All Episodes &rarr;</a>
   </div>
   {{ range . }}
-  <div class="podcast-card">
-    <div class="podcast-card-header">
-      <div>
-        {{ with .Params.episode }}
-        <span class="podcast-card-episode">Episode {{ . }}</span>
-        {{ end }}
-        <h3 class="podcast-card-title">
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </h3>
-        <span class="podcast-card-date">{{ .Date.Format "January 2, 2006" }}</span>
-      </div>
-    </div>
-    <p class="podcast-card-description">{{ .Description }}</p>
+  <div class="home-card">
+    {{ with .Params.episode }}
+    <span class="home-card-label">Episode {{ . }}</span>
+    {{ end }}
+    <h3 class="home-card-title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h3>
+    <span class="home-card-meta">{{ .Date.Format "January 2, 2006" }}</span>
+    <p class="home-card-desc">{{ .Description }}</p>
     {{ with .Params.audio }}
     <div class="audio-player">
       <audio controls preload="metadata">
         <source src="{{ . }}" type="audio/mpeg">
-        Your browser does not support the audio element.
       </audio>
     </div>
     {{ end }}
@@ -96,20 +67,15 @@
     </h2>
     <a href="/articles/" class="section-link">All Articles &rarr;</a>
   </div>
-  <div class="article-list">
-    {{ range . }}
-    <article class="article-card featured">
-      <h3 class="article-card-title">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-      </h3>
-      <div class="article-card-meta">
-        {{ .Date.Format "January 2, 2006" }}
-        {{ with .Params.author }} &middot; {{ . }}{{ end }}
-      </div>
-      <p class="article-card-excerpt">{{ .Description }}</p>
-    </article>
-    {{ end }}
+  {{ range . }}
+  <div class="home-card">
+    <h3 class="home-card-title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h3>
+    <span class="home-card-meta">{{ .Date.Format "January 2, 2006" }}{{ with .Params.author }} &middot; {{ . }}{{ end }}</span>
+    <p class="home-card-desc">{{ .Description }}</p>
   </div>
+  {{ end }}
 </section>
 {{ end }}
 
@@ -122,30 +88,44 @@
     </h2>
     <a href="/shop/" class="section-link">Visit Shop &rarr;</a>
   </div>
-  <div class="shop-promo">
-    <p class="shop-promo-text">In-depth field guides written by practitioners with direct experience. Each volume delivers actionable knowledge on intelligence gathering, communications infrastructure, and unconventional operations.</p>
+  <div class="home-card">
+    <p class="home-card-desc">In-depth field guides written by practitioners with direct experience. Each volume delivers actionable knowledge on intelligence gathering, communications infrastructure, and unconventional operations.</p>
     <a href="/shop/" class="btn btn-primary">Browse Volumes</a>
   </div>
 </section>
 
-<!-- Community: Matrix Server -->
-<section class="home-section home-community">
+<!-- Apps -->
+<section class="home-section">
+  <div class="section-header">
+    <h2 class="section-title">
+      <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Apps
+    </h2>
+    <a href="/tools/" class="section-link">All Apps &rarr;</a>
+  </div>
+  <div class="home-card">
+    <h3 class="home-card-title">Light Fighter Guide</h3>
+    <p class="home-card-desc">Interactive field reference covering drones, communications, SIGINT, marksmanship, and mission planning. Features full-text search, interactive checklists, and nine calculation tools. Works offline.</p>
+    <a href="/apps/field-guide/" class="btn btn-primary">Open Field Guide</a>
+  </div>
+</section>
+
+<!-- Join the Community -->
+<section class="home-section">
   <div class="section-header">
     <h2 class="section-title">
       <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       Join the Community
     </h2>
   </div>
-  <div class="community-card">
-    <div class="community-content">
-      <h3 class="community-title">LFM Matrix Server</h3>
-      <p class="community-desc">Connect with the Light Fighter community on our self-hosted Matrix server. Decentralized, encrypted, and free from corporate surveillance.</p>
-      <p class="community-upcoming">We are establishing collaboration channels for community projects focused on communications infrastructure, mesh networking, and operational tools.</p>
-      <div class="community-server">
-        <code>matrix.lightfightermanifesto.net</code>
-      </div>
-      <a href="https://matrix.to/#/#General:matrix.lightfightermanifesto.net" target="_blank" rel="noopener" class="btn btn-secondary">Join Matrix</a>
+  <div class="home-card">
+    <h3 class="home-card-title">LFM Matrix Server</h3>
+    <p class="home-card-desc">Connect with the Light Fighter community on our self-hosted Matrix server. Decentralized, encrypted, and free from corporate surveillance.</p>
+    <p class="home-card-note">We are establishing collaboration channels for community projects focused on communications infrastructure, mesh networking, and operational tools.</p>
+    <div class="home-card-code">
+      <code>matrix.lightfightermanifesto.net</code>
     </div>
+    <a href="https://matrix.to/#/#General:matrix.lightfightermanifesto.net" target="_blank" rel="noopener" class="btn btn-secondary">Join Matrix</a>
   </div>
 </section>
 
