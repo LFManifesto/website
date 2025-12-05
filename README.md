@@ -21,9 +21,13 @@ This is the Hugo static site for Light Fighter Manifesto. Changes pushed to GitH
 ```
 site/content/
 ├── _index.md           # Home page
-├── shop.md             # Shop page
-├── resources.md        # Resources page
-├── apps.md             # Apps page
+├── shop/               # Shop section
+│   └── _index.md
+├── resources/          # Resources section
+│   └── _index.md
+├── tools/              # Tools/Apps section
+│   ├── _index.md       # Tools listing page
+│   └── *.md            # Individual tool descriptions
 ├── articles/           # All articles (newest first on site)
 │   └── *.md
 └── podcast/            # All podcast episodes
@@ -108,9 +112,9 @@ git push
 | Page | File |
 |------|------|
 | Home | `content/_index.md` |
-| Shop | `content/shop.md` |
-| Resources | `content/resources.md` |
-| Apps | `content/apps.md` |
+| Shop | `content/shop/_index.md` |
+| Resources | `content/resources/_index.md` |
+| Tools | `content/tools/_index.md` |
 
 Edit the file, then deploy with git add/commit/push.
 
@@ -229,7 +233,7 @@ def hello():
 Preview changes before deploying:
 
 ```bash
-cd /Users/user/Claude-Work/Projects/Website/site
+cd /Users/user/Claude-Work/Projects/www.lightfightermanifesto.org/site
 hugo server --buildDrafts --port 1313
 ```
 
@@ -363,7 +367,7 @@ git push
 
 ```bash
 # Make sure you're in the right directory
-cd /Users/user/Claude-Work/Projects/Website/site
+cd /Users/user/Claude-Work/Projects/www.lightfightermanifesto.org/site
 
 # Kill any existing hugo processes
 pkill -f "hugo server"
@@ -387,13 +391,14 @@ site/
 ├── hugo.toml              # Site configuration
 ├── content/               # All content (markdown files)
 │   ├── _index.md          # Home page
-│   ├── shop.md            # Shop page
-│   ├── resources.md       # Resources page
-│   ├── apps.md            # Apps page
+│   ├── shop/              # Shop section
+│   ├── resources/         # Resources section
+│   ├── tools/             # Tools/Apps section
 │   ├── articles/          # Article posts
 │   └── podcast/           # Podcast episodes
 ├── static/                # Static assets
-│   └── images/            # Image files
+│   ├── images/            # Image files
+│   └── apps/              # Web applications (PWAs)
 ├── themes/lfm/            # Custom theme
 │   ├── layouts/           # HTML templates
 │   └── static/            # Theme CSS/JS
