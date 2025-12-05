@@ -477,11 +477,11 @@
 
     if (subIndex > 0) {
       const prev = section.subsections[subIndex - 1];
-      return `<a href="#${prev.id}" class="nav-btn">&larr; ${prev.number}</a>`;
+      return `<a href="#${prev.id}" class="nav-btn">&larr;</a>`;
     } else if (sectionIndex > 0) {
       const prevSection = state.sections[sectionIndex - 1];
       const prev = prevSection.subsections[prevSection.subsections.length - 1];
-      return `<a href="#${prev.id}" class="nav-btn">&larr; ${prev.number}</a>`;
+      return `<a href="#${prev.id}" class="nav-btn">&larr;</a>`;
     }
     return '<span></span>';
   }
@@ -492,11 +492,11 @@
 
     if (subIndex < section.subsections.length - 1) {
       const next = section.subsections[subIndex + 1];
-      return `<a href="#${next.id}" class="nav-btn">${next.number} &rarr;</a>`;
+      return `<a href="#${next.id}" class="nav-btn">&rarr;</a>`;
     } else if (sectionIndex < state.sections.length - 1) {
       const nextSection = state.sections[sectionIndex + 1];
       const next = nextSection.subsections[0];
-      return `<a href="#${next.id}" class="nav-btn">${next.number} &rarr;</a>`;
+      return `<a href="#${next.id}" class="nav-btn">&rarr;</a>`;
     }
     return '<span></span>';
   }
