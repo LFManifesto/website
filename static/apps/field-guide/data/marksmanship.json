@@ -2,7 +2,7 @@
   "id": "marksmanship",
   "number": "4",
   "title": "Precision Marksmanship",
-  "description": "Precision shooting demands mastery of fundamentals combined with systematic observation, range estimation, wind reading, and team communication. This section covers the complete shot process from detection through correction.",
+  "description": "A rifle is useless without the skill to employ it. Precision marksmanship combines fundamental mechanics with field craft—target detection, range estimation, wind reading, and the discipline to execute under pressure. This section builds shooters who can deliver decisive fire at distance.",
   "icon": "crosshair",
   "subsections": [
     {
@@ -12,7 +12,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "The shot process is the structured sequence every shooter follows during an engagement, regardless of weapon system. It integrates fundamentals into a repeatable system that removes shooter influence from the outcome. Strict adherence to the shot process, shot after shot, produces consistent results."
+          "text": "The difference between a shooter and a marksman is process. Anyone can get lucky; marksmen create predictable outcomes through disciplined execution. The shot process removes human variables—fatigue, stress, distraction—and replaces them with a mechanical sequence that produces the same result every time. Master this, and the target becomes secondary."
         },
         {
           "type": "heading",

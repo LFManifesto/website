@@ -1,5 +1,5 @@
 /**
- * Light Fighter Manifesto - Field Guide App
+ * Light Fighter Guide App
  * Interactive reference guide with search, checklists, and form generators
  */
 
@@ -164,6 +164,24 @@
     } else if (hash === 'link-margin') {
       showLinkMarginTool();
       updateActiveNav('tools', 'link-margin');
+    } else if (hash === 'hf-antenna-calculator') {
+      showHFAntennaCalculator();
+      updateActiveNav('tools', 'hf-antenna-calculator');
+    } else if (hash === 'path-loss-calculator') {
+      showPathLossCalculator();
+      updateActiveNav('tools', 'path-loss-calculator');
+    } else if (hash === 'freq-wavelength-converter') {
+      showFreqWavelengthConverter();
+      updateActiveNav('tools', 'freq-wavelength-converter');
+    } else if (hash === 'wind-calculator') {
+      showWindCalculator();
+      updateActiveNav('tools', 'wind-calculator');
+    } else if (hash === 'coord-converter') {
+      showCoordConverter();
+      updateActiveNav('tools', 'coord-converter');
+    } else if (hash === 'zulu-time') {
+      showZuluTime();
+      updateActiveNav('tools', 'zulu-time');
     }
   }
 
@@ -208,9 +226,9 @@
     const content = document.getElementById('contentArea');
     content.innerHTML = `
       <div class="section-header">
-        <div class="section-number">Light Fighter Course</div>
-        <h1 class="section-title">Field Guide</h1>
-        <p class="section-description">Interactive quick reference for drones, communications, SIGINT, and marksmanship. Select a section from the sidebar or search above.</p>
+        <div class="section-number">Light Fighter Manifesto</div>
+        <h1 class="section-title">Light Fighter Guide</h1>
+        <p class="section-description">Interactive quick reference for drones, communications, SIGINT, marksmanship, and mission planning. Select a section from the sidebar or search above.</p>
       </div>
 
       <div class="content-card">
@@ -250,6 +268,48 @@
             <div>
               <div style="color: var(--text-primary); font-weight: 600;">Link Margin Assessment</div>
               <div style="color: var(--text-muted); font-size: 0.85rem;">Evaluate RF link margin for site selection</div>
+            </div>
+          </a>
+          <a href="#hf-antenna-calculator" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+            <div style="color: var(--accent); min-width: 2rem;">HF</div>
+            <div>
+              <div style="color: var(--text-primary); font-weight: 600;">HF Antenna Calculator</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Calculate wire antenna dimensions for HF bands</div>
+            </div>
+          </a>
+          <a href="#path-loss-calculator" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+            <div style="color: var(--accent); min-width: 2rem;">dB</div>
+            <div>
+              <div style="color: var(--text-primary); font-weight: 600;">Path Loss Calculator</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Calculate RF signal attenuation over distance</div>
+            </div>
+          </a>
+          <a href="#freq-wavelength-converter" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+            <div style="color: var(--accent); min-width: 2rem;">λ</div>
+            <div>
+              <div style="color: var(--text-primary); font-weight: 600;">Freq/Wavelength Converter</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Convert between frequency and wavelength</div>
+            </div>
+          </a>
+          <a href="#wind-calculator" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+            <div style="color: var(--accent); min-width: 2rem;">W</div>
+            <div>
+              <div style="color: var(--text-primary); font-weight: 600;">Wind Drift Calculator</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Calculate wind deflection for precision shooting</div>
+            </div>
+          </a>
+          <a href="#coord-converter" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+            <div style="color: var(--accent); min-width: 2rem;">⊕</div>
+            <div>
+              <div style="color: var(--text-primary); font-weight: 600;">Coordinate Converter</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Convert DD/DMS coordinate formats</div>
+            </div>
+          </a>
+          <a href="#zulu-time" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+            <div style="color: var(--accent); min-width: 2rem;">Z</div>
+            <div>
+              <div style="color: var(--text-primary); font-weight: 600;">Zulu Time Converter</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Convert between local and UTC/Zulu time</div>
             </div>
           </a>
         </div>
@@ -390,6 +450,15 @@
                 <p>Assess RF link margin for site selection:</p>
                 <a href="#link-margin" class="form-btn" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
                   Open Link Margin Tool
+                </a>
+              </div>
+            `;
+          } else if (item.toolId === 'hf-antenna-calculator') {
+            return `
+              <div class="content-card" style="text-align: center;">
+                <p>Calculate HF wire antenna dimensions:</p>
+                <a href="#hf-antenna-calculator" class="form-btn" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
+                  Open HF Antenna Calculator
                 </a>
               </div>
             `;
@@ -910,6 +979,60 @@ ${remarks ? `"${remarks}, over."\n"${remarks}, out."` : '"No remarks, over."\n"N
     });
 
     overlay.addEventListener('click', closeMobileMenu);
+
+    // Mobile search
+    const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+    const mobileSearchOverlay = document.getElementById('mobileSearchOverlay');
+    const mobileSearchClose = document.getElementById('mobileSearchClose');
+    const mobileSearchInput = document.getElementById('mobileSearchInput');
+    const mobileSearchResults = document.getElementById('mobileSearchResults');
+
+    if (mobileSearchBtn) {
+      mobileSearchBtn.addEventListener('click', () => {
+        mobileSearchOverlay.classList.add('visible');
+        mobileSearchInput.focus();
+      });
+    }
+
+    if (mobileSearchClose) {
+      mobileSearchClose.addEventListener('click', () => {
+        mobileSearchOverlay.classList.remove('visible');
+        mobileSearchInput.value = '';
+        mobileSearchResults.innerHTML = '';
+      });
+    }
+
+    if (mobileSearchInput) {
+      mobileSearchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        if (query.length < 2) {
+          mobileSearchResults.innerHTML = '';
+          return;
+        }
+
+        const results = state.searchIndex.search(query).slice(0, 15);
+        if (results.length === 0) {
+          mobileSearchResults.innerHTML = '<div style="padding: 1rem; color: var(--text-muted);">No results found</div>';
+          return;
+        }
+
+        mobileSearchResults.innerHTML = results.map(result => `
+          <a href="#${result.item.subsectionId}" class="search-result-item" style="display: block; padding: 1rem; border-bottom: 1px solid var(--border-subtle); text-decoration: none;">
+            <div style="color: var(--text-primary); font-weight: 500;">${result.item.title}</div>
+            <div style="color: var(--text-muted); font-size: 0.85rem;">${result.item.sectionTitle}</div>
+          </a>
+        `).join('');
+
+        // Add click handlers to close mobile search
+        mobileSearchResults.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileSearchOverlay.classList.remove('visible');
+            mobileSearchInput.value = '';
+            mobileSearchResults.innerHTML = '';
+          });
+        });
+      });
+    }
   }
 
   function closeMobileMenu() {
@@ -1214,6 +1337,816 @@ ${recommendation}
     const outputEl = document.getElementById('lm-output');
     outputEl.innerHTML = output;
     outputEl.style.display = 'block';
+  }
+
+  // ==========================================================================
+  // HF Antenna Calculator
+  // ==========================================================================
+
+  function showHFAntennaCalculator() {
+    const content = document.getElementById('contentArea');
+    content.innerHTML = `
+      <div class="section-header">
+        <div class="section-number">Tool</div>
+        <h1 class="section-title">HF Antenna Calculator</h1>
+        <p class="section-description">Calculate antenna dimensions for HF wire antennas. Enter your operating frequency to get precise cutting lengths.</p>
+      </div>
+
+      <div class="form-generator">
+        <div class="form-group">
+          <label class="form-label">Operating Frequency (MHz)</label>
+          <input type="number" class="form-input" id="hf-frequency" placeholder="e.g., 7.2" step="0.001" min="1" max="30">
+          <span class="form-hint">Enter frequency between 1-30 MHz for HF band</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Antenna Type</label>
+          <select class="form-select" id="hf-antenna-type">
+            <option value="all">All Types (Comparison)</option>
+            <option value="dipole">Half-Wave Dipole</option>
+            <option value="quarter">Quarter-Wave Vertical</option>
+            <option value="inverted-v">Inverted V</option>
+            <option value="long-wire">Long Wire Antenna</option>
+            <option value="nvis">NVIS Dipole</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="hf-halfwaves-group" style="display: none;">
+          <label class="form-label">Number of Half-Wavelengths (for Long Wire)</label>
+          <input type="number" class="form-input" id="hf-halfwaves" value="2" min="1" max="10" step="1">
+          <span class="form-hint">Long wire antennas are typically 2-10 half-wavelengths</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Units</label>
+          <select class="form-select" id="hf-units">
+            <option value="feet">Feet and Inches</option>
+            <option value="meters">Meters</option>
+            <option value="both">Both</option>
+          </select>
+        </div>
+
+        <button class="form-btn" id="hf-calculate">Calculate Dimensions</button>
+
+        <div class="output-display" id="hf-output" style="display: none;"></div>
+      </div>
+
+      <div class="content-card" style="margin-top: 2rem;">
+        <h4>Quick Reference - Common Amateur Bands</h4>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Band</th><th>Frequency</th><th>1/2 Wave Dipole</th><th>1/4 Wave Vertical</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>80m</td><td>3.5 MHz</td><td>133 ft 8 in</td><td>66 ft 10 in</td></tr>
+            <tr><td>40m</td><td>7.15 MHz</td><td>65 ft 5 in</td><td>32 ft 9 in</td></tr>
+            <tr><td>20m</td><td>14.2 MHz</td><td>32 ft 11 in</td><td>16 ft 6 in</td></tr>
+            <tr><td>15m</td><td>21.2 MHz</td><td>22 ft 1 in</td><td>11 ft</td></tr>
+            <tr><td>10m</td><td>28.5 MHz</td><td>16 ft 5 in</td><td>8 ft 2 in</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-card">
+        <h4>Antenna Formulas</h4>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Antenna Type</th><th>Formula (Feet)</th><th>Formula (Meters)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Half-Wave Dipole</td><td><code>468 / f(MHz)</code></td><td><code>142.5 / f(MHz)</code></td></tr>
+            <tr><td>Quarter-Wave Vertical</td><td><code>234 / f(MHz)</code></td><td><code>71.25 / f(MHz)</code></td></tr>
+            <tr><td>Long Wire (N half-waves)</td><td><code>492 x (N-0.05) / f</code></td><td><code>150 x (N-0.05) / f</code></td></tr>
+            <tr><td>NVIS Height</td><td><code>142.5 / f(MHz)</code></td><td><code>43.4 / f(MHz)</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        <div class="info-box-title">Field Construction Tip</div>
+        <p>Always cut wire antennas slightly long (add 2-3%) and trim to tune. It's easier to shorten wire than add to it. For dipoles, the total length is split in half - each leg connects to one side of the feedline (coax center conductor to one leg, shield to the other).</p>
+      </div>
+    `;
+
+    // Event listeners
+    document.getElementById('hf-antenna-type').addEventListener('change', (e) => {
+      const halfwavesGroup = document.getElementById('hf-halfwaves-group');
+      halfwavesGroup.style.display = e.target.value === 'long-wire' ? 'block' : 'none';
+    });
+
+    document.getElementById('hf-calculate').addEventListener('click', calculateHFAntenna);
+  }
+
+  function calculateHFAntenna() {
+    const frequency = parseFloat(document.getElementById('hf-frequency').value);
+    const antennaType = document.getElementById('hf-antenna-type').value;
+    const units = document.getElementById('hf-units').value;
+    const halfwaves = parseInt(document.getElementById('hf-halfwaves').value) || 2;
+
+    if (!frequency || frequency < 1 || frequency > 30) {
+      const output = document.getElementById('hf-output');
+      output.innerHTML = '<span style="color: #ef4444;">Please enter a valid frequency between 1-30 MHz.</span>';
+      output.style.display = 'block';
+      return;
+    }
+
+    // Calculate all antenna dimensions
+    const calculations = {
+      halfWaveFeet: 468 / frequency,
+      halfWaveMeters: 142.5 / frequency,
+      quarterWaveFeet: 234 / frequency,
+      quarterWaveMeters: 71.25 / frequency,
+      longWireFeet: (492 * (halfwaves - 0.05)) / frequency,
+      longWireMeters: (150 * (halfwaves - 0.05)) / frequency,
+      nvisHeightFeet: 142.5 / frequency,
+      nvisHeightMeters: 43.4 / frequency,
+      wavelengthFeet: 984 / frequency,
+      wavelengthMeters: 300 / frequency
+    };
+
+    // Helper function to format feet and inches
+    function formatFeetInches(totalFeet) {
+      const feet = Math.floor(totalFeet);
+      const inches = Math.round((totalFeet - feet) * 12);
+      if (inches === 12) {
+        return `${feet + 1} ft 0 in`;
+      }
+      return `${feet} ft ${inches} in`;
+    }
+
+    // Helper function to format meters
+    function formatMeters(meters) {
+      return `${meters.toFixed(2)} m`;
+    }
+
+    // Helper function to format based on unit preference
+    function formatLength(feet, meters) {
+      if (units === 'feet') return formatFeetInches(feet);
+      if (units === 'meters') return formatMeters(meters);
+      return `${formatFeetInches(feet)} (${formatMeters(meters)})`;
+    }
+
+    let output = `<span class="line-label">FREQUENCY: ${frequency} MHz</span>
+Wavelength: ${formatLength(calculations.wavelengthFeet, calculations.wavelengthMeters)}
+
+`;
+
+    if (antennaType === 'all' || antennaType === 'dipole') {
+      output += `<span class="line-label">HALF-WAVE DIPOLE:</span>
+Total Length: ${formatLength(calculations.halfWaveFeet, calculations.halfWaveMeters)}
+Each Leg: ${formatLength(calculations.halfWaveFeet / 2, calculations.halfWaveMeters / 2)}
+
+`;
+    }
+
+    if (antennaType === 'all' || antennaType === 'quarter') {
+      output += `<span class="line-label">QUARTER-WAVE VERTICAL:</span>
+Radiator Length: ${formatLength(calculations.quarterWaveFeet, calculations.quarterWaveMeters)}
+Ground Radials (each): ${formatLength(calculations.quarterWaveFeet, calculations.quarterWaveMeters)}
+
+`;
+    }
+
+    if (antennaType === 'all' || antennaType === 'inverted-v') {
+      output += `<span class="line-label">INVERTED V DIPOLE:</span>
+Total Wire Length: ${formatLength(calculations.halfWaveFeet, calculations.halfWaveMeters)}
+Each Leg: ${formatLength(calculations.halfWaveFeet / 2, calculations.halfWaveMeters / 2)}
+Recommended Apex Angle: 90-120 degrees
+Apex Height: ${formatLength(calculations.halfWaveFeet * 0.35, calculations.halfWaveMeters * 0.35)} minimum
+
+`;
+    }
+
+    if (antennaType === 'all' || antennaType === 'long-wire') {
+      output += `<span class="line-label">LONG WIRE (${halfwaves} half-waves):</span>
+Total Length: ${formatLength(calculations.longWireFeet, calculations.longWireMeters)}
+Height Above Ground: ${formatLength(calculations.quarterWaveFeet, calculations.quarterWaveMeters)} minimum
+
+`;
+    }
+
+    if (antennaType === 'all' || antennaType === 'nvis') {
+      output += `<span class="line-label">NVIS DIPOLE (Near Vertical Incidence Skywave):</span>
+Total Length: ${formatLength(calculations.halfWaveFeet, calculations.halfWaveMeters)}
+Each Leg: ${formatLength(calculations.halfWaveFeet / 2, calculations.halfWaveMeters / 2)}
+Height Above Ground: ${formatLength(calculations.nvisHeightFeet, calculations.nvisHeightMeters)}
+(Mount LOW for high-angle radiation - covers 0-300 mile radius)
+
+`;
+    }
+
+    // Add cutting instructions
+    output += `<span class="line-label">CUTTING INSTRUCTIONS:</span>
+Add 2-3% extra length for tuning margin
+Strip insulation at center for feedpoint connection
+Connect coax: center conductor to one leg, shield to other
+`;
+
+    const outputEl = document.getElementById('hf-output');
+    outputEl.innerHTML = output.trim();
+    outputEl.style.display = 'block';
+  }
+
+  // ==========================================================================
+  // Free Space Path Loss Calculator
+  // ==========================================================================
+
+  function showPathLossCalculator() {
+    const content = document.getElementById('contentArea');
+    content.innerHTML = `
+      <div class="section-header">
+        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back</span>
+        </a>
+        <h1 class="section-title">Free Space Path Loss Calculator</h1>
+        <p class="section-description">Calculate RF signal attenuation over distance using the Friis transmission equation.</p>
+      </div>
+
+      <div class="form-generator">
+        <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Frequency</label>
+            <input type="number" class="form-input" id="fspl-freq" placeholder="Enter frequency" step="any">
+          </div>
+          <div class="form-group" style="flex: 0 0 120px;">
+            <label class="form-label">Freq Unit</label>
+            <select class="form-select" id="fspl-freq-unit">
+              <option value="mhz">MHz</option>
+              <option value="ghz">GHz</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Distance</label>
+            <input type="number" class="form-input" id="fspl-dist" placeholder="Enter distance" step="any">
+          </div>
+          <div class="form-group" style="flex: 0 0 120px;">
+            <label class="form-label">Dist Unit</label>
+            <select class="form-select" id="fspl-dist-unit">
+              <option value="km">Kilometers</option>
+              <option value="mi">Miles</option>
+              <option value="m">Meters</option>
+              <option value="ft">Feet</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="form-btn" onclick="calculatePathLoss()">Calculate Path Loss</button>
+
+        <pre class="form-output" id="fspl-output" style="display: none;"></pre>
+      </div>
+
+      <div class="content-card">
+        <h4>About Free Space Path Loss</h4>
+        <p>FSPL represents signal attenuation in ideal conditions with no obstructions. Real-world losses are typically 2-4x higher in urban environments. The formula is:</p>
+        <p style="font-family: var(--font-mono); margin: 1rem 0;">FSPL (dB) = 20×log₁₀(d) + 20×log₁₀(f) + 20×log₁₀(4π/c)</p>
+        <p>Where d = distance, f = frequency, c = speed of light</p>
+      </div>
+    `;
+  }
+
+  function calculatePathLoss() {
+    let freq = parseFloat(document.getElementById('fspl-freq').value);
+    let dist = parseFloat(document.getElementById('fspl-dist').value);
+    const freqUnit = document.getElementById('fspl-freq-unit').value;
+    const distUnit = document.getElementById('fspl-dist-unit').value;
+
+    if (!freq || !dist || freq <= 0 || dist <= 0) {
+      document.getElementById('fspl-output').innerHTML = '<span style="color: #ef4444;">Please enter valid positive values.</span>';
+      document.getElementById('fspl-output').style.display = 'block';
+      return;
+    }
+
+    // Convert frequency to MHz
+    if (freqUnit === 'ghz') freq = freq * 1000;
+
+    // Convert distance to km
+    if (distUnit === 'mi') dist = dist * 1.60934;
+    else if (distUnit === 'm') dist = dist / 1000;
+    else if (distUnit === 'ft') dist = dist * 0.0003048;
+
+    // FSPL formula: 20*log10(d_km) + 20*log10(f_MHz) + 32.44
+    const fspl = 20 * Math.log10(dist) + 20 * Math.log10(freq) + 32.44;
+
+    const output = `<span class="line-label">FREE SPACE PATH LOSS</span>
+Frequency: ${freq.toFixed(2)} MHz (${(freq/1000).toFixed(4)} GHz)
+Distance: ${dist.toFixed(3)} km (${(dist * 0.621371).toFixed(3)} mi)
+
+<span class="line-label">RESULT</span>
+Path Loss: ${fspl.toFixed(1)} dB
+
+<span class="line-label">PRACTICAL ESTIMATES</span>
+Urban/Obstructed: ${(fspl * 1.5).toFixed(1)} - ${(fspl * 2).toFixed(1)} dB
+Dense Urban: ${(fspl * 2).toFixed(1)} - ${(fspl * 2.5).toFixed(1)} dB
+Foliage (add): +10 to +20 dB per 100m`;
+
+    document.getElementById('fspl-output').innerHTML = output;
+    document.getElementById('fspl-output').style.display = 'block';
+  }
+
+  // ==========================================================================
+  // Frequency/Wavelength Converter
+  // ==========================================================================
+
+  function showFreqWavelengthConverter() {
+    const content = document.getElementById('contentArea');
+    content.innerHTML = `
+      <div class="section-header">
+        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back</span>
+        </a>
+        <h1 class="section-title">Frequency / Wavelength Converter</h1>
+        <p class="section-description">Convert between frequency and wavelength. Enter either value to calculate the other.</p>
+      </div>
+
+      <div class="form-generator">
+        <div class="form-group">
+          <label class="form-label">Frequency (MHz)</label>
+          <input type="number" class="form-input" id="conv-freq" placeholder="Enter frequency in MHz" step="any" oninput="convertFromFreq()">
+        </div>
+
+        <div style="text-align: center; padding: 0.5rem; color: var(--text-muted);">↕ Auto-converts ↕</div>
+
+        <div class="form-group">
+          <label class="form-label">Wavelength (meters)</label>
+          <input type="number" class="form-input" id="conv-wave" placeholder="Enter wavelength in meters" step="any" oninput="convertFromWave()">
+        </div>
+
+        <pre class="form-output" id="conv-output" style="display: none;"></pre>
+      </div>
+
+      <div class="content-card">
+        <h4>Quick Reference</h4>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Band</th><th>Frequency</th><th>Wavelength</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>80m Amateur</td><td>3.5-4.0 MHz</td><td>75-85m</td></tr>
+            <tr><td>40m Amateur</td><td>7.0-7.3 MHz</td><td>41-43m</td></tr>
+            <tr><td>20m Amateur</td><td>14.0-14.35 MHz</td><td>21m</td></tr>
+            <tr><td>2m Amateur</td><td>144-148 MHz</td><td>2m</td></tr>
+            <tr><td>70cm Amateur</td><td>420-450 MHz</td><td>70cm</td></tr>
+            <tr><td>WiFi 2.4GHz</td><td>2400 MHz</td><td>12.5cm</td></tr>
+            <tr><td>WiFi 5GHz</td><td>5800 MHz</td><td>5.2cm</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  function convertFromFreq() {
+    const freq = parseFloat(document.getElementById('conv-freq').value);
+    if (!freq || freq <= 0) {
+      document.getElementById('conv-output').style.display = 'none';
+      return;
+    }
+
+    const wavelengthM = 299.792458 / freq;
+    document.getElementById('conv-wave').value = wavelengthM.toFixed(4);
+
+    const output = `<span class="line-label">CONVERSION RESULTS</span>
+Frequency: ${freq} MHz = ${(freq/1000).toFixed(6)} GHz = ${(freq*1000000).toExponential(3)} Hz
+Wavelength: ${wavelengthM.toFixed(4)} m = ${(wavelengthM*100).toFixed(2)} cm = ${(wavelengthM*3.28084).toFixed(2)} ft
+
+<span class="line-label">ANTENNA LENGTHS</span>
+Half-wave dipole: ${(468/freq).toFixed(2)} ft / ${(142.5/freq).toFixed(2)} m
+Quarter-wave vertical: ${(234/freq).toFixed(2)} ft / ${(71.25/freq).toFixed(2)} m`;
+
+    document.getElementById('conv-output').innerHTML = output;
+    document.getElementById('conv-output').style.display = 'block';
+  }
+
+  function convertFromWave() {
+    const wave = parseFloat(document.getElementById('conv-wave').value);
+    if (!wave || wave <= 0) {
+      document.getElementById('conv-output').style.display = 'none';
+      return;
+    }
+
+    const freqMHz = 299.792458 / wave;
+    document.getElementById('conv-freq').value = freqMHz.toFixed(4);
+
+    const output = `<span class="line-label">CONVERSION RESULTS</span>
+Wavelength: ${wave} m = ${(wave*100).toFixed(2)} cm = ${(wave*3.28084).toFixed(2)} ft
+Frequency: ${freqMHz.toFixed(4)} MHz = ${(freqMHz/1000).toFixed(6)} GHz
+
+<span class="line-label">ANTENNA LENGTHS</span>
+Half-wave dipole: ${(468/freqMHz).toFixed(2)} ft / ${(142.5/freqMHz).toFixed(2)} m
+Quarter-wave vertical: ${(234/freqMHz).toFixed(2)} ft / ${(71.25/freqMHz).toFixed(2)} m`;
+
+    document.getElementById('conv-output').innerHTML = output;
+    document.getElementById('conv-output').style.display = 'block';
+  }
+
+  // ==========================================================================
+  // Wind Drift Calculator (Marksmanship)
+  // ==========================================================================
+
+  function showWindCalculator() {
+    const content = document.getElementById('contentArea');
+    content.innerHTML = `
+      <div class="section-header">
+        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back</span>
+        </a>
+        <h1 class="section-title">Wind Drift Calculator</h1>
+        <p class="section-description">Calculate wind deflection and holdoff for precision shooting.</p>
+      </div>
+
+      <div class="form-generator">
+        <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Range (yards)</label>
+            <input type="number" class="form-input" id="wind-range" placeholder="e.g., 500" step="any">
+          </div>
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Wind Speed (mph)</label>
+            <input type="number" class="form-input" id="wind-speed" placeholder="e.g., 10" step="any">
+          </div>
+        </div>
+
+        <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Wind Direction (clock)</label>
+            <select class="form-select" id="wind-dir">
+              <option value="1.0">3 or 9 o'clock (Full Value)</option>
+              <option value="0.87">2 or 10 o'clock</option>
+              <option value="0.87">4 or 8 o'clock</option>
+              <option value="0.5">1 or 11 o'clock (Half Value)</option>
+              <option value="0.5">5 or 7 o'clock (Half Value)</option>
+              <option value="0">12 or 6 o'clock (No Value)</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Bullet BC (G1)</label>
+            <input type="number" class="form-input" id="wind-bc" placeholder="e.g., 0.500" step="0.001" value="0.500">
+          </div>
+        </div>
+
+        <button class="form-btn" onclick="calculateWind()">Calculate Wind Drift</button>
+
+        <pre class="form-output" id="wind-output" style="display: none;"></pre>
+      </div>
+
+      <div class="content-card">
+        <h4>Wind Value by Clock Position</h4>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Position</th><th>Value</th><th>Effect</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>12, 6</td><td>No Value</td><td>Headwind/tailwind - minimal drift</td></tr>
+            <tr><td>1, 5, 7, 11</td><td>Half Value</td><td>~50% of full crosswind effect</td></tr>
+            <tr><td>2, 4, 8, 10</td><td>~87% Value</td><td>Nearly full crosswind effect</td></tr>
+            <tr><td>3, 9</td><td>Full Value</td><td>Maximum crosswind drift</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  function calculateWind() {
+    const range = parseFloat(document.getElementById('wind-range').value);
+    const speed = parseFloat(document.getElementById('wind-speed').value);
+    const dirValue = parseFloat(document.getElementById('wind-dir').value);
+    const bc = parseFloat(document.getElementById('wind-bc').value) || 0.5;
+
+    if (!range || !speed || range <= 0 || speed < 0) {
+      document.getElementById('wind-output').innerHTML = '<span style="color: #ef4444;">Please enter valid values.</span>';
+      document.getElementById('wind-output').style.display = 'block';
+      return;
+    }
+
+    // Simplified wind drift formula based on BC and range
+    // This is an approximation: drift (inches) ≈ (range/100)² × wind × windValue / (BC × 10)
+    const effectiveWind = speed * dirValue;
+    const driftInches = Math.pow(range / 100, 1.8) * effectiveWind * 0.1 / bc;
+    const driftMOA = (driftInches / range) * 100 / 1.047;
+    const driftMils = driftMOA * 0.2909;
+
+    // Direction for holdoff
+    const holdDir = effectiveWind > 0 ? 'into the wind' : 'with the wind';
+
+    const output = `<span class="line-label">WIND ANALYSIS</span>
+Range: ${range} yards
+Wind Speed: ${speed} mph
+Wind Value: ${(dirValue * 100).toFixed(0)}% (effective: ${effectiveWind.toFixed(1)} mph)
+Bullet BC: ${bc}
+
+<span class="line-label">DRIFT ESTIMATE</span>
+Drift: ${Math.abs(driftInches).toFixed(1)} inches
+Correction: ${Math.abs(driftMOA).toFixed(1)} MOA / ${Math.abs(driftMils).toFixed(1)} mils
+
+<span class="line-label">HOLDOFF</span>
+Aim ${Math.abs(driftMOA).toFixed(1)} MOA ${holdDir}
+Or dial ${Math.abs(driftMOA).toFixed(1)} MOA ${holdDir}
+
+<span style="color: var(--text-muted); font-size: 0.85rem;">Note: This is an estimate. Actual drift varies with velocity, bullet design, and atmospheric conditions. Confirm with ballistic software or range data.</span>`;
+
+    document.getElementById('wind-output').innerHTML = output;
+    document.getElementById('wind-output').style.display = 'block';
+  }
+
+  // ==========================================================================
+  // Coordinate Converter (MGRS/UTM/Lat-Long)
+  // ==========================================================================
+
+  function showCoordConverter() {
+    const content = document.getElementById('contentArea');
+    content.innerHTML = `
+      <div class="section-header">
+        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back</span>
+        </a>
+        <h1 class="section-title">Coordinate Converter</h1>
+        <p class="section-description">Convert between decimal degrees and degrees-minutes-seconds formats.</p>
+      </div>
+
+      <div class="form-generator">
+        <div class="form-group">
+          <label class="form-label">Decimal Degrees (DD)</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="number" class="form-input" id="dd-lat" placeholder="Latitude (e.g., 33.7490)" step="any" style="flex:1;">
+            <input type="number" class="form-input" id="dd-lon" placeholder="Longitude (e.g., -84.3880)" step="any" style="flex:1;">
+          </div>
+        </div>
+
+        <button class="form-btn" onclick="convertFromDD()" style="margin-bottom: 1rem;">Convert from DD →</button>
+
+        <div class="form-group">
+          <label class="form-label">Degrees Minutes Seconds (DMS)</label>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <input type="number" class="form-input" id="dms-lat-d" placeholder="D" style="width: 60px;">
+            <input type="number" class="form-input" id="dms-lat-m" placeholder="M" style="width: 60px;">
+            <input type="number" class="form-input" id="dms-lat-s" placeholder="S" step="any" style="width: 80px;">
+            <select class="form-select" id="dms-lat-dir" style="width: 60px;">
+              <option value="N">N</option>
+              <option value="S">S</option>
+            </select>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+            <input type="number" class="form-input" id="dms-lon-d" placeholder="D" style="width: 60px;">
+            <input type="number" class="form-input" id="dms-lon-m" placeholder="M" style="width: 60px;">
+            <input type="number" class="form-input" id="dms-lon-s" placeholder="S" step="any" style="width: 80px;">
+            <select class="form-select" id="dms-lon-dir" style="width: 60px;">
+              <option value="W">W</option>
+              <option value="E">E</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="form-btn" onclick="convertFromDMS()">← Convert from DMS</button>
+
+        <pre class="form-output" id="coord-output" style="display: none;"></pre>
+      </div>
+
+      <div class="content-card">
+        <h4>Format Examples</h4>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Format</th><th>Example (Atlanta, GA)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Decimal Degrees</td><td>33.7490, -84.3880</td></tr>
+            <tr><td>DMS</td><td>33° 44' 56.4" N, 84° 23' 16.8" W</td></tr>
+            <tr><td>Degrees Decimal Minutes</td><td>33° 44.940' N, 84° 23.280' W</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  function convertFromDD() {
+    const lat = parseFloat(document.getElementById('dd-lat').value);
+    const lon = parseFloat(document.getElementById('dd-lon').value);
+
+    if (isNaN(lat) || isNaN(lon)) {
+      document.getElementById('coord-output').innerHTML = '<span style="color: #ef4444;">Please enter valid coordinates.</span>';
+      document.getElementById('coord-output').style.display = 'block';
+      return;
+    }
+
+    // Convert to DMS
+    const latDir = lat >= 0 ? 'N' : 'S';
+    const lonDir = lon >= 0 ? 'E' : 'W';
+    const absLat = Math.abs(lat);
+    const absLon = Math.abs(lon);
+
+    const latD = Math.floor(absLat);
+    const latM = Math.floor((absLat - latD) * 60);
+    const latS = ((absLat - latD) * 60 - latM) * 60;
+
+    const lonD = Math.floor(absLon);
+    const lonM = Math.floor((absLon - lonD) * 60);
+    const lonS = ((absLon - lonD) * 60 - lonM) * 60;
+
+    // Fill DMS fields
+    document.getElementById('dms-lat-d').value = latD;
+    document.getElementById('dms-lat-m').value = latM;
+    document.getElementById('dms-lat-s').value = latS.toFixed(2);
+    document.getElementById('dms-lat-dir').value = latDir;
+
+    document.getElementById('dms-lon-d').value = lonD;
+    document.getElementById('dms-lon-m').value = lonM;
+    document.getElementById('dms-lon-s').value = lonS.toFixed(2);
+    document.getElementById('dms-lon-dir').value = lonDir;
+
+    const output = `<span class="line-label">COORDINATE CONVERSION</span>
+
+Decimal Degrees: ${lat.toFixed(6)}, ${lon.toFixed(6)}
+DMS: ${latD}° ${latM}' ${latS.toFixed(2)}" ${latDir}, ${lonD}° ${lonM}' ${lonS.toFixed(2)}" ${lonDir}
+DDM: ${latD}° ${((absLat - latD) * 60).toFixed(4)}' ${latDir}, ${lonD}° ${((absLon - lonD) * 60).toFixed(4)}' ${lonDir}`;
+
+    document.getElementById('coord-output').innerHTML = output;
+    document.getElementById('coord-output').style.display = 'block';
+  }
+
+  function convertFromDMS() {
+    const latD = parseFloat(document.getElementById('dms-lat-d').value) || 0;
+    const latM = parseFloat(document.getElementById('dms-lat-m').value) || 0;
+    const latS = parseFloat(document.getElementById('dms-lat-s').value) || 0;
+    const latDir = document.getElementById('dms-lat-dir').value;
+
+    const lonD = parseFloat(document.getElementById('dms-lon-d').value) || 0;
+    const lonM = parseFloat(document.getElementById('dms-lon-m').value) || 0;
+    const lonS = parseFloat(document.getElementById('dms-lon-s').value) || 0;
+    const lonDir = document.getElementById('dms-lon-dir').value;
+
+    let lat = latD + latM/60 + latS/3600;
+    let lon = lonD + lonM/60 + lonS/3600;
+
+    if (latDir === 'S') lat = -lat;
+    if (lonDir === 'W') lon = -lon;
+
+    // Fill DD fields
+    document.getElementById('dd-lat').value = lat.toFixed(6);
+    document.getElementById('dd-lon').value = lon.toFixed(6);
+
+    const output = `<span class="line-label">COORDINATE CONVERSION</span>
+
+DMS: ${latD}° ${latM}' ${latS.toFixed(2)}" ${latDir}, ${lonD}° ${lonM}' ${lonS.toFixed(2)}" ${lonDir}
+Decimal Degrees: ${lat.toFixed(6)}, ${lon.toFixed(6)}
+DDM: ${latD}° ${(latM + latS/60).toFixed(4)}' ${latDir}, ${lonD}° ${(lonM + lonS/60).toFixed(4)}' ${lonDir}`;
+
+    document.getElementById('coord-output').innerHTML = output;
+    document.getElementById('coord-output').style.display = 'block';
+  }
+
+  // ==========================================================================
+  // Zulu Time Converter
+  // ==========================================================================
+
+  function showZuluTime() {
+    const content = document.getElementById('contentArea');
+
+    // Get current times
+    const now = new Date();
+    const zuluTime = now.toISOString().slice(11, 19) + 'Z';
+    const zuluDate = now.toISOString().slice(0, 10);
+    const localTime = now.toLocaleTimeString('en-US', { hour12: false });
+    const localOffset = -now.getTimezoneOffset() / 60;
+    const offsetStr = localOffset >= 0 ? `+${localOffset}` : `${localOffset}`;
+
+    content.innerHTML = `
+      <div class="section-header">
+        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back</span>
+        </a>
+        <h1 class="section-title">Zulu Time Converter</h1>
+        <p class="section-description">Convert between local time and UTC/Zulu time for coordination.</p>
+      </div>
+
+      <div class="form-generator">
+        <div class="content-card" style="text-align: center; margin-bottom: 1rem;">
+          <div style="font-size: 0.9rem; color: var(--text-muted);">CURRENT ZULU TIME</div>
+          <div id="live-zulu" style="font-size: 2rem; font-weight: 700; font-family: var(--font-mono); color: var(--accent);">${zuluTime}</div>
+          <div style="font-size: 0.9rem; color: var(--text-muted);">Date: ${zuluDate}</div>
+        </div>
+
+        <div class="content-card" style="text-align: center; margin-bottom: 1rem;">
+          <div style="font-size: 0.9rem; color: var(--text-muted);">LOCAL TIME (UTC${offsetStr})</div>
+          <div id="live-local" style="font-size: 1.5rem; font-weight: 600; font-family: var(--font-mono);">${localTime}</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Convert Local Time to Zulu</label>
+          <input type="time" class="form-input" id="local-input" step="1">
+        </div>
+        <button class="form-btn" onclick="localToZulu()">Convert to Zulu →</button>
+
+        <div class="form-group" style="margin-top: 1rem;">
+          <label class="form-label">Convert Zulu to Local</label>
+          <input type="time" class="form-input" id="zulu-input" step="1">
+        </div>
+        <button class="form-btn" onclick="zuluToLocal()">← Convert to Local</button>
+
+        <pre class="form-output" id="time-output" style="display: none;"></pre>
+      </div>
+
+      <div class="content-card">
+        <h4>Common Time Zone Offsets</h4>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Zone</th><th>Name</th><th>Offset</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Z</td><td>Zulu (UTC)</td><td>+0</td></tr>
+            <tr><td>A</td><td>Alpha</td><td>+1</td></tr>
+            <tr><td>B</td><td>Bravo</td><td>+2</td></tr>
+            <tr><td>R</td><td>Romeo (EST)</td><td>-5</td></tr>
+            <tr><td>S</td><td>Sierra (CST)</td><td>-6</td></tr>
+            <tr><td>T</td><td>Tango (MST)</td><td>-7</td></tr>
+            <tr><td>U</td><td>Uniform (PST)</td><td>-8</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    // Start live clock update
+    setInterval(updateLiveClock, 1000);
+  }
+
+  function updateLiveClock() {
+    const zuluEl = document.getElementById('live-zulu');
+    const localEl = document.getElementById('live-local');
+    if (zuluEl && localEl) {
+      const now = new Date();
+      zuluEl.textContent = now.toISOString().slice(11, 19) + 'Z';
+      localEl.textContent = now.toLocaleTimeString('en-US', { hour12: false });
+    }
+  }
+
+  function localToZulu() {
+    const localInput = document.getElementById('local-input').value;
+    if (!localInput) {
+      document.getElementById('time-output').innerHTML = '<span style="color: #ef4444;">Please enter a time.</span>';
+      document.getElementById('time-output').style.display = 'block';
+      return;
+    }
+
+    const [hours, minutes, seconds = 0] = localInput.split(':').map(Number);
+    const now = new Date();
+    now.setHours(hours, minutes, seconds);
+
+    const zuluHours = now.getUTCHours().toString().padStart(2, '0');
+    const zuluMinutes = now.getUTCMinutes().toString().padStart(2, '0');
+    const zuluSeconds = now.getUTCSeconds().toString().padStart(2, '0');
+
+    const output = `<span class="line-label">TIME CONVERSION</span>
+Local: ${localInput}
+Zulu:  ${zuluHours}:${zuluMinutes}:${zuluSeconds}Z
+
+Military Format: ${zuluHours}${zuluMinutes}Z`;
+
+    document.getElementById('time-output').innerHTML = output;
+    document.getElementById('time-output').style.display = 'block';
+  }
+
+  function zuluToLocal() {
+    const zuluInput = document.getElementById('zulu-input').value;
+    if (!zuluInput) {
+      document.getElementById('time-output').innerHTML = '<span style="color: #ef4444;">Please enter a time.</span>';
+      document.getElementById('time-output').style.display = 'block';
+      return;
+    }
+
+    const [hours, minutes, seconds = 0] = zuluInput.split(':').map(Number);
+    const now = new Date();
+    now.setUTCHours(hours, minutes, seconds);
+
+    const localTime = now.toLocaleTimeString('en-US', { hour12: false });
+
+    const output = `<span class="line-label">TIME CONVERSION</span>
+Zulu:  ${zuluInput}Z
+Local: ${localTime}
+
+Military Format: ${hours.toString().padStart(2, '0')}${minutes.toString().padStart(2, '0')}Z`;
+
+    document.getElementById('time-output').innerHTML = output;
+    document.getElementById('time-output').style.display = 'block';
   }
 
   // ==========================================================================

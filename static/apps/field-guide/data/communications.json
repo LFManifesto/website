@@ -2,7 +2,7 @@
   "id": "communications",
   "number": "2",
   "title": "Communications",
-  "description": "Radio communications fundamentals, DMR digital radios, HF operations with JS8Call, RF theory, antenna systems, and signal propagation for tactical small team operations.",
+  "description": "In an age of ubiquitous jamming and direction-finding, the ability to communicate without being located has become a survival skill. This section covers everything from RF theory to practical field operations with DMR, HF, and digital modes.",
   "icon": "radio",
   "subsections": [
     {
@@ -12,7 +12,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "Electromagnetic energy consists of electric and magnetic waves paired together moving through space. RF energy travels at the speed of light, approximately 300,000,000 meters per second. Understanding basic RF concepts is essential for effective radio communications and informed equipment selection."
+          "text": "Radio has become both weapon and vulnerability. The NATO-Ukraine Electronic Warfare Coalition, formed with 13 signatories in late 2024, exists because modern forces live or die by their ability to communicate while denying that ability to others. Russia's Murmansk-BN systems jam GPS and communications from 300 kilometers away. Understanding RF is no longer optional—it's survival."
         },
         {
           "type": "heading",
@@ -803,9 +803,174 @@
           ]
         },
         {
-          "type": "info",
+          "type": "warning",
           "title": "Emission Control",
-          "text": "The only certain protection against DF is not transmitting. Consider whether each transmission is operationally necessary. Reception creates no emission and cannot be detected. When possible, push information to forward elements via receive-only means rather than requiring them to transmit from positions near adversary capability."
+          "text": "The only certain protection against DF is not transmitting. Every transmission is a targeting opportunity. Modern infantry now carry backpack EW systems specifically to locate radio operators. New US radios are described as 'very, very difficult to jam'—but not impossible. When in doubt, listen. Reception creates no emission and cannot be detected."
+        }
+      ]
+    },
+    {
+      "id": "hf-quick-reference",
+      "number": "2.12",
+      "title": "HF Quick Reference",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "This section provides essential quick reference data for HF radio operations including antenna dimensions, propagation distances, and frequency band characteristics. Use these tables for rapid field calculations and antenna construction."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Antenna Length Formulas"
+        },
+        {
+          "type": "paragraph",
+          "text": "The following formulas calculate antenna lengths for HF operations. These use a correction factor of 0.95 for high frequencies between 3 and 50 MHz. The same formulas calculate height above ground for wire antennas."
+        },
+        {
+          "type": "table",
+          "headers": ["Antenna Type", "Formula (Feet)", "Formula (Meters)"],
+          "rows": [
+            ["Half-Wave Dipole", "468 / freq (MHz)", "142.5 / freq (MHz)"],
+            ["Quarter-Wave Vertical", "234 / freq (MHz)", "71.25 / freq (MHz)"],
+            ["Long Wire (N half-waves)", "492 × (N - 0.05) / freq", "150 × (N - 0.05) / freq"],
+            ["NVIS Height Above Ground", "142.5 / freq (MHz)", "43.4 / freq (MHz)"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Common HF Antenna Lengths"
+        },
+        {
+          "type": "table",
+          "headers": ["Freq (MHz)", "1/2 Wave (ft)", "1/4 Wave (ft)", "1/8 Wave (ft)", "NVIS Height (ft)"],
+          "rows": [
+            ["3.0", "150 ft 4 in", "75 ft 2 in", "37 ft 7 in", "47 ft 6 in"],
+            ["3.5", "128 ft 10 in", "64 ft 5 in", "32 ft 2 in", "40 ft 9 in"],
+            ["4.0", "112 ft 9 in", "56 ft 4 in", "28 ft 2 in", "35 ft 8 in"],
+            ["5.0", "90 ft 2 in", "45 ft 1 in", "22 ft 6 in", "28 ft 6 in"],
+            ["7.0", "64 ft 5 in", "32 ft 2 in", "16 ft 1 in", "20 ft 4 in"],
+            ["7.3", "61 ft 10 in", "30 ft 11 in", "15 ft 5 in", "19 ft 6 in"],
+            ["10.0", "45 ft 1 in", "22 ft 6 in", "11 ft 3 in", "14 ft 3 in"],
+            ["14.0", "32 ft 2 in", "16 ft 1 in", "8 ft", "10 ft 2 in"],
+            ["18.0", "25 ft 2 in", "12 ft 7 in", "6 ft 3 in", "7 ft 11 in"],
+            ["21.0", "21 ft 6 in", "10 ft 9 in", "5 ft 4 in", "6 ft 9 in"],
+            ["28.0", "16 ft 1 in", "8 ft", "4 ft", "5 ft 1 in"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Take-Off Angle vs Distance (F2 Layer)"
+        },
+        {
+          "type": "paragraph",
+          "text": "The angle at which your signal enters the ionosphere determines skip distance. Lower angles produce longer range. These distances assume F2 layer propagation which is the primary layer for HF communications."
+        },
+        {
+          "type": "table",
+          "headers": ["Take-Off Angle", "Daytime (km)", "Daytime (mi)", "Nighttime (km)", "Nighttime (mi)"],
+          "rows": [
+            ["0°", "3220", "2000", "4508", "2800"],
+            ["5°", "2415", "1500", "3703", "2300"],
+            ["10°", "1932", "1200", "2898", "1800"],
+            ["15°", "1450", "900", "2254", "1400"],
+            ["20°", "1127", "700", "1771", "1100"],
+            ["30°", "725", "450", "1328", "825"],
+            ["45°", "443", "275", "805", "500"],
+            ["60°", "258", "160", "443", "275"],
+            ["75°", "153", "95", "290", "180"],
+            ["90° (NVIS)", "0", "0", "0", "0"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "HF Antenna Types Comparison"
+        },
+        {
+          "type": "table",
+          "headers": ["Antenna", "Ground Wave", "Skywave", "Directivity", "Polarization"],
+          "rows": [
+            ["AS-2259/GR", "Yes", "-", "Omnidirectional", "Vertical"],
+            ["Vertical Whip", "Yes", "-", "Omnidirectional", "Vertical"],
+            ["Half-Wave Dipole", "-", "Short/Medium", "Bidirectional", "Horizontal"],
+            ["Long Wire", "-", "Medium/Long", "Bidirectional", "Horizontal"],
+            ["Inverted L", "Yes", "Short/Medium/Long", "Omnidirectional", "Both"],
+            ["Sloping V", "-", "Medium/Long", "Directional", "Horizontal"],
+            ["Vertical Half Rhombic", "Yes", "Short/Medium/Long", "Directional", "Both"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Inverted V Apex Angles"
+        },
+        {
+          "type": "paragraph",
+          "text": "When constructing an Inverted V antenna, the apex angle affects performance. Steeper angles (closer to 90°) provide more omnidirectional coverage while flatter angles increase gain in the broadside direction."
+        },
+        {
+          "type": "table",
+          "headers": ["Antenna Length (Wavelengths)", "Optimum Apex Angle (Degrees)"],
+          "rows": [
+            ["1", "90°"],
+            ["2", "70°"],
+            ["3", "58°"],
+            ["4", "50°"],
+            ["6", "40°"],
+            ["8", "35°"],
+            ["10", "33°"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Frequency Band Reference"
+        },
+        {
+          "type": "table",
+          "headers": ["Band", "Frequency Range", "Wavelength Range"],
+          "rows": [
+            ["ELF (Extremely Low)", "< 3 kHz", "> 100 km"],
+            ["VLF (Very Low)", "3 - 30 kHz", "10 - 100 km"],
+            ["LF (Low)", "30 - 300 kHz", "1 - 10 km"],
+            ["MF (Medium)", "300 kHz - 3 MHz", "100m - 1 km"],
+            ["HF (High)", "3 - 30 MHz", "10 - 100 m"],
+            ["VHF (Very High)", "30 - 300 MHz", "1 - 10 m"],
+            ["UHF (Ultra High)", "300 MHz - 3 GHz", "10 cm - 1 m"],
+            ["SHF (Super High)", "3 - 30 GHz", "1 - 10 cm"],
+            ["EHF (Extremely High)", "30 - 300 GHz", "1 mm - 1 cm"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Ionospheric Layers"
+        },
+        {
+          "type": "paragraph",
+          "text": "The ionosphere consists of distinct layers that affect HF propagation differently. During daylight, all layers are present. At night, the D layer disappears and F1/F2 combine, generally improving long-distance propagation."
+        },
+        {
+          "type": "table",
+          "headers": ["Layer", "Height (km)", "Height (miles)", "Characteristics"],
+          "rows": [
+            ["D", "48 - 88 km", "30 - 55 mi", "Daytime only, absorbs lower HF"],
+            ["E", "88 - 136 km", "55 - 85 mi", "Sporadic E possible, VHF reflection"],
+            ["F1", "136 - 248 km", "85 - 155 mi", "Daytime only, merges with F2 at night"],
+            ["F2", "248 - 400 km", "155 - 250 mi", "Primary HF layer, present day and night"]
+          ]
+        },
+        {
+          "type": "tool",
+          "toolId": "hf-antenna-calculator"
+        },
+        {
+          "type": "info",
+          "title": "Field Construction Tip",
+          "text": "When cutting antenna wire in the field, always cut slightly long and trim to tune. Wire antennas can be shortened but not lengthened. For dipoles, the total length is split in half with each leg connected to one side of the feedline. Use the calculator tool to determine precise lengths for your operating frequency."
         }
       ]
     }

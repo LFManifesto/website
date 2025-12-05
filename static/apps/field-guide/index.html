@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Light Fighter Course Field Guide - Interactive quick reference for drones, communications, SIGINT, and marksmanship.">
+  <meta name="description" content="Light Fighter Guide - Interactive quick reference for drones, communications, SIGINT, marksmanship, and mission planning.">
   <meta name="author" content="Light Fighter Manifesto L.L.C.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a0a0a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="LFM Field Guide">
+  <meta name="apple-mobile-web-app-title" content="Light Fighter Guide">
 
-  <title>Field Guide | Light Fighter Manifesto</title>
+  <title>Light Fighter Guide | Light Fighter Manifesto</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/images/logo.png">
@@ -804,9 +804,99 @@
       z-index: 40;
     }
 
+    /* Mobile Search Button */
+    .mobile-search-btn {
+      display: none;
+      background: none;
+      border: none;
+      padding: var(--space-sm);
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    .mobile-search-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+    }
+
+    .mobile-search-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--bg-primary);
+      z-index: 200;
+      padding: var(--space-md);
+      flex-direction: column;
+    }
+
+    .mobile-search-overlay.visible {
+      display: flex;
+    }
+
+    .mobile-search-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .mobile-search-close {
+      background: none;
+      border: none;
+      padding: var(--space-sm);
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    .mobile-search-close svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+
+    .mobile-search-input {
+      flex: 1;
+      padding: var(--space-md);
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+
+    .mobile-search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .mobile-search-results {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    /* Table Wrapper for Mobile Scroll */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: var(--space-md) 0;
+    }
+
+    .table-wrapper table {
+      min-width: 500px;
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .menu-toggle {
+        display: block;
+      }
+
+      .mobile-search-btn {
         display: block;
       }
 
@@ -839,6 +929,22 @@
       .back-link span {
         display: none;
       }
+
+      /* Larger touch targets for mobile */
+      .sidebar-nav-link {
+        padding: var(--space-md) var(--space-lg);
+        min-height: 48px;
+      }
+
+      .checklist-item {
+        padding: var(--space-md);
+        min-height: 48px;
+      }
+
+      .form-btn {
+        padding: var(--space-md) var(--space-lg);
+        min-height: 48px;
+      }
     }
 
     @media (max-width: 600px) {
@@ -852,6 +958,21 @@
 
       .form-generator {
         padding: var(--space-md);
+      }
+
+      /* Stack form inputs on small screens */
+      .form-row {
+        flex-direction: column;
+      }
+
+      .form-group {
+        width: 100%;
+      }
+
+      /* Ensure tables scroll properly */
+      .quick-ref-table {
+        display: block;
+        overflow-x: auto;
       }
     }
 
@@ -894,7 +1015,7 @@
         </svg>
       </button>
 
-      <a href="/apps/field-guide/" class="app-title">LFM Field Guide</a>
+      <a href="/apps/field-guide/" class="app-title">Light Fighter Guide</a>
 
       <div class="search-container">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -906,6 +1027,13 @@
       </div>
 
       <div class="header-spacer"></div>
+
+      <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
 
       <a href="/tools/" class="back-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -966,6 +1094,66 @@
                   Link Margin Assessment
                 </a>
               </li>
+              <li class="sidebar-nav-item">
+                <a href="#hf-antenna-calculator" class="sidebar-nav-link" data-section="tools" data-subsection="hf-antenna-calculator">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v20"></path>
+                    <path d="M2 12h20"></path>
+                    <path d="M12 2l6 6"></path>
+                    <path d="M12 2l-6 6"></path>
+                    <path d="M12 22l6-6"></path>
+                    <path d="M12 22l-6-6"></path>
+                  </svg>
+                  HF Antenna Calculator
+                </a>
+              </li>
+              <li class="sidebar-nav-item">
+                <a href="#path-loss-calculator" class="sidebar-nav-link" data-section="tools" data-subsection="path-loss-calculator">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                  </svg>
+                  Path Loss Calculator
+                </a>
+              </li>
+              <li class="sidebar-nav-item">
+                <a href="#freq-wavelength-converter" class="sidebar-nav-link" data-section="tools" data-subsection="freq-wavelength-converter">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 3v18"></path>
+                    <path d="M7 21V3"></path>
+                    <path d="M17 8l-10 8"></path>
+                  </svg>
+                  Freq/Wavelength Converter
+                </a>
+              </li>
+              <li class="sidebar-nav-item">
+                <a href="#wind-calculator" class="sidebar-nav-link" data-section="tools" data-subsection="wind-calculator">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2"></path>
+                    <path d="M12.59 19.41A2 2 0 1 0 14 16H2"></path>
+                    <path d="M17.73 7.73A2.5 2.5 0 1 1 19 12H2"></path>
+                  </svg>
+                  Wind Drift Calculator
+                </a>
+              </li>
+              <li class="sidebar-nav-item">
+                <a href="#coord-converter" class="sidebar-nav-link" data-section="tools" data-subsection="coord-converter">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                  </svg>
+                  Coordinate Converter
+                </a>
+              </li>
+              <li class="sidebar-nav-item">
+                <a href="#zulu-time" class="sidebar-nav-link" data-section="tools" data-subsection="zulu-time">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  Zulu Time Converter
+                </a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -985,6 +1173,20 @@
       <span class="offline-dot"></span>
       Offline Mode
     </div>
+  </div>
+
+  <!-- Mobile Search Overlay -->
+  <div class="mobile-search-overlay" id="mobileSearchOverlay">
+    <div class="mobile-search-header">
+      <button class="mobile-search-close" id="mobileSearchClose" aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <input type="text" class="mobile-search-input" id="mobileSearchInput" placeholder="Search guide..." autocomplete="off">
+    </div>
+    <div class="mobile-search-results" id="mobileSearchResults"></div>
   </div>
 
   <!-- Fuse.js for search -->

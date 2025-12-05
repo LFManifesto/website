@@ -2,7 +2,7 @@
   "id": "mission-planning",
   "number": "5",
   "title": "Mission Planning",
-  "description": "Effective operations begin with thorough planning. This section covers the systematic processes that translate objectives into executable plans, from initial assessment through mission execution.",
+  "description": "Amateurs talk tactics; professionals talk logistics. The difference between success and failure is rarely courage or firepower—it's whether someone thought through the fuel, the comms plan, the extract route, and the thousand details that mission success depends on.",
   "icon": "compass",
   "subsections": [
     {
@@ -12,7 +12,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "No plan survives first contact with the enemy, but the planning process itself is invaluable. Planning forces you to think through contingencies, identify resource requirements, and develop shared understanding among participants. Even when circumstances force deviation from the original plan, the mental frameworks developed during planning enable faster adaptation."
+          "text": "No plan survives first contact—but the planning process is what allows you to adapt when it fails. Every contingency you think through in advance is one less crisis to solve under fire. Every resource you stage is one less thing you will desperately need and not have. The plan itself is merely a starting point. The thinking that produced it is what keeps people alive."
         },
         {
           "type": "paragraph",

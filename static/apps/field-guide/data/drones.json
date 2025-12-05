@@ -2,7 +2,7 @@
   "id": "drones",
   "number": "1",
   "title": "Unmanned Aerial Systems",
-  "description": "From reconnaissance to payload delivery, UAS have become indispensable tools in modern unconventional warfare. This section covers operational employment, tactical considerations, and countermeasures derived from ongoing conflicts.",
+  "description": "The drone has become the defining weapon of modern warfare. What cost millions a decade ago now costs hundreds. This section covers everything from basic reconnaissance to advanced strike tactics, drawing from lessons paid for in blood on battlefields from Ukraine to the Middle East.",
   "icon": "drone",
   "subsections": [
     {
@@ -12,15 +12,15 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "In recent years, small drones have played an increasingly significant role in modern warfare, and their utilization in the conflict in Ukraine exemplifies their versatility and effectiveness. Analysts estimate drones account for roughly 70% of battlefield losses for both Russian and Ukrainian forces, with FPV drones inflicting up to 80% of Russian battlefield casualties. Ukraine became the first country to create a military branch exclusively dedicated to drone warfare with its Unmanned Systems Forces in June 2024."
+          "text": "The battlefield has fundamentally changed. By late 2025, analysts estimate that drones account for 70% of all battlefield casualties in major conflicts. FPV drones alone now inflict up to 80% of losses at tactical depth. Ukraine, producing 200,000 FPV drones per month and targeting 4 million annually, became the first nation to establish a military branch dedicated exclusively to drone warfare when it created the Unmanned Systems Forces in June 2024."
         },
         {
           "type": "paragraph",
-          "text": "In the domain of Unmanned Aerial Systems, communication protocols serve as the backbone for facilitating seamless data exchange between Ground Control Stations and UAVs. These protocols govern the transmission of crucial control, telemetry, and video data by establishing rules, syntax, semantics, and synchronization mechanisms. While some drones adhere to standardized protocols, others rely on proprietary ones developed by manufacturers."
+          "text": "The economics are staggering. A $400 FPV drone carrying a modified RPG warhead can destroy a $3 million tank. Ukraine's DOT-Chain procurement system now delivers drones directly from factory floor to fighting position, bypassing traditional military supply chains entirely. The gamification of kills—with points redeemable for advanced weapons—has turned drone warfare into something that resembles a lethal video game."
         },
         {
           "type": "paragraph",
-          "text": "Modern drones typically employ serial-based protocols, ensuring synchronization among peripherals and enabling seamless communication across components. However, older models may utilize alternative methods such as Pulse Position Modulation or Pulse Width Modulation."
+          "text": "Understanding how drones communicate is essential for both operators and defenders. Most commercial drones use standardized protocols for control and video, making them predictable to those who know what to look for. Military and modified systems often employ proprietary or encrypted links, but all share common vulnerabilities that can be exploited."
         },
         {
           "type": "heading",
@@ -104,7 +104,7 @@
         },
         {
           "type": "paragraph",
-          "text": "An FPV drone consists of a simple quadcopter, a remote control station, and goggles so an operator can see what the drone sees when flying. These drones cost approximately $200 to $1,000 and can fly 5-15 kilometers on average. FPV drones have been getting progressively larger, starting with 7-inch frames in 2022 and increasing to 10-13 inch frames in 2024-2025 to carry heavier payloads."
+          "text": "The FPV drone has evolved from a hobbyist toy into the most cost-effective precision weapon in history. A basic setup—frame, motors, flight controller, camera, and goggles—costs $200 to $1,000. With AI-assisted targeting now boosting hit rates from 10-20% to 70-80%, these weapons have fundamentally altered infantry tactics. Frames have grown from 7 inches in 2022 to 10-13 inches by 2025, enabling heavier payloads including modified artillery rounds."
         },
         {
           "type": "table",
@@ -454,7 +454,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "sUAS provide significant advantages to tactical units, but they can be defeated. Methods of defeat include both active and so-called passive measures, although the second label is misleading. There is nothing passive about continual setup, teardown, and improvement of camouflage, overhead cover, and decoys. Russia has shifted from heavy armored columns to smaller assault units using motorbikes and dune buggies specifically to evade drone detection."
+          "text": "The kill zone has expanded dramatically. Reconnaissance and attack drones have made the airspace within 15 kilometers of contact lines essentially unsurvivable for conventional logistics. Ground drones now handle 90% of frontline supply runs in some sectors because wheeled vehicles become targets the moment they enter drone coverage. Russia has abandoned heavy armored columns for small assault teams on motorbikes and dune buggies. Survival requires understanding that 'passive' countermeasures demand constant, active work."
         },
         {
           "type": "heading",
@@ -556,16 +556,16 @@
         {
           "type": "heading",
           "level": 4,
-          "text": "Fiber-Optic Drone Challenge"
+          "text": "The Fiber-Optic Revolution"
         },
         {
           "type": "paragraph",
-          "text": "Fiber-optic FPV drones represent a significant challenge for electronic warfare. Unlike conventional drones which rely on radio frequencies vulnerable to jamming, fiber-optic drones transmit control signals and video feeds through fiber-optic cables, making them immune to RF jamming. These drones can operate up to 20 kilometers depending on cable length."
+          "text": "Fiber-optic FPV drones have rendered billions of dollars in electronic warfare investment obsolete overnight. These systems transmit control signals and crystal-clear video through hair-thin fiber-optic cables, making them completely immune to RF jamming. With ranges now exceeding 20 kilometers, they can strike deep behind lines with guaranteed signal integrity. The transition from radio to fiber represents one of the most significant tactical adaptations in modern warfare."
         },
         {
-          "type": "info",
+          "type": "warning",
           "title": "Fiber-Optic Countermeasures",
-          "text": "Fiber-optic UAVs can only be stopped with kinetic means such as shotguns, small arms fire, or physical interception. Electronic warfare has no effect on these systems. Early detection and engagement before they reach their target is critical."
+          "text": "Fiber-optic drones can only be stopped with kinetic means: shotguns, small arms, nets, or physical interception. Your multi-million dollar jammer is useless. The emphasis now is on what soldiers can carry—portable EW in backpacks and guns to shoot incoming FPV drones. Early visual and acoustic detection is your only warning."
         },
         {
           "type": "heading",
@@ -694,6 +694,342 @@
           "type": "info",
           "title": "Repeater Placement",
           "text": "When deploying a repeater, position it in direct line of sight to both the FPV drone and the ground control station, ideally at an elevated location that surpasses the surrounding terrain. For 1.3GHz video systems, maximum theoretical range in free space can exceed 70km with proper antenna configuration."
+        }
+      ]
+    },
+    {
+      "id": "fpv-employment-techniques",
+      "number": "1.11",
+      "title": "Advanced FPV Employment Techniques",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Analysis of large-scale FPV drone employment in modern conflicts reveals a significant expansion in tactical applications. Kamikaze drones now account for up to 70% of personnel and equipment losses at tactical depth. This section documents 19 named employment techniques observed in current operations."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Standard FPV Specifications"
+        },
+        {
+          "type": "table",
+          "headers": ["Specification", "Typical Value"],
+          "rows": [
+            ["Frame Size", "7 inches"],
+            ["Payload Capacity", "Up to 2.5 kg"],
+            ["Max Speed (loaded)", "Up to 120 km/h"],
+            ["Flight Time (loaded)", "7-10 minutes"],
+            ["Range (no repeater)", "10-12 km"],
+            ["Prep Time", "2 minutes"],
+            ["Unit Cost", "$400-500 USD"]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "1. Classic Attack"
+        },
+        {
+          "type": "paragraph",
+          "text": "The most common employment method. A reconnaissance drone locates the target and transmits coordinates to the FPV operator for destruction. Video confirmation of target destruction is provided by the reconnaissance drone. Requires: 1 recon drone operator, 1 FPV operator."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "2. Free Hunt"
+        },
+        {
+          "type": "paragraph",
+          "text": "FPV drones independently strike pre-identified objects and positions without real-time reconnaissance support. Operators work from previously collected intelligence on known enemy positions. Best for static targets with confirmed locations."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "3. FPV Swarm"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mass attack using 5-12 kamikaze drones against identified targets. A reconnaissance drone locates targets and coordinates the mass strike. Can be combined with artillery and mortar fire for devastating combined effects. Requires: 5+ FPV operators, 1 recon operator."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "4. Assault Group Escort"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sequential FPV attacks on enemy positions during assault team movement and offensive operations. The reconnaissance drone provides control and coordination between ground units and drone operators. Particularly effective for suppressing defensive positions ahead of advancing infantry. Requires: 3-5 FPV operators, 1 recon operator."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "5. FPV Ambush"
+        },
+        {
+          "type": "paragraph",
+          "text": "FPV drone lands and occupies a concealed position near roads with heavy traffic, intersections, or likely concentration areas, then executes surprise attacks on targets of opportunity. When paired with a relay drone: depth exceeds 5 km, wait time up to 6 hours (only control receiver active). At night, attacks can target vehicle headlights or use thermal-equipped FPV."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "6. Combined Strike"
+        },
+        {
+          "type": "paragraph",
+          "text": "Joint operation between FPV drones and bomber drones for comprehensive fire engagement. After FPV destroys or disables armored vehicles, the bomber drone drops munitions on personnel during evacuation. Alternative: bomber first immobilizes personnel/soft vehicles with drops, then FPV engages."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "7. Double Strike"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sequential employment of multiple FPV drones with different warheads to defeat protected positions. First drone with shaped charge breaches the barrier. Second drone with thermobaric or fragmentation warhead engages personnel in interior spaces. Effective against bunkers and hardened positions."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "8. FPV Trap"
+        },
+        {
+          "type": "paragraph",
+          "text": "Booby-trapped drone variants designed to exploit enemy recovery attempts. Methods include: audio beacon to attract attention with remote detonation via relay drone; tilt-switch detonation when position changes; 20-50g embedded charge activated during disassembly; GPS beacon for follow-up strike on recovery location; chemical agent coating on drone body."
+        },
+        {
+          "type": "warning",
+          "title": "Recovered Drone Hazard",
+          "text": "Never approach recovered enemy drones. Assume all downed enemy FPV drones are booby-trapped. Do not approach from the camera direction. Mark location, report to commander, wait for EOD specialist."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "9. FPV Miner"
+        },
+        {
+          "type": "paragraph",
+          "text": "Covert placement of anti-personnel mines, anti-tank mines, or disguised IEDs on rotation and evacuation routes. FPV drone delivers and places munitions near positions or on routes to destroy personnel and vehicles. Creates remote mining capability without exposing personnel."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "10. FPV Sapper"
+        },
+        {
+          "type": "paragraph",
+          "text": "Remote mine clearance by dropping munitions on or placing charges against exposed, unconcealed mines on roads and paths. Enables safe route clearance without risking EOD personnel."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "11. FPV Drop"
+        },
+        {
+          "type": "paragraph",
+          "text": "Munition drops from FPV drones to destroy personnel in the open or in light cover. Reconnaissance drone guides FPV to target. Cases documented of chemical agent munitions. Also used for friendly resupply drops to isolated positions."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "12. FPV Dragon"
+        },
+        {
+          "type": "paragraph",
+          "text": "Dispersal of incendiary mixture over enemy positions using FPV equipped with thermite charge (typically based on 120mm artillery incendiary round). Average dispersal height: 20-50m. Burn time: up to 2 minutes. Temperature exceeds 2300°C. Effective against personnel, vehicles, exposed ammunition, and equipment."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "13. FPV Air Defense"
+        },
+        {
+          "type": "paragraph",
+          "text": "Using FPV drones to intercept and destroy enemy reconnaissance drones and hexacopters. When radio-technical means detect UAV (altitude up to 3 km, speed up to 110 km/h), FPV drones launch for interception. Destruction via fragmentation charge detonation on approach or ramming. Radar operator provides target cueing."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "14. FPV Saboteur"
+        },
+        {
+          "type": "paragraph",
+          "text": "Covert pre-positioning of 4-6 kamikaze drones within 2-3 km of target by reconnaissance teams. Drones placed in standby mode, then remotely activated via GSM network signal to strike pre-loaded coordinates. Enables delayed attacks after team withdrawal."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "15. FPV Mothership"
+        },
+        {
+          "type": "paragraph",
+          "text": "Extended range operations using carrier UAV (fixed-wing or large multirotor) that also serves as relay. Payload capacity: 2-3 FPV drones. Range extension up to 60-70 km depending on carrier type. Unmanned surface vessels can also serve as FPV carriers for maritime operations."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "16. Fiber-Optic FPV"
+        },
+        {
+          "type": "paragraph",
+          "text": "FPV drones controlled via fiber-optic cable for guaranteed target engagement immune to EW jamming. Range: up to 10 km (some variants to 25 km). Characteristics: clear video to terminal phase, requires avoiding sharp maneuvers, must avoid fire sources along route. Only kinetic defeat is effective against these systems."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "17. Building Clearing"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tiny whoop micro-drones (under 100mm diameter, under 50g) with prop guards for interior reconnaissance during urban assault operations. Flight time: up to 4 minutes. Indoor range: up to 500m. Used to detect enemy and clear rooms before entry."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "18. FPV Loudspeaker"
+        },
+        {
+          "type": "paragraph",
+          "text": "Psychological operations using FPV drones equipped with speakers to broadcast messages. Hover height: up to 50m. Used to demoralize personnel and encourage surrender by broadcasting that positions are surrounded and evacuation routes are under fire control."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "19. Leaflet Drop"
+        },
+        {
+          "type": "paragraph",
+          "text": "Information warfare using FPV drones for leaflet distribution. Payload: up to 2 kg (approximately 200 leaflets). Used for propaganda and psychological influence on military personnel and civilian population."
+        }
+      ]
+    },
+    {
+      "id": "fpv-countermeasures-survival",
+      "number": "1.12",
+      "title": "FPV Countermeasures and Survival",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Countering FPV drones requires a comprehensive approach combining active and passive measures implemented both at unit level and by individual personnel. The number of drones on the front grows exponentially. Constant drone coverage has led to decentralization and reduction of forces at the front line. Where a platoon once held, now a squad suffices. Where there was a strongpoint, now three two-man positions."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Active Countermeasures"
+        },
+        {
+          "type": "checklist",
+          "id": "active-countermeasures",
+          "items": [
+            "Locate and destroy drone operator teams: look for antennas, prepared launch sites, munition disassembly traces, packaging, inconspicuous vehicles, repeaters on tall buildings",
+            "Early UAV detection: visual, auditory, detector/analyzer signals, alerts from command or adjacent units",
+            "Electronic warfare suppression of control frequencies, video transmission, and satellite navigation",
+            "Reduce time in probable engagement zone through vehicle speed (enduro motorcycle at 80 km/h covers 5 km in 4 minutes)",
+            "Kinetic engagement: small arms fire, primarily shotguns (effective to 50m)",
+            "Mechanical defeat: net launchers at close range (20-30m)",
+            "Evasive maneuver: dispersion, taking cover, active movement in open terrain under threat"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Passive Countermeasures"
+        },
+        {
+          "type": "checklist",
+          "id": "passive-countermeasures",
+          "items": [
+            "Fortification: anti-drone niches and foxholes, L-shaped bunker entrances, overhead protective nets and barriers",
+            "Position camouflage: irregular-shaped camo nets 0.3-0.5m from equipment in tree/bush shadows or inside damaged buildings, thermal covers, drone-perspective signature checks",
+            "Decoy positions with heat and light sources, vehicle mockups or disabled vehicles, simulated activity",
+            "Protective net/screen barriers along rotation and evacuation routes from fishing nets",
+            "Vehicle protection: overhead screens, cage armor, dome EW systems",
+            "Weather/terrain/time planning: operate during conditions unfavorable for drones",
+            "Smoke screens and obscuration of positions and movement routes"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Camouflage Fundamentals"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Camouflage from aerial observation using overheads, fabric nets, branches, grass, foliage. Positions are compromised by: plastic film, white bags, household trash, fresh earth, personnel movement",
+            "From the air you are less visible if you: do not move; are in shadow of structures; sit rather than lie (reduces profile); match uniform color to terrain; do not fidget or reflect light",
+            "Move and hide in shadows of trees and slopes. No sudden movements or running. Safer times: dusk, night, fog, rain. Thermal covers are relevant",
+            "Place and camouflage vehicles in tree lines, along/inside buildings and hangars, change positions, build simple camouflaged shelters. Cover vehicle glass to prevent glare. If enemy is north, park vehicles on south side of buildings",
+            "Do not park transport near positions; stage in concealed location for quick departure. Collect all trash in bags and designated pit. Scattered ration packaging, cans, bottles, plastic clearly expose positions. Launch your own drone quietly to check for signature indicators",
+            "Camo nets always needed in large quantities. When installing, vary configuration - the more unclear and diffuse the silhouette, the harder to detect. Satellite dishes heat up; hide in pits and camouflage from both day cameras and thermal",
+            "Create decoy positions with signature indicators. Install military vehicle mockups or disabled transport. Simulate activity. Light fires at night in empty shelters, place trench candles"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Light and Sound Discipline"
+        },
+        {
+          "type": "paragraph",
+          "text": "At night maintain light discipline. Cigarette glow, campfire, flashlight, headlights, phone screens attract drones like moths to flame. Conversations only in cover. Do not cluster with cigarettes when bored. Do not wander positions aimlessly. If called by command, inform another soldier. Primary detection criteria: movement by day and thermal signatures by night. Maintain silence, communicate in whispers and gestures, listen for sounds."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Fortification Best Practices"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "When digging positions, create lateral niche at bottom for protection from shrapnel during shelling, FPV strikes, and drops. Bunker exits in L-shape. Hang protective cover at shelter entrance. Build second bunker entrance (first may be buried by hit)",
+            "As FPV obstacles, prepare and secure cord anti-drone curtains from 4-5mm rope: length 6m, height up to 4m, 20cm spacing between hanging ropes",
+            "Alternative protection: install screens from cheap fishing nets (length up to 80m, height 4m) - invisible to operators. Build additional overheads and visors",
+            "Pre-position smoke grenades 20-30m from position for activation under drone kamikaze threat. Each soldier carries instant smoke grenades",
+            "Additional protection elements on vehicles (visors, cage armor, shields, nets, chains, 1cm rubber fragments on screws) increase crew and passenger survivability during drone attacks. Do not overdo it"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Actions on Drone Detection"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Always listen for sounds, sense the sky. Detection is first by sound (better at night), then visual. Use your ears and eyes. Report immediately. Treat all UAVs as hostile",
+            "Learn to distinguish Mavic from FPV by sound. Mavic is quieter and steadier, FPV is higher-pitched with sharp changes during acceleration",
+            "Plan movement based on analysis of enemy drone activity patterns in specific area (they know about gray time too)",
+            "Avoid open areas, move along tree lines, in built-up areas move building to building. Minimum 5m spacing in three-man teams. Move covertly by threes to control points",
+            "Reconnaissance drone is harbinger of FPV. If you detect enemy UAV while moving (including in vehicle), do not lead it to friendly positions. Take cover, wait, observe, do not reveal your unit's positions. In tree line, lean against tree trunk and freeze",
+            "During movement, maintain sky watch by sectors. Keep distance and note nearest cover (ruins, holes, tree lines, bushes) for sprint under drone threat. Shell crater as safe place becomes a grave. Do not cluster in one spot. Dispersion, maneuver, and speed",
+            "Hear FPV - immediately to cover. In the open - make sudden sharp movements. Exit operator's observation sector, dodge sideways during attack. Shuttle-run skills help. Practice",
+            "If drone is within 20-30m, do not freeze hoping it will not notice and pass by. Move! Survival is in reaction and movement"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "text": "Vehicle Operations"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Small arms fire is largely ineffective (small target, high speed). When shooting you are static, making operator targeting easier. At close range (to 50m), shotguns have best chance. Train on clay pigeons",
+            "Cases documented of operator toying with victims. If you are agile and skillfully evade, hide behind cover (40cm tree trunk works), and can attack drone by throwing objects - survival chances increase. Documented in practice",
+            "During vehicle movement, special attention to sky watch from rear and flanks (up to 80% of FPV attacks target rear and side of vehicles)",
+            "On dangerous sections, travel at maximum safe speed. Do not choose long routes. When kamikaze drone detected, pull off road (preferably to tree line or buildings), stop, and quickly disperse. Chance of evading FPV on highway is minimal",
+            "At vehicle stops, everyone exits very quickly, no clustering, no arguing about who unloads ammunition. Otherwise target priority increases. Time works against you",
+            "High-speed motorcycles, buggies, and ATVs with trained drivers improve survivability and logistics near the line. Electric versions provide silent movement and better crew alertness for early drone detection by sound"
+          ]
+        },
+        {
+          "type": "info",
+          "title": "Extreme Driving",
+          "text": "Extreme driving requires serious driver training. Practice day and night. Learn to identify and memorize landmarks by day and find them at night. Speed and unpredictability are your best defense against FPV drones while mobile."
         }
       ]
     }

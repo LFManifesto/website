@@ -2,7 +2,7 @@
   "id": "sigint",
   "number": "3",
   "title": "Signals Intelligence",
-  "description": "Signals Intelligence (SIGINT) encompasses interception, analysis, and exploitation of electronic signals. This section covers SDR platforms, signal identification, RF emitter analysis, and direction finding techniques for small team operations.",
+  "description": "A $30 USB dongle and a laptop now do what once required a van full of equipment. Software-defined radio has transformed signals intelligence from a government monopoly into a capability any motivated team can develop. This section covers the tools, techniques, and tradecraft.",
   "icon": "signal",
   "subsections": [
     {
@@ -12,11 +12,11 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "Signals Intelligence (SIGINT) is the interception, analysis, and exploitation of electronic signals for intelligence purposes. It involves monitoring and deciphering communication signals, including voice, data, and other electronic transmissions, to gather information about adversaries, threats, or targets of interest."
+          "text": "Signals Intelligence answers the question every commander asks: what is the enemy doing? Intercepting and analyzing electronic emissions reveals communications, locations, capabilities, and intentions. AI-powered deep learning now outperforms hand-coded algorithms for signal detection, making automated collection increasingly accessible to small teams with limited budgets."
         },
         {
           "type": "paragraph",
-          "text": "Small teams can effectively leverage Software-Defined Radios (SDRs) along with online resources like the Signal Identification Wiki (sigidwiki.com) to enhance their SIGINT capabilities. The combination of affordable hardware and specialized software enables meaningful collection operations without massive budgets traditionally associated with signals intelligence."
+          "text": "The democratization of SIGINT began with the RTL-SDR—a $30 TV tuner that hackers discovered could receive virtually any radio signal. Today, purpose-built platforms like SIGpi (a complete SIGINT distribution for Raspberry Pi) put professional-grade collection capability in a package smaller than a paperback book. The gap between what intelligence agencies and small teams can achieve narrows every year."
         },
         {
           "type": "heading",
@@ -60,11 +60,11 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "Software Defined Radio (SDR) implements radio functions in software rather than hardware. Traditional radios use fixed circuits for modulation, demodulation, and filtering. SDRs digitize signals at the antenna and process them with software, enabling a single device to receive virtually any signal type within its frequency range."
+          "text": "Software Defined Radio replaces fixed hardware circuits with flexible software. A single SDR can decode FM broadcasts, track aircraft, monitor encrypted radios, or analyze completely unknown signals—all through different software. The HackRF One covers 1 MHz to 6 GHz for $300. The new HackRF Pro adds professional features for serious operators. FPGAs now enable embedded SIGINT algorithms running at the edge."
         },
         {
           "type": "paragraph",
-          "text": "SDR technology democratizes signals intelligence by providing flexible, affordable platforms that can be reconfigured through software. The same hardware can decode FM broadcasts, track aircraft via ADS-B, monitor amateur radio, or analyze unknown signals simply by running different software."
+          "text": "What changed everything wasn't the hardware—it was the software ecosystem. GNU Radio provides building blocks for any conceivable signal processing task. Signal identification databases like SigIdWiki catalog thousands of known signals with their characteristics. Machine learning now identifies signals that would take human analysts hours to recognize."
         },
         {
           "type": "heading",
@@ -92,7 +92,7 @@
             ["GQRX", "Linux/Mac", "General purpose receiver, GNU Radio based"],
             ["GNU Radio", "Linux/Mac/Windows", "Advanced signal processing, custom decoders"],
             ["SDR++", "Cross-platform", "Modern interface, plugin architecture"],
-            ["Artemis", "Cross-platform", "Offline signal identification database"],
+            ["SIGpi", "Raspberry Pi", "Complete portable SIGINT platform"],
             ["SigintOS", "Linux", "Dedicated SIGINT distribution with integrated tools"]
           ]
         },
