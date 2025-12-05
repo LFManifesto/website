@@ -1642,6 +1642,17 @@ audio {
 /* --------------------------------------------------------------------------
    Tools Page
    -------------------------------------------------------------------------- */
+.tools-notice {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--bg-tertiary);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

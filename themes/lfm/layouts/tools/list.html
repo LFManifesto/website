@@ -1,6 +1,8 @@
 {{ define "main" }}
 <h1 class="page-title-centered">{{ .Title }}</h1>
 
+<p class="tools-notice">These tools are designed for desktop and tablet use. Mobile users may experience display issues.</p>
+
 <div class="tools-grid">
   {{ range .Pages }}
   <a href="{{ .Permalink }}" class="tool-card">
