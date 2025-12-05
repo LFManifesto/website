@@ -702,11 +702,33 @@
       margin: 0;
     }
 
+    /* Navigation Buttons */
+    .nav-btn {
+      display: inline-block;
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--accent);
+      background-color: var(--bg-tertiary);
+    }
+
     /* Quick Reference Table */
     .quick-ref-table {
       width: 100%;
       border-collapse: collapse;
       margin: var(--space-md) 0;
+      font-size: 0.85rem;
     }
 
     .quick-ref-table th,
@@ -714,19 +736,21 @@
       padding: var(--space-sm) var(--space-md);
       text-align: left;
       border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
     }
 
     .quick-ref-table th {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       background-color: var(--bg-secondary);
+      white-space: nowrap;
     }
 
     .quick-ref-table td {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
     }
 
@@ -739,7 +763,7 @@
       background-color: var(--bg-secondary);
       padding: 2px 6px;
       border-radius: 3px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--accent);
     }
 
@@ -889,7 +913,17 @@
     }
 
     .table-wrapper table {
-      min-width: 500px;
+      min-width: 400px;
+    }
+
+    /* Content card table container */
+    .content-card {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .content-card .quick-ref-table {
+      min-width: 400px;
     }
 
     /* Responsive */
@@ -958,6 +992,7 @@
 
       .content-card {
         padding: var(--space-md);
+        overflow-x: auto;
       }
 
       .form-generator {
@@ -973,10 +1008,24 @@
         width: 100%;
       }
 
-      /* Ensure tables scroll properly */
+      /* Tables with consistent mobile styling */
       .quick-ref-table {
-        display: block;
-        overflow-x: auto;
+        font-size: 0.8rem;
+      }
+
+      .quick-ref-table th,
+      .quick-ref-table td {
+        padding: var(--space-xs) var(--space-sm);
+      }
+
+      .quick-ref-table th {
+        font-size: 0.65rem;
+      }
+
+      /* Nav buttons compact on mobile */
+      .nav-btn {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.85rem;
       }
     }
 
