@@ -1602,6 +1602,78 @@ audio {
   padding: 0 var(--space-lg);
 }
 
+/* Tables - tactical data presentation */
+.article-content table {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.article-content thead {
+  background: var(--bg-tertiary);
+  border-bottom: 2px solid var(--accent);
+}
+
+.article-content th {
+  padding: 0.875rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.article-content td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.article-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.article-content tbody tr:hover {
+  background: var(--bg-tertiary);
+}
+
+.article-content td:first-child,
+.article-content th:first-child {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Monospace for numerical data */
+.article-content td code,
+.article-content table strong {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--accent);
+}
+
+/* Mobile table scroll */
+@media (max-width: 600px) {
+  .article-content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .article-content th,
+  .article-content td {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}
+
 /* Links with subtle animation */
 .article-content a {
   color: var(--accent);
