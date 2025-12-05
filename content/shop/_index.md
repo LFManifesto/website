@@ -1,4 +1,4 @@
 ---
 title: "Shop"
-description: "Zines and print materials. Pay with Monero, cash, or card."
+description: "Print publications featuring original research and operational tradecraft from subject matter experts."
 ---

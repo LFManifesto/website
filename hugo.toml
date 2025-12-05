@@ -12,7 +12,7 @@ theme = 'lfm'
 
 # Site description for SEO
 [params]
-  description = "Zines covering OSINT, survival, communications, and emergent warfare. By practitioners, for practitioners."
+  description = "A veteran-owned publication delivering field-tested knowledge on intelligence gathering, communications infrastructure, and unconventional operations."
   author = "Light Fighter Manifesto L.L.C."
   tagline = "Unfiltered. Uncensored. Unconventional."
 

@@ -2,7 +2,7 @@
 
 **Live Site:** https://lightfightermanifesto.org
 
-Zines covering OSINT, survival, communications, and emergent warfare. By practitioners, for practitioners.
+A veteran-owned publication delivering field-tested knowledge on intelligence gathering, communications infrastructure, and unconventional operations.
 
 *Unfiltered. Uncensored. Unconventional.*
 
