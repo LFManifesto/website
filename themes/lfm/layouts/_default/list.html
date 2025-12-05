@@ -10,7 +10,7 @@
   {{ range .Pages }}
   <article class="article-card">
     <h2 class="article-card-title">
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </h2>
     <div class="article-card-meta">
       {{ .Date.Format "January 2, 2006" }}

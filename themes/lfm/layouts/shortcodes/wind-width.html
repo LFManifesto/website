@@ -1,0 +1,221 @@
+{{/* Wind Width Reference - Inline Article Tool */}}
+{{/* M118LR .308 175gr @ 2650 fps - Data from Ballisticard */}}
+{{/* Shows target width in mph - how much wind error you can tolerate */}}
+
+<div class="inline-tool wind-width-calc">
+  <div class="tool-header">
+    <span class="tool-label">WIND WIDTH REFERENCE</span>
+    <span class="tool-ammo">M118LR .308 175gr @ 2650 fps | 18" target</span>
+  </div>
+
+  <div class="tool-body">
+    <div class="wind-instructions">
+      <p>Target width in mph shows how much you can misjudge wind and still hit. Hold upwind edge. If your estimate is within the margin, send it.</p>
+    </div>
+
+    <table class="wind-table">
+      <thead>
+        <tr>
+          <th>Range</th>
+          <th>10 mph Drift</th>
+          <th>1 mph Drift</th>
+          <th>Target Width</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>100 yd</td>
+          <td>0.7 in</td>
+          <td>0.07 in</td>
+          <td class="wide">257 mph</td>
+        </tr>
+        <tr>
+          <td>200 yd</td>
+          <td>2.9 in</td>
+          <td>0.29 in</td>
+          <td class="wide">62 mph</td>
+        </tr>
+        <tr>
+          <td>300 yd</td>
+          <td>7.0 in</td>
+          <td>0.70 in</td>
+          <td class="wide">26 mph</td>
+        </tr>
+        <tr>
+          <td>400 yd</td>
+          <td>13 in</td>
+          <td>1.30 in</td>
+          <td class="good">14 mph</td>
+        </tr>
+        <tr>
+          <td>500 yd</td>
+          <td>20 in</td>
+          <td>2.00 in</td>
+          <td class="good">9 mph</td>
+        </tr>
+        <tr>
+          <td>600 yd</td>
+          <td>30 in</td>
+          <td>3.00 in</td>
+          <td class="caution">6 mph</td>
+        </tr>
+        <tr>
+          <td>700 yd</td>
+          <td>43 in</td>
+          <td>4.30 in</td>
+          <td class="caution">4 mph</td>
+        </tr>
+        <tr>
+          <td>800 yd</td>
+          <td>59 in</td>
+          <td>5.90 in</td>
+          <td class="tight">3 mph</td>
+        </tr>
+        <tr>
+          <td>900 yd</td>
+          <td>77 in</td>
+          <td>7.70 in</td>
+          <td class="tight">2 mph</td>
+        </tr>
+        <tr>
+          <td>1000 yd</td>
+          <td>99 in</td>
+          <td>9.90 in</td>
+          <td class="no-go">1.8 mph</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="wind-legend">
+      <span class="legend-item"><span class="dot wide"></span> 10+ mph: Full send</span>
+      <span class="legend-item"><span class="dot good"></span> 5-10 mph: Comfortable</span>
+      <span class="legend-item"><span class="dot caution"></span> 3-5 mph: Tight</span>
+      <span class="legend-item"><span class="dot tight"></span> 2-3 mph: Risky</span>
+      <span class="legend-item"><span class="dot no-go"></span> &lt;2 mph: Hold</span>
+    </div>
+  </div>
+</div>
+
+<style>
+.wind-width-calc {
+  background: #111;
+  border: 1px solid #333;
+  border-left: 3px solid #c41e3a;
+  border-radius: 4px;
+  margin: 2rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.wind-width-calc .tool-header {
+  background: #1a1a1a;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.wind-width-calc .tool-label {
+  color: #c41e3a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wind-width-calc .tool-ammo {
+  color: #666;
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+.wind-width-calc .tool-body {
+  padding: 1.5rem;
+}
+
+.wind-width-calc .wind-instructions {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: #0a0a0a;
+  border-left: 2px solid #666;
+}
+
+.wind-width-calc .wind-instructions p {
+  margin: 0;
+  color: #999;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.wind-width-calc .wind-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.wind-width-calc .wind-table th {
+  background: #1a1a1a;
+  color: #888;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+.wind-width-calc .wind-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #222;
+  color: #ccc;
+  font-family: monospace;
+}
+
+.wind-width-calc .wind-table td:first-child {
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.wind-width-calc .wind-table td:last-child {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.wind-width-calc .wind-table td.wide { color: #4a4; }
+.wind-width-calc .wind-table td.good { color: #6a6; }
+.wind-width-calc .wind-table td.caution { color: #aa4; }
+.wind-width-calc .wind-table td.tight { color: #a84; }
+.wind-width-calc .wind-table td.no-go { color: #c41e3a; }
+
+.wind-width-calc .wind-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #222;
+}
+
+.wind-width-calc .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.wind-width-calc .legend-item .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.wind-width-calc .legend-item .dot.wide { background: #4a4; }
+.wind-width-calc .legend-item .dot.good { background: #6a6; }
+.wind-width-calc .legend-item .dot.caution { background: #aa4; }
+.wind-width-calc .legend-item .dot.tight { background: #a84; }
+.wind-width-calc .legend-item .dot.no-go { background: #c41e3a; }
+</style>
