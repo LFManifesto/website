@@ -436,8 +436,98 @@ strong {
   letter-spacing: 0.15em;
 }
 
+.hero-intro {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: var(--space-md) auto 0;
+  line-height: 1.7;
+}
+
 .home-section {
   margin-bottom: var(--space-2xl);
+}
+
+/* Featured App Card */
+.featured-app-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-xl);
+}
+
+.featured-app-title {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-md);
+  color: var(--text-primary);
+}
+
+.featured-app-desc {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: 1.7;
+}
+
+.featured-app-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-lg);
+}
+
+.featured-app-features li {
+  color: var(--text-secondary);
+  padding: var(--space-xs) 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.featured-app-features li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+/* Community Section */
+.community-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-xl);
+}
+
+.community-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-md);
+  color: var(--text-primary);
+}
+
+.community-desc {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  line-height: 1.7;
+}
+
+.community-upcoming {
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
+}
+
+.community-server {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.community-server code {
+  color: var(--accent);
 }
 
 .section-header {
@@ -918,6 +1008,33 @@ audio {
   .payment-section {
     padding: var(--space-lg);
   }
+}
+
+/* Sold Out Banner */
+.sold-out-banner {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.sold-out-stamp {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  border: 3px solid var(--accent);
+  padding: var(--space-sm) var(--space-lg);
+  transform: rotate(-3deg);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+}
+
+.sold-out-text {
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
 /* --------------------------------------------------------------------------

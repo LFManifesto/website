@@ -3,7 +3,7 @@ title: "Light Fighter Guide"
 date: 2025-12-04
 description: "Interactive reference for unconventional warfare. Covers drones, communications, SIGINT, marksmanship, and mission planning with searchable content and checklists."
 icon: "book"
-tags: ["reference", "UAS", "comms", "training", "SIGINT", "marksmanship"]
+tags: ["reference", "training"]
 app_url: "/apps/field-guide/"
 weight: 5
 ---
