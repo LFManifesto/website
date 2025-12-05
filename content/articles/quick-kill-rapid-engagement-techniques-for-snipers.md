@@ -13,7 +13,7 @@ tags: ["Marksmanship", "Sniper", "Tactics", "Training", "Ukraine"]
 
 You are in a stairwell. Concrete block. Soviet era, maybe, or close enough. The railing is cold under your hand and the building smells like pigeon shit and old rain.
 
-Somewhere above you is a window. Somewhere beyond that window, 370 meters east, a man is crossing a courtyard. He appeared on thermal ninety seconds ago. Your radio crackled and someone said his grid and you started climbing.
+Somewhere above you is a window. Somewhere beyond that window, 370 meters east, a man is crossing a courtyard. He appeared on thermal ninety seconds ago. Your radio crackled. Someone said his grid. You started climbing.
 
 He does not know you are coming. He is thinking about his next cigarette, or the letter he will write tonight, or nothing at all. He is thinking the way a man thinks when he believes he is alone.
 
@@ -23,17 +23,17 @@ By the time you reach that window and find something stable to shoot from, you w
 
 There is no time to pull out a rangefinder. No time to reference the card in your sleeve pocket. No time to wait for your spotter to read mirage and call wind. You will see what your reticle tells you and you will either press the trigger or you won't.
 
-This is not how they taught it in school. This is how it works now.
+This is not how they taught it. This is how it works now.
 
 ---
 
 ## The Problem
 
-The old way was patience. You low-crawled into a hide you'd built over three days. You waited. Sometimes for hours. Sometimes for nothing. When the shot came, it was almost a relief—the end of all that careful stillness.
+The old way was patience. You low-crawled into a hide you built over three days. You waited. Sometimes for hours. Sometimes for nothing. When the shot came, it was almost a relief. The end of all that careful stillness.
 
-That sniper still exists. He's just becoming extinct.
+That sniper still exists. He is just becoming extinct.
 
-In Ukraine, drones deliver eighty percent of the casualties. The battlefield is transparent from above, saturated with cheap thermals and cheaper munitions. Infantry doesn't assault anymore. Infantry holds ground and spots for the robots.
+In Ukraine, drones deliver eighty percent of the casualties. The battlefield is transparent from above, saturated with cheap thermals and cheaper munitions. Infantry does not assault anymore. Infantry holds ground and spots for the robots.
 
 But there are places drones cannot see. The covered approach. The interior hallway. The space between buildings where the angle is wrong. Dense vegetation. Rubble. The urban seams.
 
@@ -43,7 +43,7 @@ TC 3-22.10, the Army's sniper manual, defines overmatch as creating "an unfair f
 
 The problem is always the same. You need range to the target. You need wind. Everything else is just pressing a trigger.
 
-What follows are four ways to get those numbers fast enough to matter.
+What follows are three ways to solve those problems fast enough to matter.
 
 ---
 
@@ -55,17 +55,17 @@ The question is how to engage targets at unknown distances without stopping to r
 
 The answer is danger space.
 
-Before the mission, you run your ballistics. You determine that 400 meters is your longest anticipated engagement—anything beyond that and buildings block your line. At 400 meters, your hold is 2.5 mils. You dial that onto your turret.
+Before the mission, you run your ballistics. You determine that 400 meters is your longest anticipated engagement. Anything beyond that, buildings block your line. At 400 meters, your elevation hold is 2.5 mils. You dial that onto your turret.
 
-Now you check your max ordinate—the highest point the bullet reaches in its arc. At 400 meters dialed, max ordinate occurs around 220 meters, where the bullet sits 0.6 mils above your line of sight in the scope. Subtract: 2.5 minus 0.6 equals 1.9 mils.
+Now you check your max ordinate. That is the highest point the bullet reaches in its arc. At 400 meters dialed, max ordinate occurs around 220 meters, where the bullet sits 0.6 mils above your line of sight. Subtract: 2.5 minus 0.6 equals 1.9 mils.
 
-Convert to inches: 1.9 mils × 3.937 × 2.2 = 16.45 inches.
+Convert to inches: 1.9 mils times 3.937 times 2.2 equals 16.45 inches.
 
 That number tells you everything. With 2.5 mils dialed, the bullet never rises more than 16.5 inches above your point of aim at any distance from muzzle to 400 meters. A standing man is roughly 30 inches from beltline to head.
 
 So you hold on the beltline. Every target. Every distance.
 
-At 50 meters, the bullet is still rising—it hits mid-chest. At 220 meters, it peaks—16 inches above beltline, still center mass. At 400 meters, it's dropped back to your point of aim—beltline. All hits. One hold.
+At 50 meters, the bullet is still rising. It hits mid-chest. At 220 meters, it peaks. Sixteen inches above beltline, still center mass. At 400 meters, it has dropped back to your point of aim. Beltline. All hits. One hold.
 
 | Parameter | Value |
 |---|---|
@@ -77,19 +77,19 @@ At 50 meters, the bullet is still rising—it hits mid-chest. At 220 meters, it 
 
 This is not precision shooting. This is killing fast. The target appears, you put the crosshair on his belt, you press. No thinking. No math. The ballistics are already solved.
 
-For sniper teams, you can break the AO into sectors—near, mid, far—with different shooters dialed to different ranges. Layered fires. Interlocking danger spaces. Nobody has to calculate anything when the shooting starts.
+For sniper teams, you can break the AO into sectors. Near, mid, far. Different shooters dialed to different ranges. Layered fires. Interlocking danger spaces. Nobody has to calculate anything when the shooting starts.
 
 ---
 
 ## Max Point Blank Zero
 
-Danger space requires you to know your max engagement range ahead of time. Sometimes you don't. Sometimes you're moving through unfamiliar terrain and anything might appear at any distance.
+Danger space requires you to know your max engagement range ahead of time. Sometimes you do not. Sometimes you are moving through unfamiliar terrain and anything might appear at any distance.
 
 This is where MPBZ earns its place.
 
-Your rifle is zeroed at 100 meters—standard for precision rifles. Before you step off, you dial your turret to a new zero, one calculated to keep the bullet inside a target-sized envelope for as long as possible.
+Your rifle is zeroed at 100 meters. Standard for precision rifles. Before you step off, you dial your turret to a new zero, one calculated to keep the bullet inside a target-sized envelope for as long as possible.
 
-The math: find the zero distance where max ordinate equals half your target height. For a 30-inch target—head to belt on a standing man—that means the bullet never rises more than 15 inches above your line of sight or falls more than 15 inches below.
+The math is straightforward. Find the zero distance where max ordinate equals half your target height. For a 30-inch target, head to belt on a standing man, that means the bullet never rises more than 15 inches above your line of sight or falls more than 15 inches below.
 
 For 7.62 NATO at standard velocities, that zero falls around 365 meters. Dial it. Now, from muzzle to approximately 440 meters, you can hold center of visible mass and hit somewhere on a torso-sized target.
 
@@ -101,47 +101,13 @@ For 7.62 NATO at standard velocities, that zero falls around 365 meters. Dial it
 | Max point blank range | 440 meters |
 | Point of aim | Center visible mass |
 
-At 50 meters, you hit slightly high. At 365 meters, you hit point of aim. At 440 meters, you hit low—but still on the target. Beyond that, the bullet drops below the 30-inch window and you need to start holding over.
+At 50 meters, you hit slightly high. At 365 meters, you hit point of aim. At 440 meters, you hit low, but still on the target. Beyond that, the bullet drops below the 30-inch window and you need to start holding over.
 
-The difference from danger space: MPBZ optimizes for maximum range coverage when you don't know where the threat will appear. Danger space optimizes for a known AO with a defined maximum. Both eliminate math. Both let you press the trigger without thinking.
+The difference from danger space: MPBZ optimizes for maximum range coverage when you do not know where the threat will appear. Danger space optimizes for a known AO with a defined maximum. Both eliminate math. Both let you press the trigger without thinking.
 
-The tradeoff is precision. You're aiming center mass, not center heart. At 400 meters you might hit low chest instead of upper. For interdiction, acceptable. For a hostage rescue, not.
+The tradeoff is precision. You are aiming center mass, not center heart. At 400 meters you might hit low chest instead of upper. For interdiction, acceptable. For a hostage rescue, not.
 
-Know what you're trading.
-
----
-
-## The 12-Inch Drill
-
-The envelope ends somewhere. Beyond MPBZ range, you need a holdover. Fast.
-
-There's a dimension on the human body that stays remarkably constant: top of head to top of shoulders. Twelve inches. Also chin to center chest. Twelve inches again.
-
-You mil that span on your target. Read 0.7 mils and you know, without calculating, that he's about 435 meters out. But you don't need range in meters. You need holdover in mils.
-
-For a 7.62 rifle running M118LR at 2,600 feet per second, the math collapses: **mil reading plus holdover equals ten.**
-
-You read 0.7. What plus 0.7 equals 10?
-
-Three.
-
-Hold three mils high. Break the shot.
-
-| Mil reading (12") | Holdover |
-|---|---|
-| 1.0 | 0 mils |
-| 0.9 | 1.0 mils |
-| 0.8 | 2.0 mils |
-| 0.7 | 3.0 mils |
-| 0.6 | 4.0 mils |
-| 0.5 | 5.0 mils |
-| 0.4 | 6.0 mils |
-
-Three seconds. All through the optic. No card, no laser, no radio call.
-
-The tradeoff is accuracy. The rule of 10 works for a specific velocity band. A crouching target breaks the assumption—his 12 inches isn't where you think. You are trading precision for speed.
-
-Sometimes that's the right trade.
+Know what you are trading.
 
 ---
 
@@ -149,17 +115,17 @@ Sometimes that's the right trade.
 
 You have range. Now you need wind.
 
-The traditional method: read the vegetation, read the mirage, estimate velocity at the target, velocity at midrange, velocity at the muzzle, average them, multiply by your wind factor, apply the hold.
+The traditional method is this: read the vegetation, read the mirage, estimate velocity at the target, velocity at midrange, velocity at the muzzle, average them, multiply by your wind factor, apply the hold.
 
 This works. It also takes time you might not have.
 
-Target width in wind reframes the question. Instead of asking "how fast is the wind," ask "how much wind would push the bullet off target?"
+Target width in wind reframes the question. Instead of asking how fast is the wind, ask how much wind would push the bullet off target.
 
-Start with your 1 mph wind value—deflection in mils from a 1 mph crosswind at a given range. At 400 meters for M118LR, it's 0.10 mils. An 18-inch target at that range reads 1.14 mils wide.
+Start with your 1 mph wind value. That is the deflection in mils from a 1 mph crosswind at a given range. At 400 meters for M118LR, it is 0.10 mils. An 18-inch target at that range reads 1.14 mils wide.
 
-Divide: 1.14 ÷ 0.10 = 11.4
+Divide: 1.14 divided by 0.10 equals 11.4.
 
-That number is the target's width in miles per hour. You can misjudge the wind by 11 mph—aiming at the upwind edge—and still hit somewhere on the torso.
+That number is the target's width in miles per hour. You can misjudge the wind by 11 mph while aiming at the upwind edge and still hit somewhere on the torso.
 
 At 400 meters, the target is 11 mph wide. You can be wrong by a lot and still connect.
 
@@ -178,11 +144,11 @@ At 800 meters, the target is 2.5 mph wide. Now your margin is thin.
 | 900 m | 0.26 mils | 1.9 |
 | 1000 m | 0.30 mils | 1.5 |
 
-*M118LR at 2,600 fps, 60°F, 29.92 inHg. 18-inch IPSC target.*
+*M118LR at 2,600 fps, 60 degrees F, 29.92 inHg. 18-inch IPSC target.*
 
 Look at what happens as range extends. At 400, you can be sloppy. At 600, you need to be close. At 1000, less than 2 mph of error and you miss.
 
-This isn't a wind call technique. It's risk assessment. You read conditions, estimate velocity, favor the upwind edge of the target, then ask: is my margin wide enough to cover my uncertainty?
+This is not a wind call technique. It is risk assessment. You read conditions, estimate velocity, favor the upwind edge of the target, then ask: is my margin wide enough to cover my uncertainty?
 
 If yes, shoot. If no, hold.
 
@@ -192,17 +158,15 @@ If yes, shoot. If no, hold.
 
 These techniques layer.
 
-Danger space handles the known AO. You've done the math before the mission. One hold, beltline, everything from muzzle to max range. Press and forget.
+Danger space handles the known AO. You have done the math before the mission. One hold, beltline, everything from muzzle to max range. Press and forget.
 
 MPBZ handles the unknown. Moving through unfamiliar terrain, dial your far zero, hold center mass, engage anything inside the envelope without thinking.
 
-The 12-inch drill covers what's beyond. Target past your envelope? Mil the head-to-shoulders, subtract from ten, hold the difference.
+Wind width runs underneath both. You already know your margins from the table you built. At 400 you have 11 mph to play with. At 800, two and a half. When you estimate a 5 mph crosswind, you know instantly whether you are gambling.
 
-Wind width runs underneath all of it. You already know your margins from the table you built. At 400 you have 11 mph to play with. At 800, two and a half. When you estimate a 5 mph crosswind, you know instantly whether you're gambling.
+None of this replaces fundamentals. You still need a stable position. You still need a clean press. You still need to call your shot and know when you have missed.
 
-None of this replaces fundamentals. You still need a stable position. You still need a clean press. You still need to call your shot and know when you've missed.
-
-But the cognitive overhead—the math, the lookups, the second-guessing—compresses into patterns you can run without stopping to think.
+But the cognitive overhead compresses. The math, the lookups, the second-guessing. It all becomes pattern recognition you can run without stopping to think.
 
 The fight will not wait for you to think.
 
@@ -212,25 +176,25 @@ The fight will not wait for you to think.
 
 In the treelines around Bakhmut, Ukrainian snipers talk about a fight that looks nothing like the manuals. Positions are occupied for hours, not days. Drones overhead force constant movement. Targets appear on thermal for seconds before disappearing behind walls, into vehicles, underground.
 
-The sniper who hesitates watches opportunities vanish. The sniper who cannot operate at tempo becomes a liability—occupying positions a drone could fill, consuming resources without producing effects.
+The sniper who hesitates watches opportunities vanish. The sniper who cannot operate at tempo becomes a liability. He occupies a position a drone could fill. He consumes resources without producing effects.
 
 Eighty percent of casualties from unmanned systems. The human behind the glass has to justify his presence by doing what the machines cannot.
 
 Move fast. Shoot fast. Displace before the counterbattery fires.
 
-The techniques here are tools for that fight. Danger space eliminates ranging entirely when you know the AO. MPBZ covers the unknown. The 12-inch drill provides holdovers at speed. Wind width converts estimation to risk management. Together, they compress the shot process until a sniper moving through unfamiliar terrain can make the hit without slowing down.
+The techniques here are tools for that fight. Danger space eliminates ranging entirely when you know the AO. MPBZ covers the unknown. Wind width converts estimation to risk management. Together, they compress the shot process until a sniper moving through unfamiliar terrain can make the hit without slowing down.
 
 ---
 
-You are at the window now. Third floor. You've been climbing for forty-five seconds and your heart rate is still too high. The bipod legs are on the sill and your breathing is wrong and none of that matters because there he is, crossing the courtyard, exactly where they said.
+You are at the window now. Third floor. You have been climbing for forty-five seconds and your heart rate is still too high. The bipod legs are on the sill and your breathing is wrong and none of that matters because there he is, crossing the courtyard, exactly where they said.
 
 You already dialed 2.5 before you stepped off. Danger space. Everything out to 400.
 
-He's inside that. You can see it without milling. Close enough.
+He is inside that. You can see it without milling. Close enough.
 
 Beltline. Press.
 
-The round breaks and you are already moving—Loss of target. Rifle up, off the sill, down the stairs three at a time because the shot signature is blooming on somebody's thermal right now and if you're still at that window in thirty seconds you won't be leaving this building.
+The round breaks and you are already moving. Loss of target. Rifle up, off the sill, down the stairs three at a time because the shot signature is blooming on someone's thermal right now and if you are still at that window in thirty seconds you will not be leaving this building.
 
 The window was open for three seconds.
 
