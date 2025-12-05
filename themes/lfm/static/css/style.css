@@ -1964,6 +1964,7 @@ audio {
   border-radius: 8px;
   padding: var(--space-xl);
   margin: var(--space-lg) 0;
+  text-align: center;
 }
 
 .tool-app input,
