@@ -158,30 +158,9 @@
     if (hash === 'payload-request') {
       showPayloadRequestTool();
       updateActiveNav('tools', 'payload-request');
-    } else if (hash === 'mil-calculator') {
-      showMilCalculator();
-      updateActiveNav('tools', 'mil-calculator');
-    } else if (hash === 'link-margin') {
-      showLinkMarginTool();
-      updateActiveNav('tools', 'link-margin');
-    } else if (hash === 'hf-antenna-calculator') {
-      showHFAntennaCalculator();
-      updateActiveNav('tools', 'hf-antenna-calculator');
-    } else if (hash === 'path-loss-calculator') {
-      showPathLossCalculator();
-      updateActiveNav('tools', 'path-loss-calculator');
-    } else if (hash === 'freq-wavelength-converter') {
-      showFreqWavelengthConverter();
-      updateActiveNav('tools', 'freq-wavelength-converter');
-    } else if (hash === 'wind-calculator') {
-      showWindCalculator();
-      updateActiveNav('tools', 'wind-calculator');
-    } else if (hash === 'coord-converter') {
-      showCoordConverter();
-      updateActiveNav('tools', 'coord-converter');
-    } else if (hash === 'zulu-time') {
-      showZuluTime();
-      updateActiveNav('tools', 'zulu-time');
+    } else if (hash === 'sniper-reference') {
+      showSniperReference();
+      updateActiveNav('tools', 'sniper-reference');
     }
   }
 
@@ -256,60 +235,11 @@
               <div style="color: var(--text-muted); font-size: 0.85rem;">Generate formatted 5-Line payload delivery requests</div>
             </div>
           </a>
-          <a href="#mil-calculator" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
-            <div style="color: var(--accent); min-width: 2rem;">MIL</div>
+          <a href="#sniper-reference" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+            <div style="color: var(--accent); min-width: 2rem;">SR</div>
             <div>
-              <div style="color: var(--text-primary); font-weight: 600;">Mil-Relation Calculator</div>
-              <div style="color: var(--text-muted); font-size: 0.85rem;">Calculate range using mil-relation formula</div>
-            </div>
-          </a>
-          <a href="#link-margin" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
-            <div style="color: var(--accent); min-width: 2rem;">RF</div>
-            <div>
-              <div style="color: var(--text-primary); font-weight: 600;">Link Margin Assessment</div>
-              <div style="color: var(--text-muted); font-size: 0.85rem;">Evaluate RF link margin for site selection</div>
-            </div>
-          </a>
-          <a href="#hf-antenna-calculator" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
-            <div style="color: var(--accent); min-width: 2rem;">HF</div>
-            <div>
-              <div style="color: var(--text-primary); font-weight: 600;">HF Antenna Calculator</div>
-              <div style="color: var(--text-muted); font-size: 0.85rem;">Calculate wire antenna dimensions for HF bands</div>
-            </div>
-          </a>
-          <a href="#path-loss-calculator" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
-            <div style="color: var(--accent); min-width: 2rem;">dB</div>
-            <div>
-              <div style="color: var(--text-primary); font-weight: 600;">Path Loss Calculator</div>
-              <div style="color: var(--text-muted); font-size: 0.85rem;">Calculate RF signal attenuation over distance</div>
-            </div>
-          </a>
-          <a href="#freq-wavelength-converter" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
-            <div style="color: var(--accent); min-width: 2rem;">λ</div>
-            <div>
-              <div style="color: var(--text-primary); font-weight: 600;">Freq/Wavelength Converter</div>
-              <div style="color: var(--text-muted); font-size: 0.85rem;">Convert between frequency and wavelength</div>
-            </div>
-          </a>
-          <a href="#wind-calculator" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
-            <div style="color: var(--accent); min-width: 2rem;">W</div>
-            <div>
-              <div style="color: var(--text-primary); font-weight: 600;">Wind Drift Calculator</div>
-              <div style="color: var(--text-muted); font-size: 0.85rem;">Calculate wind deflection for precision shooting</div>
-            </div>
-          </a>
-          <a href="#coord-converter" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
-            <div style="color: var(--accent); min-width: 2rem;">⊕</div>
-            <div>
-              <div style="color: var(--text-primary); font-weight: 600;">Coordinate Converter</div>
-              <div style="color: var(--text-muted); font-size: 0.85rem;">Convert DD/DMS coordinate formats</div>
-            </div>
-          </a>
-          <a href="#zulu-time" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
-            <div style="color: var(--accent); min-width: 2rem;">Z</div>
-            <div>
-              <div style="color: var(--text-primary); font-weight: 600;">Zulu Time Converter</div>
-              <div style="color: var(--text-muted); font-size: 0.85rem;">Convert between local and UTC/Zulu time</div>
+              <div style="color: var(--text-primary); font-weight: 600;">Sniper Reference</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem;">Mil-relation formulas, BCs, conversions, and calculators</div>
             </div>
           </a>
         </div>
@@ -1079,1075 +1009,386 @@ ${remarks ? `"${remarks}, over."\n"${remarks}, out."` : '"No remarks, over."\n"N
   }
 
   // ==========================================================================
-  // Mil-Relation Calculator
+  // Sniper Reference Tool
   // ==========================================================================
 
-  function showMilCalculator() {
+  function showSniperReference() {
     const content = document.getElementById('contentArea');
     content.innerHTML = `
       <div class="section-header">
         <div class="section-number">Tool</div>
-        <h1 class="section-title">Mil-Relation Calculator</h1>
-        <p class="section-description">Calculate range to target using the mil-relation formula when target size is known.</p>
+        <h1 class="section-title">Sniper Reference</h1>
+        <p class="section-description">Quick reference for mil-relation formulas, ballistic coefficients, conversions, and field calculations.</p>
       </div>
 
-      <div class="form-generator">
-        <div class="info-box">
-          <div class="info-box-title">The Formula</div>
-          <p style="font-family: monospace; font-size: 1.1rem; text-align: center;">Range (m) = Target Size (m) x 1000 / Mils Observed</p>
+      <!-- Mil-Relation Calculator -->
+      <div class="form-generator" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">Mil-Relation Calculator</h3>
+
+        <div class="info-box" style="margin-bottom: 1rem;">
+          <div class="info-box-title">Formulas</div>
+          <p style="font-family: var(--font-mono); font-size: 0.9rem;">
+            Range = (Target Size" x 25.4) / Mil Size<br>
+            Range (m) = (Target Size (m) x 1000) / Mil Size<br>
+            Target Size" = (Range x Mil Size) / 25.4<br>
+            Mil Size = (Target Size" x 25.4) / Range
+          </p>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Target Type (or select Custom)</label>
-          <select class="form-select" id="mil-target-type">
-            <option value="1.8">Standing Person (1.8m)</option>
-            <option value="1.3">Kneeling Person (1.3m)</option>
-            <option value="0.5">Prone Person (0.5m)</option>
-            <option value="0.3">Head and Shoulders (0.3m)</option>
-            <option value="2.0">Standard Door (2.0m)</option>
-            <option value="1.5">Sedan Vehicle Height (1.5m)</option>
-            <option value="4.5">Sedan Vehicle Length (4.5m)</option>
-            <option value="custom">Custom Size</option>
-          </select>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Target Size (inches)</label>
+            <select class="form-select" id="sr-target-type">
+              <option value="39.5">Head to Groin (39.5")</option>
+              <option value="12">Head to Shoulders (12")</option>
+              <option value="20">Shoulder to Shoulder (20")</option>
+              <option value="70">Male Height (70")</option>
+              <option value="65">Female Height (65")</option>
+              <option value="84">Door Height (84")</option>
+              <option value="36">Door Width (36")</option>
+              <option value="30">Stop Sign (30")</option>
+              <option value="custom">Custom Size</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Observed Mils</label>
+            <input type="number" class="form-input" id="sr-mils" placeholder="e.g., 2.0" step="0.1">
+          </div>
         </div>
 
-        <div class="form-group" id="mil-custom-size-group" style="display: none;">
-          <label class="form-label">Custom Target Size (meters)</label>
-          <input type="number" class="form-input" id="mil-custom-size" placeholder="e.g., 1.8" step="0.1">
+        <div class="form-group" id="sr-custom-group" style="display: none;">
+          <label class="form-label">Custom Size (inches)</label>
+          <input type="number" class="form-input" id="sr-custom-size" placeholder="e.g., 18" step="0.1">
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Observed Size in Mils</label>
-          <input type="number" class="form-input" id="mil-observed" placeholder="e.g., 2.4" step="0.1">
-          <span class="form-hint">Measure the target height or width against your reticle mil markings</span>
-        </div>
-
-        <button class="form-btn" id="mil-calculate">Calculate Range</button>
-
-        <div class="output-display" id="mil-output" style="display: none;"></div>
+        <button class="form-btn" id="sr-calc-range">Calculate Range</button>
+        <div class="output-display" id="sr-range-output" style="display: none;"></div>
       </div>
 
-      <div class="content-card" style="margin-top: 2rem;">
-        <h4>Common Target Sizes</h4>
+      <!-- BLIR Calculator -->
+      <div class="form-generator" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">BLIR Calculator (Loophole)</h3>
+
+        <div class="info-box" style="margin-bottom: 1rem;">
+          <div class="info-box-title">Formula</div>
+          <p style="font-family: var(--font-mono); font-size: 0.9rem;">BLIR = (HOB x 70) / Feet From Loophole</p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Height Over Bore (inches)</label>
+            <input type="number" class="form-input" id="sr-hob" placeholder="e.g., 2.5" step="0.1" value="2.5">
+          </div>
+          <div class="form-group" style="flex: 1; min-width: 150px;">
+            <label class="form-label">Feet From Loophole</label>
+            <input type="number" class="form-input" id="sr-loophole-dist" placeholder="e.g., 10" step="1">
+          </div>
+        </div>
+
+        <button class="form-btn" id="sr-calc-blir">Calculate BLIR</button>
+        <div class="output-display" id="sr-blir-output" style="display: none;"></div>
+
+        <div class="content-card" style="margin-top: 1rem; padding: 1rem;">
+          <h4 style="margin-bottom: 0.5rem;">BLIR Rules of Thumb</h4>
+          <table class="quick-ref-table">
+            <tbody>
+              <tr><td>5ft or less</td><td>Add 5 mils</td></tr>
+              <tr><td>10ft</td><td>Add 4 mils</td></tr>
+              <tr><td>15ft</td><td>Add 3 mils</td></tr>
+              <tr><td>20ft or more</td><td>Add 2 mils</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+            1 mil every 10ft = 0.12 inches | .308 bullet is 0.15" from center wide<br>
+            Loopholes > HO: put target on top and shoot
+          </p>
+        </div>
+      </div>
+
+      <!-- Reference Tables -->
+      <div class="content-card" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">Ballistic Coefficients (G1)</h3>
         <table class="quick-ref-table">
           <thead>
-            <tr><th>Target</th><th>Height (m)</th><th>Width (m)</th></tr>
+            <tr><th>Cartridge</th><th>G1 BC</th></tr>
           </thead>
           <tbody>
-            <tr><td>Standing Person</td><td>1.8</td><td>0.5</td></tr>
-            <tr><td>Kneeling Person</td><td>1.3</td><td>0.5</td></tr>
-            <tr><td>Prone Person</td><td>0.5</td><td>0.5</td></tr>
-            <tr><td>Head and Shoulders</td><td>0.3</td><td>0.45</td></tr>
-            <tr><td>Standard Door</td><td>2.0</td><td>0.9</td></tr>
-            <tr><td>Sedan Vehicle</td><td>1.5</td><td>4.5</td></tr>
-            <tr><td>Pickup Truck</td><td>1.8</td><td>5.5</td></tr>
+            <tr><td>MK262 (.223)</td><td>.362</td></tr>
+            <tr><td>M118LR (.308)</td><td>.475</td></tr>
+            <tr><td>A191 (.300WM)</td><td>.533</td></tr>
+            <tr><td>MK211 (.50)</td><td>.701</td></tr>
           </tbody>
         </table>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">G1 to G7 conversion: G1 x 0.512</p>
+      </div>
+
+      <div class="content-card" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">Average Muzzle Velocities</h3>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Platform</th><th>MV (fps)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>M24</td><td>2650</td></tr>
+            <tr><td>M2010</td><td>2950</td></tr>
+            <tr><td>M110</td><td>2550</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-card" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">High Angle Shooting</h3>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Angle</th><th>Hold Adjustment</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>30 degrees</td><td>Shoot 85% of actual hold</td></tr>
+            <tr><td>45 degrees</td><td>Shoot 66% of actual hold</td></tr>
+            <tr><td>60 degrees</td><td>Shoot 50% of actual hold - 0.08 mils</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-card" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">Wind Analysis</h3>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Speed (mph)</th><th>Indicator</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0-3</td><td>Hardly felt on face</td></tr>
+            <tr><td>3-5</td><td>Felt lightly on face</td></tr>
+            <tr><td>5-8</td><td>Tree leaves in constant motion</td></tr>
+            <tr><td>8-12</td><td>Raises dust and loose paper</td></tr>
+            <tr><td>12-15</td><td>Small trees begin to sway</td></tr>
+            <tr><td>15-20</td><td>Large trees begin to sway, wind becomes audible</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box" style="margin-top: 1rem;">
+          <div class="info-box-title">MOA Wind Deflection Formula</div>
+          <p style="font-family: var(--font-mono);">Deflection (MOA) = Range (100s) x Wind Velocity (mph) / 10</p>
+        </div>
+      </div>
+
+      <div class="content-card" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">Measurements & Conversions</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <div>
+            <h4 style="margin-bottom: 0.5rem;">Mil/MOA</h4>
+            <table class="quick-ref-table">
+              <tbody>
+                <tr><td>1 Mil</td><td>3.438 TMOA</td></tr>
+                <tr><td>1 Mil</td><td>3.5 SMOA</td></tr>
+                <tr><td>1 Mil</td><td>3.936"</td></tr>
+                <tr><td>1 Mil (field)</td><td>4" (deviation: 0.64" @ 1000m)</td></tr>
+                <tr><td>1 TMOA</td><td>0.29 mils</td></tr>
+                <tr><td>1 SMOA</td><td>0.3 mils</td></tr>
+                <tr><td>1 TMOA @ 100m</td><td>1.145"</td></tr>
+                <tr><td>1 SMOA @ 100m</td><td>1"</td></tr>
+                <tr><td>1 TMOA @ 100yd</td><td>1.047"</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4 style="margin-bottom: 0.5rem;">Distance</h4>
+            <table class="quick-ref-table">
+              <tbody>
+                <tr><td>1 inch</td><td>2.54 cm</td></tr>
+                <tr><td>1 cm</td><td>0.3937 in</td></tr>
+                <tr><td>1 foot</td><td>0.3048 m</td></tr>
+                <tr><td>1 meter</td><td>1.0936 yd</td></tr>
+                <tr><td>1 yard</td><td>0.9144 m</td></tr>
+                <tr><td>1 meter</td><td>3.2808 ft</td></tr>
+                <tr><td>1 mile</td><td>1.6093 km</td></tr>
+                <tr><td>1 km</td><td>0.6213 mile</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">Truing Process</h3>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Step</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1st True</td><td>Speed of sound x 1.2 (Update MV)</td></tr>
+            <tr><td>2nd True</td><td>(Mach 1.0 - Mach 1.2) x 0.75 + Mach 1.2 (find range limit before C1 changes)</td></tr>
+            <tr><td>3rd True</td><td>Beginning of subsonic + 200m (update using C1)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-card" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">Miscellaneous Reference</h3>
+        <table class="quick-ref-table">
+          <tbody>
+            <tr><td>Cant Effect</td><td>Every 2.5 deg of cant = 0.05 mil in direction of cant every 100m</td></tr>
+            <tr><td>Max Ord</td><td>Range to target x 0.55</td></tr>
+            <tr><td>Supersonic</td><td>Faster than speed of sound, ends at Mach 1.0</td></tr>
+            <tr><td>Transonic</td><td>Mach 1.2 - 0.8 (transitional stage)</td></tr>
+            <tr><td>Subsonic</td><td>Starts at Mach 1.0</td></tr>
+            <tr><td>Speed of Sound (Mach 1.0)</td><td>1061 + temp of day (fps)</td></tr>
+            <tr><td>FTB</td><td>350 mps</td></tr>
+            <tr><td>Altitude Effect</td><td>Every 1000ft gained = 1" inHg</td></tr>
+            <tr><td>Sea Level BP</td><td>29.9" inHg</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-card" style="margin-bottom: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">RET (Rapid Engagement Technique)</h3>
+        <div class="info-box" style="margin-bottom: 1rem;">
+          <div class="info-box-title">Finding Your RET Number</div>
+          <p style="font-size: 0.9rem;">
+            1. After truing weapon system, find actual holds for ranges: 380m, 440m, 510m, 610m<br>
+            2. Add actual holds to milsize for given range to find RET number<br>
+            3. Average the 4 RET numbers = your RET number
+          </p>
+        </div>
+        <table class="quick-ref-table">
+          <thead>
+            <tr><th>Range (m)</th><th>Milsize (12")</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>380</td><td>0.8</td></tr>
+            <tr><td>440</td><td>0.7</td></tr>
+            <tr><td>510</td><td>0.6</td></tr>
+            <tr><td>610</td><td>0.5</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem;">
+          <strong>.308:</strong> Usually a 10 gun at 12" drill<br>
+          <strong>.300WM:</strong> Usually a 9 gun at 12" drill<br>
+          <strong>12":</strong> Measured from top of head to curvature of shoulders<br>
+          <strong>For 20":</strong> Take mil size, cut in half, subtract 9 (for 10 gun) or 8 (for 9 gun)<br>
+          <strong>Wind Bracket 1:</strong> RET hold (decimal) + 0.2
+        </p>
       </div>
 
       <div class="content-card">
-        <h4>Quick Reference Examples</h4>
-        <p>If a standing person (1.8m) measures:</p>
-        <table class="quick-ref-table">
-          <thead>
-            <tr><th>Mils</th><th>Range</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>6.0 mils</td><td>300 meters</td></tr>
-            <tr><td>4.5 mils</td><td>400 meters</td></tr>
-            <tr><td>3.6 mils</td><td>500 meters</td></tr>
-            <tr><td>2.4 mils</td><td>750 meters</td></tr>
-            <tr><td>1.8 mils</td><td>1000 meters</td></tr>
-          </tbody>
-        </table>
+        <h3 style="margin-bottom: 1rem; color: var(--accent);">Report Formats</h3>
+
+        <h4 style="margin-top: 1rem; margin-bottom: 0.5rem;">GOSS (Ground Objective Surveillance)</h4>
+        <p style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-secondary); padding: 0.75rem; border-radius: 4px;">
+          SO#/TRGTNAME/DTG/GRID/GOSS#OF#<br>
+          Breach point | LCC | Routes LU->VDO/Staging area->LCC/LCC->Breach<br>
+          Obstacles (ground and air) | SO Location (day and night)<br>
+          North seeking arrow | Sector of fire | # buildings starting w/ target moving clockwise
+        </p>
+
+        <h4 style="margin-top: 1rem; margin-bottom: 0.5rem;">GSS (Ground Structure Surveillance)</h4>
+        <p style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-secondary); padding: 0.75rem; border-radius: 4px;">
+          SO#/TRGTNAME/DTG/GRID/DIRECTION/DIST/BUILDINGSIDE/GSS#OF#<br>
+          North seeking arrow | Building dimensions (ft) | Breach Points<br>
+          Opening # System | Obstacles | Roof Identification
+        </p>
+
+        <h4 style="margin-top: 1rem; margin-bottom: 0.5rem;">ANGUS (Activity Notification)</h4>
+        <p style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-secondary); padding: 0.75rem; border-radius: 4px;">
+          SO element + OBJ Name | SO location (8 dig MGRS)<br>
+          Casualties/Disposition of Team | Location of MSS/PB (8 dig MGRS)<br>
+          DTG Surveillance established | Additional Info
+        </p>
+
+        <h4 style="margin-top: 1rem; margin-bottom: 0.5rem;">BORIS (Biometric/Observation Report)</h4>
+        <p style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-secondary); padding: 0.75rem; border-radius: 4px;">
+          SO#/TRGTNAME/DTG/BORIS#OF#<br>
+          Size | Activity | Location | Unit | Time<br>
+          Equipment | Sex | Nationality | Age | Physical Description
+        </p>
+
+        <h4 style="margin-top: 1rem; margin-bottom: 0.5rem;">SNAP (Short Notification of Activity/Persons)</h4>
+        <p style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg-secondary); padding: 0.75rem; border-radius: 4px;">
+          SO#/TRGTNAME/DTG/SNAP#OF#<br>
+          Sex | Nationality | Age | Physical Description
+        </p>
       </div>
     `;
 
-    // Event listeners
-    document.getElementById('mil-target-type').addEventListener('change', (e) => {
-      const customGroup = document.getElementById('mil-custom-size-group');
-      customGroup.style.display = e.target.value === 'custom' ? 'block' : 'none';
+    // Event listeners for calculators
+    document.getElementById('sr-target-type').addEventListener('change', (e) => {
+      document.getElementById('sr-custom-group').style.display =
+        e.target.value === 'custom' ? 'block' : 'none';
     });
 
-    document.getElementById('mil-calculate').addEventListener('click', calculateMilRange);
+    document.getElementById('sr-calc-range').addEventListener('click', calculateSniperRange);
+    document.getElementById('sr-calc-blir').addEventListener('click', calculateBLIR);
   }
 
-  function calculateMilRange() {
-    const targetType = document.getElementById('mil-target-type').value;
-    const customSize = parseFloat(document.getElementById('mil-custom-size').value);
-    const milsObserved = parseFloat(document.getElementById('mil-observed').value);
+  function calculateSniperRange() {
+    const targetType = document.getElementById('sr-target-type').value;
+    const customSize = parseFloat(document.getElementById('sr-custom-size').value);
+    const mils = parseFloat(document.getElementById('sr-mils').value);
 
-    const targetSize = targetType === 'custom' ? customSize : parseFloat(targetType);
+    const targetInches = targetType === 'custom' ? customSize : parseFloat(targetType);
 
-    if (!targetSize || !milsObserved || milsObserved <= 0) {
-      const output = document.getElementById('mil-output');
-      output.innerHTML = '<span style="color: var(--error);">Please enter valid values for target size and mils observed.</span>';
-      output.style.display = 'block';
+    if (!targetInches || !mils || mils <= 0) {
+      document.getElementById('sr-range-output').innerHTML =
+        '<span style="color: #ef4444;">Enter valid target size and mils.</span>';
+      document.getElementById('sr-range-output').style.display = 'block';
       return;
     }
 
-    const range = Math.round((targetSize * 1000) / milsObserved);
+    const rangeMeters = Math.round((targetInches * 25.4) / mils);
+    const rangeYards = Math.round(rangeMeters * 1.0936);
+    const targetMeters = (targetInches * 0.0254).toFixed(2);
 
-    const output = document.getElementById('mil-output');
-    output.innerHTML = `
-<span class="line-label">CALCULATION:</span>
-Target Size: ${targetSize} meters
-Mils Observed: ${milsObserved} mils
+    document.getElementById('sr-range-output').innerHTML = `
+<span class="line-label">INPUT:</span>
+Target Size: ${targetInches}" (${targetMeters}m)
+Observed: ${mils} mils
 
 <span class="line-label">RESULT:</span>
-<span style="font-size: 1.5rem; color: var(--accent);">Range: ${range} meters</span>
+<span style="font-size: 1.3rem; color: var(--accent);">Range: ${rangeMeters}m / ${rangeYards}yd</span>
 
 <span class="line-label">FORMULA:</span>
-${targetSize} x 1000 / ${milsObserved} = ${range}m
+(${targetInches}" x 25.4) / ${mils} = ${rangeMeters}m
     `.trim();
-    output.style.display = 'block';
+    document.getElementById('sr-range-output').style.display = 'block';
   }
 
-  // ==========================================================================
-  // Link Margin Assessment Tool
-  // ==========================================================================
+  function calculateBLIR() {
+    const hob = parseFloat(document.getElementById('sr-hob').value);
+    const dist = parseFloat(document.getElementById('sr-loophole-dist').value);
 
-  function showLinkMarginTool() {
-    const content = document.getElementById('contentArea');
-    content.innerHTML = `
-      <div class="section-header">
-        <div class="section-number">Tool</div>
-        <h1 class="section-title">RF Link Margin Assessment</h1>
-        <p class="section-description">Evaluate whether your communication or control link has adequate margin for reliable operation.</p>
-      </div>
-
-      <div class="form-generator">
-        <div class="info-box">
-          <div class="info-box-title">Link Margin Rule</div>
-          <p>For reliable operation, maintain at least 15-20 dB margin between your signal and the noise floor or interfering signals. Below 10 dB is critical and indicates high risk of link failure.</p>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Expected Signal Strength (dBm)</label>
-          <input type="number" class="form-input" id="lm-signal" placeholder="e.g., -65" step="1">
-          <span class="form-hint">From your RF planning tool or equipment specifications</span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Measured Noise Floor (dBm)</label>
-          <input type="number" class="form-input" id="lm-noise" placeholder="e.g., -90" step="1">
-          <span class="form-hint">Measure with SDR or spectrum analyzer at the site</span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Strongest Interferer (dBm) - Optional</label>
-          <input type="number" class="form-input" id="lm-interferer" placeholder="e.g., -75" step="1">
-          <span class="form-hint">Any strong signal in your operational band</span>
-        </div>
-
-        <button class="form-btn" id="lm-calculate">Assess Link</button>
-
-        <div class="output-display" id="lm-output" style="display: none;"></div>
-      </div>
-
-      <div class="content-card" style="margin-top: 2rem;">
-        <h4>Link Margin Interpretation</h4>
-        <table class="quick-ref-table">
-          <thead>
-            <tr><th>Margin</th><th>Status</th><th>Recommendation</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>> 20 dB</td><td style="color: #10b981;">EXCELLENT</td><td>High confidence, proceed with mission</td></tr>
-            <tr><td>15-20 dB</td><td style="color: #10b981;">NOMINAL</td><td>Adequate for most operations</td></tr>
-            <tr><td>10-15 dB</td><td style="color: #f59e0b;">MARGINAL</td><td>May degrade under stress, use caution</td></tr>
-            <tr><td>< 10 dB</td><td style="color: #ef4444;">CRITICAL</td><td>High risk of failure, find alternate site</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="content-card">
-        <h4>Go/No-Go Decision Factors</h4>
-        <p>Link margin is one factor. Also consider:</p>
-        <ul style="margin-left: 1.5rem;">
-          <li>Physical obstacles between you and the operational area</li>
-          <li>GPS signal quality (degradation may indicate jamming)</li>
-          <li>Weather conditions affecting propagation</li>
-          <li>Mission criticality and acceptable risk level</li>
-          <li>Availability of alternate sites with better conditions</li>
-        </ul>
-      </div>
-    `;
-
-    document.getElementById('lm-calculate').addEventListener('click', calculateLinkMargin);
-  }
-
-  function calculateLinkMargin() {
-    const signalStr = parseFloat(document.getElementById('lm-signal').value);
-    const noiseFloor = parseFloat(document.getElementById('lm-noise').value);
-    const interferer = parseFloat(document.getElementById('lm-interferer').value);
-
-    if (isNaN(signalStr) || isNaN(noiseFloor)) {
-      const output = document.getElementById('lm-output');
-      output.innerHTML = '<span style="color: var(--error);">Please enter valid signal strength and noise floor values.</span>';
-      output.style.display = 'block';
+    if (!hob || !dist || dist <= 0) {
+      document.getElementById('sr-blir-output').innerHTML =
+        '<span style="color: #ef4444;">Enter valid HOB and distance.</span>';
+      document.getElementById('sr-blir-output').style.display = 'block';
       return;
     }
 
-    const snr = signalStr - noiseFloor;
-    const interfererMargin = isNaN(interferer) ? null : signalStr - interferer;
+    const blir = (hob * 70) / dist;
 
-    // Determine the limiting factor
-    const effectiveMargin = interfererMargin !== null ? Math.min(snr, interfererMargin) : snr;
+    document.getElementById('sr-blir-output').innerHTML = `
+<span class="line-label">INPUT:</span>
+Height Over Bore: ${hob}"
+Distance from Loophole: ${dist} ft
 
-    let status, statusColor, recommendation;
-    if (effectiveMargin > 20) {
-      status = 'EXCELLENT';
-      statusColor = '#10b981';
-      recommendation = 'Link conditions are favorable. Proceed with mission planning.';
-    } else if (effectiveMargin >= 15) {
-      status = 'NOMINAL';
-      statusColor = '#10b981';
-      recommendation = 'Adequate margin for most operations. Monitor for degradation.';
-    } else if (effectiveMargin >= 10) {
-      status = 'MARGINAL';
-      statusColor = '#f59e0b';
-      recommendation = 'Link may degrade under stress. Consider alternate site or reduced range operations.';
-    } else {
-      status = 'CRITICAL';
-      statusColor = '#ef4444';
-      recommendation = 'High risk of link failure. Find alternate site or abort mission.';
-    }
+<span class="line-label">RESULT:</span>
+<span style="font-size: 1.3rem; color: var(--accent);">BLIR Hold: ${blir.toFixed(2)} mils</span>
 
-    let output = `
-<span class="line-label">LINK ANALYSIS:</span>
-Signal Strength: ${signalStr} dBm
-Noise Floor: ${noiseFloor} dBm
-Signal-to-Noise Ratio: ${snr} dB
-`;
-
-    if (interfererMargin !== null) {
-      output += `Interferer Level: ${interferer} dBm
-Signal-to-Interferer Ratio: ${interfererMargin} dB
-`;
-    }
-
-    output += `
-<span class="line-label">ASSESSMENT:</span>
-<span style="font-size: 1.3rem; color: ${statusColor};">Link Margin: ${effectiveMargin} dB - ${status}</span>
-
-<span class="line-label">RECOMMENDATION:</span>
-${recommendation}
+<span class="line-label">FORMULA:</span>
+(${hob}" x 70) / ${dist}ft = ${blir.toFixed(2)} mils
     `.trim();
-
-    const outputEl = document.getElementById('lm-output');
-    outputEl.innerHTML = output;
-    outputEl.style.display = 'block';
+    document.getElementById('sr-blir-output').style.display = 'block';
   }
 
-  // ==========================================================================
-  // HF Antenna Calculator
-  // ==========================================================================
-
-  function showHFAntennaCalculator() {
-    const content = document.getElementById('contentArea');
-    content.innerHTML = `
-      <div class="section-header">
-        <div class="section-number">Tool</div>
-        <h1 class="section-title">HF Antenna Calculator</h1>
-        <p class="section-description">Calculate antenna dimensions for HF wire antennas. Enter your operating frequency to get precise cutting lengths.</p>
-      </div>
-
-      <div class="form-generator">
-        <div class="form-group">
-          <label class="form-label">Operating Frequency (MHz)</label>
-          <input type="number" class="form-input" id="hf-frequency" placeholder="e.g., 7.2" step="0.001" min="1" max="30">
-          <span class="form-hint">Enter frequency between 1-30 MHz for HF band</span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Antenna Type</label>
-          <select class="form-select" id="hf-antenna-type">
-            <option value="all">All Types (Comparison)</option>
-            <option value="dipole">Half-Wave Dipole</option>
-            <option value="quarter">Quarter-Wave Vertical</option>
-            <option value="inverted-v">Inverted V</option>
-            <option value="long-wire">Long Wire Antenna</option>
-            <option value="nvis">NVIS Dipole</option>
-          </select>
-        </div>
-
-        <div class="form-group" id="hf-halfwaves-group" style="display: none;">
-          <label class="form-label">Number of Half-Wavelengths (for Long Wire)</label>
-          <input type="number" class="form-input" id="hf-halfwaves" value="2" min="1" max="10" step="1">
-          <span class="form-hint">Long wire antennas are typically 2-10 half-wavelengths</span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Units</label>
-          <select class="form-select" id="hf-units">
-            <option value="feet">Feet and Inches</option>
-            <option value="meters">Meters</option>
-            <option value="both">Both</option>
-          </select>
-        </div>
-
-        <button class="form-btn" id="hf-calculate">Calculate Dimensions</button>
-
-        <div class="output-display" id="hf-output" style="display: none;"></div>
-      </div>
-
-      <div class="content-card" style="margin-top: 2rem;">
-        <h4>Quick Reference - Common Amateur Bands</h4>
-        <table class="quick-ref-table">
-          <thead>
-            <tr><th>Band</th><th>Frequency</th><th>1/2 Wave Dipole</th><th>1/4 Wave Vertical</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>80m</td><td>3.5 MHz</td><td>133 ft 8 in</td><td>66 ft 10 in</td></tr>
-            <tr><td>40m</td><td>7.15 MHz</td><td>65 ft 5 in</td><td>32 ft 9 in</td></tr>
-            <tr><td>20m</td><td>14.2 MHz</td><td>32 ft 11 in</td><td>16 ft 6 in</td></tr>
-            <tr><td>15m</td><td>21.2 MHz</td><td>22 ft 1 in</td><td>11 ft</td></tr>
-            <tr><td>10m</td><td>28.5 MHz</td><td>16 ft 5 in</td><td>8 ft 2 in</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="content-card">
-        <h4>Antenna Formulas</h4>
-        <table class="quick-ref-table">
-          <thead>
-            <tr><th>Antenna Type</th><th>Formula (Feet)</th><th>Formula (Meters)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Half-Wave Dipole</td><td><code>468 / f(MHz)</code></td><td><code>142.5 / f(MHz)</code></td></tr>
-            <tr><td>Quarter-Wave Vertical</td><td><code>234 / f(MHz)</code></td><td><code>71.25 / f(MHz)</code></td></tr>
-            <tr><td>Long Wire (N half-waves)</td><td><code>492 x (N-0.05) / f</code></td><td><code>150 x (N-0.05) / f</code></td></tr>
-            <tr><td>NVIS Height</td><td><code>142.5 / f(MHz)</code></td><td><code>43.4 / f(MHz)</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="info-box">
-        <div class="info-box-title">Field Construction Tip</div>
-        <p>Always cut wire antennas slightly long (add 2-3%) and trim to tune. It's easier to shorten wire than add to it. For dipoles, the total length is split in half - each leg connects to one side of the feedline (coax center conductor to one leg, shield to the other).</p>
-      </div>
-    `;
-
-    // Event listeners
-    document.getElementById('hf-antenna-type').addEventListener('change', (e) => {
-      const halfwavesGroup = document.getElementById('hf-halfwaves-group');
-      halfwavesGroup.style.display = e.target.value === 'long-wire' ? 'block' : 'none';
-    });
-
-    document.getElementById('hf-calculate').addEventListener('click', calculateHFAntenna);
-  }
-
-  function calculateHFAntenna() {
-    const frequency = parseFloat(document.getElementById('hf-frequency').value);
-    const antennaType = document.getElementById('hf-antenna-type').value;
-    const units = document.getElementById('hf-units').value;
-    const halfwaves = parseInt(document.getElementById('hf-halfwaves').value) || 2;
-
-    if (!frequency || frequency < 1 || frequency > 30) {
-      const output = document.getElementById('hf-output');
-      output.innerHTML = '<span style="color: #ef4444;">Please enter a valid frequency between 1-30 MHz.</span>';
-      output.style.display = 'block';
-      return;
-    }
-
-    // Calculate all antenna dimensions
-    const calculations = {
-      halfWaveFeet: 468 / frequency,
-      halfWaveMeters: 142.5 / frequency,
-      quarterWaveFeet: 234 / frequency,
-      quarterWaveMeters: 71.25 / frequency,
-      longWireFeet: (492 * (halfwaves - 0.05)) / frequency,
-      longWireMeters: (150 * (halfwaves - 0.05)) / frequency,
-      nvisHeightFeet: 142.5 / frequency,
-      nvisHeightMeters: 43.4 / frequency,
-      wavelengthFeet: 984 / frequency,
-      wavelengthMeters: 300 / frequency
-    };
-
-    // Helper function to format feet and inches
-    function formatFeetInches(totalFeet) {
-      const feet = Math.floor(totalFeet);
-      const inches = Math.round((totalFeet - feet) * 12);
-      if (inches === 12) {
-        return `${feet + 1} ft 0 in`;
-      }
-      return `${feet} ft ${inches} in`;
-    }
-
-    // Helper function to format meters
-    function formatMeters(meters) {
-      return `${meters.toFixed(2)} m`;
-    }
-
-    // Helper function to format based on unit preference
-    function formatLength(feet, meters) {
-      if (units === 'feet') return formatFeetInches(feet);
-      if (units === 'meters') return formatMeters(meters);
-      return `${formatFeetInches(feet)} (${formatMeters(meters)})`;
-    }
-
-    let output = `<span class="line-label">FREQUENCY: ${frequency} MHz</span>
-Wavelength: ${formatLength(calculations.wavelengthFeet, calculations.wavelengthMeters)}
-
-`;
-
-    if (antennaType === 'all' || antennaType === 'dipole') {
-      output += `<span class="line-label">HALF-WAVE DIPOLE:</span>
-Total Length: ${formatLength(calculations.halfWaveFeet, calculations.halfWaveMeters)}
-Each Leg: ${formatLength(calculations.halfWaveFeet / 2, calculations.halfWaveMeters / 2)}
-
-`;
-    }
-
-    if (antennaType === 'all' || antennaType === 'quarter') {
-      output += `<span class="line-label">QUARTER-WAVE VERTICAL:</span>
-Radiator Length: ${formatLength(calculations.quarterWaveFeet, calculations.quarterWaveMeters)}
-Ground Radials (each): ${formatLength(calculations.quarterWaveFeet, calculations.quarterWaveMeters)}
-
-`;
-    }
-
-    if (antennaType === 'all' || antennaType === 'inverted-v') {
-      output += `<span class="line-label">INVERTED V DIPOLE:</span>
-Total Wire Length: ${formatLength(calculations.halfWaveFeet, calculations.halfWaveMeters)}
-Each Leg: ${formatLength(calculations.halfWaveFeet / 2, calculations.halfWaveMeters / 2)}
-Recommended Apex Angle: 90-120 degrees
-Apex Height: ${formatLength(calculations.halfWaveFeet * 0.35, calculations.halfWaveMeters * 0.35)} minimum
-
-`;
-    }
-
-    if (antennaType === 'all' || antennaType === 'long-wire') {
-      output += `<span class="line-label">LONG WIRE (${halfwaves} half-waves):</span>
-Total Length: ${formatLength(calculations.longWireFeet, calculations.longWireMeters)}
-Height Above Ground: ${formatLength(calculations.quarterWaveFeet, calculations.quarterWaveMeters)} minimum
-
-`;
-    }
-
-    if (antennaType === 'all' || antennaType === 'nvis') {
-      output += `<span class="line-label">NVIS DIPOLE (Near Vertical Incidence Skywave):</span>
-Total Length: ${formatLength(calculations.halfWaveFeet, calculations.halfWaveMeters)}
-Each Leg: ${formatLength(calculations.halfWaveFeet / 2, calculations.halfWaveMeters / 2)}
-Height Above Ground: ${formatLength(calculations.nvisHeightFeet, calculations.nvisHeightMeters)}
-(Mount LOW for high-angle radiation - covers 0-300 mile radius)
-
-`;
-    }
-
-    // Add cutting instructions
-    output += `<span class="line-label">CUTTING INSTRUCTIONS:</span>
-Add 2-3% extra length for tuning margin
-Strip insulation at center for feedpoint connection
-Connect coax: center conductor to one leg, shield to other
-`;
-
-    const outputEl = document.getElementById('hf-output');
-    outputEl.innerHTML = output.trim();
-    outputEl.style.display = 'block';
-  }
-
-  // ==========================================================================
-  // Free Space Path Loss Calculator
-  // ==========================================================================
-
-  function showPathLossCalculator() {
-    const content = document.getElementById('contentArea');
-    content.innerHTML = `
-      <div class="section-header">
-        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span>Back</span>
-        </a>
-        <h1 class="section-title">Free Space Path Loss Calculator</h1>
-        <p class="section-description">Calculate RF signal attenuation over distance using the Friis transmission equation.</p>
-      </div>
-
-      <div class="form-generator">
-        <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <div class="form-group" style="flex: 1; min-width: 150px;">
-            <label class="form-label">Frequency</label>
-            <input type="number" class="form-input" id="fspl-freq" placeholder="Enter frequency" step="any">
-          </div>
-          <div class="form-group" style="flex: 0 0 120px;">
-            <label class="form-label">Freq Unit</label>
-            <select class="form-select" id="fspl-freq-unit">
-              <option value="mhz">MHz</option>
-              <option value="ghz">GHz</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <div class="form-group" style="flex: 1; min-width: 150px;">
-            <label class="form-label">Distance</label>
-            <input type="number" class="form-input" id="fspl-dist" placeholder="Enter distance" step="any">
-          </div>
-          <div class="form-group" style="flex: 0 0 120px;">
-            <label class="form-label">Dist Unit</label>
-            <select class="form-select" id="fspl-dist-unit">
-              <option value="km">Kilometers</option>
-              <option value="mi">Miles</option>
-              <option value="m">Meters</option>
-              <option value="ft">Feet</option>
-            </select>
-          </div>
-        </div>
-
-        <button class="form-btn" onclick="calculatePathLoss()">Calculate Path Loss</button>
-
-        <pre class="form-output" id="fspl-output" style="display: none;"></pre>
-      </div>
-
-      <div class="content-card">
-        <h4>About Free Space Path Loss</h4>
-        <p>FSPL represents signal attenuation in ideal conditions with no obstructions. Real-world losses are typically 2-4x higher in urban environments. The formula is:</p>
-        <p style="font-family: var(--font-mono); margin: 1rem 0;">FSPL (dB) = 20×log₁₀(d) + 20×log₁₀(f) + 20×log₁₀(4π/c)</p>
-        <p>Where d = distance, f = frequency, c = speed of light</p>
-      </div>
-    `;
-  }
-
-  function calculatePathLoss() {
-    let freq = parseFloat(document.getElementById('fspl-freq').value);
-    let dist = parseFloat(document.getElementById('fspl-dist').value);
-    const freqUnit = document.getElementById('fspl-freq-unit').value;
-    const distUnit = document.getElementById('fspl-dist-unit').value;
-
-    if (!freq || !dist || freq <= 0 || dist <= 0) {
-      document.getElementById('fspl-output').innerHTML = '<span style="color: #ef4444;">Please enter valid positive values.</span>';
-      document.getElementById('fspl-output').style.display = 'block';
-      return;
-    }
-
-    // Convert frequency to MHz
-    if (freqUnit === 'ghz') freq = freq * 1000;
-
-    // Convert distance to km
-    if (distUnit === 'mi') dist = dist * 1.60934;
-    else if (distUnit === 'm') dist = dist / 1000;
-    else if (distUnit === 'ft') dist = dist * 0.0003048;
-
-    // FSPL formula: 20*log10(d_km) + 20*log10(f_MHz) + 32.44
-    const fspl = 20 * Math.log10(dist) + 20 * Math.log10(freq) + 32.44;
-
-    const output = `<span class="line-label">FREE SPACE PATH LOSS</span>
-Frequency: ${freq.toFixed(2)} MHz (${(freq/1000).toFixed(4)} GHz)
-Distance: ${dist.toFixed(3)} km (${(dist * 0.621371).toFixed(3)} mi)
-
-<span class="line-label">RESULT</span>
-Path Loss: ${fspl.toFixed(1)} dB
-
-<span class="line-label">PRACTICAL ESTIMATES</span>
-Urban/Obstructed: ${(fspl * 1.5).toFixed(1)} - ${(fspl * 2).toFixed(1)} dB
-Dense Urban: ${(fspl * 2).toFixed(1)} - ${(fspl * 2.5).toFixed(1)} dB
-Foliage (add): +10 to +20 dB per 100m`;
-
-    document.getElementById('fspl-output').innerHTML = output;
-    document.getElementById('fspl-output').style.display = 'block';
-  }
-
-  // ==========================================================================
-  // Frequency/Wavelength Converter
-  // ==========================================================================
-
-  function showFreqWavelengthConverter() {
-    const content = document.getElementById('contentArea');
-    content.innerHTML = `
-      <div class="section-header">
-        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span>Back</span>
-        </a>
-        <h1 class="section-title">Frequency / Wavelength Converter</h1>
-        <p class="section-description">Convert between frequency and wavelength. Enter either value to calculate the other.</p>
-      </div>
-
-      <div class="form-generator">
-        <div class="form-group">
-          <label class="form-label">Frequency (MHz)</label>
-          <input type="number" class="form-input" id="conv-freq" placeholder="Enter frequency in MHz" step="any" oninput="convertFromFreq()">
-        </div>
-
-        <div style="text-align: center; padding: 0.5rem; color: var(--text-muted);">↕ Auto-converts ↕</div>
-
-        <div class="form-group">
-          <label class="form-label">Wavelength (meters)</label>
-          <input type="number" class="form-input" id="conv-wave" placeholder="Enter wavelength in meters" step="any" oninput="convertFromWave()">
-        </div>
-
-        <pre class="form-output" id="conv-output" style="display: none;"></pre>
-      </div>
-
-      <div class="content-card">
-        <h4>Quick Reference</h4>
-        <table class="quick-ref-table">
-          <thead>
-            <tr><th>Band</th><th>Frequency</th><th>Wavelength</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>80m Amateur</td><td>3.5-4.0 MHz</td><td>75-85m</td></tr>
-            <tr><td>40m Amateur</td><td>7.0-7.3 MHz</td><td>41-43m</td></tr>
-            <tr><td>20m Amateur</td><td>14.0-14.35 MHz</td><td>21m</td></tr>
-            <tr><td>2m Amateur</td><td>144-148 MHz</td><td>2m</td></tr>
-            <tr><td>70cm Amateur</td><td>420-450 MHz</td><td>70cm</td></tr>
-            <tr><td>WiFi 2.4GHz</td><td>2400 MHz</td><td>12.5cm</td></tr>
-            <tr><td>WiFi 5GHz</td><td>5800 MHz</td><td>5.2cm</td></tr>
-          </tbody>
-        </table>
-      </div>
-    `;
-  }
-
-  function convertFromFreq() {
-    const freq = parseFloat(document.getElementById('conv-freq').value);
-    if (!freq || freq <= 0) {
-      document.getElementById('conv-output').style.display = 'none';
-      return;
-    }
-
-    const wavelengthM = 299.792458 / freq;
-    document.getElementById('conv-wave').value = wavelengthM.toFixed(4);
-
-    const output = `<span class="line-label">CONVERSION RESULTS</span>
-Frequency: ${freq} MHz = ${(freq/1000).toFixed(6)} GHz = ${(freq*1000000).toExponential(3)} Hz
-Wavelength: ${wavelengthM.toFixed(4)} m = ${(wavelengthM*100).toFixed(2)} cm = ${(wavelengthM*3.28084).toFixed(2)} ft
-
-<span class="line-label">ANTENNA LENGTHS</span>
-Half-wave dipole: ${(468/freq).toFixed(2)} ft / ${(142.5/freq).toFixed(2)} m
-Quarter-wave vertical: ${(234/freq).toFixed(2)} ft / ${(71.25/freq).toFixed(2)} m`;
-
-    document.getElementById('conv-output').innerHTML = output;
-    document.getElementById('conv-output').style.display = 'block';
-  }
-
-  function convertFromWave() {
-    const wave = parseFloat(document.getElementById('conv-wave').value);
-    if (!wave || wave <= 0) {
-      document.getElementById('conv-output').style.display = 'none';
-      return;
-    }
-
-    const freqMHz = 299.792458 / wave;
-    document.getElementById('conv-freq').value = freqMHz.toFixed(4);
-
-    const output = `<span class="line-label">CONVERSION RESULTS</span>
-Wavelength: ${wave} m = ${(wave*100).toFixed(2)} cm = ${(wave*3.28084).toFixed(2)} ft
-Frequency: ${freqMHz.toFixed(4)} MHz = ${(freqMHz/1000).toFixed(6)} GHz
-
-<span class="line-label">ANTENNA LENGTHS</span>
-Half-wave dipole: ${(468/freqMHz).toFixed(2)} ft / ${(142.5/freqMHz).toFixed(2)} m
-Quarter-wave vertical: ${(234/freqMHz).toFixed(2)} ft / ${(71.25/freqMHz).toFixed(2)} m`;
-
-    document.getElementById('conv-output').innerHTML = output;
-    document.getElementById('conv-output').style.display = 'block';
-  }
-
-  // ==========================================================================
-  // Wind Drift Calculator (Marksmanship)
-  // ==========================================================================
-
-  function showWindCalculator() {
-    const content = document.getElementById('contentArea');
-    content.innerHTML = `
-      <div class="section-header">
-        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span>Back</span>
-        </a>
-        <h1 class="section-title">Wind Drift Calculator</h1>
-        <p class="section-description">Calculate wind deflection and holdoff for precision shooting.</p>
-      </div>
-
-      <div class="form-generator">
-        <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <div class="form-group" style="flex: 1; min-width: 150px;">
-            <label class="form-label">Range (yards)</label>
-            <input type="number" class="form-input" id="wind-range" placeholder="e.g., 500" step="any">
-          </div>
-          <div class="form-group" style="flex: 1; min-width: 150px;">
-            <label class="form-label">Wind Speed (mph)</label>
-            <input type="number" class="form-input" id="wind-speed" placeholder="e.g., 10" step="any">
-          </div>
-        </div>
-
-        <div class="form-row" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <div class="form-group" style="flex: 1; min-width: 150px;">
-            <label class="form-label">Wind Direction (clock)</label>
-            <select class="form-select" id="wind-dir">
-              <option value="1.0">3 or 9 o'clock (Full Value)</option>
-              <option value="0.87">2 or 10 o'clock</option>
-              <option value="0.87">4 or 8 o'clock</option>
-              <option value="0.5">1 or 11 o'clock (Half Value)</option>
-              <option value="0.5">5 or 7 o'clock (Half Value)</option>
-              <option value="0">12 or 6 o'clock (No Value)</option>
-            </select>
-          </div>
-          <div class="form-group" style="flex: 1; min-width: 150px;">
-            <label class="form-label">Bullet BC (G1)</label>
-            <input type="number" class="form-input" id="wind-bc" placeholder="e.g., 0.500" step="0.001" value="0.500">
-          </div>
-        </div>
-
-        <button class="form-btn" onclick="calculateWind()">Calculate Wind Drift</button>
-
-        <pre class="form-output" id="wind-output" style="display: none;"></pre>
-      </div>
-
-      <div class="content-card">
-        <h4>Wind Value by Clock Position</h4>
-        <table class="quick-ref-table">
-          <thead>
-            <tr><th>Position</th><th>Value</th><th>Effect</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>12, 6</td><td>No Value</td><td>Headwind/tailwind - minimal drift</td></tr>
-            <tr><td>1, 5, 7, 11</td><td>Half Value</td><td>~50% of full crosswind effect</td></tr>
-            <tr><td>2, 4, 8, 10</td><td>~87% Value</td><td>Nearly full crosswind effect</td></tr>
-            <tr><td>3, 9</td><td>Full Value</td><td>Maximum crosswind drift</td></tr>
-          </tbody>
-        </table>
-      </div>
-    `;
-  }
-
-  function calculateWind() {
-    const range = parseFloat(document.getElementById('wind-range').value);
-    const speed = parseFloat(document.getElementById('wind-speed').value);
-    const dirValue = parseFloat(document.getElementById('wind-dir').value);
-    const bc = parseFloat(document.getElementById('wind-bc').value) || 0.5;
-
-    if (!range || !speed || range <= 0 || speed < 0) {
-      document.getElementById('wind-output').innerHTML = '<span style="color: #ef4444;">Please enter valid values.</span>';
-      document.getElementById('wind-output').style.display = 'block';
-      return;
-    }
-
-    // Simplified wind drift formula based on BC and range
-    // This is an approximation: drift (inches) ≈ (range/100)² × wind × windValue / (BC × 10)
-    const effectiveWind = speed * dirValue;
-    const driftInches = Math.pow(range / 100, 1.8) * effectiveWind * 0.1 / bc;
-    const driftMOA = (driftInches / range) * 100 / 1.047;
-    const driftMils = driftMOA * 0.2909;
-
-    // Direction for holdoff
-    const holdDir = effectiveWind > 0 ? 'into the wind' : 'with the wind';
-
-    const output = `<span class="line-label">WIND ANALYSIS</span>
-Range: ${range} yards
-Wind Speed: ${speed} mph
-Wind Value: ${(dirValue * 100).toFixed(0)}% (effective: ${effectiveWind.toFixed(1)} mph)
-Bullet BC: ${bc}
-
-<span class="line-label">DRIFT ESTIMATE</span>
-Drift: ${Math.abs(driftInches).toFixed(1)} inches
-Correction: ${Math.abs(driftMOA).toFixed(1)} MOA / ${Math.abs(driftMils).toFixed(1)} mils
-
-<span class="line-label">HOLDOFF</span>
-Aim ${Math.abs(driftMOA).toFixed(1)} MOA ${holdDir}
-Or dial ${Math.abs(driftMOA).toFixed(1)} MOA ${holdDir}
-
-<span style="color: var(--text-muted); font-size: 0.85rem;">Note: This is an estimate. Actual drift varies with velocity, bullet design, and atmospheric conditions. Confirm with ballistic software or range data.</span>`;
-
-    document.getElementById('wind-output').innerHTML = output;
-    document.getElementById('wind-output').style.display = 'block';
-  }
-
-  // ==========================================================================
-  // Coordinate Converter (MGRS/UTM/Lat-Long)
-  // ==========================================================================
-
-  function showCoordConverter() {
-    const content = document.getElementById('contentArea');
-    content.innerHTML = `
-      <div class="section-header">
-        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span>Back</span>
-        </a>
-        <h1 class="section-title">Coordinate Converter</h1>
-        <p class="section-description">Convert between decimal degrees and degrees-minutes-seconds formats.</p>
-      </div>
-
-      <div class="form-generator">
-        <div class="form-group">
-          <label class="form-label">Decimal Degrees (DD)</label>
-          <div style="display: flex; gap: 0.5rem;">
-            <input type="number" class="form-input" id="dd-lat" placeholder="Latitude (e.g., 33.7490)" step="any" style="flex:1;">
-            <input type="number" class="form-input" id="dd-lon" placeholder="Longitude (e.g., -84.3880)" step="any" style="flex:1;">
-          </div>
-        </div>
-
-        <button class="form-btn" onclick="convertFromDD()" style="margin-bottom: 1rem;">Convert from DD →</button>
-
-        <div class="form-group">
-          <label class="form-label">Degrees Minutes Seconds (DMS)</label>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <input type="number" class="form-input" id="dms-lat-d" placeholder="D" style="width: 60px;">
-            <input type="number" class="form-input" id="dms-lat-m" placeholder="M" style="width: 60px;">
-            <input type="number" class="form-input" id="dms-lat-s" placeholder="S" step="any" style="width: 80px;">
-            <select class="form-select" id="dms-lat-dir" style="width: 60px;">
-              <option value="N">N</option>
-              <option value="S">S</option>
-            </select>
-          </div>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
-            <input type="number" class="form-input" id="dms-lon-d" placeholder="D" style="width: 60px;">
-            <input type="number" class="form-input" id="dms-lon-m" placeholder="M" style="width: 60px;">
-            <input type="number" class="form-input" id="dms-lon-s" placeholder="S" step="any" style="width: 80px;">
-            <select class="form-select" id="dms-lon-dir" style="width: 60px;">
-              <option value="W">W</option>
-              <option value="E">E</option>
-            </select>
-          </div>
-        </div>
-
-        <button class="form-btn" onclick="convertFromDMS()">← Convert from DMS</button>
-
-        <pre class="form-output" id="coord-output" style="display: none;"></pre>
-      </div>
-
-      <div class="content-card">
-        <h4>Format Examples</h4>
-        <table class="quick-ref-table">
-          <thead>
-            <tr><th>Format</th><th>Example (Atlanta, GA)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Decimal Degrees</td><td>33.7490, -84.3880</td></tr>
-            <tr><td>DMS</td><td>33° 44' 56.4" N, 84° 23' 16.8" W</td></tr>
-            <tr><td>Degrees Decimal Minutes</td><td>33° 44.940' N, 84° 23.280' W</td></tr>
-          </tbody>
-        </table>
-      </div>
-    `;
-  }
-
-  function convertFromDD() {
-    const lat = parseFloat(document.getElementById('dd-lat').value);
-    const lon = parseFloat(document.getElementById('dd-lon').value);
-
-    if (isNaN(lat) || isNaN(lon)) {
-      document.getElementById('coord-output').innerHTML = '<span style="color: #ef4444;">Please enter valid coordinates.</span>';
-      document.getElementById('coord-output').style.display = 'block';
-      return;
-    }
-
-    // Convert to DMS
-    const latDir = lat >= 0 ? 'N' : 'S';
-    const lonDir = lon >= 0 ? 'E' : 'W';
-    const absLat = Math.abs(lat);
-    const absLon = Math.abs(lon);
-
-    const latD = Math.floor(absLat);
-    const latM = Math.floor((absLat - latD) * 60);
-    const latS = ((absLat - latD) * 60 - latM) * 60;
-
-    const lonD = Math.floor(absLon);
-    const lonM = Math.floor((absLon - lonD) * 60);
-    const lonS = ((absLon - lonD) * 60 - lonM) * 60;
-
-    // Fill DMS fields
-    document.getElementById('dms-lat-d').value = latD;
-    document.getElementById('dms-lat-m').value = latM;
-    document.getElementById('dms-lat-s').value = latS.toFixed(2);
-    document.getElementById('dms-lat-dir').value = latDir;
-
-    document.getElementById('dms-lon-d').value = lonD;
-    document.getElementById('dms-lon-m').value = lonM;
-    document.getElementById('dms-lon-s').value = lonS.toFixed(2);
-    document.getElementById('dms-lon-dir').value = lonDir;
-
-    const output = `<span class="line-label">COORDINATE CONVERSION</span>
-
-Decimal Degrees: ${lat.toFixed(6)}, ${lon.toFixed(6)}
-DMS: ${latD}° ${latM}' ${latS.toFixed(2)}" ${latDir}, ${lonD}° ${lonM}' ${lonS.toFixed(2)}" ${lonDir}
-DDM: ${latD}° ${((absLat - latD) * 60).toFixed(4)}' ${latDir}, ${lonD}° ${((absLon - lonD) * 60).toFixed(4)}' ${lonDir}`;
-
-    document.getElementById('coord-output').innerHTML = output;
-    document.getElementById('coord-output').style.display = 'block';
-  }
-
-  function convertFromDMS() {
-    const latD = parseFloat(document.getElementById('dms-lat-d').value) || 0;
-    const latM = parseFloat(document.getElementById('dms-lat-m').value) || 0;
-    const latS = parseFloat(document.getElementById('dms-lat-s').value) || 0;
-    const latDir = document.getElementById('dms-lat-dir').value;
-
-    const lonD = parseFloat(document.getElementById('dms-lon-d').value) || 0;
-    const lonM = parseFloat(document.getElementById('dms-lon-m').value) || 0;
-    const lonS = parseFloat(document.getElementById('dms-lon-s').value) || 0;
-    const lonDir = document.getElementById('dms-lon-dir').value;
-
-    let lat = latD + latM/60 + latS/3600;
-    let lon = lonD + lonM/60 + lonS/3600;
-
-    if (latDir === 'S') lat = -lat;
-    if (lonDir === 'W') lon = -lon;
-
-    // Fill DD fields
-    document.getElementById('dd-lat').value = lat.toFixed(6);
-    document.getElementById('dd-lon').value = lon.toFixed(6);
-
-    const output = `<span class="line-label">COORDINATE CONVERSION</span>
-
-DMS: ${latD}° ${latM}' ${latS.toFixed(2)}" ${latDir}, ${lonD}° ${lonM}' ${lonS.toFixed(2)}" ${lonDir}
-Decimal Degrees: ${lat.toFixed(6)}, ${lon.toFixed(6)}
-DDM: ${latD}° ${(latM + latS/60).toFixed(4)}' ${latDir}, ${lonD}° ${(lonM + lonS/60).toFixed(4)}' ${lonDir}`;
-
-    document.getElementById('coord-output').innerHTML = output;
-    document.getElementById('coord-output').style.display = 'block';
-  }
-
-  // ==========================================================================
-  // Zulu Time Converter
-  // ==========================================================================
-
-  function showZuluTime() {
-    const content = document.getElementById('contentArea');
-
-    // Get current times
-    const now = new Date();
-    const zuluTime = now.toISOString().slice(11, 19) + 'Z';
-    const zuluDate = now.toISOString().slice(0, 10);
-    const localTime = now.toLocaleTimeString('en-US', { hour12: false });
-    const localOffset = -now.getTimezoneOffset() / 60;
-    const offsetStr = localOffset >= 0 ? `+${localOffset}` : `${localOffset}`;
-
-    content.innerHTML = `
-      <div class="section-header">
-        <a href="#" class="back-link" onclick="window.location.hash=''; return false;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span>Back</span>
-        </a>
-        <h1 class="section-title">Zulu Time Converter</h1>
-        <p class="section-description">Convert between local time and UTC/Zulu time for coordination.</p>
-      </div>
-
-      <div class="form-generator">
-        <div class="content-card" style="text-align: center; margin-bottom: 1rem;">
-          <div style="font-size: 0.9rem; color: var(--text-muted);">CURRENT ZULU TIME</div>
-          <div id="live-zulu" style="font-size: 2rem; font-weight: 700; font-family: var(--font-mono); color: var(--accent);">${zuluTime}</div>
-          <div style="font-size: 0.9rem; color: var(--text-muted);">Date: ${zuluDate}</div>
-        </div>
-
-        <div class="content-card" style="text-align: center; margin-bottom: 1rem;">
-          <div style="font-size: 0.9rem; color: var(--text-muted);">LOCAL TIME (UTC${offsetStr})</div>
-          <div id="live-local" style="font-size: 1.5rem; font-weight: 600; font-family: var(--font-mono);">${localTime}</div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Convert Local Time to Zulu</label>
-          <input type="time" class="form-input" id="local-input" step="1">
-        </div>
-        <button class="form-btn" onclick="localToZulu()">Convert to Zulu →</button>
-
-        <div class="form-group" style="margin-top: 1rem;">
-          <label class="form-label">Convert Zulu to Local</label>
-          <input type="time" class="form-input" id="zulu-input" step="1">
-        </div>
-        <button class="form-btn" onclick="zuluToLocal()">← Convert to Local</button>
-
-        <pre class="form-output" id="time-output" style="display: none;"></pre>
-      </div>
-
-      <div class="content-card">
-        <h4>Common Time Zone Offsets</h4>
-        <table class="quick-ref-table">
-          <thead>
-            <tr><th>Zone</th><th>Name</th><th>Offset</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Z</td><td>Zulu (UTC)</td><td>+0</td></tr>
-            <tr><td>A</td><td>Alpha</td><td>+1</td></tr>
-            <tr><td>B</td><td>Bravo</td><td>+2</td></tr>
-            <tr><td>R</td><td>Romeo (EST)</td><td>-5</td></tr>
-            <tr><td>S</td><td>Sierra (CST)</td><td>-6</td></tr>
-            <tr><td>T</td><td>Tango (MST)</td><td>-7</td></tr>
-            <tr><td>U</td><td>Uniform (PST)</td><td>-8</td></tr>
-          </tbody>
-        </table>
-      </div>
-    `;
-
-    // Start live clock update
-    setInterval(updateLiveClock, 1000);
-  }
-
-  function updateLiveClock() {
-    const zuluEl = document.getElementById('live-zulu');
-    const localEl = document.getElementById('live-local');
-    if (zuluEl && localEl) {
-      const now = new Date();
-      zuluEl.textContent = now.toISOString().slice(11, 19) + 'Z';
-      localEl.textContent = now.toLocaleTimeString('en-US', { hour12: false });
-    }
-  }
-
-  function localToZulu() {
-    const localInput = document.getElementById('local-input').value;
-    if (!localInput) {
-      document.getElementById('time-output').innerHTML = '<span style="color: #ef4444;">Please enter a time.</span>';
-      document.getElementById('time-output').style.display = 'block';
-      return;
-    }
-
-    const [hours, minutes, seconds = 0] = localInput.split(':').map(Number);
-    const now = new Date();
-    now.setHours(hours, minutes, seconds);
-
-    const zuluHours = now.getUTCHours().toString().padStart(2, '0');
-    const zuluMinutes = now.getUTCMinutes().toString().padStart(2, '0');
-    const zuluSeconds = now.getUTCSeconds().toString().padStart(2, '0');
-
-    const output = `<span class="line-label">TIME CONVERSION</span>
-Local: ${localInput}
-Zulu:  ${zuluHours}:${zuluMinutes}:${zuluSeconds}Z
-
-Military Format: ${zuluHours}${zuluMinutes}Z`;
-
-    document.getElementById('time-output').innerHTML = output;
-    document.getElementById('time-output').style.display = 'block';
-  }
-
-  function zuluToLocal() {
-    const zuluInput = document.getElementById('zulu-input').value;
-    if (!zuluInput) {
-      document.getElementById('time-output').innerHTML = '<span style="color: #ef4444;">Please enter a time.</span>';
-      document.getElementById('time-output').style.display = 'block';
-      return;
-    }
-
-    const [hours, minutes, seconds = 0] = zuluInput.split(':').map(Number);
-    const now = new Date();
-    now.setUTCHours(hours, minutes, seconds);
-
-    const localTime = now.toLocaleTimeString('en-US', { hour12: false });
-
-    const output = `<span class="line-label">TIME CONVERSION</span>
-Zulu:  ${zuluInput}Z
-Local: ${localTime}
-
-Military Format: ${hours.toString().padStart(2, '0')}${minutes.toString().padStart(2, '0')}Z`;
-
-    document.getElementById('time-output').innerHTML = output;
-    document.getElementById('time-output').style.display = 'block';
-  }
+  // [Legacy tools removed - replaced by Sniper Reference Tool]
+  // The following tools have been removed:
+  // - Link Margin Assessment
+  // - HF Antenna Calculator
+  // - Path Loss Calculator
+  // - Freq/Wavelength Converter
+  // - Wind Drift Calculator
+  // - Coordinate Converter
+  // - Zulu Time Converter
+  //
+  // All sniper-related calculations are now in the Sniper Reference Tool
 
   // ==========================================================================
   // Initialize on Load

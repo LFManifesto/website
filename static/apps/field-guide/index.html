@@ -1127,84 +1127,16 @@
                 </a>
               </li>
               <li class="sidebar-nav-item">
-                <a href="#mil-calculator" class="sidebar-nav-link" data-section="tools" data-subsection="mil-calculator">
+                <a href="#sniper-reference" class="sidebar-nav-link" data-section="tools" data-subsection="sniper-reference">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="12" x2="16" y2="12"></line>
+                    <line x1="22" y1="12" x2="18" y2="12"></line>
+                    <line x1="6" y1="12" x2="2" y2="12"></line>
+                    <line x1="12" y1="6" x2="12" y2="2"></line>
+                    <line x1="12" y1="22" x2="12" y2="18"></line>
+                    <circle cx="12" cy="12" r="3"></circle>
                   </svg>
-                  Mil-Relation Calculator
-                </a>
-              </li>
-              <li class="sidebar-nav-item">
-                <a href="#link-margin" class="sidebar-nav-link" data-section="tools" data-subsection="link-margin">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M2 20h.01"></path>
-                    <path d="M7 20v-4"></path>
-                    <path d="M12 20v-8"></path>
-                    <path d="M17 20V8"></path>
-                  </svg>
-                  Link Margin Assessment
-                </a>
-              </li>
-              <li class="sidebar-nav-item">
-                <a href="#hf-antenna-calculator" class="sidebar-nav-link" data-section="tools" data-subsection="hf-antenna-calculator">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2v20"></path>
-                    <path d="M2 12h20"></path>
-                    <path d="M12 2l6 6"></path>
-                    <path d="M12 2l-6 6"></path>
-                    <path d="M12 22l6-6"></path>
-                    <path d="M12 22l-6-6"></path>
-                  </svg>
-                  HF Antenna Calculator
-                </a>
-              </li>
-              <li class="sidebar-nav-item">
-                <a href="#path-loss-calculator" class="sidebar-nav-link" data-section="tools" data-subsection="path-loss-calculator">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                  </svg>
-                  Path Loss Calculator
-                </a>
-              </li>
-              <li class="sidebar-nav-item">
-                <a href="#freq-wavelength-converter" class="sidebar-nav-link" data-section="tools" data-subsection="freq-wavelength-converter">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M17 3v18"></path>
-                    <path d="M7 21V3"></path>
-                    <path d="M17 8l-10 8"></path>
-                  </svg>
-                  Freq/Wavelength Converter
-                </a>
-              </li>
-              <li class="sidebar-nav-item">
-                <a href="#wind-calculator" class="sidebar-nav-link" data-section="tools" data-subsection="wind-calculator">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2"></path>
-                    <path d="M12.59 19.41A2 2 0 1 0 14 16H2"></path>
-                    <path d="M17.73 7.73A2.5 2.5 0 1 1 19 12H2"></path>
-                  </svg>
-                  Wind Drift Calculator
-                </a>
-              </li>
-              <li class="sidebar-nav-item">
-                <a href="#coord-converter" class="sidebar-nav-link" data-section="tools" data-subsection="coord-converter">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="2" y1="12" x2="22" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                  </svg>
-                  Coordinate Converter
-                </a>
-              </li>
-              <li class="sidebar-nav-item">
-                <a href="#zulu-time" class="sidebar-nav-link" data-section="tools" data-subsection="zulu-time">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
-                  Zulu Time Converter
+                  Sniper Reference
                 </a>
               </li>
             </ul>
@@ -1246,13 +1178,13 @@
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
   <!-- App JavaScript -->
-  <script src="app.js?v=1.1"></script>
+  <script src="app.js?v=2.0"></script>
 
   <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js')
+        navigator.serviceWorker.register('sw.js?v=3')
           .then(function(registration) {
             console.log('[App] ServiceWorker registered:', registration.scope);
           })
