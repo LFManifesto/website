@@ -1532,6 +1532,52 @@ audio {
   margin: 2rem 0;
 }
 
+/* Hero image with vignette edge fading */
+.hero-image {
+  position: relative;
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  margin: 2rem 0 3rem 0;
+  border-radius: 8px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 0;
+}
+
+.hero-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 40%, var(--bg-primary) 100%),
+    linear-gradient(to bottom, transparent 60%, var(--bg-primary) 100%);
+  pointer-events: none;
+}
+
+.hero-image figcaption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 0 var(--space-lg);
+  z-index: 1;
+}
+
 /* SVG infographics need minimum height */
 .article-content img[src$=".svg"] {
   min-height: 280px;
