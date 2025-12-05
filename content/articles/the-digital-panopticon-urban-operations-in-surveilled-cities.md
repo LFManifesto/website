@@ -45,18 +45,6 @@ Municipal infrastructure records are often available through FOIA requests. City
 
 ---
 
-## The Counterintuitive Truth About Height
-
-There is a persistent myth, reinforced by a thousand action movies and military training manuals, that elevation equals advantage. Get high, see far, dominate the battlespace.
-In a surveilled city, this is often exactly wrong.
-Rooftops in high-density areas like Midtown and Downtown are protected primarily by keycard systems and basic alarms. Technology designed to keep out bored teenagers, not determined operators. The rooftopping community has been testing these access methods for a decade. Their tradecraft translates directly to operational applications.
-But the roof presents a problem that doctrine rarely addresses: everyone looks up at tall buildings. Security guards. Police officers. Curious pedestrians. The person on the twentieth floor with a line of sight to a target three blocks away is also the person silhouetted against the sky, visible from every angle, memorable to everyone who glances upward.
-The U.S. Army's TC 3-22.10 teaches elevated positions. In urban environments, that doctrine often fails.
-The second floor is high enough to see over parked cars and pedestrian traffic. Low enough to reach an exit in seconds. Memorable to no one. The person on the second floor is just another figure in a window, indistinguishable from the thousands of other figures in thousands of other windows across the city.
-Height is a tool. It is not automatically an advantage.
-
----
-
 ## Becoming Invisible in Plain Sight
 
 The man at Five Points wore khakis and a polo because he had studied, for three weeks before his arrival, what people in Atlanta actually wear.
