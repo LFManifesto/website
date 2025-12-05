@@ -3,7 +3,7 @@
  * Enables offline functionality by caching app shell and data
  */
 
-const CACHE_NAME = 'lfm-field-guide-v1';
+const CACHE_NAME = 'lfm-field-guide-v2';
 
 // Files to cache on install
 const PRECACHE_URLS = [
