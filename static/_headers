@@ -8,29 +8,35 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-# Cache static assets aggressively
+# HTML pages - no cache, always fetch fresh
+# This catches all routes since Hugo uses pretty URLs
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Static assets - cache with revalidation (not immutable)
 /css/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 /js/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 /images/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# Cache apps but allow revalidation
-/apps/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
-# HTML pages - short cache, always revalidate
-/*.html
+/fonts/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+# Apps - short cache, always revalidate for updates
+/apps/*
   Cache-Control: public, max-age=0, must-revalidate
 
-/
-  Cache-Control: public, max-age=0, must-revalidate
+# App static data files - short cache
+/apps/*/data/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+# Service worker - never cache
+/apps/*/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
 
 # RSS feeds
 /feed.xml
