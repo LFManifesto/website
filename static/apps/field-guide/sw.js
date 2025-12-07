@@ -1,9 +1,10 @@
 /**
  * Service Worker for LFM Field Guide
  * Enables offline functionality by caching app shell and data
+ * Auto-updates and reloads clients when new version is available
  */
 
-const CACHE_NAME = 'lfm-field-guide-v4';
+const CACHE_NAME = 'lfm-field-guide-v5';
 
 // Files to cache on install
 const PRECACHE_URLS = [
@@ -23,15 +24,14 @@ const EXTERNAL_URLS = [
   'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js'
 ];
 
-// Install event - precache resources
+// Install event - precache resources and skip waiting immediately
 self.addEventListener('install', event => {
+  console.log('[SW] Installing new version:', CACHE_NAME);
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('[SW] Precaching app shell');
-        // Cache local files
         const localPromise = cache.addAll(PRECACHE_URLS);
-        // Cache external files (may fail if offline during install)
         const externalPromise = Promise.all(
           EXTERNAL_URLS.map(url =>
             fetch(url)
@@ -41,80 +41,83 @@ self.addEventListener('install', event => {
         );
         return Promise.all([localPromise, externalPromise]);
       })
-      .then(() => self.skipWaiting())
+      .then(() => {
+        console.log('[SW] Skip waiting - activating immediately');
+        return self.skipWaiting();
+      })
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches and take control
 self.addEventListener('activate', event => {
+  console.log('[SW] Activating new version:', CACHE_NAME);
   event.waitUntil(
     caches.keys()
       .then(cacheNames => {
         return Promise.all(
           cacheNames
-            .filter(name => name !== CACHE_NAME)
+            .filter(name => name.startsWith('lfm-field-guide-') && name !== CACHE_NAME)
             .map(name => {
               console.log('[SW] Deleting old cache:', name);
               return caches.delete(name);
             })
         );
       })
-      .then(() => self.clients.claim())
+      .then(() => {
+        console.log('[SW] Claiming all clients');
+        return self.clients.claim();
+      })
+      .then(() => {
+        // Notify all clients to reload
+        return self.clients.matchAll({ type: 'window' });
+      })
+      .then(clients => {
+        clients.forEach(client => {
+          console.log('[SW] Notifying client to reload:', client.id);
+          client.postMessage({ type: 'SW_UPDATED', version: CACHE_NAME });
+        });
+      })
   );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - network first for HTML, cache first for assets
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Only handle GET requests
   if (request.method !== 'GET') return;
 
-  // Handle same-origin and CDN requests
+  // Navigation requests (HTML) - network first
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          if (response.ok) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(request, responseToCache));
+          }
+          return response;
+        })
+        .catch(() => caches.match('/apps/field-guide/'))
+    );
+    return;
+  }
+
+  // Static assets - cache first with background update
   if (url.origin === self.location.origin || url.hostname === 'cdn.jsdelivr.net') {
     event.respondWith(
       caches.match(request)
         .then(cachedResponse => {
-          if (cachedResponse) {
-            // Return cached response, but also fetch and update cache in background
-            if (url.origin === self.location.origin) {
-              event.waitUntil(
-                fetch(request)
-                  .then(response => {
-                    if (response.ok) {
-                      caches.open(CACHE_NAME)
-                        .then(cache => cache.put(request, response));
-                    }
-                  })
-                  .catch(() => {}) // Ignore network errors
-              );
-            }
-            return cachedResponse;
-          }
-
-          // Not in cache, fetch from network
-          return fetch(request)
+          const fetchPromise = fetch(request)
             .then(response => {
-              if (!response.ok) {
-                return response;
+              if (response.ok) {
+                caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
               }
-
-              // Clone response for cache
-              const responseToCache = response.clone();
-              caches.open(CACHE_NAME)
-                .then(cache => cache.put(request, responseToCache));
-
               return response;
             })
-            .catch(() => {
-              // Network failed and not in cache
-              // Return offline page for navigation requests
-              if (request.mode === 'navigate') {
-                return caches.match('/apps/field-guide/');
-              }
-              return new Response('Offline', { status: 503 });
-            });
+            .catch(() => cachedResponse);
+
+          return cachedResponse || fetchPromise;
         })
     );
   }
@@ -124,5 +127,8 @@ self.addEventListener('fetch', event => {
 self.addEventListener('message', event => {
   if (event.data === 'skipWaiting') {
     self.skipWaiting();
+  }
+  if (event.data === 'checkUpdate') {
+    self.registration.update();
   }
 });
