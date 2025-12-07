@@ -38,43 +38,44 @@ In these spaces, the sniper matters. But only if he can work at the speed the fi
 
 TC 3-22.10, the Army's sniper manual, defines overmatch as creating "an unfair fight in favor of the sniper." It does not say anything about taking your time.
 
-What follows are three ways to solve those problems fast enough to matter.
+What follows are two ways to speed up the process of killing quickly. 
 
 ---
 
 ## Danger Space
 
-You are providing overwatch for a ground element. They are moving through a village and you are on a rooftop 400 yards south with a clear line on the main road. Anything that presents itself between you and them needs to die quickly.
+A sniper preparing to overwatch a ground force can simplify their task to affect targets out to a specified range with one elevation hold. The sniper can use this technique to provide rapid and discriminate fires for the ground force.
 
-The question is how to engage targets at unknown distances without stopping to range each one.
+Utilizing the AB Kestrel and based on their mission set, the sniper can compile data to formulate one elevation hold to use for their area of operation.
 
-The answer is danger space.
+{{< worked-example title="DANGER SPACE CALCULATION" >}}
+The sniper anticipates that 400 yards would be their longest engagement.
 
-Before the mission, you study your area of operation (AO). Buildings, open areas. You determine that 400 yards is your longest anticipated engagement.
+<div class="data-grid">
+<dt>Hold for 400 yard target</dt><dd>2.3 Mils</dd>
+<dt>Hold for 200 yards (Max Ordinate)</dt><dd>0.6 Mils</dd>
+</div>
 
-The bullet rises. Then it falls. At some point between muzzle and target, it reaches its highest point above your line of sight. That is max ordinate. If the bullet never rises higher than your target is tall, you can hold on the base and hit anything from muzzle to max range.
+These two values tell the sniper precisely where the bullet is at its maximum ordinate.
 
-One hold. Every target. Every distance inside the envelope.
+<div class="equation">2.3 – 0.6 = 1.7 Mils</div>
+
+If the sniper is shooting at a target at 400 yards, their line of sight in the scope is `2.3 Mils`. At the highest point in the flight of that shot (200 yards) the bullet is at `0.6 Mils` in the scope. That equates to being `1.7 Mils` above the line of sight.
+
+<div class="equation result">1.7 Mils × 3.937 × 2.0 = 13.4 Inches</div>
+
+<div class="conclusion">
+
+Holding or dialing `2.3 Mils` on the scope enables engagement of any target out to 400 yards with a single hold. Aim beltline. All shots will be no higher than `13.4 inches` above point of aim.
+
+</div>
+{{< /worked-example >}}
 
 {{< danger-space >}}
-
-The table shows what happens. At close range, the bullet is still rising. At max ordinate, it peaks. At max range, it drops back to your point of aim. All hits.
 
 This is not precision shooting. This is killing fast. The target appears, you put the crosshair on his belt, you press the trigger. No thinking. No math.
 
 For sniper teams, you can break the AO into sectors. Near, mid, far. Different shooters dialed to different ranges. Layered fires. Interlocking danger spaces. Nobody has to calculate anything when the shooting starts.
-
----
-
-## Max Point Blank Zero
-
-The concept is the same. Find a zero that keeps the bullet inside a targets torso for as long as possible. For a 30-inch target, the bullet never rises more than 15 inches above your line of sight or falls more than 15 inches below.
-
-For 7.62 NATO at standard velocities, that zero falls around 400 yards. Dial it. Now, from muzzle to approximately 480 yards, you can hold center of visible mass and hit somewhere on a standing man.
-
-At 50 yards, you hit slightly high. At 400 yards, you hit point of aim. At 480 yards, you hit low, but still on the target. Beyond that, the bullet drops below the kill box and you need to start holding over.
-
-The difference from danger space: MPBZ optimizes for maximum range coverage when you do not know where the threat will appear.
 
 ---
 
@@ -104,11 +105,9 @@ These techniques layer.
 
 Danger space handles the known AO. One hold, beltline, everything from muzzle to max range. Press and forget.
 
-MPBZ handles the unknown. Moving through unfamiliar terrain or on infil, dial your far zero, hold center mass, engage anything inside the envelope without thinking.
-
 Wind width runs underneath both. You already know your margins from the table. At 400 you have 14 mph to play with. At 800, three. When you estimate a 5 mph crosswind, you know instantly whether you are gambling.
 
-None of this replaces fundamentals. You still need a stable position. You still need a clean trigger press. You still need to call your shot and know when you have missed and how to correct it for a follow up shot.
+None of this replaces fundamentals. You still need to build a stable position. You still need a clean trigger press. You still need to call your shot and know when you have missed and how to correct it for a follow up shot.
 
 But the cognitive overhead compresses. The math, the lookups, the second-guessing. It all becomes pattern recognition you can run without stopping to think.
 
@@ -117,14 +116,6 @@ But the cognitive overhead compresses. The math, the lookups, the second-guessin
 ## The Tempo
 
 In the treelines around Bakhmut, Ukrainian snipers talk about a fight that looks nothing like the manuals. Positions are occupied for minutes or hours, not days. Drones overhead force constant movement. Targets appear on thermal feeds for seconds before disappearing behind walls or before they go underground.
-
-The sniper who hesitates watches opportunities vanish. The sniper who cannot operate at tempo becomes a liability. He occupies a position a drone could fill. He consumes resources without producing effects.
-
-The human behind the glass has to justify his presence by doing what the machines cannot.
-
-Move fast. Shoot fast. Displace before the counterbattery fires.
-
----
 
 You are at the window now. Third floor. You have been climbing for forty-five seconds and your heart rate is still high. The bipod legs are on the sill and your breathing is wrong and none of that matters because there he is, crossing the courtyard, exactly where they said.
 
@@ -148,6 +139,5 @@ You are already moving. Rifle up, off the sill, down the stairs three at a time.
 
 ### Tools
 
-- [Applied Ballistics Mobile](https://appliedballisticsllc.com/) — Ballistic solver for danger space and MPBZ calculations
+- [Applied Ballistics](https://appliedballisticsllc.com/) — Ballistic solver for danger space and MPBZ calculations
 - [Kestrel 5700 Elite](https://kestrelballistics.com/) — Weather meter with integrated AB engine
-- [Strelok Pro](https://www.borisov.mobi/) — Mobile ballistic calculator
