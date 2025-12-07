@@ -1,0 +1,109 @@
+{{/* Resource Callout - Styled external resource link box */}}
+{{/* Usage: {{< resource-callout title="INTERACTIVE MAP" url="https://deflock.me/map" >}}Description here{{< /resource-callout >}} */}}
+
+{{ $title := .Get "title" | default "RESOURCE" }}
+{{ $url := .Get "url" }}
+{{ $icon := .Get "icon" | default "link" }}
+
+<div class="resource-callout">
+  <div class="callout-header">
+    <span class="callout-icon">
+      {{ if eq $icon "map" }}
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+      {{ else if eq $icon "database" }}
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+      {{ else }}
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      {{ end }}
+    </span>
+    <span class="callout-label">{{ $title }}</span>
+  </div>
+  <div class="callout-body">
+    <p class="callout-desc">{{ .Inner | markdownify }}</p>
+    {{ if $url }}
+    <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="callout-link">
+      <span>{{ $url | replaceRE "^https?://(www\\.)?" "" | replaceRE "/$" "" }}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+    </a>
+    {{ end }}
+  </div>
+</div>
+
+<style>
+.resource-callout {
+  background: #111;
+  border: 1px solid #333;
+  border-left: 3px solid #c41e3a;
+  border-radius: 4px;
+  margin: 2rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.resource-callout .callout-header {
+  background: #1a1a1a;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resource-callout .callout-icon {
+  color: #c41e3a;
+  display: flex;
+  align-items: center;
+}
+
+.resource-callout .callout-label {
+  color: #c41e3a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.resource-callout .callout-body {
+  padding: 1.25rem;
+}
+
+.resource-callout .callout-desc {
+  color: #999;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.resource-callout .callout-desc:last-child {
+  margin-bottom: 0;
+}
+
+.resource-callout .callout-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #e0e0e0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.resource-callout .callout-link:hover {
+  background: rgba(196, 30, 58, 0.1);
+  border-color: #c41e3a;
+  color: #c41e3a;
+}
+
+.resource-callout .callout-link svg {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.resource-callout .callout-link:hover svg {
+  opacity: 1;
+}
+</style>

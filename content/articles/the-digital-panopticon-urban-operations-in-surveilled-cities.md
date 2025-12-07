@@ -6,6 +6,10 @@ author: "LFM"
 tags: ["OSINT", "Urban Operations", "Surveillance", "Counter-Surveillance", "Tradecraft"]
 ---
 
+<figure class="hero-image">
+  <img src="/images/articles/digital-panopticon/hero.png" alt="Surveillance cameras mounted on a pole overlooking highway traffic">
+</figure>
+
 The man stepped off the MARTA train at Five Points at 2:47 p.m. on a Tuesday. Khakis. Faded polo. New Balance sneakers. Laptop bag over one shoulder. He looked like ten thousand other people passing through Atlanta's busiest transit hub that afternoon.
 
 Within ninety seconds of exiting the turnstile, his face had been captured by fourteen different cameras.
@@ -51,6 +55,14 @@ Over time, the system learns your routine better than you know it yourself.
 A grassroots project called DeFlock has begun mapping these cameras. As of late 2025, volunteers have logged over 5,600 Flock camera locations worldwide. The project's creator received a cease-and-desist letter from Flock Safety. The EFF told them to pound sand.
 
 The map is still growing.
+
+{{< resource-callout title="INTERACTIVE MAP" url="https://deflock.me/map" icon="map" >}}
+Crowdsourced Flock camera locations. See what is watching your neighborhood, your commute, your patterns. Contribute sightings to the database.
+{{< /resource-callout >}}
+
+{{< resource-callout title="SURVEILLANCE DATABASE" url="https://atlasofsurveillance.org" icon="database" >}}
+EFF's Atlas of Surveillance documents police surveillance technologies across the United States. Search by city, county, or technology type.
+{{< /resource-callout >}}
 
 ---
 
