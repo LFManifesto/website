@@ -3089,143 +3089,33 @@ audio {
   color: var(--text-muted);
 }
 
-/* Projects page styles */
-.project-needs {
-  margin-top: var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  background-color: var(--bg-secondary);
-  border-radius: 4px;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.project-needs strong {
-  color: var(--text-primary);
-}
-
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-top: var(--space-md);
-}
-
-.project-links a {
-  font-size: 0.85rem;
-  color: var(--accent);
-  text-decoration: none;
-  padding: 0.3em 0.6em;
-  background-color: var(--bg-secondary);
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-.project-links a:hover {
-  background-color: var(--bg-tertiary);
-}
-
-.project-matrix {
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--border-subtle);
-}
-
-.project-matrix a {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.project-matrix a:hover {
-  text-decoration: underline;
-}
-
-.matrix-note {
-  margin-top: var(--space-lg);
-  padding: var(--space-md);
-  background-color: var(--bg-secondary);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 4px 4px 0;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.matrix-note a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.matrix-note a:hover {
-  text-decoration: underline;
-}
-
-.section-intro {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-lg);
-  line-height: 1.6;
-}
-
-.payout {
-  margin-top: var(--space-md);
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.submit-link {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.submit-link:hover {
-  text-decoration: underline;
-}
-
-.pgp-info {
-  margin-top: var(--space-lg);
+/* Project "What We Need" section */
+.project-what-we-need {
+  margin: var(--space-lg) 0;
   padding: var(--space-md);
   background-color: var(--bg-secondary);
   border-radius: 6px;
 }
 
-.pgp-info p {
+.project-what-we-need h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
   margin: 0 0 var(--space-sm) 0;
-  font-size: 0.9rem;
+}
+
+.project-what-we-need ul {
+  margin: 0;
+  padding-left: var(--space-lg);
   color: var(--text-secondary);
 }
 
-.pgp-info a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.pgp-info a:hover {
-  text-decoration: underline;
-}
-
-.fingerprint {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  word-break: break-all;
-}
-
-/* Mobile - Projects page */
-@media (max-width: 768px) {
-  .project-links {
-    flex-direction: column;
-  }
-
-  .project-links a {
-    text-align: center;
-  }
+.project-what-we-need li {
+  margin-bottom: var(--space-xs);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 /* Project repo links (GitHub buttons) */
