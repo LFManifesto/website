@@ -50,13 +50,13 @@ theme = 'lfm'
     pageRef = '/articles'
     weight = 30
   [[menus.main]]
-    name = 'Bulletin'
-    pageRef = '/bulletin'
-    weight = 35
-  [[menus.main]]
     name = 'Podcast'
     pageRef = '/podcast'
     weight = 40
+  [[menus.main]]
+    name = 'Projects'
+    pageRef = '/projects'
+    weight = 45
   [[menus.main]]
     name = 'Resources'
     pageRef = '/resources'
