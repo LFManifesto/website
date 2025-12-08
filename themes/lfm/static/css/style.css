@@ -3580,6 +3580,86 @@ audio {
   text-decoration: underline;
 }
 
+/* Model statement */
+.model-section {
+  margin-bottom: var(--space-xl);
+}
+
+.model-statement {
+  text-align: center;
+  padding: var(--space-lg) var(--space-xl);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.model-statement p {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Submission guidelines */
+.submission-guidelines {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.submission-guidelines h3 {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-lg);
+}
+
+.guideline-block {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.guideline-block:last-child {
+  margin-bottom: 0;
+}
+
+.guideline-block h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm) 0;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.guideline-block ul {
+  margin: 0;
+  padding-left: var(--space-lg);
+  color: var(--text-secondary);
+}
+
+.guideline-block li {
+  margin-bottom: var(--space-xs);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.guideline-block li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.guideline-block code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background-color: var(--bg-secondary);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  color: var(--accent);
+}
+
 /* Mobile responsive - Projects page */
 @media (max-width: 768px) {
   .xmr-rate-banner {

@@ -1,6 +1,13 @@
 {{ define "main" }}
 <h1 class="page-title-centered">{{ .Title }}</h1>
 
+<!-- The Model -->
+<section class="resource-section model-section">
+  <div class="model-statement">
+    <p>Publications fund development. All contributions become open source. We do not profit from your work.</p>
+  </div>
+</section>
+
 <!-- Active Projects -->
 <section class="resource-section">
   <h2 class="resource-section-title">
@@ -131,7 +138,7 @@
     </div>
     <div class="payout-row">
       <span class="payout-type">Articles</span>
-      <span class="payout-desc">Original work on comms, drones, tradecraft. 1500-3000 words.</span>
+      <span class="payout-desc">Original work on comms, drones, tradecraft, OSINT, mesh networking.</span>
       <span class="payout-amount">$25</span>
     </div>
     <div class="payout-row">
@@ -141,13 +148,59 @@
     </div>
     <div class="payout-row">
       <span class="payout-type">Hardware Configs</span>
-      <span class="payout-desc">Complete guides with parts, wiring, tested configs.</span>
+      <span class="payout-desc">Complete build guides with parts, wiring, tested parameters.</span>
       <span class="payout-amount">$30</span>
     </div>
     <div class="payout-row">
-      <span class="payout-type">Code / Repo Contributions</span>
-      <span class="payout-desc">Bug fixes, features, docs. Use GitHub Discussions first.</span>
+      <span class="payout-type">Code Contributions</span>
+      <span class="payout-desc">Bug fixes, features, documentation. Use GitHub Discussions first.</span>
       <span class="payout-amount">Variable</span>
+    </div>
+  </div>
+
+  <!-- Submission Guidelines -->
+  <div class="submission-guidelines">
+    <h3>Submission Guidelines</h3>
+
+    <div class="guideline-block">
+      <h4>Articles</h4>
+      <ul>
+        <li><strong>Length:</strong> 1,200 - 3,000 words</li>
+        <li><strong>Format:</strong> .docx, .odt, or Markdown (.md)</li>
+        <li><strong>Font:</strong> 12pt, standard font (Times New Roman, Arial, Liberation Serif)</li>
+        <li><strong>Structure:</strong> Title, author name or handle, body with subheadings, sources at end</li>
+        <li><strong>File naming:</strong> <code>ARTICLE_Title_Author_Date.docx</code></li>
+      </ul>
+    </div>
+
+    <div class="guideline-block">
+      <h4>Field Documentation</h4>
+      <ul>
+        <li><strong>Format:</strong> .docx, .odt, or Markdown (.md)</li>
+        <li><strong>Required:</strong> Date, location (general area), equipment used, methodology, results</li>
+        <li><strong>Structure:</strong> Objective, setup, procedure, data/observations, conclusions</li>
+        <li><strong>Photos:</strong> Include if applicable, labeled with description</li>
+        <li><strong>File naming:</strong> <code>FIELD_TestType_Author_Date.docx</code></li>
+      </ul>
+    </div>
+
+    <div class="guideline-block">
+      <h4>Hardware Configs</h4>
+      <ul>
+        <li><strong>Format:</strong> .docx, .odt, or Markdown (.md)</li>
+        <li><strong>Required:</strong> Complete parts list with sources, wiring diagrams, config files, tested parameters</li>
+        <li><strong>Include:</strong> Build photos, cost breakdown, software/firmware versions</li>
+        <li><strong>File naming:</strong> <code>HW_DeviceType_Author_Date.docx</code></li>
+      </ul>
+    </div>
+
+    <div class="guideline-block">
+      <h4>Code Contributions</h4>
+      <ul>
+        <li><strong>Process:</strong> Open a Discussion on the relevant repo before starting significant work</li>
+        <li><strong>Standards:</strong> Follow existing code style, include tests if applicable</li>
+        <li><strong>Documentation:</strong> Update README or docs for new features</li>
+      </ul>
     </div>
   </div>
 

@@ -59,16 +59,49 @@ AI-assisted field operations: medical diagnosis support, direction finding, tele
 
 ---
 
+## The Model
+
+Publications fund development. All contributions become open source. We do not profit from your work.
+
+---
+
 ## Contributing
 
 We pay for work that ships. All payments in Monero (XMR).
 
 | Type | Payout |
 |------|--------|
-| Articles (1500-3000 words) | $25 |
+| Articles | $25 |
 | Field Documentation | $10 |
 | Hardware Configs | $30 |
 | Code Contributions | Variable |
+
+### Submission Guidelines
+
+**Articles**
+- Length: 1,200 - 3,000 words
+- Format: .docx, .odt, or Markdown (.md)
+- Font: 12pt, standard font (Times New Roman, Arial, Liberation Serif)
+- Structure: Title, author name or handle, body with subheadings, sources at end
+- File naming: `ARTICLE_Title_Author_Date.docx`
+
+**Field Documentation**
+- Format: .docx, .odt, or Markdown (.md)
+- Required: Date, location (general area), equipment used, methodology, results
+- Structure: Objective, setup, procedure, data/observations, conclusions
+- Photos: Include if applicable, labeled with description
+- File naming: `FIELD_TestType_Author_Date.docx`
+
+**Hardware Configs**
+- Format: .docx, .odt, or Markdown (.md)
+- Required: Complete parts list with sources, wiring diagrams, config files, tested parameters
+- Include: Build photos, cost breakdown, software/firmware versions
+- File naming: `HW_DeviceType_Author_Date.docx`
+
+**Code Contributions**
+- Process: Open a Discussion on the relevant repo before starting significant work
+- Standards: Follow existing code style, include tests if applicable
+- Documentation: Update README or docs for new features
 
 ### How to Submit
 
