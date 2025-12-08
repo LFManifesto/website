@@ -510,6 +510,25 @@ strong {
   color: var(--accent);
 }
 
+.home-projects-list {
+  margin: var(--space-md) 0;
+}
+
+.home-project-item {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.home-project-item:last-child {
+  border-bottom: none;
+}
+
+.home-project-item strong {
+  color: var(--text-primary);
+}
+
 .home-card .btn {
   margin-top: var(--space-sm);
 }
