@@ -31,18 +31,54 @@ In-depth articles on tactical and technical subjects. NYT-style long-form journa
 ### Web Applications
 Interactive tools designed for desktop and tablet use:
 
-- **Light Fighter Guide** - Comprehensive field reference PWA covering drones, communications, SIGINT, marksmanship, and mission planning with 9 interactive calculators
-- **RF Simulator** - Radio frequency propagation modeling
-- **Network Simulator** - Mesh network visualization
-- **Air TM Simulator** - Airspace and terrain modeling
-- **Loophole Calculator** - Ballistic calculations
-- **OSINT Tutorial** - Intelligence gathering walkthrough
+- **[Light Fighter Guide](https://lightfightermanifesto.org/apps/field-guide/)** - Comprehensive field reference PWA covering drones, communications, SIGINT, marksmanship, and mission planning with 9 interactive calculators
 
 ### Podcast
 Audio content discussing tactics, technology, and unconventional warfare.
 
 ### Shop
 Print zines (Volumes I-IV) available for purchase. Accepts Monero, cash, or card through Mixam print-on-demand.
+
+---
+
+## Active Projects
+
+We maintain several open-source projects focused on communications and field operations. See the [Projects page](https://lightfightermanifesto.org/projects/) for details and contribution opportunities.
+
+### LFM-Reticulum
+Encrypted mesh communications over HF radio using Reticulum and FreeDV. Long-range, off-grid, no repeaters. Building Monero transaction capability over mesh.
+
+- [ReticulumHF](https://github.com/LFManifesto/ReticulumHF) - HF transport layer for Reticulum
+- [LXMFMonero](https://github.com/LFManifesto/LXMFMonero) - Monero transactions over LXMF
+
+### LFM-Unmanned Systems
+FPV platforms and counter-UAS. Build documentation, flight controller configs, and operational techniques.
+
+### LFM-Guerrilla Tech
+AI-assisted field operations: medical diagnosis support, direction finding, telemedicine over mesh, and improvised tech solutions.
+
+---
+
+## Contributing
+
+We pay for work that ships. All payments in Monero (XMR).
+
+| Type | Payout |
+|------|--------|
+| Articles (1500-3000 words) | $25 |
+| Field Documentation | $10 |
+| Hardware Configs | $30 |
+| Code Contributions | Variable |
+
+### How to Submit
+
+**Code:** Open a PR or start a [Discussion](https://github.com/LFManifesto/ReticulumHF/discussions) first for significant work.
+
+**Everything else:** Email [lfmanifesto@proton.me](mailto:lfmanifesto@proton.me)
+
+PGP encryption available for sensitive material:
+- **Key:** https://lightfightermanifesto.org/keys/lfm-dead-drop.asc
+- **Fingerprint:** `5F30 7CCC D67D 28BC F7D2 B5EE FBEC F672 D19E 1FFB`
 
 ---
 
@@ -88,8 +124,11 @@ Reticulum config:
 - **Discord** - [Light Fighter Manifesto Server](https://discord.com/invite/light-fighter-manifesto-963878135718371408) (~4,000 members)
 - **Matrix** - [#General:matrix.lightfightermanifesto.net](https://matrix.to/#/#General:matrix.lightfightermanifesto.net)
 - **GitHub** - [LFManifesto](https://github.com/LFManifesto)
-- **Instagram** - [@light_fighter_manifesto](https://www.instagram.com/light_fighter_manifesto/)
-- **TikTok** - [@lfmanifesto](https://www.tiktok.com/@lfmanifesto)
+
+Project-specific Matrix channels (invite-only, join #General first):
+- #LFM-Reticulum
+- #LFM-Unmanned-Systems
+- #LFM-Guerrilla-Tech
 
 ---
 
@@ -113,20 +152,17 @@ site/
 ├── hugo.toml              # Site configuration
 ├── content/
 │   ├── _index.md          # Home page
-│   ├── shop/              # Shop section
-│   ├── resources/         # Resources page
-│   ├── tools/             # Tools/Apps listings
 │   ├── articles/          # Article posts
-│   └── podcast/           # Podcast episodes
+│   ├── podcast/           # Podcast episodes
+│   ├── projects/          # Projects/bounties page
+│   ├── resources/         # Resources page
+│   ├── shop/              # Shop section
+│   └── tools/             # Tools/Apps listings
 ├── static/
+│   ├── apps/              # Web applications
+│   │   └── field-guide/   # Light Fighter Guide PWA
 │   ├── images/            # Site images
-│   └── apps/              # Web applications
-│       ├── field-guide/   # Light Fighter Guide PWA
-│       ├── RF_Sim/        # RF Simulator
-│       ├── Network_Sim/   # Network Simulator
-│       ├── Air_TM_Sim/    # Air TM Simulator
-│       ├── loophole/      # Loophole Calculator
-│       └── OSINT/         # OSINT Tutorial
+│   └── keys/              # PGP keys
 └── themes/lfm/            # Custom Hugo theme
 ```
 
@@ -158,12 +194,6 @@ git push
 ```
 
 Live in approximately 1-2 minutes.
-
----
-
-## Contributing
-
-This is a private publication. For corrections or suggestions, contact via Discord or Matrix.
 
 ---
 
