@@ -2332,6 +2332,31 @@ audio {
   white-space: pre-wrap;
 }
 
+.resource-join-steps {
+  margin: var(--space-md) 0;
+}
+
+.resource-join-steps p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.resource-join-steps a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.resource-join-steps a:hover {
+  text-decoration: underline;
+}
+
+.resource-card-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 .resource-link-card {
   display: block;
   background-color: var(--bg-card);
