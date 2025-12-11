@@ -7,15 +7,20 @@
 (function() {
   'use strict';
 
+  // ==========================================================================
+  // CONTENT DATA
+  // ==========================================================================
+
   const CONTENT = {
     cuf: {
       title: 'Care Under Fire',
-      subtitle: 'Actions taken while still under effective hostile fire',
+      subtitle: 'Actions while under effective hostile fire',
       color: '#dc2626',
       sections: [
         {
           id: 'cuf-overview',
           title: 'Overview',
+          keywords: ['care under fire', 'cuf', 'hostile fire', 'return fire', 'cover'],
           content: `
             <div class="alert alert-critical">
               <strong>PRIORITY:</strong> Return fire and take cover. The best medicine on the battlefield is fire superiority.
@@ -30,6 +35,15 @@
                 <li>Stop life-threatening external hemorrhage if tactically feasible</li>
               </ol>
             </div>
+            <div class="card">
+              <div class="card-title">CUF Assessment</div>
+              <p>Tactical patient assessment during CUF is limited to:</p>
+              <ul>
+                <li>Rapid head-to-toe survey (<strong>10-15 seconds</strong> or as tactically feasible)</li>
+                <li>Identifying life-threatening hemorrhage only</li>
+                <li>Airway management (other than positioning) deferred to TFC</li>
+              </ul>
+            </div>
             <div class="alert alert-warning">
               <strong>Airway management is generally best deferred until Tactical Field Care phase.</strong>
             </div>
@@ -38,6 +52,7 @@
         {
           id: 'cuf-hemorrhage',
           title: 'Hemorrhage Control',
+          keywords: ['hemorrhage', 'bleeding', 'tourniquet', 'blood', 'massive hemorrhage', 'cat', 'softt'],
           content: `
             <div class="card march-card massive">
               <div class="card-title">
@@ -47,45 +62,68 @@
               <div class="alert alert-critical">
                 <strong>LIFE-THREATENING BLEEDING:</strong>
                 <ul style="margin-top: 0.5rem; margin-bottom: 0;">
-                  <li>Spurting blood or flowing blood</li>
+                  <li>Spurting or flowing blood</li>
                   <li>Blood soaking rapidly through uniform</li>
                   <li>Blood pooling on the ground</li>
-                  <li>Complete amputation</li>
+                  <li>Complete or partial amputation</li>
+                  <li>Extremity with absent distal pulse</li>
                 </ul>
               </div>
-              <h4>Actions:</h4>
-              <ul>
+            </div>
+            <div class="card">
+              <div class="card-title">CUF Hemorrhage Actions</div>
+              <ol>
                 <li>Direct casualty to control hemorrhage by self-aid if able</li>
-                <li>Use a <strong>CoTCCC-recommended limb tourniquet</strong> for extremity hemorrhage</li>
-                <li>Apply tourniquet <strong>"High and Tight"</strong> if bleeding site is not easily identifiable</li>
+                <li>Use a <strong>CoTCCC-recommended limb tourniquet</strong></li>
+                <li>Apply tourniquet <strong>"High and Tight"</strong> (as proximal as possible)</li>
                 <li>Move the casualty to cover</li>
-              </ul>
-              <div class="alert alert-info">
-                <strong>CoTCCC Recommended Tourniquets:</strong>
-                <ul style="margin-top: 0.5rem; margin-bottom: 0;">
-                  <li>Combat Application Tourniquet (CAT)</li>
-                  <li>SOF Tactical Tourniquet (SOFTT)</li>
-                  <li>Emergency Medical Tourniquet (EMT)</li>
-                </ul>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">CoTCCC Recommended Tourniquets</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Name</th><th>NSN</th></tr></thead>
+                  <tbody>
+                    <tr><td>Combat Application Tourniquet (CAT)</td><td>6515-01-521-7976</td></tr>
+                    <tr><td>SOF Tactical Tourniquet (SOFTT-W)</td><td>6515-01-530-7015</td></tr>
+                    <tr><td>Emergency Medical Tourniquet (EMT)</td><td>6515-01-580-1645</td></tr>
+                    <tr><td>SAM XT Extremity Tourniquet</td><td>6515-01-680-1797</td></tr>
+                    <tr><td>TX2/TX3 Tourniquet</td><td>6515-01-699-4207</td></tr>
+                  </tbody>
+                </table>
               </div>
+            </div>
+            <div class="alert alert-info">
+              <strong>High and Tight Placement:</strong> Place tourniquet as high as possible on the affected limb, over the uniform if necessary. This is the fastest method and accounts for wounds you may not immediately see.
             </div>
           `
         },
         {
           id: 'cuf-movement',
           title: 'Casualty Movement',
+          keywords: ['movement', 'drag', 'extrication', 'carry', 'move casualty'],
           content: `
             <div class="card">
               <div class="card-title">Extrication</div>
-              <p>Casualties should be extricated from burning vehicles or buildings and moved to relative safety. Do what is necessary to stop the burning process.</p>
+              <p>Casualties should be extricated from:</p>
+              <ul>
+                <li>Burning vehicles or buildings</li>
+                <li>Areas of continued hostile fire</li>
+                <li>Hazardous environments (water, chemical, collapse)</li>
+              </ul>
+              <p><strong>Do what is necessary to stop the burning process.</strong></p>
             </div>
             <div class="card">
               <div class="card-title">Movement Methods</div>
               <ul>
-                <li><strong>Fastest method:</strong> Dragging along the long axis of patient's body by two rescuers</li>
-                <li>Spinal precautions or stabilization should only be considered <strong>after</strong> casualty is removed from enemy threat</li>
-                <li>Only indicated by mechanism of injury</li>
+                <li><strong>Fastest:</strong> Dragging along the long axis of patient's body (2 rescuers)</li>
+                <li><strong>Hasty:</strong> Fireman's carry, pack-strap carry</li>
+                <li><strong>Equipment:</strong> SKEDCO, litter, poncho</li>
               </ul>
+              <div class="alert alert-warning" style="margin-top: 0.5rem;">
+                Spinal precautions should only be considered <strong>AFTER</strong> casualty is removed from threat.
+              </div>
             </div>
             <div class="decision-box">
               <div class="decision-question">Is the casualty conscious?</div>
@@ -101,12 +139,13 @@
 
     tfc: {
       title: 'Tactical Field Care',
-      subtitle: 'Care rendered when no longer under effective hostile fire',
+      subtitle: 'Care when no longer under effective hostile fire',
       color: '#f59e0b',
       sections: [
         {
           id: 'tfc-march',
           title: 'MARCH Protocol',
+          keywords: ['march', 'protocol', 'assessment', 'tfc', 'tactical field care', 'paws'],
           content: `
             <div class="alert alert-info">
               <strong>MARCH-PAWS</strong> is the assessment and treatment sequence for Tactical Field Care.
@@ -116,107 +155,143 @@
               <div class="card" style="border-left: 4px solid #f97316;"><strong style="color: #f97316;">A</strong> - Airway</div>
               <div class="card" style="border-left: 4px solid #eab308;"><strong style="color: #eab308;">R</strong> - Respiration</div>
               <div class="card" style="border-left: 4px solid #22c55e;"><strong style="color: #22c55e;">C</strong> - Circulation</div>
-              <div class="card" style="border-left: 4px solid #3b82f6;"><strong style="color: #3b82f6;">H</strong> - Hypothermia/Head Injury</div>
+              <div class="card" style="border-left: 4px solid #3b82f6;"><strong style="color: #3b82f6;">H</strong> - Hypothermia/Head</div>
             </div>
             <div class="card">
-              <div class="card-title">Initial Actions</div>
+              <div class="card-title">Then PAWS</div>
               <ul>
-                <li>Establish security perimeter IAW tactical SOPs</li>
-                <li>Maintain situational awareness</li>
-                <li>Triage casualties as required</li>
-                <li>Casualties with <strong>altered mental status</strong> should have weapons cleared/secured, communications gear secured, sensitive items redistributed</li>
+                <li><strong>P</strong> - Pain management</li>
+                <li><strong>A</strong> - Antibiotics</li>
+                <li><strong>W</strong> - Wounds (inspect and dress)</li>
+                <li><strong>S</strong> - Splinting</li>
               </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Initial TFC Actions</div>
+              <ol>
+                <li>Establish security perimeter IAW tactical SOPs</li>
+                <li>Consolidate casualties in CCP</li>
+                <li>Conduct triage to identify priority</li>
+                <li>Casualties with <strong>altered mental status</strong>: disarm, secure weapons and comms</li>
+                <li>Delegate minor injuries to RFRs/ARFRs</li>
+                <li>Communicate casualty status and MEDEVAC requirements to C2</li>
+              </ol>
             </div>
           `
         },
         {
           id: 'tfc-hemorrhage',
           title: 'M - Massive Hemorrhage',
+          keywords: ['hemorrhage', 'bleeding', 'tourniquet', 'hemostatic', 'junctional', 'conversion', 'txa'],
           content: `
             <div class="card march-card massive">
-              <div class="card-title"><span class="march-letter">M</span> Massive Hemorrhage Control</div>
+              <div class="card-title"><span class="march-letter">M</span> Hemorrhage Control</div>
               <ol>
                 <li>Assess for unrecognized hemorrhage and control all life-threatening bleeding</li>
-                <li>Use one or more CoTCCC-recommended <strong>limb tourniquets</strong> if necessary</li>
-                <li>Use CoTCCC-approved <strong>hemostatic dressing</strong> for compressible hemorrhage not amenable to limb tourniquet</li>
-                <li>Apply <strong>junctional tourniquet</strong> immediately if bleeding site is amenable</li>
+                <li>Expose wound to assess tourniquet necessity</li>
+                <li>Apply CoTCCC-recommended <strong>limb tourniquet</strong> if indicated</li>
+                <li>Use <strong>hemostatic dressing</strong> for compressible hemorrhage not amenable to tourniquet</li>
+                <li>Apply <strong>junctional tourniquet</strong> for groin/axilla bleeding</li>
               </ol>
-              <h4>Tourniquet Reassessment:</h4>
+            </div>
+            <div class="card">
+              <div class="card-title">Tourniquet Reassessment</div>
               <ul>
-                <li>Expose wound and determine if tourniquet is needed</li>
-                <li>If bleeding not controlled, tighten tourniquet if possible</li>
-                <li>If first tourniquet fails, add second tourniquet <strong>side-by-side</strong></li>
+                <li>Expose wound - determine if TQ still needed</li>
+                <li>If bleeding not controlled: tighten TQ or add second <strong>side-by-side</strong></li>
+                <li>Mark time of application on TQ and casualty card</li>
               </ul>
-              <div class="alert alert-warning">
-                <strong>Convert tourniquets in less than 2 hours</strong> if casualty NOT in shock, possible to monitor wound closely, NOT controlling bleeding from amputation.<br>
+              <div class="alert alert-warning" style="margin-top: 0.5rem;">
+                <strong>Conversion:</strong> Consider in <2 hours if:
+                <ul style="margin: 0.25rem 0 0 0;">
+                  <li>Casualty NOT in shock</li>
+                  <li>Can monitor wound closely</li>
+                  <li>NOT an amputation</li>
+                </ul>
                 <strong>Do NOT remove if TQ in place >6 hours.</strong>
               </div>
             </div>
             <div class="card">
-              <div class="card-title">Pelvic Binder Indications</div>
-              <p>Apply for suspected pelvic fracture and/or severe blunt force or blast injury with:</p>
-              <ul>
-                <li>Pelvic pain</li>
-                <li>Any major lower limb amputation/near amputation</li>
-                <li>Physical exam suggestive of pelvic fracture</li>
-                <li>Unconsciousness or shock</li>
-              </ul>
-            </div>
-            <div class="card">
-              <div class="card-title">CoTCCC Hemostatic Dressings</div>
+              <div class="card-title">Hemostatic Dressings</div>
               <div class="table-wrapper">
                 <table>
                   <thead><tr><th>Product</th><th>NSN</th></tr></thead>
                   <tbody>
-                    <tr><td>Combat Gauze (CG) Z-Fold</td><td>6510-01-562-3325</td></tr>
+                    <tr><td>Combat Gauze Z-Fold</td><td>6510-01-562-3325</td></tr>
                     <tr><td>Celox Gauze Z-fold</td><td>6510-01-623-9910</td></tr>
                     <tr><td>ChitoGauze</td><td>6510-01-591-7740</td></tr>
-                    <tr><td>X-Stat Single Applicator</td><td>6510-01-644-7335</td></tr>
+                    <tr><td>X-Stat (cannot remove in field)</td><td>6510-01-644-7335</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p style="font-size: 0.85rem; color: var(--text-muted);">Note: X-Stat cannot be removed in the field.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Junctional Hemorrhage</div>
+              <p>For groin, axilla, or neck bleeding not amenable to limb tourniquet:</p>
+              <ul>
+                <li>Combat Ready Clamp (CRoC) - NSN 6515-01-589-9135</li>
+                <li>SAM Junctional Tourniquet - NSN 6515-01-618-7475</li>
+                <li>JETT - NSN 6515-01-616-5841</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Pelvic Binder</div>
+              <p>Apply for suspected pelvic fracture with:</p>
+              <ul>
+                <li>Pelvic pain or instability</li>
+                <li>Major lower limb amputation/near amputation</li>
+                <li>Unconsciousness or shock with pelvic MOI</li>
+              </ul>
             </div>
           `
         },
         {
           id: 'tfc-airway',
           title: 'A - Airway',
+          keywords: ['airway', 'npa', 'opa', 'recovery position', 'jaw thrust', 'chin lift', 'cric', 'cricothyroidotomy'],
           content: `
             <div class="card march-card airway">
               <div class="card-title"><span class="march-letter">A</span> Airway Management</div>
-              <h4>Unconscious WITHOUT Airway Obstruction:</h4>
+              <p><strong>Conscious patient talking normally = airway intact.</strong></p>
+              <p>Unconscious patient: tongue is most common obstruction.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Unconscious WITHOUT Obstruction</div>
               <ol>
                 <li>Chin lift or jaw thrust maneuver</li>
                 <li>Nasopharyngeal airway (NPA)</li>
-                <li>Place casualty in <strong>recovery position</strong></li>
+                <li>Place in <strong>recovery position</strong></li>
               </ol>
-              <h4>Airway Obstruction or Impending Obstruction:</h4>
+            </div>
+            <div class="card">
+              <div class="card-title">Airway Obstruction or Impending</div>
               <ol>
-                <li>Allow conscious casualty to assume any position that best protects airway (including sitting up)</li>
-                <li>Chin lift or jaw thrust maneuver</li>
-                <li>Nasopharyngeal airway</li>
+                <li>Allow conscious casualty to assume position that protects airway</li>
+                <li>Chin lift or jaw thrust</li>
+                <li>NPA (contraindicated in suspected basilar skull fracture)</li>
+                <li>Suction if available</li>
                 <li>Place unconscious casualty in recovery position</li>
               </ol>
-              <div class="alert alert-critical">
-                <strong>If previous measures unsuccessful:</strong> Perform surgical cricothyroidotomy
-                <ul style="margin-top: 0.5rem; margin-bottom: 0;">
-                  <li>CricKey technique (preferred)</li>
-                  <li>Bougie-aided open surgical technique</li>
-                  <li>Standard open surgical technique</li>
-                </ul>
-                <p style="margin-top: 0.5rem;"><strong>Use lidocaine if casualty is conscious.</strong></p>
+              <div class="alert alert-critical" style="margin-top: 0.5rem;">
+                <strong>If above measures fail:</strong> Surgical cricothyroidotomy
               </div>
             </div>
             <div class="card">
-              <div class="card-title">DOPE Troubleshooting</div>
-              <p>If ventilation problems occur with an advanced airway:</p>
+              <div class="card-title">NPA Sizing</div>
               <ul>
-                <li><strong>D</strong> - Dislodgement: Check tube placement</li>
-                <li><strong>O</strong> - Obstruction: Consider suctioning</li>
-                <li><strong>P</strong> - Pneumothorax: Consider NCD</li>
-                <li><strong>E</strong> - Equipment failure: Disconnect vent and use BVM</li>
+                <li>Measure: tip of nose to earlobe</li>
+                <li>Common adult sizes: 28F (7.0mm), 32F (8.0mm)</li>
+                <li>Lubricate and insert bevel toward septum</li>
               </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Recovery Position</div>
+              <ol>
+                <li>Roll casualty onto side (injured side down if possible)</li>
+                <li>Flex upper knee for stability</li>
+                <li>Position upper arm to support head</li>
+                <li>Allows drainage, prevents aspiration</li>
+              </ol>
             </div>
             <div class="alert alert-info">
               <strong>Spinal stabilization is NOT necessary</strong> for casualties with penetrating trauma.
@@ -226,112 +301,132 @@
         {
           id: 'tfc-respiration',
           title: 'R - Respiration',
+          keywords: ['respiration', 'breathing', 'pneumothorax', 'tension', 'ncd', 'needle decompression', 'chest seal'],
           content: `
             <div class="card march-card respiration">
-              <div class="card-title"><span class="march-letter">R</span> Respiration / Breathing</div>
-              <h4>Progressive Respiratory Distress + Known/Suspected Torso Trauma:</h4>
-              <p>Consider <strong>tension pneumothorax</strong> - Decompress chest on side of injury</p>
-              <div class="alert alert-warning">
-                <strong>Needle Decompression:</strong>
-                <ul style="margin: 0.5rem 0;">
-                  <li>14-gauge, 3.25 inch needle/catheter</li>
-                  <li><strong>Primary Site:</strong> 5th ICS, Anterior Axillary Line</li>
-                  <li><strong>Alternate Site:</strong> 2nd or 3rd ICS, Midclavicular Line</li>
-                </ul>
-              </div>
-              <h4>Open/Sucking Chest Wounds:</h4>
-              <ol>
-                <li>Apply <strong>vented chest seal</strong> (preferred)</li>
-                <li>Or apply non-vented chest seal</li>
-                <li>Burp wound if indicated for breathing difficulty</li>
-              </ol>
+              <div class="card-title"><span class="march-letter">R</span> Respiration</div>
+              <p>Progressive respiratory distress + known/suspected torso trauma = <strong>consider tension pneumothorax</strong></p>
             </div>
             <div class="card">
-              <div class="card-title">Tension Pneumothorax Indicators</div>
+              <div class="card-title">Tension Pneumothorax Signs</div>
               <ul>
-                <li>Difficulty or worsening breathing with chest/abdominal injury</li>
+                <li>Difficulty/worsening breathing after chest/abdominal injury</li>
                 <li>Decreased SpO2</li>
                 <li>Decreased breath sounds on affected side</li>
                 <li>Tracheal deviation (late sign)</li>
-                <li>Jugular vein distention (late sign)</li>
+                <li>JVD (late sign)</li>
+                <li>Cyanosis</li>
               </ul>
             </div>
+            <div class="card">
+              <div class="card-title">Needle Chest Decompression</div>
+              <div class="drug-dose">
+                14-gauge, 3.25" needle/catheter<br>
+                <strong>Primary:</strong> 5th ICS, Anterior Axillary Line<br>
+                <strong>Alternate:</strong> 2nd/3rd ICS, Midclavicular Line
+              </div>
+              <p style="color: var(--accent);"><strong>Ensure NOT medial to nipple line and NOT directed toward heart.</strong></p>
+            </div>
+            <div class="card">
+              <div class="card-title">Open/Sucking Chest Wound</div>
+              <ol>
+                <li>Apply <strong>vented chest seal</strong> (HyFin, SAM, Bolin)</li>
+                <li>If no vented seal: apply non-vented and monitor closely</li>
+                <li>If breathing worsens: burp seal or perform NCD</li>
+              </ol>
+            </div>
             <div class="alert alert-info">
-              <strong>Initiate pulse oximetry monitoring.</strong><br>
-              Casualties with moderate/severe TBI should receive supplemental O2 to maintain SpO2 >90%.
+              <strong>Initiate pulse oximetry.</strong> Maintain SpO2 >90%, especially with moderate/severe TBI.
             </div>
           `
         },
         {
           id: 'tfc-circulation',
           title: 'C - Circulation',
+          keywords: ['circulation', 'shock', 'iv', 'io', 'fluids', 'blood', 'transfusion', 'resuscitation', 'txa'],
           content: `
             <div class="card march-card circulation">
               <div class="card-title"><span class="march-letter">C</span> Circulation</div>
-              <h4>IV/IO Access:</h4>
+              <h4>Shock Indicators (Field Assessment):</h4>
               <ul>
-                <li>Start 18-gauge IV or saline lock if indicated</li>
-                <li>If IV not obtainable, use intraosseous (IO) needle</li>
-              </ul>
-              <h4>Shock Assessment - Field Indicators:</h4>
-              <ul>
-                <li>Altered mental status (in absence of TBI)</li>
+                <li>Altered mental status (without TBI)</li>
                 <li>Weak or absent radial pulse</li>
                 <li>Capillary refill >2 seconds</li>
-                <li>Decreased blood pressure</li>
+                <li>Cold, pale, clammy skin</li>
               </ul>
             </div>
             <div class="card">
               <div class="card-title">Pulse Pressure Estimation</div>
               <div class="table-wrapper">
                 <table>
-                  <thead><tr><th>Pulse Location</th><th>Estimated SBP</th></tr></thead>
+                  <thead><tr><th>Pulse Present</th><th>Est. SBP</th></tr></thead>
                   <tbody>
-                    <tr><td>Radial pulse present</td><td>~80 mmHg</td></tr>
-                    <tr><td>Femoral pulse present</td><td>~70 mmHg</td></tr>
-                    <tr><td>Carotid pulse present</td><td>~60 mmHg</td></tr>
+                    <tr><td>Radial</td><td>~80 mmHg</td></tr>
+                    <tr><td>Femoral</td><td>~70 mmHg</td></tr>
+                    <tr><td>Carotid</td><td>~60 mmHg</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="card">
-              <div class="card-title">Tranexamic Acid (TXA)</div>
-              <div class="drug-dose">1-2g IV/IO flush as soon as possible<br>DO NOT administer >3 hours post injury</div>
-              <p><strong>TXA Criteria:</strong> Hemorrhagic shock, major amputations, penetrating torso, severe bleeding, pelvic fracture</p>
+              <div class="card-title">IV/IO Access</div>
+              <ul>
+                <li>Start 18-gauge IV or saline lock</li>
+                <li>If IV not obtainable: use IO (humerus preferred)</li>
+                <li>Do NOT delay evacuation for IV access unless lifesaving</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">TXA (Tranexamic Acid)</div>
+              <div class="drug-dose">
+                1-2g IV/IO flush ASAP<br>
+                <strong>DO NOT give >3 hours post injury</strong>
+              </div>
+              <p><strong>Criteria:</strong> Hemorrhagic shock, amputations, penetrating torso, severe bleeding, pelvic fracture</p>
             </div>
             <div class="card">
               <div class="card-title">Fluid Resuscitation Priority</div>
               <ol>
-                <li><strong>Whole Blood Transfusion (warmed)</strong> - Preferred</li>
-                <li>Components in 1:1 ratio (Plasma:RBCs:Platelets)</li>
-                <li>ROLO (Ranger O Low-titer)</li>
-                <li>Freeze-Dried Plasma (FDP)</li>
+                <li><strong>Whole Blood (warmed)</strong> - Preferred</li>
+                <li>1:1:1 Components (Plasma:RBCs:Platelets)</li>
+                <li>LTOWB / ROLO</li>
+                <li>Freeze-Dried Plasma</li>
                 <li>Hextend 500ml bolus</li>
-                <li>Lactated Ringers OR Plasma-Lyte A</li>
+                <li>Lactated Ringers / Plasma-Lyte A</li>
               </ol>
-              <div class="alert alert-success">
-                <strong>Resuscitation Endpoints:</strong> Palpable radial pulse, improved mental status, SBP 90-100 mmHg (hemorrhagic shock), SBP >110 mmHg (TBI with altered mental status)
-              </div>
+            </div>
+            <div class="alert alert-success">
+              <strong>Resuscitation Endpoints:</strong>
+              <ul style="margin: 0.25rem 0 0 0;">
+                <li>Palpable radial pulse</li>
+                <li>Improved mental status</li>
+                <li>SBP 90-100 mmHg (hemorrhagic shock)</li>
+                <li>SBP >110 mmHg (TBI)</li>
+              </ul>
             </div>
           `
         },
         {
           id: 'tfc-hypothermia',
-          title: 'H - Hypothermia',
+          title: 'H - Hypothermia/Head',
+          keywords: ['hypothermia', 'warming', 'head injury', 'tbi', 'brain', 'lethal triad'],
           content: `
             <div class="card march-card hypothermia">
               <div class="card-title"><span class="march-letter">H</span> Hypothermia Prevention</div>
               <div class="alert alert-critical">
                 <strong>The Lethal Triad:</strong> Hypothermia + Acidosis + Coagulopathy = Death
               </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Prevention Measures</div>
               <ul>
-                <li>Minimize casualty environmental exposure</li>
-                <li>Keep PPE on if feasible</li>
-                <li>Replace wet clothing if possible</li>
+                <li>Minimize environmental exposure</li>
+                <li>Keep protective equipment on if feasible</li>
+                <li>Replace wet clothing</li>
                 <li>Get casualty onto insulated surface ASAP</li>
-                <li>Use hypothermia prevention kit with active rewarming</li>
-                <li>If unavailable: dry blankets, poncho liners, sleeping bags</li>
-                <li><strong>Warm IV fluids are preferred</strong></li>
+                <li>Use HPMK (Hypothermia Prevention Management Kit)</li>
+                <li>If unavailable: dry blankets, poncho liner, sleeping bag</li>
+                <li><strong>Warm IV fluids preferred</strong></li>
               </ul>
             </div>
             <div class="card">
@@ -342,55 +437,73 @@
                 <li>Self-heating fluid warmer</li>
               </ul>
             </div>
-            <div class="alert alert-info">
-              Hypothermia prevention and fluid resuscitation should be executed <strong>simultaneously</strong> if possible.
+            <div class="card">
+              <div class="card-title">Head Injury / TBI</div>
+              <ul>
+                <li>Maintain SBP >90 mmHg (target >110 mmHg)</li>
+                <li>Maintain SpO2 >90%</li>
+                <li>Prevent hypothermia</li>
+                <li>Elevate head 30° if no spinal concern</li>
+                <li>Document GCS/AVPU</li>
+              </ul>
+              <div class="alert alert-critical" style="margin-top: 0.5rem;">
+                <strong>Herniation Signs:</strong> Asymmetric pupil dilation, fixed dilated pupil, extensor posturing, widening pulse pressure
+                <p style="margin-top: 0.5rem;"><strong>Treatment:</strong> 250ml 3% or 5% hypertonic saline bolus, elevate head 30°, hyperventilate at 20 breaths/min</p>
+              </div>
             </div>
           `
         },
         {
           id: 'tfc-paws',
           title: 'PAWS',
+          keywords: ['pain', 'antibiotics', 'wounds', 'splinting', 'burns', 'analgesia'],
           content: `
-            <div class="alert alert-info"><strong>PAWS</strong> follows MARCH in the treatment sequence.</div>
             <div class="card">
               <div class="card-title">P - Pain Management</div>
-              <p>See <a href="../medic-pharmacology/#drugs-pain" style="color: var(--info);">Pharmacology App</a> for detailed protocols.</p>
-              <h4>Mild to Moderate Pain (still able to fight):</h4>
-              <ul><li>Tylenol 650mg bilayer - 2 PO q8h</li><li>Meloxicam 15mg PO daily</li></ul>
-              <h4>Moderate to Severe Pain:</h4>
-              <ul>
-                <li><strong>NOT in shock:</strong> OTFC 800mcg</li>
-                <li><strong>IN shock/respiratory distress:</strong> Ketamine 50mg IM/IN or 20mg slow IV/IO</li>
-              </ul>
+              <h4>Mild-Moderate (able to fight):</h4>
+              <div class="drug-dose">Tylenol 650mg x2 PO q8h + Meloxicam 15mg PO daily</div>
+              <h4>Moderate-Severe (NOT in shock):</h4>
+              <div class="drug-dose">OTFC 800mcg transmucosal (have Naloxone ready)</div>
+              <h4>Moderate-Severe (IN shock):</h4>
+              <div class="drug-dose">Ketamine 50mg IM/IN or 20mg slow IV/IO</div>
+              <p><a href="../medic-pharmacology/#drugs" style="color: var(--info);">See Pharmacology App for details</a></p>
             </div>
             <div class="card">
               <div class="card-title">A - Antibiotics</div>
-              <p><em>Early administration recommended for ALL open combat wounds.</em></p>
-              <ul>
-                <li><strong>If able to take PO:</strong> Moxifloxacin 400mg PO daily</li>
-                <li><strong>If unable to take PO:</strong> Ertapenem 1g IV/IM daily</li>
-              </ul>
+              <p><em>Recommended for ALL open combat wounds.</em></p>
+              <div class="drug-dose">
+                <strong>If PO:</strong> Moxifloxacin 400mg daily<br>
+                <strong>If unable PO:</strong> Ertapenem 1g IV/IM daily
+              </div>
             </div>
             <div class="card">
               <div class="card-title">W - Wounds</div>
-              <ul><li>Inspect and dress known wounds</li><li>Check for additional wounds (full body sweep)</li></ul>
+              <ul>
+                <li>Inspect and dress all known wounds</li>
+                <li>Full body sweep for additional wounds</li>
+                <li>Document on casualty card</li>
+              </ul>
             </div>
             <div class="card">
               <div class="card-title">S - Splinting</div>
-              <ul><li>Splint fractures</li><li><strong>Recheck pulses after splinting</strong></li></ul>
+              <ul>
+                <li>Splint fractures and dislocations</li>
+                <li><strong>Check pulses before and after splinting</strong></li>
+                <li>Pad bony prominences</li>
+                <li>Immobilize joint above and below fracture</li>
+              </ul>
             </div>
             <div class="card">
               <div class="card-title">Burns</div>
               <ul>
-                <li>Facial burns: aggressively monitor airway</li>
-                <li>Estimate TBSA to nearest 10% using Rule of Nines</li>
+                <li>Facial burns: aggressively monitor airway (edema risk)</li>
+                <li>Estimate TBSA (Rule of Nines)</li>
                 <li>Cover with dry, sterile dressings</li>
-                <li>>20% TBSA: initiate IV fluids (Rule of Ten)</li>
+                <li>>20% TBSA: IV fluids per Rule of Ten</li>
               </ul>
-              <div class="alert alert-info" style="margin-top: 1rem;">
-                <strong>USAISR Rule of Ten:</strong><br>
-                %TBSA x 10ml/hour for adults 40-80kg<br>
-                (+100ml/hr for every 10kg above 80kg)
+              <div class="drug-dose">
+                <strong>Rule of Ten:</strong> %TBSA x 10ml/hr (40-80kg adult)<br>
+                Add 100ml/hr for every 10kg above 80kg
               </div>
             </div>
           `
@@ -399,13 +512,14 @@
     },
 
     tacevac: {
-      title: 'Tactical Evacuation Care',
-      subtitle: 'Care during evacuation to higher level of care',
+      title: 'TACEVAC',
+      subtitle: 'Tactical Evacuation Care',
       color: '#22c55e',
       sections: [
         {
           id: 'tacevac-transition',
           title: 'Transition of Care',
+          keywords: ['transition', 'handover', 'evacuation', 'sit report', 'medevac'],
           content: `
             <div class="card">
               <div class="card-title">Tactical Force Actions</div>
@@ -413,83 +527,103 @@
                 <li>Establish evacuation point security</li>
                 <li>Stage casualties for evacuation</li>
                 <li>Communicate patient status to TACEVAC personnel</li>
+                <li>Consolidate medical supplies</li>
               </ul>
             </div>
             <div class="card">
               <div class="card-title">SIT Report Method</div>
               <ol>
                 <li>Identify receiving care provider on evac platform</li>
-                <li>Establish direct contact (Radio/Eye Contact/Hand Contact)</li>
-                <li>Provide SIT status beginning with most serious:</li>
+                <li>Establish direct contact (radio/eye/hand)</li>
+                <li>Provide SIT status (most serious first):</li>
               </ol>
-              <div class="alert alert-info" style="margin-top: 1rem;">
+              <div class="alert alert-info" style="margin-top: 0.5rem;">
                 <strong>S</strong> - Stable or Unstable<br>
                 <strong>I</strong> - Injuries (life threats & MOI)<br>
                 <strong>T</strong> - Treatments (drugs & interventions)
               </div>
             </div>
+            <div class="card">
+              <div class="card-title">Casualty Documentation</div>
+              <ul>
+                <li>Complete DD Form 1380 (Tactical Combat Casualty Care Card)</li>
+                <li>Document all interventions with times</li>
+                <li>Document vital signs</li>
+                <li>Attach to casualty (do not lose)</li>
+              </ul>
+            </div>
           `
         },
         {
-          id: 'tacevac-airway',
-          title: 'Airway (TACEVAC)',
+          id: 'tacevac-reassess',
+          title: 'Reassessment',
+          keywords: ['reassess', 'monitor', 'vitals', 'airway'],
           content: `
             <div class="card">
-              <div class="card-title">Additional Airway Options in TACEVAC</div>
-              <p>In addition to TFC airway management, consider:</p>
+              <div class="card-title">After Movement Reassessment</div>
+              <p>After every evacuation movement, reassess:</p>
               <ul>
-                <li><strong>Supraglottic airway</strong></li>
-                <li><strong>Endotracheal intubation</strong></li>
+                <li>Mental status (AVPU)</li>
+                <li>Airway patency</li>
+                <li>Vital signs</li>
+                <li>All interventions (TQs, chest seals, airways, IVs)</li>
+                <li>Bleeding control</li>
               </ul>
-              <p>Then surgical cricothyroidotomy if needed.</p>
             </div>
             <div class="card">
-              <div class="card-title">ETI Confirmation Methods</div>
-              <p>Confirm tube placement with minimum of 2 techniques:</p>
+              <div class="card-title">DOPE Troubleshooting</div>
+              <p>For ventilation problems with advanced airway:</p>
               <ul>
-                <li>End-tidal CO2 monitoring (most reliable)</li>
-                <li>Tube misting</li>
-                <li>Breath against cheek/wrist</li>
-                <li>Auscultate breath sounds</li>
-                <li>Monitor SpO2</li>
+                <li><strong>D</strong> - Dislodgement: Check tube position</li>
+                <li><strong>O</strong> - Obstruction: Suction</li>
+                <li><strong>P</strong> - Pneumothorax: Consider NCD</li>
+                <li><strong>E</strong> - Equipment failure: Disconnect vent, use BVM</li>
               </ul>
-              <div class="alert alert-warning" style="margin-top: 0.5rem;">
-                <strong>DO NOT rely on auscultation or visual misting as sole placement confirmation.</strong>
-              </div>
             </div>
           `
         },
         {
           id: 'tacevac-tbi',
-          title: 'Traumatic Brain Injury',
+          title: 'TBI Management',
+          keywords: ['tbi', 'brain injury', 'head trauma', 'gcs', 'concussion', 'herniation'],
           content: `
             <div class="card">
-              <div class="card-title">TBI Indicators</div>
-              <ul>
-                <li>Obvious mechanism of injury</li>
-                <li>Loss of consciousness >30 min</li>
-                <li>Confused or disoriented state</li>
-                <li>Moderate TBI: GCS 9-13</li>
-                <li>Severe TBI: GCS 3-8</li>
-              </ul>
+              <div class="card-title">TBI Severity</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Severity</th><th>GCS</th><th>LOC</th></tr></thead>
+                  <tbody>
+                    <tr><td>Mild</td><td>13-15</td><td><30 min</td></tr>
+                    <tr><td>Moderate</td><td>9-12</td><td>30 min - 24 hr</td></tr>
+                    <tr><td>Severe</td><td>3-8</td><td>>24 hr</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div class="card">
-              <div class="card-title">Moderate/Severe TBI Monitoring</div>
+              <div class="card-title">TBI Management Goals</div>
               <ul>
-                <li>SBP should be >90 mmHg (target >110 mmHg)</li>
-                <li>O2 sat >90%</li>
-                <li>Hypothermia prevention</li>
-                <li>PCO2 maintained 35-40 mmHg (if capnography available)</li>
-                <li><strong>Assume spinal injury until cleared</strong></li>
+                <li>SBP >110 mmHg</li>
+                <li>SpO2 >90%</li>
+                <li>Prevent hypothermia</li>
+                <li>Elevate head 30° (if no spinal concern)</li>
+                <li>PCO2 35-40 mmHg (if capnography)</li>
+                <li>Document serial neuro exams</li>
               </ul>
             </div>
             <div class="alert alert-critical">
-              <strong>Herniation Indicators:</strong> Asymmetric pupillary dilation, fixed dilated pupil, extensor posturing, widening pulse pressure<br><br>
-              <strong>If impending herniation suspected:</strong>
-              <ol style="margin: 0.5rem 0 0 0;">
-                <li>250ml of 3% or 5% hypertonic saline bolus</li>
-                <li>Elevate head 30 degrees</li>
-                <li>Hyperventilate at 20 breaths/min with highest O2</li>
+              <strong>Herniation Signs:</strong>
+              <ul style="margin: 0.25rem 0 0 0;">
+                <li>Asymmetric or fixed dilated pupil(s)</li>
+                <li>Extensor posturing (decerebrate)</li>
+                <li>Widening pulse pressure</li>
+                <li>Cushing's triad (HTN, bradycardia, irregular breathing)</li>
+              </ul>
+              <strong>If suspected:</strong>
+              <ol style="margin: 0.25rem 0 0 0;">
+                <li>250ml 3-5% hypertonic saline bolus</li>
+                <li>Elevate head 30°</li>
+                <li>Hyperventilate at 20 breaths/min</li>
               </ol>
             </div>
           `
@@ -497,22 +631,32 @@
         {
           id: 'tacevac-cpr',
           title: 'CPR Considerations',
+          keywords: ['cpr', 'cardiac arrest', 'resuscitation', 'death'],
           content: `
             <div class="card">
-              <div class="card-title">CPR in TACEVAC</div>
-              <p>CPR <strong>may be attempted</strong> if:</p>
+              <div class="card-title">CPR May Be Attempted If:</div>
               <ul>
                 <li>Casualty does NOT have obviously fatal wounds</li>
                 <li>Quickly arriving at surgical capability</li>
+                <li>Resources available and mission allows</li>
               </ul>
-              <div class="alert alert-critical" style="margin-top: 1rem;">
-                <strong>CPR should NOT be attempted if:</strong>
-                <ul style="margin: 0.5rem 0 0 0;">
-                  <li>Compromising the mission</li>
-                  <li>Denying lifesaving treatment to other casualties</li>
-                </ul>
-              </div>
-              <p style="margin-top: 1rem;">Casualties with torso/polytrauma and no pulse should have <strong>bilateral needle decompression</strong> before discontinuing care.</p>
+            </div>
+            <div class="alert alert-critical">
+              <strong>CPR Should NOT Be Attempted If:</strong>
+              <ul style="margin: 0.25rem 0 0 0;">
+                <li>Obviously fatal wounds</li>
+                <li>Compromising the mission</li>
+                <li>Denying lifesaving treatment to other casualties</li>
+                <li>Prolonged pulseless arrest with no reversible cause</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Before Discontinuing Care</div>
+              <p>Casualties with torso/polytrauma and no pulse should receive:</p>
+              <ul>
+                <li><strong>Bilateral needle decompression</strong></li>
+                <li>Assess for reversible causes</li>
+              </ul>
             </div>
           `
         }
@@ -521,257 +665,268 @@
 
     procedures: {
       title: 'Procedures',
-      subtitle: 'Step-by-step surgical and medical procedures',
+      subtitle: 'Step-by-step field procedures',
       color: '#06b6d4',
       sections: [
         {
           id: 'proc-cric',
-          title: 'Surgical Cricothyroidotomy',
+          title: 'Surgical Cric',
+          keywords: ['cric', 'cricothyroidotomy', 'surgical airway', 'airway', 'emergency airway'],
           content: `
             <div class="alert alert-critical">
-              <strong>Indications:</strong> Severe airway obstruction, failure of airway positioning, failure of NPA, unable to manually ventilate
+              <strong>Indications:</strong> Airway obstruction unrelieved by positioning/NPA, facial trauma preventing BVM, unable to ventilate
             </div>
             <div class="card">
-              <div class="card-title">Equipment Needed</div>
+              <div class="card-title">Equipment</div>
               <ul>
-                <li>Scalpel</li>
-                <li>Tracheal Hook or Bougie</li>
-                <li>Antiseptic (Povidone/Chlorhexidine/Alcohol)</li>
-                <li>Sterile gloves and 4x4 sponge</li>
-                <li>ET Tube (6.0-7.0) or Cric-specific tube</li>
-                <li>Bag-Valve-Mask (BVM)</li>
-                <li>Securing device, tape, or suture</li>
+                <li>Scalpel (#20 or #10)</li>
+                <li>Tracheal hook or bougie</li>
+                <li>6.0-7.0 cuffed ET tube or cric-specific tube</li>
+                <li>10cc syringe</li>
+                <li>BVM</li>
+                <li>Securing device/tape</li>
+                <li>Antiseptic, gloves</li>
               </ul>
             </div>
             <div class="card">
-              <div class="card-title">Procedure Steps</div>
+              <div class="card-title">Procedure</div>
               <ol>
-                <li>Position patient supine, head/neck midline</li>
-                <li><strong>If conscious:</strong> Administer procedural sedation, inject lidocaine 2-4ml into cricothyroid membrane and trachea</li>
-                <li>Identify cricothyroid membrane: Soft aspect just inferior to larynx, midline, anterior trachea</li>
-                <li>Cleanse the site</li>
-                <li>Stabilize larynx between thumb and index finger of non-dominant hand</li>
-                <li>Make a <strong>VERTICAL</strong> skin incision over cricothyroid membrane</li>
-                <li>Carefully incise <strong>horizontally</strong> through the membrane</li>
-                <li>If needed: Insert tracheal hook, hook cricoid cartilage, apply anterior displacement, widen incision</li>
-                <li>Insert 6.0-7.0 ET tube through midline of membrane, direct distally into trachea 2cm past cricothyroid membrane</li>
-                <li>Inflate cuff with 10cc air</li>
-                <li>Confirm placement with minimum 2 techniques (ETCO2, misting, auscultation, SpO2)</li>
-                <li>Secure tube to prevent dislodging</li>
-                <li>Attach BVM and ventilate (1 breath every 6-8 seconds, 8-10 breaths/min)</li>
+                <li>Position supine, head/neck midline</li>
+                <li><strong>If conscious:</strong> Ketamine sedation, lidocaine to site</li>
+                <li>Identify cricothyroid membrane (soft depression below thyroid cartilage)</li>
+                <li>Stabilize larynx with non-dominant hand</li>
+                <li>Make <strong>VERTICAL</strong> skin incision (3-4cm)</li>
+                <li>Make <strong>HORIZONTAL</strong> incision through membrane</li>
+                <li>Insert tracheal hook on inferior border, apply anterior traction</li>
+                <li>Insert bougie or tube (6.0-7.0)</li>
+                <li>Inflate cuff (10cc)</li>
+                <li>Confirm placement (ETCO2, misting, auscultation, SpO2)</li>
+                <li>Secure tube</li>
+                <li>Ventilate: 1 breath every 6-8 seconds</li>
               </ol>
             </div>
             <div class="alert alert-warning">
-              <strong>Critical Notes:</strong> Maintain C-spine precautions if concerned. If SpO2 drops <90%, stop procedure and ventilate 30-60 seconds before retry. Confirm airway before and after ANY patient movement.
+              <strong>If SpO2 drops <90%:</strong> Stop, ventilate 30-60 sec, then retry.<br>
+              <strong>Always confirm airway before AND after any patient movement.</strong>
             </div>
           `
         },
         {
           id: 'proc-ncd',
-          title: 'Needle Chest Decompression',
+          title: 'Needle Decompression',
+          keywords: ['ncd', 'needle decompression', 'chest', 'pneumothorax', 'tension'],
           content: `
             <div class="alert alert-critical">
-              <strong>Indications:</strong> Difficulty/worsening breathing with MOI, decreased SpO2 with chest/abdominal injury, decreased breath sounds on affected side, tracheal deviation (late), JVD (late)
+              <strong>Indications:</strong> Suspected tension pneumothorax with respiratory distress, decreased SpO2, decreased breath sounds, tracheal deviation
             </div>
             <div class="card">
               <div class="card-title">Equipment</div>
               <ul>
-                <li>10G to 14G, 3.25" needle with catheter</li>
-                <li>Antiseptic swab</li>
+                <li>14G, 3.25" needle/catheter (minimum)</li>
+                <li>Antiseptic</li>
               </ul>
             </div>
             <div class="card">
               <div class="card-title">Site Selection</div>
-              <div class="alert alert-info">
-                <strong>Primary Site:</strong> Affected side, 5th intercostal space (nipple level), anterior axillary line<br><br>
-                <strong>Alternate Site:</strong> Affected side, 2nd or 3rd intercostal space, mid-clavicular line
+              <div class="drug-dose">
+                <strong>Primary:</strong> 5th ICS, Anterior Axillary Line (nipple level, anterior to mid-axilla)<br>
+                <strong>Alternate:</strong> 2nd/3rd ICS, Midclavicular Line
               </div>
-              <p style="margin-top: 0.5rem; color: var(--accent);"><strong>Ensure needle entry is NOT medial to nipple line and NOT directed toward heart.</strong></p>
+              <p style="color: var(--accent);"><strong>NOT medial to nipple line. NOT directed at heart.</strong></p>
             </div>
             <div class="card">
-              <div class="card-title">Procedure Steps</div>
+              <div class="card-title">Procedure</div>
               <ol>
-                <li>Select site based on injury pattern and patient condition</li>
-                <li>Cleanse site with antiseptic</li>
-                <li>Insert needle with catheter <strong>perpendicular (90°)</strong> over the rib into intercostal space</li>
-                <li>Puncture the parietal pleura</li>
-                <li>Hold needle with catheter for 5-10 seconds before removing needle</li>
-                <li>Leave catheter in place (converts tension to open pneumothorax)</li>
-                <li>Reassess effectiveness</li>
+                <li>Select site based on injury pattern</li>
+                <li>Clean site</li>
+                <li>Insert needle <strong>perpendicular (90°)</strong> to chest wall</li>
+                <li>Advance over superior border of rib (avoid neurovascular bundle)</li>
+                <li>Puncture parietal pleura (may feel "pop")</li>
+                <li>Hold 5-10 seconds</li>
+                <li>Remove needle, leave catheter in place</li>
+                <li>Reassess patient</li>
               </ol>
             </div>
             <div class="card">
-              <div class="card-title">Assess Effectiveness</div>
+              <div class="card-title">Effectiveness Check</div>
               <ul>
+                <li>Improved breathing</li>
                 <li>Increased SpO2</li>
-                <li>Can patient breathe better?</li>
-                <li>Auscultate breath sounds</li>
-                <li>Chest rise and fall</li>
+                <li>Improved breath sounds</li>
+                <li>Rush of air on insertion</li>
               </ul>
-              <p style="margin-top: 0.5rem;"><strong>If ineffective:</strong> Repeat at alternate site, consider bilateral NCD or finger thoracostomy.</p>
+              <p><strong>If ineffective:</strong> Repeat at alternate site or consider finger thoracostomy.</p>
             </div>
           `
         },
         {
           id: 'proc-chesttube',
-          title: 'Chest Tube / Finger Thoracostomy',
+          title: 'Finger Thoracostomy',
+          keywords: ['chest tube', 'finger thoracostomy', 'thoracostomy', 'hemothorax', 'pneumothorax'],
           content: `
             <div class="alert alert-info">
-              <strong>Indications:</strong> Multiple unsuccessful NCDs, extended time before evacuation, large hemothorax suspected
+              <strong>Indications:</strong> Failed NCD, extended evacuation time, suspected large hemothorax
             </div>
             <div class="card">
               <div class="card-title">Equipment</div>
               <ul>
-                <li>6" or 9" Peans forceps (clamp)</li>
-                <li>Chlorhexidine gluconate solution/swab</li>
-                <li>Scalpel, #10</li>
-                <li>28 Fr to 36 Fr chest tube</li>
-                <li>Heimlich valve</li>
-                <li>Sterile gloves, securing device/suture</li>
+                <li>Scalpel (#10)</li>
+                <li>Kelly clamp / Peans forceps</li>
+                <li>Chest tube (28-36 Fr) - optional</li>
+                <li>Heimlich valve - if using tube</li>
+                <li>Antiseptic, gloves, suture</li>
               </ul>
             </div>
             <div class="card">
-              <div class="card-title">Site Selection</div>
-              <div class="drug-dose">Affected side, 5th intercostal space (nipple level), anterior to midaxillary line</div>
+              <div class="card-title">Site</div>
+              <div class="drug-dose">
+                5th ICS (nipple level), Anterior to Midaxillary Line, affected side
+              </div>
             </div>
             <div class="card">
-              <div class="card-title">Procedure Steps</div>
+              <div class="card-title">Procedure</div>
               <ol>
-                <li>Cleanse site with antiseptic</li>
-                <li>Locally anesthetize skin, rib periosteum, and pleura (and/or procedural sedation)</li>
-                <li>Make 2-3cm <strong>horizontal</strong> incision parallel to ribs</li>
-                <li>Bluntly dissect through subcutaneous tissue just over top of 6th rib</li>
-                <li>Puncture parietal pleura with tip of clamp and spread tissues</li>
-                <li>With index finger of non-dominant hand, trace clamp into incision to avoid organ injury and clear adhesions/clots</li>
-                <li><strong>FINGER THORACOSTOMY:</strong> Stop here if no chest tube available</li>
-                <li>With finger still in place, clamp proximal end of chest tube and insert to desired length</li>
-                <li>Look for "fogging" of chest tube with expiration</li>
-                <li>Connect end of chest tube to Heimlich valve</li>
-                <li>Secure tube in place (suture or adhesive chest seals)</li>
+                <li>Clean site, local anesthesia if time permits</li>
+                <li>2-3cm <strong>horizontal</strong> incision parallel to ribs</li>
+                <li>Blunt dissect through tissue to pleura (over top of 6th rib)</li>
+                <li>Puncture pleura with clamp tip, spread</li>
+                <li><strong>Insert finger</strong> to confirm entry and sweep for adhesions</li>
+                <li><strong>FINGER THORACOSTOMY:</strong> Can stop here if no tube</li>
+                <li>If tube: insert with finger guidance, attach Heimlich valve</li>
+                <li>Secure with suture and occlusive dressing</li>
               </ol>
             </div>
             <div class="alert alert-critical">
-              <strong>Surgical intervention required if:</strong> Blood loss 1000-1500ml immediately OR drainage 200-300ml/hr
+              <strong>Surgical intervention if:</strong> >1000-1500ml immediate output OR >200-300ml/hr continued drainage
             </div>
           `
         },
         {
           id: 'proc-io',
-          title: 'Intraosseous Access',
+          title: 'IO Access',
+          keywords: ['io', 'intraosseous', 'vascular access', 'ezio', 'bone'],
           content: `
             <div class="alert alert-info">
-              <strong>Indication:</strong> Inability to attain vascular access through peripheral extremity or external jugular when life-saving fluids or medications are needed.
+              <strong>Indication:</strong> Vascular access needed, peripheral IV unobtainable
             </div>
             <div class="card">
-              <div class="card-title">Site Selection (Priority Order)</div>
+              <div class="card-title">Site Priority (Best Flow First)</div>
               <div class="table-wrapper">
                 <table>
-                  <thead><tr><th>Site</th><th>Location</th><th>Needle Size</th></tr></thead>
+                  <thead><tr><th>Site</th><th>Location</th><th>Needle</th></tr></thead>
                   <tbody>
-                    <tr><td><strong>Proximal Humerus</strong></td><td>Greater tubercle (internally rotate arm)</td><td>45mm 15ga</td></tr>
-                    <tr><td><strong>Sternal (Manubrium)</strong></td><td>Midline, 1.5cm below sternal notch</td><td>38.5mm 15ga</td></tr>
-                    <tr><td><strong>Proximal Tibia</strong></td><td>1 finger medial to tuberosity, 2 fingers below patella</td><td>25mm 15ga</td></tr>
-                    <tr><td><strong>Distal Tibia</strong></td><td>2 fingers proximal to medial malleolus</td><td>25mm 15ga</td></tr>
+                    <tr><td><strong>Proximal Humerus</strong></td><td>Greater tubercle (rotate arm internally)</td><td>45mm</td></tr>
+                    <tr><td><strong>Sternum</strong></td><td>Manubrium, 1.5cm below sternal notch</td><td>38.5mm</td></tr>
+                    <tr><td><strong>Proximal Tibia</strong></td><td>2 fingers below patella, 1 finger medial</td><td>25mm</td></tr>
+                    <tr><td><strong>Distal Tibia</strong></td><td>2 fingers above medial malleolus</td><td>25mm</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p style="font-size: 0.85rem;">The more proximal the site, the better flow rate.</p>
             </div>
             <div class="card">
-              <div class="card-title">Procedure Steps (Non-Sternal)</div>
+              <div class="card-title">Procedure (EZ-IO)</div>
               <ol>
-                <li>Cleanse site with antiseptic</li>
-                <li>Ensure flat, stable platform</li>
-                <li>Use gentle, steady downward pressure with boring/screwing motion</li>
-                <li>Advance needle at 90° angle until penetrating marrow (feeling of "give" or "pop")</li>
-                <li>Remove stylet and driver</li>
-                <li>Attach primed extension set to catheter hub</li>
-                <li>Attempt to aspirate marrow blood (confirms placement)</li>
-                <li>Flush with 5cc NS (or TXA if indicated)</li>
-                <li>Consider 5-10cc lidocaine flush for pain control</li>
-                <li>Attach IV tubing/saline lock and administer fluids/meds</li>
+                <li>Clean site</li>
+                <li>Stabilize limb on flat surface</li>
+                <li>Insert at 90° with steady pressure</li>
+                <li>Stop when you feel "give" or "pop"</li>
+                <li>Remove stylet</li>
+                <li>Attach primed extension set</li>
+                <li>Aspirate (may get marrow)</li>
+                <li>Flush with 5-10ml NS</li>
+                <li><strong>Lidocaine 40mg slow IO</strong> for pain (conscious patient)</li>
+                <li>Secure and infuse</li>
               </ol>
             </div>
             <div class="alert alert-warning">
-              <strong>Cautions:</strong> Do NOT rock or bend during insertion. Do NOT leave catheter inserted >24 hours. Do NOT attach syringe directly to IO catheter hub.
-            </div>
-          `
-        },
-        {
-          id: 'proc-ejiv',
-          title: 'External Jugular IV',
-          content: `
-            <div class="alert alert-info">
-              <strong>Indication:</strong> Vascular access when peripheral IV not obtainable.
-            </div>
-            <div class="card">
-              <div class="card-title">Equipment</div>
-              <ul>
-                <li>Constricting band (or finger pressure)</li>
-                <li>Chlorhexidine gluconate swab</li>
-                <li>2x 14G IV catheter/needle</li>
-                <li>10cc syringe with normal saline</li>
-                <li>Needleless saline lock</li>
-                <li>Tegaderm (at least 2.5" x 2.5")</li>
-              </ul>
-            </div>
-            <div class="card">
-              <div class="card-title">Procedure Steps</div>
-              <ol>
-                <li>Place patient supine or modified Trendelenburg position</li>
-                <li>Maintain C-spine precautions as required</li>
-                <li>Turn patient's head to opposite side</li>
-                <li>Attach 10cc syringe (filled with NS) to catheter/needle</li>
-                <li>Cleanse site with antiseptic</li>
-                <li>Apply light pressure on inferior aspect of EJ to create tourniquet effect</li>
-                <li>Align needle/catheter/syringe in direction of vein, tip aimed toward "same-side" nipple</li>
-                <li>Insert catheter/needle into vein and aspirate</li>
-                <li><strong>Confirm blood return when aspirating</strong></li>
-                <li><strong>DO NOT allow air to enter the vein</strong></li>
-                <li>Advance catheter and withdraw needle/syringe</li>
-                <li>Attach needleless saline lock and flush with NS</li>
-                <li>Apply Tegaderm over venipuncture site</li>
-              </ol>
-            </div>
-            <div class="alert alert-critical">
-              <strong>Critical:</strong> DO NOT allow air to enter the vein - can cause air embolism.
+              <strong>Do NOT:</strong> Rock/bend during insertion. Leave >24 hours. Attach syringe directly to hub.
             </div>
           `
         },
         {
           id: 'proc-iv',
-          title: 'Peripheral IV / Saline Lock',
+          title: 'IV Access',
+          keywords: ['iv', 'intravenous', 'peripheral', 'saline lock', 'venipuncture'],
           content: `
             <div class="card">
-              <div class="card-title">Equipment</div>
+              <div class="card-title">Site Selection</div>
               <ul>
-                <li>Constricting band</li>
-                <li>Chlorhexidine gluconate solution/swab</li>
-                <li>2x 18G or 16G IV catheter/needle</li>
-                <li>Needleless saline lock</li>
-                <li>Tegaderm (at least 2.5" x 2.5")</li>
-                <li>IV tubing (if needed), IV securing device</li>
+                <li>Antecubital fossa (AC)</li>
+                <li>Forearm</li>
+                <li>Dorsum of hand</li>
+                <li>External jugular (EJ) - alternate</li>
               </ul>
             </div>
             <div class="card">
-              <div class="card-title">Procedure Steps</div>
+              <div class="card-title">Procedure</div>
               <ol>
-                <li>Prep equipment and don gloves</li>
-                <li>Apply constricting band</li>
-                <li>Select vein (AC fossa, forearm, dorsum of hand)</li>
-                <li>Cleanse/prep site</li>
-                <li>Insert catheter/needle at 15-30° angle</li>
-                <li>Advance catheter and remove needle</li>
-                <li>Attach needleless saline lock</li>
-                <li>Release constricting band</li>
-                <li>Apply Tegaderm over venipuncture site</li>
-                <li>Flush with 5-10ml normal saline</li>
-                <li>Attach IV tubing if indicated</li>
-                <li>Secure IV tubing with tape or securing device</li>
+                <li>Apply tourniquet proximal to site</li>
+                <li>Select vein (palpate, visible)</li>
+                <li>Clean site</li>
+                <li>Insert catheter at 15-30° angle, bevel up</li>
+                <li>Advance until flash</li>
+                <li>Lower angle, advance catheter</li>
+                <li>Remove needle</li>
+                <li>Release tourniquet</li>
+                <li>Attach saline lock or IV tubing</li>
+                <li>Flush with 5-10ml NS</li>
+                <li>Secure with Tegaderm</li>
               </ol>
             </div>
             <div class="alert alert-warning">
-              <strong>Notes:</strong> Never delay evacuation for IV access unless needed for lifesaving procedure. Warmed IV fluids preferred. DO NOT REMOVE saline lock when discontinuing fluids.
+              <strong>Notes:</strong>
+              <ul style="margin: 0.25rem 0 0 0;">
+                <li>Never delay evac for IV unless lifesaving</li>
+                <li>Warm fluids preferred</li>
+                <li>Do NOT remove saline lock when discontinuing fluids</li>
+              </ul>
+            </div>
+          `
+        },
+        {
+          id: 'proc-tourniquet',
+          title: 'Tourniquet',
+          keywords: ['tourniquet', 'cat', 'softt', 'bleeding', 'hemorrhage', 'application', 'conversion'],
+          content: `
+            <div class="card">
+              <div class="card-title">Application</div>
+              <ol>
+                <li>Place 2-3" above wound (or high and tight if bleeding source unknown)</li>
+                <li>Pull strap tight</li>
+                <li>Turn windlass until bleeding stops</li>
+                <li>Lock windlass</li>
+                <li>Secure remaining strap</li>
+                <li><strong>Mark time on TQ and casualty card</strong></li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Verification</div>
+              <ul>
+                <li>Bleeding stopped</li>
+                <li>Distal pulse absent</li>
+                <li>If bleeding continues: tighten or add second TQ side-by-side</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Conversion (TFC Phase)</div>
+              <p>Consider conversion if ALL criteria met:</p>
+              <ul>
+                <li>TQ in place <2 hours</li>
+                <li>Casualty NOT in shock</li>
+                <li>Can monitor wound closely</li>
+                <li>NOT an amputation</li>
+              </ul>
+              <h4>Conversion Procedure:</h4>
+              <ol>
+                <li>Apply direct pressure / pressure dressing distal to TQ</li>
+                <li>Slowly release TQ</li>
+                <li>Monitor for bleeding x 2 minutes</li>
+                <li>If bleeding: reapply TQ immediately</li>
+                <li>If no bleeding: leave loosened TQ in place</li>
+              </ol>
+              <div class="alert alert-critical" style="margin-top: 0.5rem;">
+                <strong>Do NOT remove TQ if in place >6 hours</strong> - risk of reperfusion injury, hyperkalemia
+              </div>
             </div>
           `
         }
@@ -779,29 +934,30 @@
     },
 
     tools: {
-      title: 'Tools & References',
-      subtitle: 'MEDEVAC requests, triage, and reference tables',
+      title: 'Tools',
+      subtitle: 'MEDEVAC, Triage, References',
       color: '#8b5cf6',
       sections: [
         {
           id: 'tools-medevac',
           title: '9-Line MEDEVAC',
+          keywords: ['9 line', 'medevac', 'evacuation', 'helicopter', 'dustoff'],
           content: `
             <div class="card">
-              <div class="card-title">MEDEVAC Request Format</div>
+              <div class="card-title">9-Line MEDEVAC Request</div>
               <div class="table-wrapper">
                 <table>
                   <thead><tr><th>Line</th><th>Content</th><th>Example</th></tr></thead>
                   <tbody>
                     <tr><td><strong>1</strong></td><td>Location (Grid)</td><td>11SNT 79652 89123</td></tr>
-                    <tr><td><strong>2</strong></td><td>Callsign & Frequency</td><td>DUSTOFF 7, 36.250</td></tr>
-                    <tr><td><strong>3</strong></td><td># and Precedence</td><td>2 Alpha, 1 Bravo</td></tr>
-                    <tr><td><strong>4</strong></td><td>Special Equipment</td><td>A-None, B-Hoist, C-Extract</td></tr>
-                    <tr><td><strong>5</strong></td><td># by Type</td><td>2L, 1A (Litter/Ambulatory)</td></tr>
-                    <tr><td><strong>6</strong></td><td>Security at PZ</td><td>N-None, P-Possible, E-Enemy</td></tr>
-                    <tr><td><strong>7</strong></td><td>PZ Marking</td><td>C-Smoke (Green)</td></tr>
-                    <tr><td><strong>8</strong></td><td>Nationality/Status</td><td>A-US Military</td></tr>
-                    <tr><td><strong>9</strong></td><td>Terrain/Obstacles</td><td>Open field, wires to south</td></tr>
+                    <tr><td><strong>2</strong></td><td>Callsign & Freq</td><td>DUSTOFF 7, 36.250</td></tr>
+                    <tr><td><strong>3</strong></td><td># by Precedence</td><td>2A, 1B</td></tr>
+                    <tr><td><strong>4</strong></td><td>Special Equipment</td><td>A-None</td></tr>
+                    <tr><td><strong>5</strong></td><td># by Type</td><td>2L, 1A</td></tr>
+                    <tr><td><strong>6</strong></td><td>Security at PZ</td><td>N-No enemy</td></tr>
+                    <tr><td><strong>7</strong></td><td>PZ Marking</td><td>C-Smoke (green)</td></tr>
+                    <tr><td><strong>8</strong></td><td>Nationality</td><td>A-US Mil</td></tr>
+                    <tr><td><strong>9</strong></td><td>Terrain/Obstacles</td><td>Open, wires S</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -812,109 +968,202 @@
                 <table>
                   <tbody>
                     <tr class="triage-immediate"><td><strong>A - Urgent</strong></td><td>Within 2 hours</td></tr>
+                    <tr><td><strong>A-S - Urgent Surgical</strong></td><td>Within 2 hours, needs surgery</td></tr>
                     <tr class="triage-delayed"><td><strong>B - Priority</strong></td><td>Within 4 hours</td></tr>
                     <tr class="triage-minimal"><td><strong>C - Routine</strong></td><td>Within 24 hours</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
+            <div class="card">
+              <div class="card-title">Line 4 - Special Equipment</div>
+              <ul>
+                <li><strong>A:</strong> None</li>
+                <li><strong>B:</strong> Hoist</li>
+                <li><strong>C:</strong> Extraction equipment</li>
+                <li><strong>D:</strong> Ventilator</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Line 5 - Type</div>
+              <ul>
+                <li><strong>L:</strong> Litter</li>
+                <li><strong>A:</strong> Ambulatory</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Line 6 - Security</div>
+              <ul>
+                <li><strong>N:</strong> No enemy</li>
+                <li><strong>P:</strong> Possible enemy</li>
+                <li><strong>E:</strong> Enemy in area</li>
+                <li><strong>X:</strong> Armed escort required</li>
+              </ul>
+            </div>
           `
         },
         {
           id: 'tools-mist',
           title: 'MIST Report',
+          keywords: ['mist', 'report', 'handover', 'patient report'],
           content: `
             <div class="card">
               <div class="card-title">MIST Report Format</div>
-              <div class="alert alert-info">Use MIST to communicate casualty information to receiving medical personnel.</div>
               <div class="table-wrapper">
                 <table>
                   <thead><tr><th>Letter</th><th>Content</th></tr></thead>
                   <tbody>
-                    <tr><td><strong>M</strong></td><td>Mechanism of Injury and Time of Injury (if known)</td></tr>
-                    <tr><td><strong>I</strong></td><td>Injury or Illness</td></tr>
-                    <tr><td><strong>S</strong></td><td>Symptoms and Vital Signs (A-Airway, B-Breathing, C-Pulse, D-LOC, E-Other)</td></tr>
-                    <tr><td><strong>T</strong></td><td>Treatment Given (Tourniquet/time, drugs administered)</td></tr>
+                    <tr><td><strong>M</strong></td><td>Mechanism of Injury + Time</td></tr>
+                    <tr><td><strong>I</strong></td><td>Injuries found</td></tr>
+                    <tr><td><strong>S</strong></td><td>Signs/Symptoms (vitals, mental status)</td></tr>
+                    <tr><td><strong>T</strong></td><td>Treatments given (TQ time, meds, etc.)</td></tr>
                   </tbody>
                 </table>
               </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Example</div>
+              <p><strong>M:</strong> GSW to right thigh, 1423 hrs</p>
+              <p><strong>I:</strong> Through-and-through right thigh, no bone involvement</p>
+              <p><strong>S:</strong> A+Ox4, HR 98, BP 118/72, SpO2 98%</p>
+              <p><strong>T:</strong> TQ right thigh 1425, wound packed w/ combat gauze, 1g TXA IV</p>
             </div>
           `
         },
         {
           id: 'tools-triage',
-          title: 'Triage Categories',
+          title: 'Triage',
+          keywords: ['triage', 'priority', 'immediate', 'delayed', 'minimal', 'expectant'],
           content: `
             <div class="card triage-immediate" style="border: 2px solid #dc2626;">
-              <div class="card-title" style="color: #dc2626;">IMMEDIATE (T1)</div>
-              <p>Requires immediate LSI and/or surgery. Without medical attention, they will die.</p>
+              <div class="card-title" style="color: #dc2626;">IMMEDIATE (T1) - RED</div>
+              <p>Requires immediate intervention. Will die without treatment.</p>
               <ul>
-                <li>Hemodynamically unstable with airway obstruction</li>
-                <li>Chest or abdominal injuries</li>
-                <li>Massive external bleeding</li>
+                <li>Airway obstruction</li>
+                <li>Tension pneumothorax</li>
+                <li>Massive hemorrhage</li>
                 <li>Shock</li>
               </ul>
             </div>
             <div class="card triage-delayed" style="border: 2px solid #f59e0b;">
-              <div class="card-title" style="color: #f59e0b;">DELAYED (T2)</div>
-              <p>Likely to need surgery, but condition permits delay without endangering life, limb, or eyesight.</p>
+              <div class="card-title" style="color: #f59e0b;">DELAYED (T2) - YELLOW</div>
+              <p>Needs treatment but can wait without life threat.</p>
               <ul>
-                <li>Large soft tissue wounds (no shock)</li>
-                <li>Fractures of major bones</li>
+                <li>Large wounds without shock</li>
+                <li>Fractures (stable)</li>
                 <li>Burns <20% TBSA</li>
               </ul>
             </div>
             <div class="card triage-minimal" style="border: 2px solid #22c55e;">
-              <div class="card-title" style="color: #22c55e;">MINIMAL (T3)</div>
-              <p>"Walking wounded" - minor injuries treatable with self or buddy aid.</p>
+              <div class="card-title" style="color: #22c55e;">MINIMAL (T3) - GREEN</div>
+              <p>"Walking wounded" - minor injuries.</p>
+              <ul>
+                <li>Minor lacerations</li>
+                <li>Sprains</li>
+                <li>Small burns</li>
+              </ul>
             </div>
             <div class="card triage-expectant" style="border: 2px solid #6b7280;">
-              <div class="card-title" style="color: #6b7280;">EXPECTANT (T4)</div>
-              <p>Wounds so extensive that survival is highly unlikely even with optimal resources.</p>
-              <p><strong>Should still receive comfort measures and pain medication.</strong></p>
+              <div class="card-title" style="color: #6b7280;">EXPECTANT (T4) - BLACK</div>
+              <p>Injuries incompatible with survival given resources.</p>
+              <ul>
+                <li>Massive head trauma with brain matter</li>
+                <li>Burns >85% TBSA</li>
+                <li>Prolonged cardiac arrest</li>
+              </ul>
+              <p><strong>Still provide comfort measures.</strong></p>
+            </div>
+          `
+        },
+        {
+          id: 'tools-vitals',
+          title: 'Vitals & GCS',
+          keywords: ['vitals', 'vital signs', 'gcs', 'glasgow', 'avpu', 'blood pressure', 'heart rate'],
+          content: `
+            <div class="card">
+              <div class="card-title">Normal Adult Vitals</div>
+              <div class="table-wrapper">
+                <table>
+                  <tbody>
+                    <tr><td><strong>HR</strong></td><td>60-100 bpm</td></tr>
+                    <tr><td><strong>RR</strong></td><td>12-20/min</td></tr>
+                    <tr><td><strong>BP</strong></td><td>90-120 / 60-80</td></tr>
+                    <tr><td><strong>SpO2</strong></td><td>95-100%</td></tr>
+                    <tr><td><strong>Temp</strong></td><td>97.8-99.1°F</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">AVPU Scale</div>
+              <ul>
+                <li><strong>A</strong> - Alert</li>
+                <li><strong>V</strong> - Responds to Voice</li>
+                <li><strong>P</strong> - Responds to Pain</li>
+                <li><strong>U</strong> - Unresponsive</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Glasgow Coma Scale</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Eye</th><th>Verbal</th><th>Motor</th></tr></thead>
+                  <tbody>
+                    <tr><td>4-Spontaneous</td><td>5-Oriented</td><td>6-Obeys</td></tr>
+                    <tr><td>3-To voice</td><td>4-Confused</td><td>5-Localizes</td></tr>
+                    <tr><td>2-To pain</td><td>3-Inappropriate</td><td>4-Withdraws</td></tr>
+                    <tr><td>1-None</td><td>2-Incomprehensible</td><td>3-Flexion</td></tr>
+                    <tr><td></td><td>1-None</td><td>2-Extension</td></tr>
+                    <tr><td></td><td></td><td>1-None</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p><strong>Total: 3-15</strong> | Severe: 3-8 | Moderate: 9-12 | Mild: 13-15</p>
             </div>
           `
         },
         {
           id: 'tools-equipment',
-          title: 'CoTCCC Equipment',
+          title: 'Equipment NSNs',
+          keywords: ['nsn', 'equipment', 'supply', 'cat', 'tourniquet', 'gauze'],
           content: `
             <div class="card">
               <div class="card-title">Tourniquets</div>
               <div class="table-wrapper">
                 <table>
-                  <thead><tr><th>Name</th><th>NSN</th></tr></thead>
+                  <thead><tr><th>Item</th><th>NSN</th></tr></thead>
                   <tbody>
-                    <tr><td>Combat Application Tourniquet (CAT)</td><td>6515-01-521-7976</td></tr>
-                    <tr><td>SOF Tactical Tourniquet (SOFTT)</td><td>6515-01-530-7015</td></tr>
-                    <tr><td>Emergency Medical Tourniquet (EMT)</td><td>6515-01-580-1645</td></tr>
+                    <tr><td>CAT Gen 7</td><td>6515-01-521-7976</td></tr>
+                    <tr><td>SOFTT-W</td><td>6515-01-530-7015</td></tr>
+                    <tr><td>SAM XT</td><td>6515-01-680-1797</td></tr>
+                    <tr><td>TX2/TX3</td><td>6515-01-699-4207</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="card">
-              <div class="card-title">Hemostatic Dressings</div>
+              <div class="card-title">Hemostatic Agents</div>
               <div class="table-wrapper">
                 <table>
-                  <thead><tr><th>Name</th><th>NSN</th></tr></thead>
+                  <thead><tr><th>Item</th><th>NSN</th></tr></thead>
                   <tbody>
                     <tr><td>Combat Gauze Z-Fold</td><td>6510-01-562-3325</td></tr>
-                    <tr><td>Celox Gauze Z-fold</td><td>6510-01-623-9910</td></tr>
+                    <tr><td>Celox Gauze</td><td>6510-01-623-9910</td></tr>
                     <tr><td>ChitoGauze</td><td>6510-01-591-7740</td></tr>
-                    <tr><td>X-Stat Single Applicator</td><td>6510-01-644-7335</td></tr>
+                    <tr><td>X-Stat</td><td>6510-01-644-7335</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="card">
-              <div class="card-title">Junctional Tourniquets</div>
+              <div class="card-title">Chest Seals</div>
               <div class="table-wrapper">
                 <table>
-                  <thead><tr><th>Name</th><th>NSN</th></tr></thead>
+                  <thead><tr><th>Item</th><th>NSN</th></tr></thead>
                   <tbody>
-                    <tr><td>Combat Ready Clamp (CRoC)</td><td>6515-01-589-9135</td></tr>
-                    <tr><td>SAM Junctional Tourniquet</td><td>6515-01-618-7475</td></tr>
-                    <tr><td>JETT</td><td>6515-01-616-5841</td></tr>
+                    <tr><td>HyFin Vent</td><td>6510-01-632-4628</td></tr>
+                    <tr><td>SAM Chest Seal</td><td>6510-01-644-5308</td></tr>
+                    <tr><td>Bolin Chest Seal</td><td>6510-01-643-2507</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -923,9 +1172,10 @@
               <div class="card-title">Airway</div>
               <div class="table-wrapper">
                 <table>
-                  <thead><tr><th>Name</th><th>NSN</th></tr></thead>
+                  <thead><tr><th>Item</th><th>NSN</th></tr></thead>
                   <tbody>
                     <tr><td>CricKey</td><td>6515-01-640-6701</td></tr>
+                    <tr><td>NPA 28Fr</td><td>6515-01-204-4041</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -936,9 +1186,85 @@
     }
   };
 
+  // ==========================================================================
+  // STATE
+  // ==========================================================================
+
   let currentPhase = 'cuf';
   let currentSection = null;
   const PHASES = ['cuf', 'tfc', 'tacevac', 'procedures', 'tools'];
+
+  // ==========================================================================
+  // SEARCH
+  // ==========================================================================
+
+  function initSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    if (!searchInput || !searchResults) return;
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      if (query.length < 2) {
+        searchResults.classList.remove('visible');
+        return;
+      }
+
+      const results = [];
+      for (const [phaseKey, phase] of Object.entries(CONTENT)) {
+        for (const section of phase.sections) {
+          const titleMatch = section.title.toLowerCase().includes(query);
+          const keywordMatch = section.keywords && section.keywords.some(k => k.includes(query));
+          const contentMatch = section.content.toLowerCase().includes(query);
+
+          if (titleMatch || keywordMatch || contentMatch) {
+            results.push({
+              phase: phaseKey,
+              phaseTitle: phase.title,
+              section: section.id,
+              title: section.title,
+              relevance: titleMatch ? 3 : (keywordMatch ? 2 : 1)
+            });
+          }
+        }
+      }
+
+      results.sort((a, b) => b.relevance - a.relevance);
+
+      if (results.length === 0) {
+        searchResults.innerHTML = '<div class="search-result"><div class="search-result-title">No results found</div></div>';
+      } else {
+        searchResults.innerHTML = results.slice(0, 8).map(r => `
+          <div class="search-result" data-phase="${r.phase}" data-section="${r.section}">
+            <div class="search-result-title">${r.title}</div>
+            <div class="search-result-phase">${r.phaseTitle}</div>
+          </div>
+        `).join('');
+      }
+
+      searchResults.classList.add('visible');
+    });
+
+    searchResults.addEventListener('click', (e) => {
+      const result = e.target.closest('.search-result');
+      if (result && result.dataset.phase) {
+        window.location.hash = `${result.dataset.phase}/${result.dataset.section}`;
+        searchInput.value = '';
+        searchResults.classList.remove('visible');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-box')) {
+        searchResults.classList.remove('visible');
+      }
+    });
+  }
+
+  // ==========================================================================
+  // NAVIGATION
+  // ==========================================================================
 
   function initNavigation() {
     document.querySelectorAll('.phase-btn').forEach(btn => {
@@ -954,8 +1280,8 @@
 
   function initSwipeNavigation() {
     const main = document.getElementById('mainContent');
-    let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
-    const minSwipeDistance = 80, maxVerticalMovement = 100;
+    let touchStartX = 0, touchStartY = 0;
+    const minSwipe = 80, maxVertical = 100;
 
     main.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
@@ -963,19 +1289,18 @@
     }, { passive: true });
 
     main.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
-      const deltaX = touchEndX - touchStartX;
-      const deltaY = Math.abs(touchEndY - touchStartY);
-      if (Math.abs(deltaX) > minSwipeDistance && deltaY < maxVerticalMovement) {
-        const currentIndex = PHASES.indexOf(currentPhase);
-        if (deltaX < 0 && currentIndex < PHASES.length - 1) setPhase(PHASES[currentIndex + 1]);
-        else if (deltaX > 0 && currentIndex > 0) setPhase(PHASES[currentIndex - 1]);
+      const deltaX = e.changedTouches[0].screenX - touchStartX;
+      const deltaY = Math.abs(e.changedTouches[0].screenY - touchStartY);
+      if (Math.abs(deltaX) > minSwipe && deltaY < maxVertical) {
+        const idx = PHASES.indexOf(currentPhase);
+        if (deltaX < 0 && idx < PHASES.length - 1) setPhase(PHASES[idx + 1]);
+        else if (deltaX > 0 && idx > 0) setPhase(PHASES[idx - 1]);
       }
     }, { passive: true });
   }
 
   function setPhase(phase) {
+    if (!CONTENT[phase]) return;
     currentPhase = phase;
     currentSection = null;
     document.querySelectorAll('.phase-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.phase === phase));
@@ -986,12 +1311,10 @@
 
   function handleHashChange() {
     const hash = window.location.hash.slice(1) || 'cuf';
-    const parts = hash.split('/');
-    const phase = parts[0];
-    const section = parts[1] || null;
+    const [phase, section] = hash.split('/');
     if (CONTENT[phase]) {
       currentPhase = phase;
-      currentSection = section;
+      currentSection = section || null;
       document.querySelectorAll('.phase-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.phase === phase));
       document.querySelectorAll('.bottom-nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.phase === phase));
       renderPhase(phase, section);
@@ -1001,10 +1324,11 @@
   function renderPhase(phase, sectionId = null) {
     const content = CONTENT[phase];
     const main = document.getElementById('mainContent');
-    const sectionNav = content.sections.map(sec => `
-      <button class="subsection-btn${sectionId === sec.id || (!sectionId && sec.id === content.sections[0].id) ? ' active' : ''}" data-section="${sec.id}">${sec.title}</button>
-    `).join('');
     const activeSection = sectionId ? content.sections.find(s => s.id === sectionId) : content.sections[0];
+
+    const sectionNav = content.sections.map(sec => `
+      <button class="subsection-btn${sec.id === activeSection.id ? ' active' : ''}" data-section="${sec.id}">${sec.title}</button>
+    `).join('');
 
     main.innerHTML = `
       <div class="section-header">
@@ -1019,25 +1343,40 @@
     main.querySelectorAll('.subsection-btn').forEach(btn => {
       btn.addEventListener('click', () => window.location.hash = `${currentPhase}/${btn.dataset.section}`);
     });
+
     window.scrollTo(0, 0);
   }
 
+  // ==========================================================================
+  // OFFLINE
+  // ==========================================================================
+
   function initOfflineSupport() {
     const indicator = document.getElementById('offlineIndicator');
-    function updateStatus() { indicator.classList.toggle('visible', !navigator.onLine); }
+    if (!indicator) return;
+    const updateStatus = () => indicator.classList.toggle('visible', !navigator.onLine);
     window.addEventListener('online', updateStatus);
     window.addEventListener('offline', updateStatus);
     updateStatus();
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
+      navigator.serviceWorker.register('sw.js').catch(() => {});
     }
   }
 
+  // ==========================================================================
+  // INIT
+  // ==========================================================================
+
   function init() {
     initNavigation();
+    initSearch();
     initOfflineSupport();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
 })();

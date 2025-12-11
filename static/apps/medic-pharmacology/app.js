@@ -884,19 +884,81 @@
     window.scrollTo(0, 0);
   }
 
+  function initSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    if (!searchInput || !searchResults) return;
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      if (query.length < 2) {
+        searchResults.classList.remove('visible');
+        return;
+      }
+
+      const results = [];
+      for (const [phaseKey, phase] of Object.entries(CONTENT)) {
+        for (const section of phase.sections) {
+          const titleMatch = section.title.toLowerCase().includes(query);
+          const contentMatch = section.content.toLowerCase().includes(query);
+          if (titleMatch || contentMatch) {
+            results.push({
+              phase: phaseKey,
+              phaseTitle: phase.title,
+              section: section.id,
+              title: section.title,
+              relevance: titleMatch ? 2 : 1
+            });
+          }
+        }
+      }
+
+      results.sort((a, b) => b.relevance - a.relevance);
+
+      if (results.length === 0) {
+        searchResults.innerHTML = '<div class="search-result"><div class="search-result-title">No results found</div></div>';
+      } else {
+        searchResults.innerHTML = results.slice(0, 8).map(r => `
+          <div class="search-result" data-phase="${r.phase}" data-section="${r.section}">
+            <div class="search-result-title">${r.title}</div>
+            <div class="search-result-phase">${r.phaseTitle}</div>
+          </div>
+        `).join('');
+      }
+      searchResults.classList.add('visible');
+    });
+
+    searchResults.addEventListener('click', (e) => {
+      const result = e.target.closest('.search-result');
+      if (result && result.dataset.phase) {
+        window.location.hash = `${result.dataset.phase}/${result.dataset.section}`;
+        searchInput.value = '';
+        searchResults.classList.remove('visible');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-box')) {
+        searchResults.classList.remove('visible');
+      }
+    });
+  }
+
   function initOfflineSupport() {
     const indicator = document.getElementById('offlineIndicator');
-    function updateStatus() { indicator.classList.toggle('visible', !navigator.onLine); }
+    if (!indicator) return;
+    const updateStatus = () => indicator.classList.toggle('visible', !navigator.onLine);
     window.addEventListener('online', updateStatus);
     window.addEventListener('offline', updateStatus);
     updateStatus();
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
+      navigator.serviceWorker.register('sw.js').catch(() => {});
     }
   }
 
   function init() {
     initNavigation();
+    initSearch();
     initOfflineSupport();
   }
 
