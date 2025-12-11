@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <meta name="description" content="Tactical Combat Casualty Care Quick Reference - MARCH-PAWS protocols, drug dosages, and MEDEVAC formats">
+  <meta name="description" content="Light Fighter Medic - Guerrilla Assault Medicine Reference. TCCC, MARCH-PAWS, Ranger Medic protocols, drug dosages, procedures, and field tools.">
   <meta name="theme-color" content="#1a1a1a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>TCCC Quick Reference</title>
+  <title>Light Fighter Medic</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
   <style>
@@ -140,6 +140,7 @@
     .phase-btn.cuf { border-left: 4px solid #dc2626; }
     .phase-btn.tfc { border-left: 4px solid #f59e0b; }
     .phase-btn.tacevac { border-left: 4px solid #22c55e; }
+    .phase-btn.procedures { border-left: 4px solid #06b6d4; }
     .phase-btn.drugs { border-left: 4px solid #3b82f6; }
     .phase-btn.tools { border-left: 4px solid #8b5cf6; }
 
@@ -838,9 +839,9 @@
     <div class="header-content">
       <a href="#" class="logo">
         <span class="logo-icon">+</span>
-        <span>TCCC Reference</span>
+        <span>Light Fighter Medic</span>
       </a>
-      <span class="header-version">CoTCCC Guidelines 2017</span>
+      <span class="header-version">RMHB 2019 / CoTCCC</span>
     </div>
   </header>
 
@@ -848,6 +849,7 @@
     <button class="phase-btn cuf active" data-phase="cuf">Care Under Fire</button>
     <button class="phase-btn tfc" data-phase="tfc">Tactical Field Care</button>
     <button class="phase-btn tacevac" data-phase="tacevac">TACEVAC</button>
+    <button class="phase-btn procedures" data-phase="procedures">Procedures</button>
     <button class="phase-btn drugs" data-phase="drugs">Drugs</button>
     <button class="phase-btn tools" data-phase="tools">Tools</button>
   </nav>
@@ -867,7 +869,11 @@
     </button>
     <button class="bottom-nav-btn" data-phase="tacevac">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-      <span>TACEVAC</span>
+      <span>EVAC</span>
+    </button>
+    <button class="bottom-nav-btn" data-phase="procedures">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <span>Proc</span>
     </button>
     <button class="bottom-nav-btn" data-phase="drugs">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2z"/><path d="M12 8v8M8 12h8"/></svg>

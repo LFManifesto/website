@@ -1,7 +1,9 @@
 /**
- * TCCC Quick Reference App
- * Tactical Combat Casualty Care protocols, drug reference, and tools
- * Based on CoTCCC Guidelines (31 JAN 2017)
+ * Light Fighter Medic App
+ * Guerrilla Assault Medicine Reference
+ * Based on Ranger Medic Handbook 2019 & CoTCCC Guidelines
+ *
+ * "Hunt. Harm. Heal." - The Guerrilla Assault Medic's phrase
  */
 
 (function() {
@@ -259,6 +261,17 @@
               </div>
             </div>
 
+            <div class="card">
+              <div class="card-title">DOPE Troubleshooting</div>
+              <p>If ventilation problems occur with an advanced airway:</p>
+              <ul>
+                <li><strong>D</strong> - Dislodgement: Check tube placement</li>
+                <li><strong>O</strong> - Obstruction: Consider suctioning</li>
+                <li><strong>P</strong> - Pneumothorax: Consider NCD</li>
+                <li><strong>E</strong> - Equipment failure: Disconnect vent and use BVM</li>
+              </ul>
+            </div>
+
             <div class="alert alert-info">
               <strong>Spinal stabilization is NOT necessary</strong> for casualties with penetrating trauma.
             </div>
@@ -281,8 +294,8 @@
                 <strong>Needle Decompression:</strong>
                 <ul style="margin: 0.5rem 0;">
                   <li>14-gauge, 3.25 inch needle/catheter</li>
-                  <li><strong>Primary Site:</strong> 2nd Intercostal Space / Midclavicular Line</li>
-                  <li><strong>Alternate Site:</strong> 4th or 5th ICS / Anterior Axillary Line</li>
+                  <li><strong>Primary Site:</strong> 5th ICS, Anterior Axillary Line</li>
+                  <li><strong>Alternate Site:</strong> 2nd or 3rd ICS, Midclavicular Line</li>
                 </ul>
               </div>
 
@@ -296,9 +309,11 @@
               <div class="card" style="margin-top: 1rem;">
                 <div class="card-title">Tension Pneumothorax Indicators</div>
                 <ul>
-                  <li>Increasing hypoxia</li>
-                  <li>Respiratory distress</li>
-                  <li>Hypotension</li>
+                  <li>Difficulty or worsening breathing with chest/abdominal injury</li>
+                  <li>Decreased SpO2</li>
+                  <li>Decreased breath sounds on affected side</li>
+                  <li>Tracheal deviation (late sign)</li>
+                  <li>Jugular vein distention (late sign)</li>
                 </ul>
               </div>
             </div>
@@ -325,18 +340,37 @@
                 <li>If IV not obtainable, use intraosseous (IO) needle</li>
               </ul>
 
-              <h4>Shock Criteria:</h4>
+              <h4>Shock Assessment - Field Indicators:</h4>
               <ul>
                 <li>Altered mental status (in absence of TBI)</li>
                 <li>Weak or absent radial pulse</li>
+                <li>Capillary refill >2 seconds</li>
+                <li>Decreased blood pressure</li>
               </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Pulse Pressure Estimation</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr><th>Pulse Location</th><th>Estimated SBP</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Radial pulse present</td><td>~80 mmHg</td></tr>
+                    <tr><td>Femoral pulse present</td><td>~70 mmHg</td></tr>
+                    <tr><td>Carotid pulse present</td><td>~60 mmHg</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">These are quick estimates only. Use actual BP measurement when possible.</p>
             </div>
 
             <div class="card">
               <div class="card-title">Tranexamic Acid (TXA)</div>
               <div class="drug-dose">
-                1 gram in 100ml NS or LR IV over 10 minutes<br>
-                Administer ASAP but NOT >3 hours post injury
+                1-2g IV/IO flush as soon as possible<br>
+                DO NOT administer >3 hours post injury
               </div>
               <p><strong>TXA Criteria:</strong></p>
               <ul>
@@ -344,39 +378,40 @@
                 <li>One or more major amputations</li>
                 <li>Penetrating torso trauma</li>
                 <li>Evidence of severe bleeding</li>
+                <li>Evidence of pelvic fracture</li>
               </ul>
-              <p style="margin-top: 0.5rem;">Second dose: 1g after initial fluid resuscitation</p>
+              <p style="margin-top: 0.5rem;">Second dose: 1g after first unit of blood (if initial was 1g)</p>
+              <p><strong>Do NOT delay blood product resuscitation for TXA administration.</strong></p>
             </div>
 
             <div class="card">
-              <div class="card-title">Fluid Resuscitation</div>
-
-              <div class="decision-box">
-                <div class="decision-question">Is casualty in hemorrhagic shock?</div>
-                <div class="decision-options">
-                  <div class="decision-no">NO: PO fluids if conscious and can swallow</div>
-                  <div class="decision-yes">YES: See resuscitation order below</div>
-                </div>
-              </div>
-
-              <h4>Resuscitation Order (preferred):</h4>
+              <div class="card-title">Fluid Resuscitation Priority</div>
               <ol>
-                <li>Whole blood (preferred)</li>
-                <li>Plasma, RBCs, Platelets 1:1:1</li>
-                <li>Plasma and RBCs 1:1</li>
-                <li>Plasma alone OR RBCs alone</li>
+                <li><strong>Whole Blood Transfusion (warmed)</strong> - Preferred</li>
+                <li>Components in 1:1 ratio (Plasma:RBCs:Platelets)</li>
+                <li>ROLO (Ranger O Low-titer)</li>
+                <li>Freeze-Dried Plasma (FDP)</li>
                 <li>Hextend 500ml bolus</li>
-                <li>Lactated Ringers OR Plasma-Lyte A 500ml bolus</li>
+                <li>Lactated Ringers OR Plasma-Lyte A</li>
               </ol>
 
               <div class="alert alert-success">
-                <strong>Endpoints:</strong>
+                <strong>Resuscitation Endpoints:</strong>
                 <ul style="margin: 0.5rem 0 0 0;">
                   <li>Palpable radial pulse</li>
                   <li>Improved mental status</li>
-                  <li>Systolic BP 80-90 mmHg</li>
+                  <li>SBP 90-100 mmHg (hemorrhagic shock)</li>
+                  <li>SBP >110 mmHg (TBI with altered mental status)</li>
                 </ul>
-                <p style="margin-top: 0.5rem;"><strong>For TBI:</strong> Target SBP >90 mmHg</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Calcium Supplementation</div>
+              <div class="drug-dose">
+                CaCl 10cc slow IV/IO push OR CaGluc 30cc slow IV/IO push<br>
+                After 2g TXA (use second IV/IO site)<br>
+                Repeat after every 4th unit of blood
               </div>
             </div>
           `
@@ -391,6 +426,10 @@
                 Hypothermia Prevention
               </div>
 
+              <div class="alert alert-critical">
+                <strong>The Lethal Triad:</strong> Hypothermia + Acidosis + Coagulopathy = Death
+              </div>
+
               <ul>
                 <li>Minimize casualty environmental exposure</li>
                 <li>Keep PPE on if feasible</li>
@@ -400,6 +439,15 @@
                 <li>If unavailable: dry blankets, poncho liners, sleeping bags</li>
                 <li><strong>Warm IV fluids are preferred</strong></li>
               </ul>
+
+              <div class="card" style="margin-top: 1rem;">
+                <div class="card-title">HPMK Components</div>
+                <ul>
+                  <li>Ready-Heat Blanket (apply to torso, NOT directly on skin)</li>
+                  <li>Heat-Reflective Shell (HRS)</li>
+                  <li>Self-heating fluid warmer</li>
+                </ul>
+              </div>
 
               <div class="alert alert-info">
                 Hypothermia prevention and fluid resuscitation should be executed <strong>simultaneously</strong> if possible.
@@ -446,7 +494,7 @@
               <div class="card-title">W - Wounds</div>
               <ul>
                 <li>Inspect and dress known wounds</li>
-                <li>Check for additional wounds</li>
+                <li>Check for additional wounds (full body sweep)</li>
               </ul>
             </div>
 
@@ -459,9 +507,7 @@
             </div>
 
             <div class="card">
-              <div class="card-title">Additional Considerations</div>
-
-              <h4>Burns:</h4>
+              <div class="card-title">Burns</div>
               <ul>
                 <li>Facial burns: aggressively monitor airway</li>
                 <li>Estimate TBSA to nearest 10% using Rule of Nines</li>
@@ -474,8 +520,10 @@
                 %TBSA x 10ml/hour for adults 40-80kg<br>
                 (+100ml/hr for every 10kg above 80kg)
               </div>
+            </div>
 
-              <h4 style="margin-top: 1rem;">Penetrating Eye Trauma:</h4>
+            <div class="card">
+              <div class="card-title">Penetrating Eye Trauma</div>
               <ul>
                 <li>Perform rapid field test of visual acuity</li>
                 <li>Cover with <strong>rigid eye shield</strong> (NOT pressure patch)</li>
@@ -505,6 +553,7 @@
                 <li>Clinical assessments</li>
                 <li>Treatments rendered</li>
                 <li>Changes in casualty status</li>
+                <li>All drugs administered (type, dose, route, time)</li>
               </ul>
               <p>Forward with casualty to next level of care.</p>
             </div>
@@ -593,6 +642,21 @@
               </ul>
               <p>Then surgical cricothyroidotomy if needed.</p>
             </div>
+
+            <div class="card">
+              <div class="card-title">ETI Confirmation Methods</div>
+              <p>Confirm tube placement with minimum of 2 techniques:</p>
+              <ul>
+                <li>End-tidal CO2 monitoring (most reliable)</li>
+                <li>Tube misting</li>
+                <li>Breath against cheek/wrist</li>
+                <li>Auscultate breath sounds</li>
+                <li>Monitor SpO2</li>
+              </ul>
+              <div class="alert alert-warning" style="margin-top: 0.5rem;">
+                <strong>DO NOT rely on auscultation or visual misting as sole placement confirmation.</strong>
+              </div>
+            </div>
           `
         },
         {
@@ -614,7 +678,24 @@
             </div>
 
             <div class="alert alert-warning">
-              <strong>Consider chest tube insertion</strong> if no improvement and/or long transport anticipated.
+              <strong>Consider chest tube insertion</strong> if:
+              <ul style="margin: 0.5rem 0 0 0;">
+                <li>Multiple needle decompressions required</li>
+                <li>No improvement with NCD</li>
+                <li>Extended evacuation time (>1 hour)</li>
+                <li>Transport at high altitude in unpressurized aircraft</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Ventilator Considerations</div>
+              <ul>
+                <li>Maintain strict bagging cycles (1 breath every 5 seconds)</li>
+                <li>Tidal volume approximately 500ml</li>
+                <li>Always use PEEP valve when bagging</li>
+                <li>Consider sedation for prolonged intubation (if no shock/hypotension)</li>
+                <li>Add physiologic PEEP (3-5 cm water)</li>
+              </ul>
             </div>
           `
         },
@@ -638,9 +719,9 @@
               <ul>
                 <li>Decreased level of consciousness</li>
                 <li>Pupillary dilation</li>
-                <li>SBP should be >90 mmHg</li>
+                <li>SBP should be >90 mmHg (target >110 mmHg)</li>
                 <li>O2 sat >90%</li>
-                <li>Hypothermia</li>
+                <li>Hypothermia prevention</li>
                 <li>PCO2 maintained 35-40 mmHg (if capnography available)</li>
                 <li>Penetrating head trauma (administer antibiotics)</li>
                 <li><strong>Assume spinal injury until cleared</strong></li>
@@ -652,7 +733,7 @@
               <ul style="margin: 0.5rem 0;">
                 <li>Asymmetric/unilateral pupillary dilation with decreased LOC</li>
                 <li>Fixed dilated pupil</li>
-                <li>Extensor posturing</li>
+                <li>Extensor posturing (decerebrate)</li>
                 <li>Widening pulse pressure</li>
               </ul>
 
@@ -697,9 +778,366 @@
       ]
     },
 
+    procedures: {
+      title: 'Procedures',
+      subtitle: 'Step-by-step surgical and medical procedures',
+      color: '#06b6d4',
+      sections: [
+        {
+          id: 'proc-cric',
+          title: 'Surgical Cricothyroidotomy',
+          content: `
+            <div class="alert alert-critical">
+              <strong>Indications:</strong>
+              <ul style="margin: 0.5rem 0 0 0;">
+                <li>Severe airway obstruction (trauma, edema, secretions, foreign body, tongue)</li>
+                <li>Failure of airway positioning (chin-lift/jaw-thrust)</li>
+                <li>Failure of Nasopharyngeal Airway</li>
+                <li>Unable to manually ventilate</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Equipment Needed</div>
+              <ul>
+                <li>Scalpel</li>
+                <li>Tracheal Hook or Bougie</li>
+                <li>Povidone/Chlorhexidine/Alcohol swab</li>
+                <li>Gloves (sterile preferred)</li>
+                <li>Sterile 4x4 sponge</li>
+                <li>ET Tube (6.0-7.0) or Cric-specific tube</li>
+                <li>Bag-Valve-Mask (BVM)</li>
+                <li>Curved hemostats if required</li>
+                <li>Securing device, tape, or suture</li>
+                <li>Suction (recommended)</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Procedure Steps</div>
+              <ol>
+                <li>Position patient supine, head/neck midline</li>
+                <li><strong>If conscious:</strong> Administer procedural sedation, inject lidocaine 2-4ml into cricothyroid membrane and trachea</li>
+                <li>Identify cricothyroid membrane: Soft aspect just inferior to larynx, midline, anterior trachea</li>
+                <li>Cleanse the site</li>
+                <li>Stabilize larynx between thumb and index finger of non-dominant hand</li>
+                <li>Make a <strong>VERTICAL</strong> skin incision over cricothyroid membrane</li>
+                <li>Carefully incise <strong>horizontally</strong> through the membrane</li>
+                <li>If needed: Insert tracheal hook, hook cricoid cartilage, apply anterior displacement, widen incision</li>
+                <li>Insert 6.0-7.0 ET tube through midline of membrane, direct distally into trachea 2cm past cricothyroid membrane</li>
+                <li>Inflate cuff with 10cc air</li>
+                <li>Confirm placement with minimum 2 techniques (ETCO2, misting, auscultation, SpO2)</li>
+                <li>Secure tube to prevent dislodging</li>
+                <li>Attach BVM and ventilate (1 breath every 6-8 seconds, 8-10 breaths/min)</li>
+              </ol>
+            </div>
+
+            <div class="alert alert-warning">
+              <strong>Critical Notes:</strong>
+              <ul style="margin: 0.5rem 0 0 0;">
+                <li>Maintain C-spine precautions if concerned for injury</li>
+                <li>If SpO2 drops <90%, stop procedure and ventilate 30-60 seconds before retry</li>
+                <li>Confirm airway before and after ANY patient movement</li>
+              </ul>
+            </div>
+          `
+        },
+        {
+          id: 'proc-ncd',
+          title: 'Needle Chest Decompression',
+          content: `
+            <div class="alert alert-critical">
+              <strong>Indications:</strong>
+              <ul style="margin: 0.5rem 0 0 0;">
+                <li>Difficulty or worsening breathing with mechanism of injury</li>
+                <li>Decreased SpO2 with chest/abdominal injury</li>
+                <li>Decreased breath sounds on affected side</li>
+                <li>Tracheal deviation (late sign)</li>
+                <li>Jugular vein distention (late sign)</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Equipment Needed</div>
+              <ul>
+                <li>10G to 14G, 3.25" needle with catheter</li>
+                <li>Antiseptic swab</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Site Selection</div>
+              <div class="alert alert-info">
+                <strong>Primary Site:</strong> Affected side, 5th intercostal space (nipple level), anterior axillary line<br><br>
+                <strong>Alternate Site:</strong> Affected side, 2nd or 3rd intercostal space, mid-clavicular line
+              </div>
+              <p style="margin-top: 0.5rem; color: var(--accent);"><strong>Ensure needle entry is NOT medial to nipple line and NOT directed toward heart.</strong></p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Procedure Steps</div>
+              <ol>
+                <li>Select site based on injury pattern and patient condition</li>
+                <li>Cleanse site with antiseptic</li>
+                <li>Insert needle with catheter <strong>perpendicular (90°)</strong> over the rib into intercostal space</li>
+                <li>Puncture the parietal pleura</li>
+                <li>Hold needle with catheter for 5-10 seconds before removing needle</li>
+                <li>Leave catheter in place (converts tension to open pneumothorax)</li>
+                <li>Reassess effectiveness</li>
+              </ol>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Assess Effectiveness</div>
+              <ul>
+                <li>Increased SpO2</li>
+                <li>Can patient breathe better?</li>
+                <li>Auscultate breath sounds</li>
+                <li>Chest rise and fall</li>
+              </ul>
+              <p style="margin-top: 0.5rem;"><strong>If ineffective:</strong> Repeat at alternate site, consider bilateral NCD or finger thoracostomy.</p>
+            </div>
+
+            <div class="alert alert-warning">
+              <strong>Documentation:</strong> Vital signs, SpO2, lung sounds before/after, chest rise, skin color, capillary refill, response to treatment, complications.
+            </div>
+          `
+        },
+        {
+          id: 'proc-chesttube',
+          title: 'Chest Tube / Finger Thoracostomy',
+          content: `
+            <div class="alert alert-info">
+              <strong>Indications:</strong>
+              <ul style="margin: 0.5rem 0 0 0;">
+                <li>Multiple unsuccessful needle decompressions</li>
+                <li>Extended time before evacuation</li>
+                <li>Extended evacuation distance/time</li>
+                <li>Large hemothorax suspected</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Equipment Needed</div>
+              <ul>
+                <li>6" or 9" Peans forceps (clamp)</li>
+                <li>Chlorhexidine gluconate solution/swab</li>
+                <li>Scalpel, #10</li>
+                <li>28 Fr to 36 Fr chest tube</li>
+                <li>Heimlich valve</li>
+                <li>Sterile gloves</li>
+                <li>Securing device/suture</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Site Selection</div>
+              <div class="drug-dose">
+                Affected side, 5th intercostal space (nipple level), anterior to midaxillary line
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Procedure Steps</div>
+              <ol>
+                <li>Cleanse site with antiseptic</li>
+                <li>Locally anesthetize skin, rib periosteum, and pleura (and/or procedural sedation)</li>
+                <li>Make 2-3cm <strong>horizontal</strong> incision parallel to ribs</li>
+                <li>Bluntly dissect through subcutaneous tissue just over top of 6th rib</li>
+                <li>Puncture parietal pleura with tip of clamp and spread tissues</li>
+                <li>With index finger of non-dominant hand, trace clamp into incision to avoid organ injury and clear adhesions/clots</li>
+                <li><strong>FINGER THORACOSTOMY:</strong> Stop here if no chest tube available</li>
+                <li>With finger still in place, clamp proximal end of chest tube and insert to desired length</li>
+                <li>Look for "fogging" of chest tube with expiration</li>
+                <li>Connect end of chest tube to Heimlich valve</li>
+                <li>Secure tube in place (suture or adhesive chest seals)</li>
+                <li>If available, apply negative-pressure suction (not exceeding -20 cm water)</li>
+              </ol>
+            </div>
+
+            <div class="alert alert-critical">
+              <strong>Surgical intervention required if:</strong>
+              <ul style="margin: 0.5rem 0 0 0;">
+                <li>Blood loss 1000-1500ml immediately</li>
+                <li>Drainage 200-300ml/hr in adult patient</li>
+              </ul>
+            </div>
+
+            <div class="alert alert-warning">
+              <strong>ALL chest tubes should be placed with STERILE technique.</strong>
+            </div>
+          `
+        },
+        {
+          id: 'proc-io',
+          title: 'Intraosseous Access',
+          content: `
+            <div class="alert alert-info">
+              <strong>Indication:</strong> Inability to attain vascular access through peripheral extremity or external jugular when life-saving fluids or medications are needed.
+            </div>
+
+            <div class="card">
+              <div class="card-title">Site Selection (Priority Order)</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr><th>Site</th><th>Location</th><th>Needle Size</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Proximal Humerus</strong></td><td>Greater tubercle (internally rotate arm)</td><td>45mm 15ga</td></tr>
+                    <tr><td><strong>Sternal (Manubrium)</strong></td><td>Midline, 1.5cm below sternal notch</td><td>38.5mm 15ga</td></tr>
+                    <tr><td><strong>Proximal Tibia</strong></td><td>1 finger medial to tuberosity, 2 fingers below patella</td><td>25mm 15ga</td></tr>
+                    <tr><td><strong>Distal Tibia</strong></td><td>2 fingers proximal to medial malleolus</td><td>25mm 15ga</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p style="margin-top: 0.5rem; font-size: 0.85rem;">The more proximal the site, the better flow rate.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Contraindications</div>
+              <ul>
+                <li>Fracture or injury to insertion site</li>
+                <li>Absence of landmarks</li>
+                <li>Injury proximal to IO site</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Procedure Steps (Non-Sternal)</div>
+              <ol>
+                <li>Cleanse site with antiseptic</li>
+                <li>Ensure flat, stable platform</li>
+                <li>Use gentle, steady downward pressure with boring/screwing motion</li>
+                <li>Advance needle at 90° angle until penetrating marrow (feeling of "give" or "pop")</li>
+                <li>Remove stylet and driver</li>
+                <li>Attach primed extension set to catheter hub</li>
+                <li>Attempt to aspirate marrow blood (confirms placement)</li>
+                <li>Flush with 5cc NS (or TXA if indicated)</li>
+                <li>If flush difficult without aspiration, attempt to flush - if successful, proceed</li>
+                <li>Consider 5-10cc lidocaine flush for pain control</li>
+                <li>Attach IV tubing/saline lock and administer fluids/meds</li>
+              </ol>
+            </div>
+
+            <div class="alert alert-warning">
+              <strong>Cautions:</strong>
+              <ul style="margin: 0.5rem 0 0 0;">
+                <li>Do NOT rock or bend during insertion - maintain 90° angle</li>
+                <li>Do NOT leave catheter inserted >24 hours</li>
+                <li>Do NOT attach syringe directly to IO catheter hub</li>
+              </ul>
+            </div>
+          `
+        },
+        {
+          id: 'proc-ejiv',
+          title: 'External Jugular IV',
+          content: `
+            <div class="alert alert-info">
+              <strong>Indication:</strong> Vascular access when peripheral IV not obtainable.
+            </div>
+
+            <div class="card">
+              <div class="card-title">Equipment Needed</div>
+              <ul>
+                <li>Constricting band (or finger pressure)</li>
+                <li>Chlorhexidine gluconate swab</li>
+                <li>2x 14G IV catheter/needle</li>
+                <li>10cc syringe with normal saline</li>
+                <li>Needleless saline lock</li>
+                <li>Tegaderm (at least 2.5" x 2.5")</li>
+                <li>Gloves</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Procedure Steps</div>
+              <ol>
+                <li>Place patient supine or modified Trendelenburg position</li>
+                <li>Maintain C-spine precautions as required</li>
+                <li>Turn patient's head to opposite side</li>
+                <li>Attach 10cc syringe (filled with NS) to catheter/needle</li>
+                <li>Cleanse site with antiseptic</li>
+                <li>Apply light pressure on inferior aspect of EJ to create tourniquet effect</li>
+                <li>Align needle/catheter/syringe in direction of vein, tip aimed toward "same-side" nipple</li>
+                <li>Insert catheter/needle into vein and aspirate</li>
+                <li><strong>NOTE:</strong> Confirm blood return when aspirating</li>
+                <li><strong>DO NOT allow air to enter the vein</strong></li>
+                <li>Advance catheter and withdraw needle/syringe</li>
+                <li>Attach needleless saline lock and flush with NS</li>
+                <li>Apply Tegaderm over venipuncture site</li>
+              </ol>
+            </div>
+
+            <div class="alert alert-critical">
+              <strong>Critical:</strong> DO NOT allow air to enter the vein - can cause air embolism.
+            </div>
+          `
+        },
+        {
+          id: 'proc-iv',
+          title: 'Peripheral IV / Saline Lock',
+          content: `
+            <div class="card">
+              <div class="card-title">Equipment Needed</div>
+              <ul>
+                <li>Constricting band</li>
+                <li>Chlorhexidine gluconate solution/swab</li>
+                <li>2x 18G or 16G IV catheter/needle</li>
+                <li>Needleless saline lock</li>
+                <li>Tegaderm (at least 2.5" x 2.5")</li>
+                <li>IV tubing (if needed)</li>
+                <li>IV securing device</li>
+                <li>Gloves</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Procedure Steps</div>
+              <ol>
+                <li>Prep equipment and don gloves</li>
+                <li>Apply constricting band</li>
+                <li>Select vein (AC fossa, forearm, dorsum of hand)</li>
+                <li>Cleanse/prep site</li>
+                <li>Insert catheter/needle at 15-30° angle</li>
+                <li>Advance catheter and remove needle</li>
+                <li>Attach needleless saline lock</li>
+                <li>Release constricting band</li>
+                <li>Apply Tegaderm over venipuncture site</li>
+                <li>Flush with 5-10ml normal saline</li>
+                <li>Attach IV tubing if indicated</li>
+                <li>Secure IV tubing with tape or securing device</li>
+              </ol>
+            </div>
+
+            <div class="alert alert-warning">
+              <strong>Notes:</strong>
+              <ul style="margin: 0.5rem 0 0 0;">
+                <li>Never delay evacuation or treatments to gain IV access unless needed for lifesaving procedure</li>
+                <li>Warmed IV fluids are always preferred to prevent hypothermia</li>
+                <li>DO NOT REMOVE saline lock when discontinuing IV fluids</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Documentation</div>
+              <ul>
+                <li>IV site location</li>
+                <li>IV catheter gauge</li>
+                <li>Date/time started</li>
+                <li>Fluids infused / rate</li>
+                <li>Complications encountered</li>
+              </ul>
+            </div>
+          `
+        }
+      ]
+    },
+
     drugs: {
       title: 'Drug Reference',
-      subtitle: 'TCCC pharmacology quick reference',
+      subtitle: 'Ranger Medic pharmacology quick reference',
       color: '#3b82f6',
       sections: [
         {
@@ -707,7 +1145,8 @@
           title: 'Quick Reference',
           content: `
             <div class="alert alert-info">
-              <strong>Tap any drug below for detailed information.</strong>
+              <strong>ALWAYS determine if patient has allergies before administration.</strong><br>
+              For opioids: have Naloxone ready. For benzodiazepines: have Flumazenil ready.
             </div>
 
             <div class="card">
@@ -718,11 +1157,47 @@
                     <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Indication</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>Acetaminophen</td><td>650mg x2</td><td>PO</td><td>Mild-mod pain</td></tr>
-                    <tr><td>Meloxicam</td><td>15mg</td><td>PO</td><td>Mild-mod pain</td></tr>
+                    <tr><td>Acetaminophen</td><td>650mg x2 q8h</td><td>PO</td><td>Mild-mod pain</td></tr>
+                    <tr><td>Meloxicam</td><td>15mg daily</td><td>PO</td><td>Mild-mod pain</td></tr>
                     <tr><td>OTFC (Fentanyl)</td><td>800mcg</td><td>Transmucosal</td><td>Mod-severe, NOT shock</td></tr>
                     <tr><td>Ketamine</td><td>50mg / 20mg</td><td>IM,IN / IV,IO</td><td>Mod-severe, IN shock</td></tr>
                     <tr><td>Morphine</td><td>5mg</td><td>IV/IO</td><td>Alternative to OTFC</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Antibiotics</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Use If</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Moxifloxacin</td><td>400mg daily</td><td>PO</td><td>Can take PO</td></tr>
+                    <tr><td>Ertapenem</td><td>1g daily</td><td>IV/IM</td><td>Unable to take PO</td></tr>
+                    <tr><td>Cefazolin</td><td>1-2g q8h</td><td>IV/IM</td><td>Open fractures, pre-surgical</td></tr>
+                    <tr><td>Ceftriaxone</td><td>1-2g q12-24h</td><td>IV/IM</td><td>Meningitis, severe infections</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Critical Medications</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Indication</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>TXA</td><td>1-2g flush</td><td>IV/IO</td><td>Hemorrhage (<3hr)</td></tr>
+                    <tr><td>Epinephrine</td><td>0.3-0.5mg</td><td>IM</td><td>Anaphylaxis</td></tr>
+                    <tr><td>Epinephrine</td><td>1mg q3-5min</td><td>IV/IO</td><td>Cardiac arrest (ACLS)</td></tr>
+                    <tr><td>Naloxone</td><td>0.4-2mg</td><td>IV/IM</td><td>Opioid reversal</td></tr>
+                    <tr><td>Atropine</td><td>1-6mg q3-5min</td><td>IV/IM</td><td>Nerve agent/organophosphate</td></tr>
+                    <tr><td>Atropine</td><td>0.5mg q3-5min</td><td>IV/IM</td><td>Bradycardia (max 3mg)</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -736,11 +1211,11 @@
                     <tr><th>Drug</th><th>Dose</th><th>Route</th><th>Indication</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>Moxifloxacin</td><td>400mg daily</td><td>PO</td><td>Antibiotic</td></tr>
-                    <tr><td>Ertapenem</td><td>1g daily</td><td>IV/IM</td><td>Antibiotic (if no PO)</td></tr>
-                    <tr><td>TXA</td><td>1g in 100ml</td><td>IV</td><td>Hemorrhage</td></tr>
                     <tr><td>Ondansetron</td><td>4mg q8h</td><td>ODT/IV/IM</td><td>Nausea/vomiting</td></tr>
-                    <tr><td>Naloxone</td><td>0.4-2mg</td><td>IV/IM</td><td>Opioid reversal</td></tr>
+                    <tr><td>Diphenhydramine</td><td>25-50mg q4-6h</td><td>IV/IM/PO</td><td>Allergic reaction</td></tr>
+                    <tr><td>Dexamethasone</td><td>4mg qid</td><td>PO/IV/IM</td><td>AMS, HACE, inflammation</td></tr>
+                    <tr><td>Acetazolamide</td><td>125mg BID</td><td>PO</td><td>Altitude illness prevention</td></tr>
+                    <tr><td>Albuterol</td><td>2 puffs q4-6h</td><td>MDI/Neb</td><td>Bronchospasm</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -760,7 +1235,7 @@
               <div class="drug-class">Combat Wound Medication Pack (CWMP)</div>
 
               <div class="drug-dose">
-                Acetaminophen 650mg bilayer - 2 tablets PO q8h<br>
+                Acetaminophen 650mg bilayer - 2 tablets PO q8h (max 4g/day)<br>
                 Meloxicam 15mg PO daily
               </div>
 
@@ -772,7 +1247,7 @@
               <div class="drug-class">Oral Transmucosal Fentanyl Citrate (OTFC)</div>
 
               <div class="drug-dose">
-                800mcg transmucosal<br>
+                800mcg transmucosal (max 1600mcg/day)<br>
                 Add second 800mcg in 15 min if needed
               </div>
 
@@ -786,6 +1261,9 @@
               <div class="alert alert-warning" style="margin-top: 1rem;">
                 <strong>Disarm casualty.</strong> Secure weapons and communications.
               </div>
+
+              <p style="margin-top: 0.5rem;"><strong>Onset:</strong> 15 min | <strong>Peak:</strong> 20-40 min | <strong>Duration:</strong> 2-3 hours</p>
+              <p><strong>K9 Dosage:</strong> DO NOT GIVE to K9s</p>
             </div>
 
             <div class="card drug-card">
@@ -808,6 +1286,8 @@
                   <li><strong>Contraindication:</strong> Severe TBI (may worsen)</li>
                 </ul>
               </div>
+
+              <p style="margin-top: 0.5rem;"><strong>K9 Dosage:</strong> 75-150mg (2-5mg/kg) IM. Onset 2-5 min. Consider Midazolam adjunct.</p>
             </div>
 
             <div class="card">
@@ -824,7 +1304,8 @@
           title: 'Antibiotics',
           content: `
             <div class="alert alert-info">
-              Early administration of antibiotics is recommended for <strong>ALL open combat wounds</strong>.
+              Early administration of antibiotics is recommended for <strong>ALL open combat wounds</strong>.<br>
+              If allergic to one class, use alternate: Cephalosporins/Penicillins, Tetracyclines, Quinolones, Macrolides.
             </div>
 
             <div class="card drug-card">
@@ -835,17 +1316,14 @@
 
               <p><strong>Use if:</strong> Casualty can take oral medications</p>
               <p><strong>Part of:</strong> Combat Wound Medication Pack</p>
-
-              <div class="alert alert-warning" style="margin-top: 1rem;">
-                <strong>GROUNDING medication</strong> for flight personnel
-              </div>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
             </div>
 
             <div class="card drug-card">
               <div class="drug-name">Ertapenem (Invanz)</div>
-              <div class="drug-class">Carbapenem antibiotic</div>
+              <div class="drug-class">Carbapenem antibiotic (beta-lactam)</div>
 
-              <div class="drug-dose">1g IV/IM daily</div>
+              <div class="drug-dose">1g IV/IM q24h</div>
 
               <p><strong>Use if:</strong> Unable to take oral medications</p>
 
@@ -854,55 +1332,93 @@
                 <li><strong>IV:</strong> 10ml Normal Saline</li>
                 <li><strong>IM:</strong> 3.2ml 1% Lidocaine (without epinephrine)</li>
               </ul>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
             </div>
-          `
-        },
-        {
-          id: 'drugs-txa',
-          title: 'TXA',
-          content: `
+
             <div class="card drug-card">
-              <div class="drug-name">Tranexamic Acid (TXA)</div>
-              <div class="drug-class">Antifibrinolytic agent</div>
+              <div class="drug-name">Cefazolin (Ancef)</div>
+              <div class="drug-class">1st generation cephalosporin</div>
+
+              <div class="drug-dose">1-2g IV/IM q8h (max 12g/day)</div>
+
+              <p><strong>Use for:</strong> Open bone fractures, joint disruptions, pre-surgical prophylaxis</p>
+              <p><strong>K9 Dosage:</strong> 0.5-1g (25mg/kg) IV daily, give over 5 min</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Ceftriaxone (Rocephin)</div>
+              <div class="drug-class">3rd generation cephalosporin</div>
 
               <div class="drug-dose">
-                1g in 100ml NS or LR<br>
-                IV over 10 minutes<br><br>
-                Second dose: 1g after initial fluid resuscitation
+                Moderate-severe infections: 1-2g IV/IM q12-24h (max 4g/day)<br>
+                Meningitis: 2g IV/IM q12h<br>
+                Gonorrhea: 250mg IM x1
               </div>
 
-              <div class="alert alert-critical" style="margin-top: 1rem;">
-                <strong>DO NOT administer >3 hours after injury</strong>
+              <p><strong>IM Administration:</strong> Dilute in 1% lidocaine</p>
+              <p><strong>K9 Dosage:</strong> 1g IV/IM daily</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Azithromycin (Zithromax)</div>
+              <div class="drug-class">Macrolide antibiotic</div>
+
+              <div class="drug-dose">
+                Pneumonia: 500mg PO day 1, then 250mg daily x4 days<br>
+                STI (gonococcal): 1g PO x1 with ceftriaxone
               </div>
 
-              <h4>TXA Criteria:</h4>
-              <ul>
-                <li>Hemorrhagic shock</li>
-                <li>One or more major amputations</li>
-                <li>Penetrating torso trauma</li>
-                <li>Evidence of severe bleeding</li>
-              </ul>
+              <p><strong>Note:</strong> Food decreases absorption by 50%</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+            </div>
 
-              <div class="alert alert-warning" style="margin-top: 1rem;">
-                <ul style="margin: 0;">
-                  <li>Do NOT mix with blood products or Hextend</li>
-                  <li>Inject no more than 100mg/min to avoid hypotension</li>
-                  <li>Document on casualty card</li>
-                </ul>
+            <div class="card drug-card">
+              <div class="drug-name">Doxycycline</div>
+              <div class="drug-class">Tetracycline antibiotic</div>
+
+              <div class="drug-dose">
+                Antimalarial: 100mg PO daily (start 1-2 days prior, continue 4 weeks after)<br>
+                Antimicrobial: 100mg PO q12h day 1, then 100mg daily<br>
+                Travelers' diarrhea: 100mg PO daily during risk period
               </div>
 
-              <h4 style="margin-top: 1rem;">Contraindications:</h4>
-              <ul>
-                <li>Subarachnoid hemorrhage</li>
-                <li>Active intravascular clotting</li>
-              </ul>
+              <p><strong>Note:</strong> Antacids (Pepto, Mylanta) significantly decrease absorption</p>
+              <p><strong>Contraindication:</strong> Pregnancy (tooth discoloration)</p>
             </div>
           `
         },
         {
-          id: 'drugs-reversal',
-          title: 'Reversal Agent',
+          id: 'drugs-emergency',
+          title: 'Emergency Drugs',
           content: `
+            <div class="card drug-card">
+              <div class="drug-name">Epinephrine (including Epi-Pen)</div>
+              <div class="drug-class">Alpha/beta-adrenergic agonist, catecholamine</div>
+
+              <div class="drug-dose">
+                <strong>Anaphylaxis:</strong> 0.3-0.5mg IM q10-15min (1:1000 = 1mg/1ml)<br>
+                <strong>Cardiac Arrest (ACLS):</strong> 1mg IV/IO q3-5min
+              </div>
+
+              <p><strong>Onset:</strong> Rapid | <strong>Duration:</strong> 1-2 minutes</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Atropine Sulfate</div>
+              <div class="drug-class">Anticholinergic, parasympatholytic</div>
+
+              <div class="drug-dose">
+                <strong>Organophosphate/Nerve Agent:</strong> 1-6mg IV/IM q3-5min PRN x 2-12hrs<br>
+                <strong>Bradycardia:</strong> 0.5mg IV/IM q3-5min (max 3mg)
+              </div>
+
+              <p><strong>Action:</strong> Blocks acetylcholine, increases heart rate, dries secretions</p>
+              <p><strong>Contraindications:</strong> Glaucoma, GI obstruction, tachycardia, myocardial ischemia</p>
+            </div>
+
             <div class="card drug-card">
               <div class="drug-name">Naloxone (Narcan)</div>
               <div class="drug-class">Opioid antagonist</div>
@@ -913,19 +1429,252 @@
                 Max: 10mg
               </div>
 
-              <p><strong>Indication:</strong> Opioid overdose and reversal of effects:</p>
-              <ul>
-                <li>Respiratory depression</li>
-                <li>Sedation</li>
-                <li>Hypotension</li>
-              </ul>
+              <p><strong>Indication:</strong> Opioid overdose reversal (respiratory depression, sedation, hypotension)</p>
+              <p><strong>Note:</strong> Titrate to effect - maintain pain control</p>
+              <p><strong>K9 Dosage:</strong> 1mg (0.02-0.04mg/kg) IV/IM</p>
+            </div>
 
-              <div class="alert alert-warning" style="margin-top: 1rem;">
-                <strong>Have available when administering opioids.</strong><br>
-                Titrate to effect - use caution that pain is still managed.
+            <div class="card drug-card">
+              <div class="drug-name">Tranexamic Acid (TXA)</div>
+              <div class="drug-class">Antifibrinolytic agent</div>
+
+              <div class="drug-dose">
+                1-2g IV/IO flush ASAP<br>
+                DO NOT administer >3 hours post injury<br>
+                Second dose: 1g after first blood unit (if initial was 1g)
               </div>
 
-              <p style="margin-top: 1rem;"><strong>K-9 Dosage:</strong> 1mg (0.02-0.04mg/kg) IV/IM</p>
+              <p><strong>Criteria:</strong> Hemorrhagic shock, major amputations, penetrating torso, severe bleeding, pelvic fracture</p>
+              <p><strong>Contraindications:</strong> Subarachnoid hemorrhage, active intravascular clotting</p>
+              <p><strong>Note:</strong> Do NOT mix with blood products or Hextend</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Dextrose 50% (D50)</div>
+              <div class="drug-class">Caloric, monosaccharide</div>
+
+              <div class="drug-dose">
+                0.5-1g/kg (1-2ml/kg) up to 25g (50ml) of 50% solution IV<br>
+                If tolerating PO: provide glucose tabs
+              </div>
+
+              <p><strong>Indication:</strong> Hypoglycemic episode</p>
+              <p><strong>Contraindications:</strong> Hyperglycemia, cranial/spinal hemorrhage</p>
+            </div>
+          `
+        },
+        {
+          id: 'drugs-sedation',
+          title: 'Sedation & Anxiolytics',
+          content: `
+            <div class="card drug-card">
+              <div class="drug-name">Diazepam (Valium)</div>
+              <div class="drug-class">Benzodiazepine, anticonvulsant, anxiolytic - CONTROLLED IV</div>
+
+              <div class="drug-dose">
+                5-10mg slow IV push, repeat in 3-4h<br>
+                2-10mg PO tid-qid
+              </div>
+
+              <p><strong>Indications:</strong> Anxiety, seizures, muscle spasm, status epilepticus, acute alcohol withdrawal</p>
+              <p><strong>Contraindications:</strong> Shock, coma, alcohol intoxication, narrow-angle glaucoma</p>
+              <p><strong>Mission Impact:</strong> GROUNDING - causes drowsiness</p>
+              <p><strong>K9 Dosage:</strong> Seizures: 15-30mg (0.5-1mg/kg) IV or 30-60mg (1-2mg/kg) rectally q4h. Sedation with opioid: 7.5mg (0.25mg/kg) IV/IM q4h.</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Diphenhydramine (Benadryl)</div>
+              <div class="drug-class">H1 blocker, antihistamine</div>
+
+              <div class="drug-dose">25-50mg IV/IM/PO q4-6h</div>
+
+              <p><strong>Onset:</strong> IV immediate, IM 30 min, PO 15-60 min</p>
+              <p><strong>Duration:</strong> 6-8 hours</p>
+              <p><strong>Indications:</strong> Allergic conditions, motion sickness, Parkinsonism, sedation, cough suppression</p>
+              <p><strong>Mission Impact:</strong> GROUNDING - sedative effects</p>
+              <p><strong>K9 Dosage:</strong> 50mg IM/SQ/PO (impacts sense of smell)</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Cyclobenzaprine (Flexeril)</div>
+              <div class="drug-class">Central-acting skeletal muscle relaxant</div>
+
+              <div class="drug-dose">5-10mg PO tid PRN muscle spasm (max 60mg/day)<br>Do not use longer than 2-3 weeks</div>
+
+              <p><strong>Indications:</strong> Short-term relief of muscle spasm</p>
+              <p><strong>Contraindications:</strong> MI recovery phase, cardiac arrhythmias, heart block, CHF</p>
+              <p><strong>Mission Impact:</strong> GROUNDING - causes drowsiness</p>
+              <p><strong>K9 Dosage:</strong> DO NOT GIVE</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Eszopiclone (Lunesta)</div>
+              <div class="drug-class">Sedative-Hypnotic - CONTROLLED IV</div>
+
+              <div class="drug-dose">2-3mg immediately at bedtime</div>
+
+              <p><strong>Indications:</strong> Insomnia</p>
+              <p><strong>Mission Impact:</strong> GROUNDING - higher risk for heat injury</p>
+            </div>
+          `
+        },
+        {
+          id: 'drugs-altitude',
+          title: 'Altitude & Environment',
+          content: `
+            <div class="card drug-card">
+              <div class="drug-name">Acetazolamide (Diamox)</div>
+              <div class="drug-class">Carbonic anhydrase inhibitor, diuretic</div>
+
+              <div class="drug-dose">
+                <strong>Prevention:</strong> 125mg PO BID (start 1-2 days prior to ascent)<br>
+                <strong>Treatment:</strong> 250mg PO BID until symptoms resolve
+              </div>
+
+              <p><strong>Indications:</strong> Acute high-altitude sickness (AMS) prevention/treatment, seizures</p>
+              <p><strong>Note:</strong> With HACE, dexamethasone is primary treatment; acetazolamide is adjunctive</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+              <p><strong>K9 Dosage:</strong> 250mg q12h beginning 24h prior to ascent OR 500mg q24h</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Dexamethasone (Decadron)</div>
+              <div class="drug-class">Glucocorticoid steroid</div>
+
+              <div class="drug-dose">
+                <strong>AMS:</strong> 4mg PO qid<br>
+                <strong>HACE:</strong> 8mg initial, then 4mg PO qid until symptoms resolve<br>
+                <strong>General:</strong> 0.25-4mg PO bid-qid
+              </div>
+
+              <p><strong>Onset:</strong> Hours | <strong>Peak:</strong> 8-12 hours | <strong>Duration:</strong> 72 hours</p>
+              <p><strong>Indications:</strong> Cerebral edema, inflammatory conditions, allergic states</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+              <p><strong>K9 Dosage:</strong> 3-4mg (0.5mg/kg) IV/IM</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Malarone (Atovaquone-Proguanil)</div>
+              <div class="drug-class">Antimalarial</div>
+
+              <div class="drug-dose">
+                <strong>Prophylaxis:</strong> 250mg/100mg PO daily (start 1-2 days prior, continue 7 days after)<br>
+                <strong>Treatment:</strong> 1000mg/400mg PO daily x 3 days
+              </div>
+
+              <p><strong>Indication:</strong> P. falciparum malaria prevention and treatment</p>
+              <p><strong>Side Effects:</strong> Headache, abdominal pain, N/V/D, possible seizures/psychotic events</p>
+              <p><strong>Mission Impact:</strong> None</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Albuterol (Proventil)</div>
+              <div class="drug-class">Beta-adrenergic agonist, bronchodilator</div>
+
+              <div class="drug-dose">
+                MDI: 2 puffs q4-6h PRN<br>
+                Nebulizer: 0.5ml of 0.5% solution (2.5mg) in 5ml NS tid-qid
+              </div>
+
+              <p><strong>Indications:</strong> Exercise-induced bronchospasm, acute asthma, bronchitis, reversible airway disease</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+            </div>
+          `
+        },
+        {
+          id: 'drugs-gi',
+          title: 'GI & Other',
+          content: `
+            <div class="card drug-card">
+              <div class="drug-name">Cimetidine (Tagamet)</div>
+              <div class="drug-class">H2-receptor antagonist</div>
+
+              <div class="drug-dose">300mg PO qid OR 800mg at bedtime OR 400mg BID x 8 weeks</div>
+
+              <p><strong>Indications:</strong> Duodenal/gastric ulcer, GERD, chronic urticaria, acetaminophen toxicity</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Docusate (Colace)</div>
+              <div class="drug-class">Stool softener</div>
+
+              <div class="drug-dose">50-500mg/day PO divided qd-qid</div>
+
+              <p><strong>Indications:</strong> Constipation with hard/dry stools, prophylaxis with narcotic use</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Bisacodyl (Dulcolax)</div>
+              <div class="drug-class">Stimulant laxative</div>
+
+              <div class="drug-dose">5-15mg PO (works within 6-10 hours)</div>
+
+              <p><strong>Note:</strong> Swallow tablets whole with water/juice. Do NOT crush/chew. Do NOT take with dairy or antacids.</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Benzonatate (Tessalon Perles)</div>
+              <div class="drug-class">Nonnarcotic antitussive</div>
+
+              <div class="drug-dose">100-200mg PO 3x daily PRN (max single: 200mg, max daily: 600mg)</div>
+
+              <p><strong>Indication:</strong> Relief of cough</p>
+              <p><strong>Mission Impact:</strong> None</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Cetirizine (Zyrtec)</div>
+              <div class="drug-class">H1-receptor antagonist, non-sedating antihistamine</div>
+
+              <div class="drug-dose">5-10mg PO daily</div>
+
+              <p><strong>Indications:</strong> Seasonal/perennial allergic rhinitis, chronic urticaria</p>
+              <p><strong>Note:</strong> Do not combine with OTC antihistamines</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+            </div>
+
+            <div class="card drug-card">
+              <div class="drug-name">Bupivacaine (Marcaine)</div>
+              <div class="drug-class">Local anesthetic</div>
+
+              <div class="drug-dose">0.25% infiltrated locally (max 400mg/day)<br>Aspirate before every injection</div>
+
+              <p><strong>Onset:</strong> Fast | <strong>Peak:</strong> 30-45 min | <strong>Duration:</strong> 2-8 hours</p>
+              <p><strong>Note:</strong> Epinephrine reduces absorption rate and peak concentration</p>
+              <p><strong>Contraindication:</strong> Do NOT use as IV regional anesthesia (can cause cardiac arrest)</p>
+              <p><strong>Mission Impact:</strong> GROUNDING for flight personnel</p>
+            </div>
+          `
+        },
+        {
+          id: 'drugs-k9',
+          title: 'K9 Dosages',
+          content: `
+            <div class="alert alert-critical">
+              <strong>DO NOT GIVE TO K9:</strong> Acetaminophen, Ciprofloxacin, Clindamycin, Cyclobenzaprine, Fentanyl/OTFC
+            </div>
+
+            <div class="card">
+              <div class="card-title">K9 Drug Quick Reference</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr><th>Drug</th><th>K9 Dose</th><th>Notes</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Ketamine</td><td>75-150mg (2-5mg/kg) IM</td><td>Onset 2-5 min, consider Midazolam adjunct</td></tr>
+                    <tr><td>Naloxone</td><td>1mg (0.02-0.04mg/kg) IV/IM</td><td>Opioid reversal</td></tr>
+                    <tr><td>Diazepam</td><td>Seizures: 0.5-1mg/kg IV, 1-2mg/kg rectally</td><td>q4h as needed</td></tr>
+                    <tr><td>Diphenhydramine</td><td>50mg IM/SQ/PO</td><td>Impacts sense of smell</td></tr>
+                    <tr><td>Dexamethasone</td><td>3-4mg (0.5mg/kg) IV/IM</td><td>-</td></tr>
+                    <tr><td>Cefazolin</td><td>0.5-1g (25mg/kg) IV daily</td><td>Give over 5 min</td></tr>
+                    <tr><td>Ceftriaxone</td><td>1g IV/IM daily</td><td>-</td></tr>
+                    <tr><td>Amoxicillin/Clav</td><td>10-20mg/kg PO BID x 5-7d</td><td>-</td></tr>
+                    <tr><td>Aspirin (Buffered)</td><td>10-25mg/kg PO q8-12h</td><td>Only buffered aspirin</td></tr>
+                    <tr><td>Acetazolamide</td><td>250mg q12h or 500mg q24h</td><td>Start 24h prior to ascent</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           `
         }
@@ -971,8 +1720,7 @@
                     <tr class="triage-immediate"><td><strong>A - Urgent</strong></td><td>Within 2 hours</td></tr>
                     <tr class="triage-delayed"><td><strong>B - Priority</strong></td><td>Within 4 hours</td></tr>
                     <tr class="triage-minimal"><td><strong>C - Routine</strong></td><td>Within 24 hours</td></tr>
-                  </tbody>
-                </table>
+                  </tbody>                </table>
               </div>
             </div>
 
@@ -1098,52 +1846,39 @@
           `
         },
         {
-          id: 'tools-evac',
-          title: 'Evacuation Precedence',
+          id: 'tools-shock',
+          title: 'Shock Classification',
           content: `
-            <div class="card triage-immediate" style="border: 2px solid #dc2626;">
-              <div class="card-title" style="color: #dc2626;">URGENT / CAT A (Within 2 Hours)</div>
-              <ul>
-                <li>Dismounted IED attack injuries</li>
-                <li>GSW/shrapnel to chest, abdomen, pelvis</li>
-                <li>Ongoing airway difficulty</li>
-                <li>Ongoing respiratory difficulty</li>
-                <li>Unconscious casualty</li>
-                <li>Known/suspected spinal injury</li>
-                <li>Casualty in shock</li>
-                <li>Bleeding difficult to control</li>
-                <li>Moderate/Severe TBI</li>
-                <li>Burns >20% TBSA</li>
-              </ul>
+            <div class="card">
+              <div class="card-title">Classes of Hemorrhagic Shock</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr><th>Parameter</th><th>Class I</th><th>Class II</th><th>Class III</th><th>Class IV</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Blood Loss (ml)</strong></td><td><750</td><td>750-1500</td><td>1500-2000</td><td>>2000</td></tr>
+                    <tr><td><strong>Blood Loss (%)</strong></td><td><15%</td><td>15-30%</td><td>30-40%</td><td>>40%</td></tr>
+                    <tr><td><strong>Pulse Rate</strong></td><td><100</td><td>100-120</td><td>120-140</td><td>>140</td></tr>
+                    <tr><td><strong>Blood Pressure</strong></td><td>Normal</td><td>Normal</td><td>Decreased</td><td>Decreased</td></tr>
+                    <tr><td><strong>Pulse Pressure</strong></td><td>Normal</td><td>Narrowed</td><td>Narrowed</td><td>Narrowed</td></tr>
+                    <tr><td><strong>Respiratory Rate</strong></td><td>14-20</td><td>20-30</td><td>30-40</td><td>>35</td></tr>
+                    <tr><td><strong>Urine Output (ml/hr)</strong></td><td>>30</td><td>20-30</td><td>5-15</td><td>Negligible</td></tr>
+                    <tr><td><strong>Mental Status</strong></td><td>Slightly anxious</td><td>Mildly anxious</td><td>Anxious, confused</td><td>Confused, lethargic</td></tr>
+                    <tr><td><strong>Fluid Replacement</strong></td><td>Crystalloid</td><td>Crystalloid</td><td>Blood + Crystalloid</td><td>Blood + Crystalloid</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            <div class="card triage-delayed" style="border: 2px solid #f59e0b;">
-              <div class="card-title" style="color: #f59e0b;">PRIORITY / CAT B (Within 4 Hours)</div>
-              <ul>
-                <li>Isolated open extremity fracture (bleeding controlled)</li>
-                <li>Casualty with tourniquet in place</li>
-                <li>Penetrating/serious eye injury</li>
-                <li>Significant soft tissue injury (no major bleeding)</li>
-                <li>Extremity injury with absent distal pulses</li>
-                <li>Burns 10-20% TBSA</li>
-              </ul>
-            </div>
-
-            <div class="card triage-minimal" style="border: 2px solid #22c55e;">
-              <div class="card-title" style="color: #22c55e;">ROUTINE / CAT C (Within 24 Hours)</div>
-              <ul>
-                <li>Concussion (mild TBI)</li>
-                <li>GSW to extremity (bleeding controlled, no TQ)</li>
-                <li>Minor soft tissue shrapnel injury</li>
-                <li>Closed fracture with intact distal pulses</li>
-                <li>Burns <10% TBSA</li>
-              </ul>
+            <div class="alert alert-info">
+              <strong>Note:</strong> These guidelines are for a 70kg adult. Individual responses may vary based on age, medications, and pre-existing conditions.
             </div>
           `
         },
         {
           id: 'tools-conversions',
-          title: 'Conversions',
+          title: 'Conversions & Vitals',
           content: `
             <div class="card">
               <div class="card-title">Weight Conversions</div>
@@ -1192,6 +1927,21 @@
                     <tr><td>125</td><td>21</td><td>31</td><td>125</td></tr>
                     <tr><td>150</td><td>25</td><td>37</td><td>150</td></tr>
                     <tr><td>200</td><td>33</td><td>50</td><td>200</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Normal Adult Vital Signs</div>
+              <div class="table-wrapper">
+                <table>
+                  <tbody>
+                    <tr><td><strong>Heart Rate</strong></td><td>60-100 bpm</td></tr>
+                    <tr><td><strong>Respiratory Rate</strong></td><td>12-20 breaths/min</td></tr>
+                    <tr><td><strong>Blood Pressure</strong></td><td>90-120 / 60-80 mmHg</td></tr>
+                    <tr><td><strong>SpO2</strong></td><td>95-100%</td></tr>
+                    <tr><td><strong>Temperature</strong></td><td>97.8-99.1°F (36.5-37.3°C)</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1276,7 +2026,7 @@
 
   let currentPhase = 'cuf';
   let currentSection = null;
-  const PHASES = ['cuf', 'tfc', 'tacevac', 'drugs', 'tools'];
+  const PHASES = ['cuf', 'tfc', 'tacevac', 'procedures', 'drugs', 'tools'];
 
   // ==========================================================================
   // Navigation
