@@ -1,65 +1,57 @@
 ---
-title: "TCCC Quick Reference"
-date: 2025-12-10
-description: "Tactical Combat Casualty Care protocols, drug dosages, MEDEVAC formats, and triage categories. Emergency medical reference based on CoTCCC Guidelines."
+title: "LF Medic - Procedures"
+date: 2025-12-11
+description: "TCCC phases (CUF, TFC, TACEVAC), MARCH-PAWS protocol, surgical procedures (Cric, NCD, Chest Tube, IO), triage, and field tools. Based on Ranger Medic Handbook 2019."
 icon: "first-aid"
-tags: ["medical", "reference", "emergency"]
-app_url: "/apps/tccc/"
+tags: ["medical", "reference", "emergency", "procedures"]
+app_url: "/apps/medic-procedures/"
 weight: 4
 ---
 
-The TCCC Quick Reference is a dedicated emergency medical app based on the Committee on Tactical Combat Casualty Care (CoTCCC) Guidelines. Designed for rapid access under stress with large text, high contrast, and clear decision trees.
+Light Fighter Medic - Procedures is a field medical reference covering TCCC phases and surgical procedures. Designed for combat medics and first responders with offline support, search functionality, and mobile optimization.
 
 <div class="tool-app">
-  <a href="/apps/tccc/" class="tool-launch-btn">Open TCCC Reference</a>
+  <a href="/apps/medic-procedures/" class="tool-launch-btn">Open Procedures App</a>
 </div>
 
 ## Phases of Care
 
-**Care Under Fire (CUF)** - Actions taken while still under effective hostile fire. Hemorrhage control with tourniquets.
+**Care Under Fire (CUF)** - Actions while under effective hostile fire. Hemorrhage control, tourniquet application, casualty movement.
 
 **Tactical Field Care (TFC)** - MARCH-PAWS protocol when no longer under direct fire. Comprehensive trauma assessment and treatment.
 
-**Tactical Evacuation Care (TACEVAC)** - En route care during evacuation to higher level facilities. Additional airway options and TBI management.
+**Tactical Evacuation Care (TACEVAC)** - En route care during evacuation. TBI management, reassessment, CPR considerations.
+
+## Procedures
+
+Step-by-step field procedures:
+
+- **Surgical Cricothyroidotomy** - Emergency surgical airway
+- **Needle Chest Decompression** - Tension pneumothorax treatment
+- **Finger Thoracostomy / Chest Tube** - Hemothorax management
+- **Intraosseous (IO) Access** - Vascular access when IV fails
+- **Peripheral IV / Saline Lock** - Standard vascular access
+- **Tourniquet Application & Conversion** - Hemorrhage control
+
+## Tools
+
+- **9-Line MEDEVAC** - Request format with precedence codes
+- **MIST Report** - Casualty handover format
+- **Triage Categories** - Immediate, Delayed, Minimal, Expectant
+- **Vitals & GCS** - Normal values and Glasgow Coma Scale
+- **Equipment NSNs** - CoTCCC recommended equipment
 
 ## Features
 
-**Phase-Based Navigation** - Quickly switch between CUF, TFC, and TACEVAC protocols.
-
-**Drug Quick Reference** - Complete dosing for pain management, antibiotics, TXA, and reversal agents.
-
-**MEDEVAC Tools** - 9-Line request format, MIST report structure, and evacuation precedence categories.
-
-**Triage Categories** - Immediate, Delayed, Minimal, and Expectant with visual indicators.
-
-**Works Offline** - Full offline support after first load. Critical for field use.
-
-## MARCH-PAWS Protocol
-
-The TFC section follows the MARCH-PAWS assessment sequence:
-
-- **M** - Massive Hemorrhage
-- **A** - Airway
-- **R** - Respiration
-- **C** - Circulation
-- **H** - Hypothermia / Head Injury
-- **P** - Pain Management
-- **A** - Antibiotics
-- **W** - Wounds
-- **S** - Splinting
-
-## Drug Reference
-
-Quick access to dosing for:
-
-- Acetaminophen and Meloxicam (mild pain)
-- OTFC / Fentanyl (moderate-severe, not in shock)
-- Ketamine (moderate-severe, in shock)
-- Moxifloxacin and Ertapenem (antibiotics)
-- Tranexamic Acid (TXA) for hemorrhage
-- Ondansetron for nausea
-- Naloxone for opioid reversal
+- **Search** - Find procedures, protocols, and equipment quickly
+- **Back Button** - Navigate back to apps index
+- **Swipe Navigation** - Switch phases with swipe gestures
+- **Works Offline** - Full offline support after first load
 
 ## Source
 
-Based on CoTCCC Guidelines (31 JAN 2017) and the TCCC Quick Reference Guide, First Edition.
+Based on Ranger Medic Handbook 2019 and CoTCCC Guidelines.
+
+## Related
+
+See also: [LF Medic - Pharmacology](/tools/medic-pharmacology/) for drug dosages, K9 medications, and shock classification.
