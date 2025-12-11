@@ -566,24 +566,27 @@
       }
     }
 
-    /* Mobile Optimizations */
+    /* Mobile Optimizations - Combat Medic Friendly */
     @media (max-width: 600px) {
       html {
-        font-size: 16px;
+        font-size: 18px; /* Keep readable under stress */
+      }
+
+      .header {
+        padding: 0.5rem 0.75rem;
+      }
+
+      .logo {
+        font-size: 1rem;
       }
 
       .phase-nav {
-        padding: 0.5rem;
-      }
-
-      .phase-btn {
-        min-width: 80px;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.75rem;
+        display: none; /* Hide top nav on mobile, use bottom nav */
       }
 
       .main {
         padding: 0.75rem;
+        padding-bottom: 6rem; /* Space for bottom nav */
       }
 
       .card {
@@ -591,11 +594,124 @@
       }
 
       .section-title {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
       }
 
       .march-letter {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
+      }
+
+      /* Larger touch targets for gloved hands - minimum 48px */
+      .btn {
+        min-height: 52px;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .subsection-btn {
+        min-height: 48px;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .checklist-item {
+        min-height: 56px;
+        padding: 1rem;
+      }
+
+      .checklist-box {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .form-input, .form-select, .form-textarea {
+        min-height: 52px;
+        font-size: 1.1rem;
+      }
+
+      /* High contrast text for bright conditions */
+      .card {
+        background: #1f1f1f;
+        border-color: #444;
+      }
+
+      td {
+        color: var(--text-primary); /* White instead of gray */
+      }
+
+      .section-subtitle {
+        color: var(--text-primary);
+      }
+
+      /* Drug doses extra prominent */
+      .drug-dose {
+        font-size: 1.15rem;
+        padding: 1rem;
+        background: #1a2e1a;
+        border-left: 4px solid var(--success);
+      }
+
+      /* Alert boxes more visible */
+      .alert {
+        padding: 1.25rem;
+        font-size: 1rem;
+      }
+
+      .alert-critical {
+        background: rgba(220, 38, 38, 0.25);
+        border-width: 3px;
+      }
+    }
+
+    /* Landscape mode on mobile */
+    @media (max-width: 900px) and (orientation: landscape) {
+      html {
+        font-size: 16px;
+      }
+
+      .header {
+        padding: 0.4rem 0.75rem;
+      }
+
+      .phase-nav {
+        display: flex;
+        padding: 0.25rem 0.5rem;
+      }
+
+      .phase-btn {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.75rem;
+        min-width: 70px;
+      }
+
+      .bottom-nav {
+        display: none; /* Use top nav in landscape */
+      }
+
+      .main {
+        padding: 0.5rem 1rem;
+        padding-bottom: 1rem;
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
+      }
+
+      .section-header {
+        margin-bottom: 0.75rem;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .card {
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      /* Two column layout in landscape for cards */
+      .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 

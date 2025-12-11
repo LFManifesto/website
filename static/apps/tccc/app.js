@@ -1276,6 +1276,7 @@
 
   let currentPhase = 'cuf';
   let currentSection = null;
+  const PHASES = ['cuf', 'tfc', 'tacevac', 'drugs', 'tools'];
 
   // ==========================================================================
   // Navigation
@@ -1301,8 +1302,54 @@
     // Handle hash changes
     window.addEventListener('hashchange', handleHashChange);
 
+    // Initialize swipe navigation
+    initSwipeNavigation();
+
     // Initial load
     handleHashChange();
+  }
+
+  // ==========================================================================
+  // Swipe Navigation (Mobile)
+  // ==========================================================================
+
+  function initSwipeNavigation() {
+    const main = document.getElementById('mainContent');
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    const minSwipeDistance = 80;
+    const maxVerticalMovement = 100;
+
+    main.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    main.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = Math.abs(touchEndY - touchStartY);
+
+      // Only trigger if horizontal swipe is significant and vertical movement is minimal
+      if (Math.abs(deltaX) > minSwipeDistance && deltaY < maxVerticalMovement) {
+        const currentIndex = PHASES.indexOf(currentPhase);
+
+        if (deltaX < 0 && currentIndex < PHASES.length - 1) {
+          // Swipe left - next phase
+          setPhase(PHASES[currentIndex + 1]);
+        } else if (deltaX > 0 && currentIndex > 0) {
+          // Swipe right - previous phase
+          setPhase(PHASES[currentIndex - 1]);
+        }
+      }
+    }
   }
 
   function setPhase(phase) {

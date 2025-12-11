@@ -3,7 +3,7 @@
  * Provides offline support for emergency medical reference
  */
 
-const CACHE_NAME = 'tccc-v1';
+const CACHE_NAME = 'tccc-v2';
 const ASSETS = [
   '/apps/tccc/',
   '/apps/tccc/index.html',
