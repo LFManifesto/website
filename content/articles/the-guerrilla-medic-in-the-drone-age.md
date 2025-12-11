@@ -13,7 +13,7 @@ draft: false
 
 Hannibal Barca lost half his army crossing the Alps. Elephants. Horses. Men frozen solid in mountain passes or tumbled off cliff faces into rivers nobody bothered to name. The survivors stumbled into Italy in 218 BC carrying frostbite, dysentery, and the kind of thousand-yard stare that would not get a clinical name for another two thousand years.
 
-What kept that broken army fighting was not Roman charity. It was Carthaginian medics who understood something most commanders still fail to grasp: an army's capacity to absorb punishment determines how long it stays in the fight. Hannibal's obsessive attention to medical sustainment let him terrorize Rome for sixteen years without a single reinforcement from home.
+Roman charity did not keep that broken army fighting. Carthaginian medics did. They understood something most commanders still fail to grasp: an army's capacity to absorb punishment determines how long it stays in the fight. Hannibal's obsessive attention to medical sustainment let him terrorize Rome for sixteen years without a single reinforcement from home.
 
 The guerrilla medic is not a new idea. The technology just keeps evolving around it.
 
@@ -21,7 +21,7 @@ In Light Fighter Manifesto Volume III, disruptor_26 ([@Sentinel_Society](https:/
 
 That was late 2023. Since then, Ukraine has stress-tested every assumption Western militaries held about battlefield medicine. Some held up. Most did not.
 
-What follows is an expansion of disruptor_26's original work, updated for the realities heading into 2026.
+This article expands on disruptor_26's original work, updated for the realities heading into 2026.
 
 ---
 
@@ -97,7 +97,7 @@ Ukraine has documented widespread tourniquet mismanagement. Devices slapped on w
 
 Limbs amputated that did not need to be. Soldiers who survived the bullet but not the treatment.
 
-Part of it is training compression. Four weeks does not leave room for nuance. Part of it is operational tempo. When drones circle overhead and artillery walks in, the finer points of tourniquet conversion become academic real fast.
+Part of it is training compression. Four weeks does not leave room for nuance. Part of it is operational tempo. When drones circle overhead and artillery walks in, the finer points of tourniquet conversion become academic quickly.
 
 Part of it is equipment. Early in the war, cheap Chinese tourniquets flooded Ukrainian supply chains. They snapped under tension. They failed in the cold. Soldiers bled out because someone saved money on a fifteen-dollar piece of kit.
 
@@ -143,7 +143,7 @@ The "deep neural network oriented microcomputer" he said would "save lives in th
 
 ## Setting Up Shop in the Apocalypse
 
-The original Volume III article dedicated serious space to clinic construction. Size. Resources. Breakdown time. Camouflage. disruptor_26 asked the critical question: "How good can you hide your medical box and clinic?"
+The original Volume III article dedicated serious space to clinic construction. Size. Resources. Breakdown time. Camouflage. disruptor_26 asked the critical question: "How well can you hide your medical box and clinic?"
 
 Those principles have not changed. The operational environment just made them mandatory.
 

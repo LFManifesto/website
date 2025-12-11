@@ -1,7 +1,7 @@
 ---
 title: "Quick Kill: Rapid Engagement Techniques for Snipers"
 date: 2025-12-05
-description: "The ghillie-clad sniper feeding ticks in a woodline for three days is becoming extinct. What replaces him is faster, closer, and integrated with the assault element."
+description: "The ghillie-clad sniper feeding ticks in a woodline for three days is becoming extinct. His replacement is faster, closer, and integrated with the assault element."
 author: "LFM"
 tags: ["Marksmanship", "Sniper", "Tactics", "Training", "Ukraine", "Urban Operations"]
 ---
@@ -26,7 +26,7 @@ The sniper who low-crawls into a hide and waits for days still exists. He is jus
 
 In Ukraine, drones account for eighty percent of tactical casualties. The battlefield is transparent from above, saturated with cheap quadcopters and cheaper munitions. A ghillie suit that defeats the human eye does nothing against thermal imaging at 400 meters altitude. The three-day hide gets spotted in three hours. Then the artillery comes.
 
-N. wrote about assault snipers in the context of direct action raids and hostage rescue. The 75th Ranger Regiment's sniper platoon developed much of the Sniper and Observation Team doctrine during the Global War on Terror. The United States premier direct action unit built thirty years of success around integrating snipers into assault elements rather than parking them in distant woodlines.
+N. wrote about assault snipers in the context of direct action raids and hostage rescue. The 75th Ranger Regiment's sniper platoon developed much of the Sniper and Observation Team doctrine during the Global War on Terror. The United States' premier direct action unit built thirty years of success around integrating snipers into assault elements rather than parking them in distant woodlines.
 
 That doctrine is spreading because it has to. The environment demands it.
 
@@ -56,7 +56,7 @@ The sniper is not watching from a hilltop. The sniper is in the stack.
 
 Designated marksmen are organic at squad level, carrying weapons that share caliber and magazine compatibility with everyone else. They extend the squad's range. They are riflemen with better glass.
 
-Assault snipers carry sniper-specific weapons. N. listed the options: "shorter 14.5" SR25's or Scar 17's to longer 20" SR25's, and all the way to magnum caliber bolt action rifles."
+Assault snipers carry sniper-specific weapons. N. listed the options: "shorter 14.5" SR25s or Scar 17s to longer 20" SR25s, and all the way to magnum caliber bolt action rifles."
 
 The caliber distinction matters because SNOT frequently shoots through barriers. Windows. Plexiglass. Auto glass. A 5.56 deflects. A .308 punches through. N. noted that "over hundreds of different engagements, the average engagement for the assault sniper will occur between 30 m and 500 m."
 
@@ -76,7 +76,7 @@ Using an AB Kestrel and mission-specific data, the sniper compiles ballistic inf
 The sniper anticipates that 400 yards would be their longest engagement.
 
 <div class="data-grid">
-<dt>Hold for 400 yard target</dt><dd>2.3 Mils</dd>
+<dt>Hold for 400-yard target</dt><dd>2.3 Mils</dd>
 <dt>Hold for 200 yards (Max Ordinate)</dt><dd>0.6 Mils</dd>
 </div>
 
@@ -84,7 +84,7 @@ These two values tell the sniper precisely where the bullet is at its maximum or
 
 <div class="equation">2.3 – 0.6 = 1.7 Mils</div>
 
-If the sniper is shooting at a target at 400 yards, their line of sight in the scope is `2.3 Mils`. At the highest point in the flight of that shot (200 yards) the bullet is at `0.6 Mils` in the scope. That equates to being `1.7 Mils` above the line of sight.
+If the sniper is shooting at a target at 400 yards, their line of sight in the scope is `2.3 Mils`. At the highest point in the flight of that shot (200 yards) the bullet is at `0.6 Mils` in the scope. That places the bullet `1.7 Mils` above the line of sight.
 
 <div class="equation result">1.7 Mils × 3.937 × 2.0 = 13.4 Inches</div>
 
@@ -109,11 +109,11 @@ The traditional method for wind calls: read the vegetation, read the mirage, est
 
 It works. It also takes time you might not have.
 
-Target width in wind reframes the question. Instead of asking how fast is the wind, ask how much wind error can you tolerate and still hit.
+Target width in wind reframes the question. Instead of asking how fast the wind is, ask how much wind error you can tolerate and still hit.
 
 {{< wind-width >}}
 
-At 400 yards, your target is 14 mph wide. You can misjudge the wind by that much, hold the upwind edge, and still put the round somewhere on the torso. At 800, the target is 3 mph wide. The margin shrinks fast.
+At 400 yards, your target is 14 mph wide. You can misjudge the wind by that much, hold the upwind edge, and still put the round somewhere on the torso. At 800 yards, the target is 3 mph wide. The margin shrinks fast.
 
 This is not a wind call technique. It is risk assessment. You read conditions, estimate velocity, favor the upwind edge, then ask: is my margin wide enough to cover my uncertainty?
 
@@ -127,7 +127,7 @@ These techniques layer with SNOT doctrine.
 
 Danger space handles the known AO. One hold, beltline, everything from muzzle to max range. The sniper dials 2.3 mils before stepping off and does not touch the turret again until the assault is over.
 
-Wind width runs underneath. The margins are already known from the table. At 400 yards, 14 mph of error is acceptable. At 800, three. When conditions look like a 5 mph crosswind, the sniper knows instantly whether the shot is a gamble or a certainty.
+Wind width runs underneath. The margins are already known from the table. At 400 yards, 14 mph of error is acceptable. At 800 yards, three. When conditions look like a 5 mph crosswind, the sniper knows instantly whether the shot is a gamble or a certainty.
 
 The SNOT role integrates both. During infiltration, security with pre-calculated holds. Prior to breach, observation and instant response capability. During assault, shooting through windows at threats the assaulters cannot reach. Post-assault, isolation of the objective with inverted fields of fire.
 

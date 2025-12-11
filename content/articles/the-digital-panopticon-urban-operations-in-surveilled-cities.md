@@ -158,7 +158,7 @@ Municipal infrastructure records are often available through FOIA requests. City
 
 ## Becoming Invisible in Plain Sight
 
-The man who stepped off the MARTA train at Five Points at 2:47 p.m. on a Tuesday had studied, for three weeks before his arrival, what people in Atlanta actually wear.
+The man who stepped off the MARTA train at Five Points at 2:47 p.m. on a Tuesday had studied what people in Atlanta actually wear. He spent three weeks on the research before his arrival.
 
 He used Google Street View to examine pedestrians frozen in time on Peachtree Street, on Auburn Avenue, in the parking lots of shopping centers in Buckhead. He scrolled through Instagram posts geotagged to the neighborhoods he planned to move through.
 
