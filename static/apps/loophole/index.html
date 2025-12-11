@@ -34,6 +34,32 @@
             color: #ef4444; /* red-500 */
             border-bottom-color: #ef4444;
         }
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container { padding: 0.5rem !important; }
+            h1 { font-size: 1.75rem !important; }
+            .glass-effect { padding: 1rem !important; }
+            input[type="number"] {
+                font-size: 16px !important; /* Prevents iOS zoom */
+                min-height: 48px;
+            }
+            .tab {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.8rem;
+                min-height: 48px;
+            }
+            #goNoGoResult, #goNoGoText { font-size: 1.5rem !important; }
+            #aimPointRecommendation { font-size: 1rem !important; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem !important; }
+            .tab { font-size: 0.7rem; padding: 0.5rem 0.25rem; }
+            canvas { max-height: 300px; }
+        }
+        /* Touch-friendly inputs */
+        input, button, .tab {
+            -webkit-tap-highlight-color: transparent;
+        }
     </style>
 </head>
 <body class="text-white antialiased">

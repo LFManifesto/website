@@ -28,6 +28,40 @@
         .strategy-step { color: #a78bfa; }
         .copy-btn { cursor: pointer; opacity: 0.6; transition: opacity 0.2s; }
         .copy-btn:hover { opacity: 1; }
+        /* Mobile optimizations */
+        @media (max-width: 1024px) {
+            .grid.lg\\:grid-cols-3 { grid-template-columns: 1fr; }
+            .lg\\:col-span-2 { grid-column: span 1; }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.5rem !important; }
+            .tool-tab {
+                padding: 0.5rem;
+                font-size: 0.75rem;
+                min-height: 48px;
+            }
+            .tool-tab i { margin-right: 0.25rem !important; }
+            #browser-input, #shodan-input {
+                font-size: 16px !important;
+                min-height: 44px;
+            }
+            #browser-output, #shodan-output, #strategy-output {
+                height: 20rem !important;
+                font-size: 0.8rem;
+            }
+            .panel { padding: 0.75rem; }
+            textarea { font-size: 14px; height: 10rem !important; }
+            .tutorial-step { padding: 0.75rem !important; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.25rem !important; }
+            .tool-tab { font-size: 0.65rem; }
+            .tool-tab i { display: none; }
+        }
+        /* Touch-friendly */
+        button, input, textarea {
+            -webkit-tap-highlight-color: transparent;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-4">
