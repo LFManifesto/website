@@ -13,6 +13,7 @@ theme = 'lfm'
 # Site description for SEO
 [params]
   description = "A veteran-owned publication delivering field-tested knowledge on intelligence gathering, communications infrastructure, and unconventional operations."
+  keywords = "tactical field guide, veteran owned, unconventional warfare, OSINT, mesh networking, drones, FPV, counter-surveillance, tradecraft, communications, SIGINT, electronic warfare, Reticulum, privacy"
   author = "Light Fighter Manifesto L.L.C."
   tagline = "Unfiltered. Uncensored. Unconventional."
 
@@ -22,9 +23,10 @@ theme = 'lfm'
   matrix = "https://matrix.to/#/#General:matrix.lightfightermanifesto.net"
   instagram = "https://www.instagram.com/light_fighter_manifesto/"
   tiktok = "https://www.tiktok.com/@lfmanifesto"
+  twitter = "lfmanifesto"
 
   # Social sharing image (for og:image and twitter:image)
-  ogimage = "/images/og-image.png"
+  ogimage = "images/og-image.png"
 
   # Payment info (used on shop page)
   monero_address = "84mtLpJmncKRp5TsRv9xC3Xx8KmSXvoKuJ5PduNqPM4MR2cj44hnYsc6VGJ6St7WwvHQAM4jnHJ1HD255ALeiazeNz9w4Mo"

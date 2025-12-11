@@ -1,6 +1,34 @@
 {{ define "main" }}
 <h1 class="page-title-centered">Shop</h1>
 
+<!-- Product Schema for SEO -->
+{{ range .Pages }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Light Fighter Manifesto {{ .Title }}",
+  "description": "{{ .Description }}",
+  "brand": {
+    "@type": "Organization",
+    "name": "Light Fighter Manifesto"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ .Params.mixam_url }}",
+    "priceCurrency": "USD",
+    "price": "{{ .Params.price }}",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "Light Fighter Manifesto L.L.C."
+    }
+  }{{ with .Params.cover }},
+  "image": "{{ site.BaseURL }}{{ strings.TrimPrefix "/" . }}"{{ end }}
+}
+</script>
+{{ end }}
+
 <!-- Products -->
 <div class="shop-products">
   {{ range .Pages }}
