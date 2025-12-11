@@ -29,9 +29,19 @@ Light Fighter Manifesto is a veteran-owned publication focused on practical know
 In-depth articles on tactical and technical subjects. NYT-style long-form journalism with original research and analysis.
 
 ### Web Applications
-Interactive tools designed for desktop and tablet use:
+Interactive tools optimized for desktop, tablet, and mobile:
 
 - **[Light Fighter Guide](https://lightfightermanifesto.org/apps/field-guide/)** - Comprehensive field reference PWA covering drones, communications, SIGINT, marksmanship, and mission planning with 9 interactive calculators
+- **[TCCC Quick Reference](https://lightfightermanifesto.org/apps/tccc/)** - Tactical Combat Casualty Care protocols based on CoTCCC Guidelines. MARCH-PAWS, drug dosages, MEDEVAC 9-line, triage categories. Optimized for field use with offline support.
+
+### Training Simulators
+Interactive scenario-based training tools:
+
+- **Mission Feasibility** - GO/NO-GO decision trainer using METAR, NOTAM, and ADS-B data
+- **OSINT Simulator** - WiGLE and Shodan data analysis practice
+- **OSINT Tutorial** - Google Dorks and Shodan command training
+- **RF Site Assessment** - Drone launch site RF environment evaluation
+- **Loophole Calculator** - Sniper loophole clearance with reticle visualization
 
 ### Podcast
 Audio content discussing tactics, technology, and unconventional warfare.
@@ -193,7 +203,13 @@ site/
 │   └── tools/             # Tools/Apps listings
 ├── static/
 │   ├── apps/              # Web applications
-│   │   └── field-guide/   # Light Fighter Guide PWA
+│   │   ├── field-guide/   # Light Fighter Guide PWA
+│   │   ├── tccc/          # TCCC Quick Reference PWA
+│   │   ├── Air_TM_Sim/    # Mission feasibility trainer
+│   │   ├── Network_Sim/   # OSINT simulator
+│   │   ├── OSINT/         # OSINT tutorial
+│   │   ├── RF_Sim/        # RF site assessment
+│   │   └── loophole/      # Loophole calculator
 │   ├── images/            # Site images
 │   └── keys/              # PGP keys
 └── themes/lfm/            # Custom Hugo theme
