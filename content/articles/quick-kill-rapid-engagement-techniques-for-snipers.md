@@ -1,6 +1,6 @@
 ---
 title: "Quick Kill: Rapid Engagement Techniques for Snipers"
-date: 2025-12-11
+date: 2025-12-05
 description: "The ghillie-clad sniper feeding ticks in a woodline for three days is becoming extinct. What replaces him is faster, closer, and integrated with the assault element."
 author: "LFM"
 tags: ["Marksmanship", "Sniper", "Tactics", "Training", "Ukraine", "Urban Operations"]
