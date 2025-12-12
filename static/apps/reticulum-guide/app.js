@@ -1,8 +1,8 @@
 /**
  * Reticulum Field Reference
- * Version 3.1 - Dec 12, 2025
+ * Version 3.2 - Dec 12, 2025
  * Added: HF Propagation Calculator, NomadNet Pages, GitHub Repos, Navigation buttons
- * Updated: All transport nodes verified from live rnstatus
+ * Updated: Manual solar input, clickable URLs, all transport nodes verified
  */
 
 (function() {
@@ -449,27 +449,27 @@
         { type: 'heading', level: 3, text: 'Official Reticulum Repositories' },
         { type: 'paragraph', text: 'All official Reticulum software is maintained by Mark Qvist on GitHub.' },
         { type: 'table', headers: ['Repository', 'Description', 'URL'], rows: [
-          ['<strong>Reticulum</strong>', 'Core networking stack', 'github.com/markqvist/Reticulum'],
-          ['<strong>NomadNet</strong>', 'Terminal messaging client', 'github.com/markqvist/NomadNet'],
-          ['<strong>Sideband</strong>', 'Graphical messaging client', 'github.com/markqvist/Sideband'],
-          ['<strong>LXMF</strong>', 'Messaging protocol', 'github.com/markqvist/LXMF'],
-          ['<strong>RNode</strong>', 'LoRa hardware firmware', 'github.com/markqvist/RNode_Firmware'],
-          ['<strong>LoRaMon</strong>', 'LoRa traffic monitor', 'github.com/markqvist/LoRaMon']
+          ['<strong>Reticulum</strong>', 'Core networking stack', '<a href="https://github.com/markqvist/Reticulum" target="_blank" rel="noopener">github.com/markqvist/Reticulum</a>'],
+          ['<strong>NomadNet</strong>', 'Terminal messaging client', '<a href="https://github.com/markqvist/NomadNet" target="_blank" rel="noopener">github.com/markqvist/NomadNet</a>'],
+          ['<strong>Sideband</strong>', 'Graphical messaging client', '<a href="https://github.com/markqvist/Sideband" target="_blank" rel="noopener">github.com/markqvist/Sideband</a>'],
+          ['<strong>LXMF</strong>', 'Messaging protocol', '<a href="https://github.com/markqvist/LXMF" target="_blank" rel="noopener">github.com/markqvist/LXMF</a>'],
+          ['<strong>RNode</strong>', 'LoRa hardware firmware', '<a href="https://github.com/markqvist/RNode_Firmware" target="_blank" rel="noopener">github.com/markqvist/RNode_Firmware</a>'],
+          ['<strong>LoRaMon</strong>', 'LoRa traffic monitor', '<a href="https://github.com/markqvist/LoRaMon" target="_blank" rel="noopener">github.com/markqvist/LoRaMon</a>']
         ]},
         { type: 'heading', level: 3, text: 'Documentation' },
         { type: 'list', items: [
-          '<strong>Reticulum Manual:</strong> markqvist.github.io/Reticulum/manual/',
-          '<strong>API Reference:</strong> markqvist.github.io/Reticulum/reference.html',
-          '<strong>NomadNet Guide:</strong> github.com/markqvist/NomadNet/blob/master/README.md'
+          '<strong>Reticulum Manual:</strong> <a href="https://markqvist.github.io/Reticulum/manual/" target="_blank" rel="noopener">markqvist.github.io/Reticulum/manual/</a>',
+          '<strong>API Reference:</strong> <a href="https://markqvist.github.io/Reticulum/reference.html" target="_blank" rel="noopener">markqvist.github.io/Reticulum/reference.html</a>',
+          '<strong>NomadNet Guide:</strong> <a href="https://github.com/markqvist/NomadNet/blob/master/README.md" target="_blank" rel="noopener">github.com/markqvist/NomadNet README</a>'
         ]},
         { type: 'heading', level: 3, text: 'LFManifesto Repositories' },
         { type: 'paragraph', text: 'Light Fighter Manifesto maintains several Reticulum-related projects:' },
         { type: 'table', headers: ['Repository', 'Description', 'URL'], rows: [
-          ['<strong>LXMFMonero</strong>', 'Monero transactions over LXMF/Reticulum mesh - off-grid cryptocurrency via radio', 'github.com/LFManifesto/LXMFMonero'],
-          ['<strong>ReticulumHF</strong>', 'Encrypted communication over HF radio using Reticulum and FreeDV digital modes', 'github.com/LFManifesto/ReticulumHF'],
-          ['<strong>website</strong>', 'Light Fighter Manifesto official website source', 'github.com/LFManifesto/website']
+          ['<strong>LXMFMonero</strong>', 'Monero transactions over LXMF/Reticulum mesh - off-grid cryptocurrency via radio', '<a href="https://github.com/LFManifesto/LXMFMonero" target="_blank" rel="noopener">github.com/LFManifesto/LXMFMonero</a>'],
+          ['<strong>ReticulumHF</strong>', 'Encrypted communication over HF radio using Reticulum and FreeDV digital modes', '<a href="https://github.com/LFManifesto/ReticulumHF" target="_blank" rel="noopener">github.com/LFManifesto/ReticulumHF</a>'],
+          ['<strong>website</strong>', 'Light Fighter Manifesto official website source', '<a href="https://github.com/LFManifesto/website" target="_blank" rel="noopener">github.com/LFManifesto/website</a>']
         ]},
-        { type: 'info', title: 'Contributing', text: 'LFManifesto accepts contributions via GitHub pull requests. See the Projects page at lightfightermanifesto.org/projects/ for bounty information and contribution guidelines.' },
+        { type: 'info', title: 'Contributing', text: 'LFManifesto accepts contributions via GitHub pull requests. See the <a href="https://lightfightermanifesto.org/projects/" target="_blank" rel="noopener">Projects page</a> for bounty information and contribution guidelines.' },
         { type: 'heading', level: 3, text: 'Community Resources' },
         { type: 'list', items: [
           '<strong>Matrix:</strong> #reticulum:matrix.org (Official)',
@@ -520,9 +520,9 @@
         { type: 'code', text: '# Add user to dialout group\nsudo usermod -a -G dialout $USER\n\n# Log out and back in for changes to take effect' },
         { type: 'heading', level: 3, text: 'Getting Help' },
         { type: 'list', items: [
-          '<strong>Reticulum Manual:</strong> markqvist.github.io/Reticulum/manual/',
-          '<strong>GitHub Issues:</strong> github.com/markqvist/Reticulum/issues',
-          '<strong>Matrix:</strong> #reticulum:matrix.org'
+          '<strong>Reticulum Manual:</strong> <a href="https://markqvist.github.io/Reticulum/manual/" target="_blank" rel="noopener">markqvist.github.io/Reticulum/manual/</a>',
+          '<strong>GitHub Issues:</strong> <a href="https://github.com/markqvist/Reticulum/issues" target="_blank" rel="noopener">github.com/markqvist/Reticulum/issues</a>',
+          '<strong>Matrix:</strong> <a href="https://matrix.to/#/#reticulum:matrix.org" target="_blank" rel="noopener">#reticulum:matrix.org</a>'
         ]}
       ]
     }
@@ -962,8 +962,30 @@
 
       <div class="content-card">
         <h3>Solar Conditions</h3>
-        <div id="solarStatus" class="calc-result">
-          <div class="result-label">Loading solar data from HamQSL...</div>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Enter current values from <a href="https://www.hamqsl.com/solar.html" target="_blank" rel="noopener" style="color: var(--accent);">hamqsl.com/solar.html</a></p>
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label>Solar Flux Index (SFI)</label>
+            <input type="number" id="solarFlux" value="150" min="50" max="300" step="1">
+          </div>
+          <div class="calc-field">
+            <label>K-Index</label>
+            <select id="kIndex">
+              <option value="0">0 - Quiet</option>
+              <option value="1">1 - Quiet</option>
+              <option value="2">2 - Unsettled</option>
+              <option value="3" selected>3 - Unsettled</option>
+              <option value="4">4 - Active</option>
+              <option value="5">5 - Minor Storm</option>
+              <option value="6">6 - Moderate Storm</option>
+              <option value="7">7 - Strong Storm</option>
+              <option value="8">8 - Severe Storm</option>
+              <option value="9">9 - Extreme Storm</option>
+            </select>
+          </div>
+        </div>
+        <div id="conditionAssessment" class="calc-result" style="margin-top: 1rem;">
+          <div class="result-value" style="color: var(--accent-green)">GOOD - Favorable propagation</div>
         </div>
       </div>
 
@@ -1027,53 +1049,22 @@
   }
 
   function initHFProp() {
-    // Fetch solar data
-    fetchSolarData();
+    // Update condition assessment when solar values change
+    const sfInput = document.getElementById('solarFlux');
+    const kInput = document.getElementById('kIndex');
+
+    function updateConditionDisplay() {
+      const sf = parseFloat(sfInput.value) || 100;
+      const k = parseInt(kInput.value) || 3;
+      const condition = assessConditions(sf, k);
+      document.getElementById('conditionAssessment').innerHTML =
+        `<div class="result-value" style="color: ${condition.color}">${condition.text}</div>`;
+    }
+
+    sfInput.addEventListener('input', updateConditionDisplay);
+    kInput.addEventListener('change', updateConditionDisplay);
 
     document.getElementById('hfCalcBtn').addEventListener('click', calculateHFProp);
-  }
-
-  function fetchSolarData() {
-    const solarDiv = document.getElementById('solarStatus');
-
-    // Use a CORS proxy or fallback to defaults
-    fetch('https://www.hamqsl.com/solarxml.php')
-      .then(response => response.text())
-      .then(xmlText => {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(xmlText, 'text/xml');
-        const solar = xml.querySelector('solardata');
-
-        if (solar) {
-          const solarFlux = solar.querySelector('solarflux')?.textContent || 'N/A';
-          const kIndex = solar.querySelector('kindex')?.textContent || 'N/A';
-          const aIndex = solar.querySelector('aindex')?.textContent || 'N/A';
-          const updated = solar.querySelector('updated')?.textContent || 'Unknown';
-
-          window.hfSolarData = {
-            solarFlux: parseFloat(solarFlux) || 100,
-            kIndex: parseFloat(kIndex) || 3
-          };
-
-          const condition = assessConditions(window.hfSolarData.solarFlux, window.hfSolarData.kIndex);
-
-          solarDiv.innerHTML = `
-            <div class="result-label">Updated: ${updated}</div>
-            <div class="result-label">Solar Flux: ${solarFlux} | K-index: ${kIndex} | A-index: ${aIndex}</div>
-            <div class="result-value" style="color: ${condition.color}">${condition.text}</div>
-          `;
-        } else {
-          throw new Error('Invalid XML');
-        }
-      })
-      .catch(() => {
-        window.hfSolarData = { solarFlux: 100, kIndex: 3 };
-        solarDiv.innerHTML = `
-          <div class="result-label">Unable to fetch live data. Using defaults:</div>
-          <div class="result-label">Solar Flux: 100 | K-index: 3</div>
-          <div class="result-value" style="color: var(--accent-yellow)">FAIR - Normal conditions (estimated)</div>
-        `;
-      });
   }
 
   function assessConditions(sf, k) {
@@ -1132,7 +1123,10 @@
     const midLon = (txPos.lon + rxPos.lon) / 2;
     const localHour = (utcHour + Math.round(midLon / 15) + 24) % 24;
 
-    const solar = window.hfSolarData || { solarFlux: 100, kIndex: 3 };
+    const solar = {
+      solarFlux: parseFloat(document.getElementById('solarFlux').value) || 100,
+      kIndex: parseInt(document.getElementById('kIndex').value) || 3
+    };
 
     // Path details
     document.getElementById('pathDetails').innerHTML = `
