@@ -579,18 +579,32 @@
   // ==========================================================================
 
   function loadData() {
-    state.sections = sectionData;
-    state.tools = toolsData;
-    initializeApp();
+    try {
+      console.log('[RNS Guide] Loading data...');
+      state.sections = sectionData;
+      state.tools = toolsData;
+      console.log('[RNS Guide] Sections:', state.sections.length, 'Tools:', state.tools.length);
+      initializeApp();
+    } catch (e) {
+      console.error('[RNS Guide] loadData error:', e);
+      document.getElementById('contentArea').innerHTML = '<div style="padding:2rem;color:#c92a2a;">Error loading guide: ' + e.message + '</div>';
+    }
   }
 
   function initializeApp() {
-    buildSidebar();
-    initSearch();
-    initMobileMenu();
-    initKeyboardShortcuts();
-    initOfflineIndicator();
-    handleInitialRoute();
+    try {
+      console.log('[RNS Guide] Initializing app...');
+      buildSidebar();
+      initSearch();
+      initMobileMenu();
+      initKeyboardShortcuts();
+      initOfflineIndicator();
+      handleInitialRoute();
+      console.log('[RNS Guide] App initialized successfully');
+    } catch (e) {
+      console.error('[RNS Guide] initializeApp error:', e);
+      document.getElementById('contentArea').innerHTML = '<div style="padding:2rem;color:#c92a2a;">Error initializing: ' + e.message + '</div>';
+    }
   }
 
   function handleInitialRoute() {
