@@ -1,6 +1,8 @@
 /**
  * Reticulum Field Reference
- * Version 2.1 - Following Field Guide pattern
+ * Version 3.0 - Dec 12, 2025
+ * Added: NomadNet Pages, GitHub Repos, Navigation buttons
+ * Updated: All transport nodes verified from live rnstatus
  */
 
 (function() {
@@ -250,14 +252,74 @@
         { type: 'paragraph', text: 'After connecting to the testnet, try visiting these nodes:' },
         { type: 'table', headers: ['Node', 'Address Hash'], rows: [
           ['Dublin Hub', '<code>abb3ebcd03cb2388a838e70c001291f9</code>'],
-          ['Frankfurt Hub', '<code>ea6a715f814bdc37e56f80c34da6ad51</code>']
+          ['Frankfurt Hub', '<code>ea6a715f814bdc37e56f80c34da6ad51</code>'],
+          ['Light Fighter Manifesto', '<code>2eabad04f9145d32a6a3eda285d66c39</code>']
         ]},
         { type: 'paragraph', text: 'Use <code>Ctrl+G</code> and paste an address to visit.' }
       ]
     },
     {
-      id: 'sideband',
+      id: 'nomadnet-pages',
       number: '6',
+      title: 'NomadNet Pages',
+      icon: 'file',
+      description: 'Build dynamic pages for your NomadNet node.',
+      content: [
+        { type: 'heading', level: 3, text: 'What are NomadNet Pages?' },
+        { type: 'paragraph', text: 'NomadNet pages are micron-formatted (.mu) files that create browsable content on your node. Pages can be static text or dynamic Python scripts that pull live data from APIs, run shell commands, or interact with users.' },
+        { type: 'heading', level: 4, text: 'Page Locations' },
+        { type: 'table', headers: ['Type', 'Directory'], rows: [
+          ['Pages', '<code>~/.nomadnetwork/storage/pages/</code>'],
+          ['Files (downloads)', '<code>~/.nomadnetwork/storage/files/</code>']
+        ]},
+        { type: 'heading', level: 3, text: 'Micron Markup Basics' },
+        { type: 'paragraph', text: 'Micron is a lightweight markup language for NomadNet. Here are the essential formatting codes:' },
+        { type: 'table', headers: ['Code', 'Effect'], rows: [
+          ['<code>`!</code>', 'Bold text'],
+          ['<code>`*</code>', 'Italic text'],
+          ['<code>`_</code>', 'Underline'],
+          ['<code>`c</code> / <code>`a</code>', 'Center / End center'],
+          ['<code>`Frrggbb</code>', 'Foreground color (hex RGB)'],
+          ['<code>`Brrggbb</code>', 'Background color'],
+          ['<code>`f</code> / <code>`b</code>', 'Reset foreground / background'],
+          ['<code>`[Text`:/page/file.mu]</code>', 'Link to another page'],
+          ['<code>-=</code>', 'Horizontal divider'],
+          ['<code>>Heading</code>', 'Section heading'],
+          ['<code>`=</code>', 'Preformatted block (start/end)']
+        ]},
+        { type: 'heading', level: 3, text: 'Static Page Example' },
+        { type: 'paragraph', text: 'A basic static page (save as <code>index.mu</code>):' },
+        { type: 'code', text: '`c`!Welcome to My Node`!`a\n\n-=\n\n>About\n\n  This is a Reticulum node running NomadNet.\n  We share resources and stay connected off-grid.\n\n-=\n\n>Links\n\n  `Ff00`[Articles`:/page/articles.mu]`f\n  `Ff00`[Tools`:/page/tools.mu]`f\n  `Ff00`[Contact`:/page/contact.mu]`f' },
+        { type: 'heading', level: 3, text: 'Dynamic Page Example' },
+        { type: 'paragraph', text: 'Dynamic pages use Python to generate content. Add the shebang and print formatted output:' },
+        { type: 'code', text: '#!/usr/bin/env python3\nprint("#!c=60")  # Refresh every 60 seconds\n\nfrom datetime import datetime\nimport subprocess\n\nprint("`c`!NODE STATUS`!`a")\nprint("")\nprint(f"Updated: {datetime.utcnow().strftime(\'%Y-%m-%d %H:%M UTC\')}")\nprint("")\nprint("-=")\n\n# Get system uptime\ntry:\n    result = subprocess.run(["uptime", "-p"], capture_output=True, text=True)\n    print(f"Uptime: `!{result.stdout.strip()}`!")\nexcept:\n    print("Uptime: Unknown")\n\nprint("")\nprint("`Ff00`[Back to Home`:/page/index.mu]`f")' },
+        { type: 'info', title: 'Cache Control', text: 'The <code>#!c=60</code> directive tells NomadNet to cache the page for 60 seconds. Use <code>#!c=0</code> for no caching (always regenerate).' },
+        { type: 'heading', level: 3, text: 'Light Fighter Manifesto Pages' },
+        { type: 'paragraph', text: 'The LFM node runs several dynamic pages. Here are examples from our production setup:' },
+        { type: 'heading', level: 4, text: 'Index Page (Home)' },
+        { type: 'paragraph', text: 'The main landing page with navigation links:' },
+        { type: 'code', text: '`c`Ff00`!LIGHT FIGHTER MANIFESTO`!`f`a\n`cVeteran-Owned Publication`a\n`c`F777Unfiltered. Uncensored. Unconventional.`f`a\n\n-=\n\n`c`Ff00`!`[ARTICLES`:/page/lfm_articles.mu]`!`f    `Ff00`!`[PROJECTS`:/page/projects.mu]`!`f    `Ff00`!`[RESOURCES`:/page/resources.mu]`!`f    `Ff00`!`[SHOP`:/page/shop.mu]`!`f`a\n\n-=\n\n>Mesh Network\n\n  `Ff00`!`[QUICK CHAT`:/page/chat.mu]`!`f\n  Real-time messaging bridged to Matrix #Nomadnet room.\n\n  `Ff00`[Node Status`:/page/node_stats.mu]`f\n  Live statistics for this propagation node.\n\n  `F777LXMF Direct:`f `F0f0lxmf@7a58372d270d58f6148946705a7ca665`f\n\n-=\n\n>Field Tools\n\n  `Ff00`!`[HF PROPAGATION`:/page/hfprop.mu]`!`f\n  Band selection with FreeDV DATAC recommendations.\n\n  `Ff00`[Solar Conditions`:/page/propagation.mu]`f\n  Real-time solar flux, K-index, and geomagnetic alerts.\n\n  `Ff00`[Power Planner`:/page/powerplanner.mu]`f\n  Calculate battery runtime for portable operations.\n\n-=\n\n>Live Data\n\n  `Ff00`!`[CRYPTO TICKER`:/page/crypto.mu]`!`f\n  Live XMR/BTC prices with LFM contribution rates.\n\n  `Ff00`[GitHub Activity`:/page/github_feed.mu]`f\n  Recent commits from LFManifesto repositories.\n\n-=\n\n`c`F777Light_Fighter_Manifesto Propagation Node`f`a\n`c`!lightfightermanifesto.org`!`a' },
+        { type: 'heading', level: 4, text: 'Crypto Ticker (Live API)' },
+        { type: 'paragraph', text: 'Fetches live prices from CoinGecko API:' },
+        { type: 'code', text: '#!/usr/bin/env python3\nprint("#!c=60")\n\nimport urllib.request\nimport json\nfrom datetime import datetime\n\nprint("`c`!CRYPTO TICKER`!`a")\nprint("")\n\ndef fetch_prices():\n    url = "https://api.coingecko.com/api/v3/simple/price?ids=monero,bitcoin&vs_currencies=usd&include_24hr_change=true"\n    try:\n        req = urllib.request.Request(url, headers={"User-Agent": "NomadNet/1.0"})\n        with urllib.request.urlopen(req, timeout=10) as resp:\n            return json.loads(resp.read().decode())\n    except:\n        return None\n\nprices = fetch_prices()\n\nif prices:\n    xmr = prices.get("monero", {})\n    xmr_usd = xmr.get("usd", 0)\n    xmr_change = xmr.get("usd_24h_change", 0)\n    \n    color = "0f0" if xmr_change >= 0 else "f00"\n    sign = "+" if xmr_change >= 0 else ""\n    \n    print(">MONERO (XMR)")\n    print("")\n    print(f"  `F{color}`!${xmr_usd:,.2f}`!`f USD")\n    print(f"  `F{color}24h: {sign}{xmr_change:.2f}%`f")\n    \n    # Calculate contribution rates\n    if xmr_usd > 0:\n        print("")\n        print(">LFM CONTRIBUTION RATES")\n        print("")\n        print(f"  Article ($25):    `F0f0{25/xmr_usd:.4f} XMR`f")\n        print(f"  Field Doc ($10):  `F0f0{10/xmr_usd:.4f} XMR`f")\nelse:\n    print("`Ff00Unable to fetch prices.`f")\n\nprint("")\nprint("`Ff00`[Back`:/page/index.mu]`f")' },
+        { type: 'heading', level: 4, text: 'Interactive Chat' },
+        { type: 'paragraph', text: 'The chat page demonstrates user input and database interaction. Messages are bridged to Matrix via maubot.' },
+        { type: 'info', title: 'Page Types on LFM Node', text: '<strong>Static:</strong> shop.mu, projects.mu, resources.mu<br><strong>Dynamic (API):</strong> crypto.mu, propagation.mu, github_feed.mu<br><strong>Dynamic (System):</strong> node_stats.mu, nets.mu<br><strong>Interactive:</strong> chat.mu, hfprop.mu (with input fields)' },
+        { type: 'heading', level: 3, text: 'Input Fields' },
+        { type: 'paragraph', text: 'Create interactive pages with input fields:' },
+        { type: 'code', text: '# Text input (width 20, name "callsign", default "N0CALL")\n`<20|callsign`N0CALL>\n\n# Submit button that links to processing page\n`[SUBMIT`:/page/process.mu`callsign]\n\n# Access in Python via environment variable\nimport os\ncallsign = os.environ.get("field_callsign", "")' },
+        { type: 'heading', level: 3, text: 'Making Pages Executable' },
+        { type: 'paragraph', text: 'Dynamic Python pages must be executable:' },
+        { type: 'code', text: 'chmod +x ~/.nomadnetwork/storage/pages/mypage.mu' },
+        { type: 'heading', level: 3, text: 'Debugging Pages' },
+        { type: 'paragraph', text: 'Test dynamic pages from the command line:' },
+        { type: 'code', text: 'cd ~/.nomadnetwork/storage/pages/\npython3 ./mypage.mu' },
+        { type: 'paragraph', text: 'Check for syntax errors and verify output looks correct before accessing via NomadNet.' }
+      ]
+    },
+    {
+      id: 'sideband',
+      number: '7',
       title: 'Sideband',
       icon: 'phone',
       description: 'Graphical messaging client for Android and desktop.',
@@ -298,7 +360,7 @@
     },
     {
       id: 'utilities',
-      number: '7',
+      number: '8',
       title: 'Utilities',
       icon: 'tool',
       description: 'Command-line tools included with Reticulum.',
@@ -331,8 +393,99 @@
       ]
     },
     {
+      id: 'public-nodes',
+      number: '9',
+      title: 'Public Nodes',
+      icon: 'globe',
+      description: 'Connect to the global Reticulum network.',
+      content: [
+        { type: 'heading', level: 3, text: 'Public Transport Nodes' },
+        { type: 'paragraph', text: 'These nodes are verified active as of December 12, 2025. Add them to your <code>~/.reticulum/config</code> to connect to the global network.' },
+        { type: 'heading', level: 4, text: 'TCP Transport Nodes' },
+        { type: 'table', headers: ['Name', 'Host', 'Port'], rows: [
+          ['RNS Testnet Amsterdam', '<code>amsterdam.connect.reticulum.network</code>', '4965'],
+          ['BetweenTheBorders', '<code>reticulum.betweentheborders.com</code>', '4242'],
+          ['Chicago Nomadnet', '<code>rns.chicagonomad.net</code>', '4242'],
+          ['NomadNode SEAsia', '<code>rns.jaykayenn.net</code>', '4242'],
+          ['0rbit-Net', '<code>93.95.227.8</code>', '49952'],
+          ['Beleth RNS Hub', '<code>rns.beleth.net</code>', '4242'],
+          ['FireZen', '<code>firezen.com</code>', '4242'],
+          ['Sydney RNS', '<code>sydney.reticulum.au</code>', '4242'],
+          ['RNS Transport US-East', '<code>45.77.109.86</code>', '4965'],
+          ['noDNS1', '<code>202.61.243.41</code>', '4965'],
+          ['noDNS2', '<code>193.26.158.230</code>', '4965']
+        ]},
+        { type: 'heading', level: 4, text: 'Example Config' },
+        { type: 'code', text: '[[RNS Testnet Amsterdam]]\n  type = TCPClientInterface\n  enabled = yes\n  target_host = amsterdam.connect.reticulum.network\n  target_port = 4965\n\n[[Chicago Nomadnet TCP]]\n  type = TCPClientInterface\n  enabled = yes\n  target_host = rns.chicagonomad.net\n  target_port = 4242\n\n[[Beleth RNS Hub]]\n  type = TCPClientInterface\n  enabled = yes\n  target_host = rns.beleth.net\n  target_port = 4242' },
+        { type: 'heading', level: 3, text: 'I2P Nodes (Anonymous)' },
+        { type: 'paragraph', text: 'These nodes are accessible via I2P for anonymous connectivity. Requires an I2P router running.' },
+        { type: 'table', headers: ['Name', 'B32 Address'], rows: [
+          ['Light Fighter Manifesto', '<code>kfamlmwnlw3acqfxip4x6kt53i2tr4ksp5h4qxwvxhoq7mchpolq.b32.i2p</code>'],
+          ['RNS Testnet I2P Hub', '<code>g3br23bvx3lq5uddcsjii74xgmn6y5q325ovrkq2zw2wbzbqgbuq.b32.i2p</code>'],
+          ['Chicago Nomad I2P', '<code>fgtqx3pgwyd3bjcq4ojes47j7ynnw72luf2g3jeguhf5bbzkcuhq.b32.i2p</code>'],
+          ['0rbit-Net I2P', '<code>3amqekrikkrvfoyor75tjnlxmswmxiprqx7wknrwsnb46x7kjwuq.b32.i2p</code>']
+        ]},
+        { type: 'heading', level: 4, text: 'I2P Config Example' },
+        { type: 'code', text: '[[I2P]]\n  type = I2PInterface\n  enabled = yes\n  connectable = yes\n  peers = kfamlmwnlw3acqfxip4x6kt53i2tr4ksp5h4qxwvxhoq7mchpolq.b32.i2p, g3br23bvx3lq5uddcsjii74xgmn6y5q325ovrkq2zw2wbzbqgbuq.b32.i2p' },
+        { type: 'info', title: 'I2P Setup', text: 'Install i2pd (<code>sudo apt install i2pd</code>) and enable the SAM interface in <code>/etc/i2pd/i2pd.conf</code> by setting <code>sam.enabled = true</code>.' },
+        { type: 'heading', level: 3, text: 'LFM NomadNet Node' },
+        { type: 'paragraph', text: 'The Light Fighter Manifesto runs a public NomadNet node with live tools, chat, and resources.' },
+        { type: 'table', headers: ['Property', 'Value'], rows: [
+          ['Node Address', '<code>2eabad04f9145d32a6a3eda285d66c39</code>'],
+          ['LXMF Propagation', '<code>a21f547bc1f70043a28c4e2d5b04e570</code>'],
+          ['I2P B32', '<code>kfamlmwnlw3acqfxip4x6kt53i2tr4ksp5h4qxwvxhoq7mchpolq.b32.i2p</code>'],
+          ['Uptime', '~10 days continuous (Dec 12, 2025)']
+        ]},
+        { type: 'paragraph', text: 'Connect via TCP or I2P and browse to the node address in NomadNet to access LFM pages.' }
+      ]
+    },
+    {
+      id: 'github-repos',
+      number: '10',
+      title: 'GitHub Resources',
+      icon: 'code',
+      description: 'Official repositories and community projects.',
+      content: [
+        { type: 'heading', level: 3, text: 'Official Reticulum Repositories' },
+        { type: 'paragraph', text: 'All official Reticulum software is maintained by Mark Qvist on GitHub.' },
+        { type: 'table', headers: ['Repository', 'Description', 'URL'], rows: [
+          ['<strong>Reticulum</strong>', 'Core networking stack', 'github.com/markqvist/Reticulum'],
+          ['<strong>NomadNet</strong>', 'Terminal messaging client', 'github.com/markqvist/NomadNet'],
+          ['<strong>Sideband</strong>', 'Graphical messaging client', 'github.com/markqvist/Sideband'],
+          ['<strong>LXMF</strong>', 'Messaging protocol', 'github.com/markqvist/LXMF'],
+          ['<strong>RNode</strong>', 'LoRa hardware firmware', 'github.com/markqvist/RNode_Firmware'],
+          ['<strong>LoRaMon</strong>', 'LoRa traffic monitor', 'github.com/markqvist/LoRaMon']
+        ]},
+        { type: 'heading', level: 3, text: 'Documentation' },
+        { type: 'list', items: [
+          '<strong>Reticulum Manual:</strong> markqvist.github.io/Reticulum/manual/',
+          '<strong>API Reference:</strong> markqvist.github.io/Reticulum/reference.html',
+          '<strong>NomadNet Guide:</strong> github.com/markqvist/NomadNet/blob/master/README.md'
+        ]},
+        { type: 'heading', level: 3, text: 'LFManifesto Repositories' },
+        { type: 'paragraph', text: 'Light Fighter Manifesto maintains several Reticulum-related projects:' },
+        { type: 'table', headers: ['Repository', 'Description', 'URL'], rows: [
+          ['<strong>LXMFMonero</strong>', 'Monero transactions over LXMF/Reticulum mesh - off-grid cryptocurrency via radio', 'github.com/LFManifesto/LXMFMonero'],
+          ['<strong>ReticulumHF</strong>', 'Encrypted communication over HF radio using Reticulum and FreeDV digital modes', 'github.com/LFManifesto/ReticulumHF'],
+          ['<strong>website</strong>', 'Light Fighter Manifesto official website source', 'github.com/LFManifesto/website']
+        ]},
+        { type: 'info', title: 'Contributing', text: 'LFManifesto accepts contributions via GitHub pull requests. See the Projects page at lightfightermanifesto.org/projects/ for bounty information and contribution guidelines.' },
+        { type: 'heading', level: 3, text: 'Community Resources' },
+        { type: 'list', items: [
+          '<strong>Matrix:</strong> #reticulum:matrix.org (Official)',
+          '<strong>Matrix:</strong> #General:matrix.lightfightermanifesto.net (LFM)',
+          '<strong>Reddit:</strong> r/reticulum',
+          '<strong>Mastodon:</strong> @markqvist@chaos.social'
+        ]},
+        { type: 'heading', level: 3, text: 'Installing from Source' },
+        { type: 'paragraph', text: 'Clone and install directly from GitHub for the latest development version:' },
+        { type: 'code', text: '# Clone Reticulum\ngit clone https://github.com/markqvist/Reticulum.git\ncd Reticulum\npip install .\n\n# Clone NomadNet\ngit clone https://github.com/markqvist/NomadNet.git\ncd NomadNet\npip install .\n\n# Clone LXMFMonero\ngit clone https://github.com/LFManifesto/LXMFMonero.git\ncd LXMFMonero\npip install -r requirements.txt' },
+        { type: 'info', title: 'Development', text: 'Use <code>pip install -e .</code> for editable installs during development. Changes to the source take effect immediately.', warning: false }
+      ]
+    },
+    {
       id: 'troubleshooting',
-      number: '8',
+      number: '11',
       title: 'Troubleshooting',
       icon: 'alert',
       description: 'Common issues and solutions.',
@@ -427,7 +580,9 @@
       tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
       alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
       signal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
-      file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
+      file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+      globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+      code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'
     };
 
     nav.innerHTML = state.sections.map(section => `
@@ -536,6 +691,10 @@
 
   function showSection(section) {
     const content = document.getElementById('contentArea');
+    const currentIndex = state.sections.findIndex(s => s.id === section.id);
+    const prevSection = currentIndex > 0 ? state.sections[currentIndex - 1] : null;
+    const nextSection = currentIndex < state.sections.length - 1 ? state.sections[currentIndex + 1] : null;
+
     content.innerHTML = `
       <div class="section-header">
         <div class="section-number">Section ${section.number}</div>
@@ -544,6 +703,27 @@
       </div>
 
       ${renderContent(section.content)}
+
+      <div class="section-nav">
+        ${prevSection ? `
+          <a href="#${prevSection.id}" class="section-nav-btn prev">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            <div class="section-nav-text">
+              <span class="section-nav-label">Previous</span>
+              <span class="section-nav-title">${prevSection.number}. ${prevSection.title}</span>
+            </div>
+          </a>
+        ` : '<div></div>'}
+        ${nextSection ? `
+          <a href="#${nextSection.id}" class="section-nav-btn next">
+            <div class="section-nav-text">
+              <span class="section-nav-label">Next</span>
+              <span class="section-nav-title">${nextSection.number}. ${nextSection.title}</span>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        ` : '<div></div>'}
+      </div>
     `;
     window.scrollTo(0, 0);
   }

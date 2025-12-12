@@ -779,9 +779,94 @@
       .quick-ref-table th { font-size: 0.65rem; }
     }
 
+    /* Section Navigation */
+    .section-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .section-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+      min-height: 72px;
+      max-width: 45%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .section-nav-btn:hover {
+      background-color: var(--bg-card-hover);
+      border-color: var(--accent);
+    }
+
+    .section-nav-btn svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      stroke: var(--text-muted);
+    }
+
+    .section-nav-btn:hover svg {
+      stroke: var(--accent);
+    }
+
+    .section-nav-btn.next {
+      text-align: right;
+      margin-left: auto;
+    }
+
+    .section-nav-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .section-nav-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .section-nav-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      .section-nav {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .section-nav-btn {
+        max-width: 100%;
+        min-height: 60px;
+      }
+
+      .section-nav-btn.next {
+        margin-left: 0;
+      }
+
+      .section-nav-title {
+        font-size: 0.85rem;
+      }
+    }
+
     /* Print Styles */
     @media print {
-      .app-header, .sidebar, .menu-toggle, .copy-btn, .calc-button { display: none; }
+      .app-header, .sidebar, .menu-toggle, .copy-btn, .calc-button, .section-nav { display: none; }
       .content-area { margin-left: 0; max-width: 100%; }
       body { background: white; color: black; }
       .content-card { border: 1px solid #ccc; break-inside: avoid; }
@@ -887,13 +972,13 @@
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
   <!-- App JavaScript -->
-  <script src="app.js?v=2.1"></script>
+  <script src="app.js?v=3.0"></script>
 
   <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js?v=3')
+        navigator.serviceWorker.register('sw.js?v=4')
           .then(function(registration) {
             console.log('[App] ServiceWorker registered:', registration.scope);
             setInterval(function() { registration.update(); }, 60000);
