@@ -1,0 +1,30 @@
+{
+  "title": "Hardware",
+  "sections": [
+    {
+      "id": "supported-boards",
+      "title": "Supported RNode Boards",
+      "content": "<p>From RNode_Firmware repository (v1.85, Nov 2025):</p><h4>LilyGO Boards</h4><ul><li>T-Beam v1.1 (SX1276/8 or SX1262/8)</li><li>T-Beam Supreme</li><li>T-Deck</li><li>LoRa32 v1.0, v2.0, v2.1</li><li>T3S3 (SX1276/8, SX1262/8, or SX1280)</li><li>T-Echo</li></ul><h4>Heltec Boards</h4><ul><li>LoRa32 v2</li><li>LoRa32 v3</li><li>T114</li></ul><h4>Other</h4><ul><li>RAK4631</li><li>SeeedStudio XIAO ESP32S3 (with Wio-SX1262)</li><li>Homebrew: ATmega1284p, ATmega2560, Adafruit Feather ESP32, generic ESP32</li></ul>"
+    },
+    {
+      "id": "hf-setup",
+      "title": "HF Radio Setup (Verified)",
+      "content": "<p>LFM tested configuration for Reticulum over HF radio using FreeDV DATAC1 mode.</p><h4>Hardware</h4><table><thead><tr><th>Component</th><th>Model</th></tr></thead><tbody><tr><td>Computer</td><td>Raspberry Pi 4 (4GB+ RAM)</td></tr><tr><td>HF Radio</td><td>Xiegu G90</td></tr><tr><td>Audio Interface</td><td>Digirig Mobile</td></tr></tbody></table><h4>Software Stack</h4><pre><code># Install requirements\npipx install rns\npipx install nomadnet\npipx install freedvtnc2\nsudo apt install libhamlib-utils</code></pre><h4>Start rigctld (radio control)</h4><pre><code>rigctld -m 3088 -r /dev/ttyUSB0 -s 19200 \\<br>  --set-conf=serial_handshake=None,rts_state=OFF,dtr_state=OFF &</code></pre><h4>Start freedvtnc2 (modem)</h4><pre><code>freedvtnc2 --input-device 1 --output-device 1 \\<br>  --mode DATAC1 --rigctld-port 4532 \\<br>  --ptt-on-delay-ms 300 --ptt-off-delay-ms 200 \\<br>  --output-volume -3</code></pre><h4>Audio Levels (Digirig on card 3)</h4><pre><code>amixer -c 3 sset 'Speaker' 64%\namixer -c 3 sset 'Mic',0 cap 75%\namixer -c 3 sset 'Mic' unmute</code></pre><h4>Performance</h4><table><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td>Data rate</td><td>~980 bps</td></tr><tr><td>Bandwidth</td><td>1.7 kHz</td></tr><tr><td>Latency</td><td>3-5 seconds</td></tr><tr><td>Range</td><td>50-5000+ km (propagation dependent)</td></tr></tbody></table><div class='alert alert-info'><strong>Tested:</strong> This exact configuration is verified working. See github.com/LFManifesto/LFM-HF-Reticulum for full documentation.</div>"
+    },
+    {
+      "id": "flashing",
+      "title": "Flashing RNode Firmware",
+      "content": "<pre><code># Install rnodeconf (use pipx or venv)\npipx install rns\n\n# Auto-install (interactive)\nrnodeconf --autoinstall</code></pre><h4>Manual</h4><pre><code># Check device info\nrnodeconf /dev/ttyUSB0 --info\n\n# Flash\nrnodeconf /dev/ttyUSB0 --flash</code></pre><h4>If Flashing Fails</h4><ul><li>Hold BOOT button while connecting USB</li><li>Use data-capable cable (not charge-only)</li><li>Linux: <code>sudo usermod -aG dialout $USER</code></li></ul>"
+    },
+    {
+      "id": "us-regulations",
+      "title": "US Frequency Regulations",
+      "content": "<p>Source: <a href='https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-C/subject-group-ECFR2f2e5828339709e/section-15.247'>47 CFR 15.247</a></p><h4>902-928 MHz ISM Band</h4><table><thead><tr><th>Parameter</th><th>Limit</th></tr></thead><tbody><tr><td>Frequency range</td><td>902-928 MHz</td></tr><tr><td>Max power (digital modulation)</td><td>1 Watt</td></tr><tr><td>Min 6dB bandwidth</td><td>500 kHz</td></tr></tbody></table><h4>2400-2483.5 MHz ISM Band</h4><table><thead><tr><th>Parameter</th><th>Limit</th></tr></thead><tbody><tr><td>Frequency range</td><td>2400-2483.5 MHz</td></tr><tr><td>Max power (digital modulation)</td><td>1 Watt</td></tr></tbody></table><div class='alert alert-warning'><strong>Note:</strong> These are FCC Part 15 unlicensed limits. Amateur radio licensees may use different frequencies and power under Part 97.</div>"
+    },
+    {
+      "id": "serial-ports",
+      "title": "Serial Port Tips",
+      "content": "<h4>Find Device</h4><pre><code>ls /dev/ttyUSB* /dev/ttyACM*</code></pre><h4>Use Persistent Names</h4><pre><code>ls /dev/serial/by-id/</code></pre><p>Use the by-id path in config to avoid port reassignment on reboot.</p><h4>Permissions (Linux)</h4><pre><code>sudo usermod -aG dialout $USER\n# Log out and back in</code></pre>"
+    }
+  ]
+}

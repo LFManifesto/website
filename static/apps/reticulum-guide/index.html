@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Reticulum Field Reference - Offline-capable quick reference for mesh networking, NomadNet, and LXMF">
+  <meta name="author" content="Light Fighter Manifesto L.L.C.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RNS Reference">
+
+  <title>Reticulum Field Reference | Light Fighter Manifesto</title>
+
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-tertiary: #1a1a1a;
+      --bg-card: #141414;
+      --bg-card-hover: #1c1c1c;
+      --text-primary: #f0f0f0;
+      --text-secondary: #b8b8b8;
+      --text-muted: #888888;
+      --accent: #c92a2a;
+      --accent-hover: #e03131;
+      --accent-subtle: rgba(201, 42, 42, 0.1);
+      --accent-green: #2a9d8f;
+      --accent-blue: #4a9eff;
+      --accent-yellow: #f4a261;
+      --border-color: #2a2a2a;
+      --border-subtle: #1f1f1f;
+      --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+      --nav-height: 56px;
+      --sidebar-width: 280px;
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font-primary);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Layout */
+    .app-container { display: flex; flex-direction: column; min-height: 100vh; }
+
+    /* Header */
+    .app-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      z-index: 100;
+      gap: 1rem;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+    .menu-toggle svg { width: 24px; height: 24px; }
+    .app-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .app-title span { color: var(--accent); }
+    .header-search {
+      flex: 1;
+      max-width: 400px;
+      margin-left: auto;
+    }
+    .header-search input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+    .header-search input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .header-search input::placeholder { color: var(--text-muted); }
+
+    /* Main Layout */
+    .app-main {
+      display: flex;
+      padding-top: var(--nav-height);
+      flex: 1;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      height: calc(100vh - var(--nav-height));
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      overflow-y: auto;
+      padding: 1rem 0;
+      transition: transform 0.3s ease;
+    }
+    .sidebar-section { margin-bottom: 1.5rem; }
+    .sidebar-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding: 0 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-nav li a:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+    .sidebar-nav li a.active {
+      background: var(--accent-subtle);
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+    .sidebar-nav li.sub-item a {
+      padding-left: 2rem;
+      font-size: 0.85rem;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      padding: 2rem;
+      max-width: 900px;
+    }
+    .content-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .content-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .content-header p {
+      color: var(--text-secondary);
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 2.5rem;
+    }
+    .section h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section h2::before {
+      content: '';
+      width: 4px;
+      height: 1.25rem;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .section h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: var(--text-primary); }
+    .section h4 { font-size: 1rem; margin: 1.25rem 0 0.5rem; color: var(--text-secondary); }
+    .section p { margin-bottom: 1rem; color: var(--text-secondary); }
+    .section ul, .section ol { margin: 0 0 1rem 1.5rem; color: var(--text-secondary); }
+    .section li { margin-bottom: 0.25rem; }
+    .section strong { color: var(--text-primary); }
+
+    /* Tables */
+    .section table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .section th, .section td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .section th {
+      background: var(--bg-tertiary);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .section td { color: var(--text-secondary); }
+    .section td code {
+      background: var(--bg-tertiary);
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    /* Code blocks */
+    .section pre {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .section code {
+      font-family: var(--font-mono);
+      color: var(--accent-green);
+    }
+    .section pre code { color: var(--text-primary); }
+
+    /* Alerts */
+    .alert {
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      border-left: 4px solid;
+    }
+    .alert-info {
+      background: rgba(74, 158, 255, 0.1);
+      border-color: var(--accent-blue);
+    }
+    .alert-warning {
+      background: rgba(244, 162, 97, 0.1);
+      border-color: var(--accent-yellow);
+    }
+    .alert-critical {
+      background: rgba(201, 42, 42, 0.1);
+      border-color: var(--accent);
+    }
+
+    /* Key Points */
+    .key-points {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .key-point {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      border-left: 3px solid var(--accent);
+    }
+    .key-point .label { font-weight: 500; color: var(--text-primary); }
+    .key-point .value { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.9rem; }
+
+    /* Calculators */
+    .calculator {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .calculator h3 {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .calc-field label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+    }
+    .calc-field input, .calc-field select {
+      width: 100%;
+      padding: 0.5rem;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+    .calc-field input:focus, .calc-field select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .calc-button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .calc-button:hover { background: var(--accent-hover); }
+    .calc-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      font-family: var(--font-mono);
+    }
+    .calc-result .result-label { color: var(--text-muted); font-size: 0.85rem; }
+    .calc-result .result-value { font-size: 1.25rem; color: var(--accent-green); margin-top: 0.25rem; }
+
+    /* Search Results */
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+      z-index: 200;
+    }
+    .search-results.active { display: block; }
+    .search-result {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      cursor: pointer;
+    }
+    .search-result:hover { background: var(--bg-tertiary); }
+    .search-result-title { font-weight: 500; color: var(--text-primary); }
+    .search-result-section { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .sidebar {
+        transform: translateX(-100%);
+        z-index: 150;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 140;
+      }
+      .sidebar-overlay.active { display: block; }
+      .content { margin-left: 0; padding: 1rem; }
+      .header-search { display: none; }
+      .app-title { font-size: 1rem; }
+      .calc-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Loading */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <div class="app-title"><span>Reticulum</span> Field Reference</div>
+      <div class="header-search">
+        <input type="text" id="searchInput" placeholder="Search..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="app-main">
+      <nav class="sidebar" id="sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">Reticulum Core</div>
+          <ul class="sidebar-nav" id="navOverview"></ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Interfaces</div>
+          <ul class="sidebar-nav" id="navInterfaces"></ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Hardware</div>
+          <ul class="sidebar-nav" id="navHardware"></ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">NomadNet</div>
+          <ul class="sidebar-nav" id="navNomadnet"></ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">LXMF</div>
+          <ul class="sidebar-nav" id="navLxmf"></ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Utilities</div>
+          <ul class="sidebar-nav" id="navUtilities"></ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Troubleshooting</div>
+          <ul class="sidebar-nav" id="navTroubleshooting"></ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Calculators</div>
+          <ul class="sidebar-nav">
+            <li><a href="#" data-calc="link-budget">LoRa Link Budget</a></li>
+            <li><a href="#" data-calc="airtime">Airtime Calculator</a></li>
+            <li><a href="#" data-calc="config-gen">Config Generator</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="content" id="content">
+        <div class="loading">Loading...</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js?v=1.0"></script>
+</body>
+</html>

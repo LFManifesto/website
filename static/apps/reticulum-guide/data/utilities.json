@@ -1,0 +1,50 @@
+{
+  "title": "Command Reference",
+  "sections": [
+    {
+      "id": "essential-commands",
+      "title": "Essential Commands",
+      "content": "<p>These are the commands you'll use 90% of the time:</p><table><thead><tr><th>Command</th><th>What It Does</th></tr></thead><tbody><tr><td><code>rnstatus</code></td><td>Check if Reticulum is running, see interface status</td></tr><tr><td><code>rnpath &lt;hash&gt;</code></td><td>Find a destination, check if reachable</td></tr><tr><td><code>rnsd</code></td><td>Run Reticulum daemon in foreground</td></tr><tr><td><code>nomadnet</code></td><td>Start NomadNet client</td></tr><tr><td><code>rnodeconf --info</code></td><td>Check RNode status</td></tr></tbody></table>"
+    },
+    {
+      "id": "rnstatus",
+      "title": "rnstatus - Check Status",
+      "content": "<p>First command to run when debugging. Shows all interfaces and their state.</p><pre><code># Basic status\nrnstatus\n\n# Verbose with traffic stats\nrnstatus -v\n\n# Show all known paths\nrnstatus -p</code></pre><h4>What to Look For</h4><ul><li><strong>Interface status:</strong> Should say \"Up\"</li><li><strong>Peers:</strong> Should be > 0 if connected to testnet</li><li><strong>Transport:</strong> Enabled/Disabled based on config</li></ul><h4>Example Output</h4><pre><code>Reticulum Network Stack\n  Status    : Running\n  Transport : Disabled\n\nInterfaces\n  TCPClientInterface [RNS Testnet]\n    Status  : Up\n    Peers   : 127\n    Bitrate : 10.00 Mbps</code></pre>"
+    },
+    {
+      "id": "rnpath",
+      "title": "rnpath - Find Destinations",
+      "content": "<p>Check if you can reach a destination.</p><pre><code># Look up destination\nrnpath 2eabad04f9145d32a6a3eda285d66c39\n\n# Force path request (if not in cache)\nrnpath -r 2eabad04f9145d32a6a3eda285d66c39</code></pre><h4>Success Output</h4><pre><code>Path found, destination is 2 hops away</code></pre><h4>Failure Output</h4><pre><code>No path to destination</code></pre><p>If no path: destination is offline, not announcing, or you're not connected to any shared network.</p>"
+    },
+    {
+      "id": "rnsd",
+      "title": "rnsd - Daemon",
+      "content": "<p>Keeps Reticulum running in the background. Required for other programs to use the network.</p><pre><code># Run in foreground (for debugging)\nrnsd\n\n# Run as daemon\nrnsd -d\n\n# Verbose output\nrnsd -v</code></pre><h4>Systemd Service</h4><pre><code># /etc/systemd/system/rnsd.service\n[Unit]\nDescription=Reticulum Daemon\nAfter=network.target\n\n[Service]\nType=simple\nUser=user\nExecStart=/home/user/.local/bin/rnsd\nRestart=always\nEnvironment=PATH=/home/user/.local/bin:/usr/bin\n\n[Install]\nWantedBy=multi-user.target</code></pre><pre><code>sudo systemctl enable rnsd\nsudo systemctl start rnsd</code></pre>"
+    },
+    {
+      "id": "rncp",
+      "title": "rncp - File Transfer",
+      "content": "<p>Transfer files over Reticulum. Better than LXMF for large files.</p><h4>Receive Mode</h4><pre><code># Listen for incoming files\nrncp -l\n\n# Receive to specific directory\nrncp -l -d /path/to/downloads</code></pre><h4>Send Mode</h4><pre><code># Send file to destination\nrncp -s &lt;destination-hash&gt; /path/to/file</code></pre><h4>Example</h4><pre><code># On receiver\n$ rncp -l\nListening for files...\n\n# On sender\n$ rncp -s 2eabad04... document.pdf\nTransfer complete (1.2 MB)</code></pre>"
+    },
+    {
+      "id": "rnodeconf",
+      "title": "rnodeconf - RNode Management",
+      "content": "<p>Configure and flash RNode hardware.</p><h4>Check Device Info</h4><pre><code>rnodeconf /dev/ttyUSB0 --info</code></pre><h4>Auto-Install Firmware</h4><pre><code>rnodeconf --autoinstall</code></pre><h4>Manual Configuration</h4><pre><code># Set frequency\nrnodeconf /dev/ttyUSB0 --freq 915000000\n\n# Set TX power\nrnodeconf /dev/ttyUSB0 --txpower 17\n\n# Set spreading factor\nrnodeconf /dev/ttyUSB0 --sf 8</code></pre><h4>Troubleshooting</h4><ul><li>Hold BOOT button while connecting USB</li><li>Verify it's a data cable, not charge-only</li><li>Check permissions: <code>sudo usermod -aG dialout $USER</code></li></ul>"
+    },
+    {
+      "id": "rnid",
+      "title": "rnid - Identity Management",
+      "content": "<p>Manage Reticulum identities (keypairs).</p><pre><code># Show identity info\nrnid -i /path/to/identity\n\n# Generate new identity\nrnid -g /path/to/new-identity\n\n# Export public key\nrnid -e /path/to/identity</code></pre><h4>Identity Location</h4><p>Default identity: <code>~/.reticulum/identity</code></p><p>This is your cryptographic identity. Back it up. If you lose it, you lose your address and can't decrypt messages sent to it.</p>"
+    },
+    {
+      "id": "rnprobe",
+      "title": "rnprobe - Test Connectivity",
+      "content": "<p>Probe a destination to check reachability and measure latency.</p><pre><code># Single probe\nrnprobe &lt;destination-hash&gt;\n\n# Continuous probing\nrnprobe -c &lt;destination-hash&gt;</code></pre><h4>Example</h4><pre><code>$ rnprobe 2eabad04f9145d32a6a3eda285d66c39\nResponse received in 1.234 seconds</code></pre><p>Useful for verifying connectivity before sending important messages.</p>"
+    },
+    {
+      "id": "config-file",
+      "title": "Configuration File",
+      "content": "<p>Main config: <code>~/.reticulum/config</code></p><h4>Structure</h4><pre><code>[reticulum]\n  enable_transport = no\n  share_instance = yes\n\n[logging]\n  loglevel = 4\n\n[interfaces]\n  [[Interface Name]]\n    type = InterfaceType\n    enabled = yes\n    # type-specific options</code></pre><h4>Log Levels</h4><table><thead><tr><th>Level</th><th>Shows</th></tr></thead><tbody><tr><td>0</td><td>Critical only</td></tr><tr><td>4</td><td>Info (default)</td></tr><tr><td>6</td><td>Debug</td></tr><tr><td>7</td><td>Extreme debug (noisy)</td></tr></tbody></table><p>For debugging, set <code>loglevel = 6</code> and run <code>rnsd -v</code> in foreground.</p>"
+    }
+  ]
+}

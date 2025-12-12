@@ -1,0 +1,22 @@
+{
+  "name": "Reticulum Field Reference",
+  "short_name": "RNS Reference",
+  "description": "Offline-capable quick reference for Reticulum mesh networking, NomadNet, and LXMF",
+  "start_url": "/apps/reticulum-guide/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
