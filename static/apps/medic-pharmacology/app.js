@@ -8,6 +8,463 @@
   'use strict';
 
   const CONTENT = {
+    public: {
+      title: 'Public Access',
+      subtitle: 'OTC medications, pharmacy essentials, and natural alternatives',
+      color: '#10b981',
+      sections: [
+        {
+          id: 'public-otc',
+          title: 'OTC Medications',
+          content: `
+            <div class="alert alert-info">
+              <strong>Over-the-counter medications</strong> are available without prescription. These are your first line of defense for common ailments.
+            </div>
+            <div class="card">
+              <div class="card-title">Pain & Fever</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Drug</th><th>Adult Dose</th><th>Best For</th><th>Cautions</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Acetaminophen (Tylenol)</strong></td><td>500-1000mg q6h<br>Max: 3000mg/day</td><td>Pain, fever, safe with most conditions</td><td>Liver damage if exceeded. No alcohol.</td></tr>
+                    <tr><td><strong>Ibuprofen (Advil, Motrin)</strong></td><td>200-400mg q4-6h<br>Max: 1200mg/day</td><td>Pain, inflammation, fever, menstrual cramps</td><td>Take with food. Not if kidney issues, stomach ulcers, or bleeding.</td></tr>
+                    <tr><td><strong>Naproxen (Aleve)</strong></td><td>220mg q8-12h<br>Max: 660mg/day</td><td>Long-lasting pain relief, arthritis</td><td>Longer acting, same warnings as ibuprofen.</td></tr>
+                    <tr><td><strong>Aspirin</strong></td><td>325-650mg q4h<br>Max: 4000mg/day</td><td>Pain, inflammation, heart protection</td><td>Can cause bleeding. Not for children (Reye's syndrome).</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Allergy & Cold</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Drug</th><th>Adult Dose</th><th>Best For</th><th>Notes</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Diphenhydramine (Benadryl)</strong></td><td>25-50mg q4-6h</td><td>Allergies, hives, sleep aid, itching</td><td>Causes drowsiness. Good for severe allergies.</td></tr>
+                    <tr><td><strong>Cetirizine (Zyrtec)</strong></td><td>10mg once daily</td><td>Seasonal allergies, hives</td><td>Less drowsy than Benadryl. 24-hour relief.</td></tr>
+                    <tr><td><strong>Loratadine (Claritin)</strong></td><td>10mg once daily</td><td>Seasonal allergies</td><td>Non-drowsy. 24-hour relief.</td></tr>
+                    <tr><td><strong>Pseudoephedrine (Sudafed)</strong></td><td>30-60mg q4-6h</td><td>Nasal/sinus congestion</td><td>Behind pharmacy counter. Raises BP. Don't use if heart issues.</td></tr>
+                    <tr><td><strong>Phenylephrine (Sudafed PE)</strong></td><td>10mg q4h</td><td>Nasal congestion</td><td>OTC version. Less effective than pseudoephedrine.</td></tr>
+                    <tr><td><strong>Guaifenesin (Mucinex)</strong></td><td>200-400mg q4h</td><td>Chest congestion, mucus</td><td>Drink lots of water. Loosens phlegm.</td></tr>
+                    <tr><td><strong>Dextromethorphan (DM)</strong></td><td>10-20mg q4h</td><td>Cough suppressant</td><td>For dry cough only. Don't use if productive cough.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Digestive</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Drug</th><th>Adult Dose</th><th>Best For</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Loperamide (Imodium)</strong></td><td>4mg initial, then 2mg after each loose stool<br>Max: 16mg/day</td><td>Diarrhea</td></tr>
+                    <tr><td><strong>Bismuth subsalicylate (Pepto-Bismol)</strong></td><td>524mg q30min PRN<br>Max: 8 doses/day</td><td>Diarrhea, nausea, upset stomach</td></tr>
+                    <tr><td><strong>Famotidine (Pepcid)</strong></td><td>10-20mg q12h</td><td>Heartburn, acid reflux</td></tr>
+                    <tr><td><strong>Omeprazole (Prilosec)</strong></td><td>20mg once daily</td><td>Frequent heartburn (14-day course)</td></tr>
+                    <tr><td><strong>Calcium carbonate (Tums)</strong></td><td>500-1000mg PRN</td><td>Immediate heartburn relief</td></tr>
+                    <tr><td><strong>Docusate (Colace)</strong></td><td>100mg daily</td><td>Stool softener for constipation</td></tr>
+                    <tr><td><strong>Bisacodyl (Dulcolax)</strong></td><td>5-15mg at bedtime</td><td>Constipation (stimulant laxative)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Topical</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Product</th><th>Use</th><th>Application</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Triple Antibiotic (Neosporin)</strong></td><td>Minor cuts, scrapes, burns</td><td>Thin layer 1-3x daily</td></tr>
+                    <tr><td><strong>Bacitracin</strong></td><td>Minor wounds (less allergenic)</td><td>Thin layer 1-3x daily</td></tr>
+                    <tr><td><strong>Hydrocortisone 1%</strong></td><td>Itching, rashes, insect bites, eczema</td><td>Thin layer 2-4x daily, max 7 days</td></tr>
+                    <tr><td><strong>Clotrimazole (Lotrimin)</strong></td><td>Athlete's foot, jock itch, ringworm</td><td>2x daily for 2-4 weeks</td></tr>
+                    <tr><td><strong>Miconazole (Monistat)</strong></td><td>Yeast infections (vaginal/skin)</td><td>Per package directions</td></tr>
+                    <tr><td><strong>Lidocaine 4%</strong></td><td>Topical pain relief, sunburn</td><td>Apply to affected area PRN</td></tr>
+                    <tr><td><strong>Benzocaine (Orajel)</strong></td><td>Mouth/tooth pain</td><td>Apply to affected area q2h PRN</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `
+        },
+        {
+          id: 'public-pharmacy',
+          title: 'Pharmacy Requests',
+          content: `
+            <div class="alert alert-warning">
+              <strong>Austere Situation:</strong> If medical infrastructure is compromised, you may need to request medications directly from pharmacies. Know what to ask for.
+            </div>
+            <div class="card">
+              <div class="card-title">Essential Antibiotics to Request</div>
+              <p><strong>For pharmacist consultation or emergency dispensing:</strong></p>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Drug</th><th>Typical Dose</th><th>Covers</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Amoxicillin</strong></td><td>500mg 3x daily x 7-10 days</td><td>Respiratory, ear, dental, skin infections</td></tr>
+                    <tr><td><strong>Amoxicillin-Clavulanate (Augmentin)</strong></td><td>875mg 2x daily x 7-10 days</td><td>Broader coverage including bites</td></tr>
+                    <tr><td><strong>Azithromycin (Z-Pack)</strong></td><td>500mg day 1, 250mg days 2-5</td><td>Respiratory, STIs, skin</td></tr>
+                    <tr><td><strong>Ciprofloxacin</strong></td><td>500mg 2x daily x 7-14 days</td><td>UTI, GI, respiratory</td></tr>
+                    <tr><td><strong>Doxycycline</strong></td><td>100mg 2x daily x 7-14 days</td><td>Respiratory, tick-borne, STIs, malaria prevention</td></tr>
+                    <tr><td><strong>Metronidazole (Flagyl)</strong></td><td>500mg 3x daily x 7-10 days</td><td>GI infections, anaerobic bacteria, parasites</td></tr>
+                    <tr><td><strong>Trimethoprim-Sulfa (Bactrim)</strong></td><td>1 DS tablet 2x daily x 3-14 days</td><td>UTI, skin infections (MRSA coverage)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="alert alert-critical" style="margin-top: 1rem;">
+                <strong>Antibiotic Allergies:</strong> If allergic to penicillin (amoxicillin), request azithromycin or doxycycline as alternatives. Tell the pharmacist.
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Critical Medications</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Drug</th><th>Purpose</th><th>Notes</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Epinephrine Auto-Injector</strong></td><td>Severe allergic reaction</td><td>EpiPen or generic. Life-saving.</td></tr>
+                    <tr><td><strong>Albuterol Inhaler</strong></td><td>Asthma, breathing difficulty</td><td>Rescue inhaler for bronchospasm</td></tr>
+                    <tr><td><strong>Prednisone</strong></td><td>Severe allergic reaction, asthma</td><td>40-60mg x 5-7 days for allergic reactions</td></tr>
+                    <tr><td><strong>Ondansetron (Zofran)</strong></td><td>Severe nausea/vomiting</td><td>4-8mg q8h, dissolving tablets available</td></tr>
+                    <tr><td><strong>Naloxone (Narcan)</strong></td><td>Opioid overdose reversal</td><td>Often available without Rx in pharmacies</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Pain Management</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Drug</th><th>Dose</th><th>Notes</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Tramadol</strong></td><td>50-100mg q4-6h</td><td>Moderate pain, less restricted than other opioids</td></tr>
+                    <tr><td><strong>Cyclobenzaprine (Flexeril)</strong></td><td>5-10mg 3x daily</td><td>Muscle relaxant for spasms</td></tr>
+                    <tr><td><strong>Gabapentin</strong></td><td>300mg 3x daily (titrate up)</td><td>Nerve pain, some availability issues</td></tr>
+                    <tr><td><strong>Lidocaine Patches</strong></td><td>1-3 patches daily (12h on/12h off)</td><td>Localized pain relief</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">How to Talk to Pharmacists</div>
+              <ol>
+                <li>Be honest about your situation</li>
+                <li>Describe symptoms clearly</li>
+                <li>Mention any allergies</li>
+                <li>Ask about interactions with current meds</li>
+                <li>Request generic versions (cheaper)</li>
+                <li>Ask about emergency supply policies</li>
+              </ol>
+              <p><strong>Many states allow pharmacists to prescribe or provide emergency supplies of essential medications.</strong></p>
+            </div>
+          `
+        },
+        {
+          id: 'public-natural',
+          title: 'Natural Remedies',
+          content: `
+            <div class="alert alert-info">
+              <strong>When modern medicine is unavailable,</strong> these evidence-based natural remedies can help. Not a replacement for professional care when available.
+            </div>
+            <div class="card">
+              <div class="card-title">Wound Care</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Remedy</th><th>Use</th><th>How</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Raw Honey</strong></td><td>Wound healing, burns, infection prevention</td><td>Apply directly to wound, cover with bandage. Change daily.</td></tr>
+                    <tr><td><strong>Aloe Vera</strong></td><td>Burns, sunburn, skin irritation</td><td>Apply gel from plant directly to skin.</td></tr>
+                    <tr><td><strong>Plantain Leaf</strong></td><td>Insect stings, minor cuts, drawing out infection</td><td>Crush fresh leaf into poultice, apply to wound.</td></tr>
+                    <tr><td><strong>Yarrow</strong></td><td>Stop bleeding, wound healing</td><td>Crush leaves, apply to wound. Traditional "soldier's woundwort."</td></tr>
+                    <tr><td><strong>Tea Tree Oil</strong></td><td>Antiseptic, antifungal</td><td>Dilute (5 drops per tbsp carrier oil). Do not ingest.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="alert alert-warning" style="margin-top: 1rem;">
+                <strong>Honey:</strong> Use raw, unpasteurized honey. Medical-grade Manuka honey is best. Regular store honey is less effective.
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Pain & Inflammation</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Remedy</th><th>Use</th><th>How</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Willow Bark</strong></td><td>Pain, fever (contains salicin - natural aspirin)</td><td>Tea: 1-2 tsp dried bark in hot water, steep 15 min. 3x daily.</td></tr>
+                    <tr><td><strong>Turmeric</strong></td><td>Inflammation, joint pain</td><td>1/2 tsp powder in warm water or food. Add black pepper for absorption.</td></tr>
+                    <tr><td><strong>Ginger</strong></td><td>Nausea, inflammation, digestion</td><td>Fresh tea, chew raw, or candied. 1-2g daily.</td></tr>
+                    <tr><td><strong>Peppermint</strong></td><td>Headache, muscle pain, digestion</td><td>Tea, or apply diluted oil to temples/muscles.</td></tr>
+                    <tr><td><strong>Clove</strong></td><td>Tooth pain (contains eugenol)</td><td>Apply clove oil to tooth/gum, or chew whole clove.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Infection Fighting</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Remedy</th><th>Use</th><th>How</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Garlic</strong></td><td>Antibacterial, antiviral, antifungal</td><td>Crush and let sit 10 min (activates allicin). Eat raw or in food. 2-3 cloves daily.</td></tr>
+                    <tr><td><strong>Oregano Oil</strong></td><td>Powerful antimicrobial</td><td>2-4 drops in water, 3x daily. Very strong - dilute.</td></tr>
+                    <tr><td><strong>Echinacea</strong></td><td>Immune support, cold/flu</td><td>Tea or tincture at first sign of illness. Take for 7-10 days max.</td></tr>
+                    <tr><td><strong>Elderberry</strong></td><td>Viral infections, flu</td><td>Syrup: 1 tbsp 4x daily during illness. Do not eat raw berries.</td></tr>
+                    <tr><td><strong>Goldenseal</strong></td><td>Mucous membrane infections</td><td>Tea or capsules. Short-term use only (1-2 weeks).</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Digestive</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Remedy</th><th>Use</th><th>How</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Ginger</strong></td><td>Nausea, vomiting, motion sickness</td><td>Tea, candied, or chew fresh. Safe during pregnancy.</td></tr>
+                    <tr><td><strong>Peppermint</strong></td><td>IBS, bloating, gas</td><td>Tea after meals. Enteric-coated capsules for IBS.</td></tr>
+                    <tr><td><strong>Chamomile</strong></td><td>Stomach upset, cramping, sleep</td><td>Tea: 1-2 bags in hot water, steep 5 min.</td></tr>
+                    <tr><td><strong>Activated Charcoal</strong></td><td>Poisoning, gas, diarrhea</td><td>500-1000mg for GI issues. For poisoning: 50-100g with water.</td></tr>
+                    <tr><td><strong>Apple Cider Vinegar</strong></td><td>Heartburn, digestion</td><td>1-2 tbsp in water before meals.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="alert alert-critical">
+              <strong>Activated Charcoal for Poisoning:</strong> Give within 1 hour of ingestion. Does NOT work for: alcohol, heavy metals, lithium, acids, petroleum products. Call Poison Control first: 1-800-222-1222
+            </div>
+          `
+        },
+        {
+          id: 'public-foraging',
+          title: 'Field Medicine',
+          content: `
+            <div class="alert alert-warning">
+              <strong>Only use plants you can positively identify.</strong> Misidentification can be fatal. When in doubt, do not use.
+            </div>
+            <div class="card">
+              <div class="card-title">Common Medicinal Plants (North America)</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Plant</th><th>Identification</th><th>Medicinal Use</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Plantain (Plantago)</strong></td><td>Oval leaves with parallel veins, grows in lawns/paths</td><td>Poultice for stings, bites, wounds. Chew and apply.</td></tr>
+                    <tr><td><strong>Yarrow</strong></td><td>Feathery leaves, flat white flower clusters</td><td>Stop bleeding, wound healing. Crush leaves, apply.</td></tr>
+                    <tr><td><strong>Mullein</strong></td><td>Large fuzzy leaves, tall flower spike</td><td>Respiratory issues. Tea from leaves. Oil for ear infections.</td></tr>
+                    <tr><td><strong>Pine Needles</strong></td><td>5-needle clusters (White Pine) safest</td><td>High in Vitamin C. Tea for colds, scurvy prevention.</td></tr>
+                    <tr><td><strong>Willow Bark</strong></td><td>Long narrow leaves, grows near water</td><td>Pain relief (natural aspirin). Tea from inner bark.</td></tr>
+                    <tr><td><strong>Dandelion</strong></td><td>Yellow flower, jagged leaves, milky sap</td><td>Diuretic, liver support. Entire plant edible.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Improvised Medical Supplies</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Need</th><th>Improvised Solution</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Antiseptic wash</strong></td><td>Salt water (1 tsp per cup), diluted alcohol, or clean urine (sterile) as last resort</td></tr>
+                    <tr><td><strong>Wound dressing</strong></td><td>Clean cloth, moss (sphagnum is antibacterial), inner bark</td></tr>
+                    <tr><td><strong>Splint material</strong></td><td>Sticks, bark, rolled newspaper, cardboard</td></tr>
+                    <tr><td><strong>Suture/closure</strong></td><td>Duct tape, superglue (cyanoacrylate), butterfly from tape</td></tr>
+                    <tr><td><strong>Tourniquet</strong></td><td>Belt, torn cloth (2"+ wide), stick for windlass</td></tr>
+                    <tr><td><strong>Oral rehydration</strong></td><td>6 tsp sugar + 1/2 tsp salt per liter water</td></tr>
+                    <tr><td><strong>Water purification</strong></td><td>Boil 1 min (3 min above 6500ft), 2 drops bleach/liter wait 30 min</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Oral Rehydration Solution (ORS)</div>
+              <div class="drug-dose">
+                <strong>Recipe:</strong> 1 liter clean water + 6 level teaspoons sugar + 1/2 level teaspoon salt
+              </div>
+              <p><strong>Use for:</strong> Diarrhea, vomiting, heat illness, blood loss recovery</p>
+              <p><strong>Drink:</strong> Small sips frequently. Adult: 200-400ml after each loose stool.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Pine Needle Tea (Vitamin C)</div>
+              <ol>
+                <li>Collect fresh green needles from White Pine, Spruce, or Fir</li>
+                <li>Avoid: Yew, Norfolk Island Pine, Ponderosa Pine (toxic)</li>
+                <li>Chop needles finely</li>
+                <li>Steep 1-3 tablespoons in hot water for 10-15 minutes</li>
+                <li>Strain and drink</li>
+              </ol>
+              <p><strong>Contains:</strong> 4-5x more Vitamin C than oranges by weight</p>
+            </div>
+            <div class="alert alert-critical">
+              <strong>TOXIC LOOKALIKES:</strong> Yew (red berries), Water Hemlock (looks like parsnip), and many others are deadly. Never consume a plant unless you are 100% certain of identification.
+            </div>
+          `
+        },
+        {
+          id: 'public-stockpile',
+          title: 'Medicine Stockpile',
+          content: `
+            <div class="alert alert-info">
+              <strong>Build your medical supplies before you need them.</strong> A well-stocked medicine cabinet can handle most emergencies.
+            </div>
+            <div class="card">
+              <div class="card-title">Tier 1: Basic Home Kit (Everyone)</div>
+              <ul>
+                <li>Acetaminophen (Tylenol) - 500mg tablets</li>
+                <li>Ibuprofen (Advil) - 200mg tablets</li>
+                <li>Diphenhydramine (Benadryl) - 25mg capsules</li>
+                <li>Loperamide (Imodium) - 2mg tablets</li>
+                <li>Antacids (Tums or Pepcid)</li>
+                <li>Triple antibiotic ointment</li>
+                <li>Hydrocortisone cream 1%</li>
+                <li>Bandages, gauze, medical tape</li>
+                <li>Thermometer</li>
+                <li>Tweezers, scissors</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Tier 2: Extended Kit (Prepared Households)</div>
+              <p><strong>Add to Tier 1:</strong></p>
+              <ul>
+                <li>Pseudoephedrine (Sudafed) - decongestant</li>
+                <li>Guaifenesin (Mucinex) - expectorant</li>
+                <li>Cetirizine or Loratadine - non-drowsy antihistamine</li>
+                <li>Omeprazole (Prilosec) - acid reducer</li>
+                <li>Docusate (Colace) - stool softener</li>
+                <li>Bismuth subsalicylate (Pepto-Bismol)</li>
+                <li>Clotrimazole cream - antifungal</li>
+                <li>Saline nasal spray</li>
+                <li>Eye drops (artificial tears)</li>
+                <li>Oral rehydration salts</li>
+                <li>SAM splint or rolled magazines</li>
+                <li>Israeli bandage or pressure dressing</li>
+                <li>Tourniquet (CAT or SOFTT-W)</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Tier 3: Austere/Remote Kit</div>
+              <p><strong>Add to Tiers 1 & 2 (consult physician for Rx items):</strong></p>
+              <ul>
+                <li>Antibiotics: Amoxicillin, Azithromycin, Ciprofloxacin, Metronidazole</li>
+                <li>Epinephrine auto-injector</li>
+                <li>Prednisone tablets</li>
+                <li>Ondansetron (Zofran) dissolving tablets</li>
+                <li>Naloxone (Narcan)</li>
+                <li>Suture kit or skin stapler</li>
+                <li>Lidocaine for injection</li>
+                <li>Chest seals</li>
+                <li>Hemostatic gauze (QuikClot, Celox)</li>
+                <li>NPA airway</li>
+                <li>Pulse oximeter</li>
+                <li>Blood pressure cuff</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Storage Tips</div>
+              <ul>
+                <li>Store in cool, dry, dark place</li>
+                <li>Check expiration dates annually</li>
+                <li>Most medications remain effective 1-2 years past expiration</li>
+                <li>Keep inventory list with dates</li>
+                <li>Rotate stock (use oldest first, replace)</li>
+                <li>Vacuum seal for long-term storage</li>
+                <li>Include dosage charts and instructions</li>
+              </ul>
+            </div>
+            <div class="alert alert-warning">
+              <strong>Expiration Reality:</strong> Studies show most medications retain 90%+ potency for years past expiration. Exceptions: liquid antibiotics, insulin, nitroglycerin, EpiPens (replace when expired).
+            </div>
+          `
+        },
+        {
+          id: 'public-pediatric',
+          title: 'Pediatric Dosing',
+          content: `
+            <div class="alert alert-critical">
+              <strong>Children are not small adults.</strong> Dosing is based on weight. When in doubt, call poison control: 1-800-222-1222
+            </div>
+            <div class="card">
+              <div class="card-title">Acetaminophen (Tylenol)</div>
+              <div class="drug-dose">
+                10-15 mg/kg every 4-6 hours<br>
+                Maximum: 75 mg/kg/day (not to exceed 4000mg)
+              </div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Weight</th><th>Age (approx)</th><th>Dose</th></tr></thead>
+                  <tbody>
+                    <tr><td>6-11 lbs</td><td>0-3 months</td><td>40mg (1.25ml infant drops)</td></tr>
+                    <tr><td>12-17 lbs</td><td>4-11 months</td><td>80mg (2.5ml infant drops)</td></tr>
+                    <tr><td>18-23 lbs</td><td>1-2 years</td><td>120mg</td></tr>
+                    <tr><td>24-35 lbs</td><td>2-3 years</td><td>160mg</td></tr>
+                    <tr><td>36-47 lbs</td><td>4-5 years</td><td>240mg</td></tr>
+                    <tr><td>48-59 lbs</td><td>6-8 years</td><td>320mg</td></tr>
+                    <tr><td>60-71 lbs</td><td>9-10 years</td><td>400mg</td></tr>
+                    <tr><td>72-95 lbs</td><td>11 years</td><td>480mg</td></tr>
+                    <tr><td>96+ lbs</td><td>12+ years</td><td>640-1000mg (adult dose)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Ibuprofen (Advil, Motrin)</div>
+              <div class="drug-dose">
+                5-10 mg/kg every 6-8 hours<br>
+                Maximum: 40 mg/kg/day (not to exceed 1200mg)
+              </div>
+              <p style="color: var(--danger);"><strong>Not for infants under 6 months</strong></p>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Weight</th><th>Age (approx)</th><th>Dose</th></tr></thead>
+                  <tbody>
+                    <tr><td>12-17 lbs</td><td>6-11 months</td><td>50mg (1.25ml)</td></tr>
+                    <tr><td>18-23 lbs</td><td>12-23 months</td><td>75mg</td></tr>
+                    <tr><td>24-35 lbs</td><td>2-3 years</td><td>100mg</td></tr>
+                    <tr><td>36-47 lbs</td><td>4-5 years</td><td>150mg</td></tr>
+                    <tr><td>48-59 lbs</td><td>6-8 years</td><td>200mg</td></tr>
+                    <tr><td>60-71 lbs</td><td>9-10 years</td><td>250mg</td></tr>
+                    <tr><td>72-95 lbs</td><td>11 years</td><td>300mg</td></tr>
+                    <tr><td>96+ lbs</td><td>12+ years</td><td>200-400mg (adult dose)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Diphenhydramine (Benadryl)</div>
+              <div class="drug-dose">
+                1-1.25 mg/kg every 6 hours<br>
+                Maximum: 300mg/day
+              </div>
+              <p style="color: var(--danger);"><strong>Not recommended for children under 2</strong></p>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Weight</th><th>Age (approx)</th><th>Dose</th></tr></thead>
+                  <tbody>
+                    <tr><td>20-24 lbs</td><td>2-3 years</td><td>6.25mg (consult doctor)</td></tr>
+                    <tr><td>25-37 lbs</td><td>4-5 years</td><td>6.25mg</td></tr>
+                    <tr><td>38-49 lbs</td><td>6-8 years</td><td>12.5mg</td></tr>
+                    <tr><td>50-99 lbs</td><td>9-11 years</td><td>12.5-25mg</td></tr>
+                    <tr><td>100+ lbs</td><td>12+ years</td><td>25-50mg (adult dose)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">When to Seek Emergency Care (Children)</div>
+              <ul>
+                <li>Fever >100.4°F in infant under 3 months</li>
+                <li>Fever >104°F at any age</li>
+                <li>Difficulty breathing or blue lips</li>
+                <li>Won't stop crying, inconsolable</li>
+                <li>Seizure</li>
+                <li>Rash that doesn't blanch (press and release - stays red)</li>
+                <li>Not urinating (dry diaper >8 hours)</li>
+                <li>Severe vomiting/diarrhea with signs of dehydration</li>
+                <li>Lethargy, difficult to wake</li>
+                <li>Bulging soft spot (infants)</li>
+              </ul>
+            </div>
+          `
+        }
+      ]
+    },
     drugs: {
       title: 'Drug Reference',
       subtitle: 'Ranger Medic pharmacology quick reference',
@@ -798,9 +1255,9 @@
     }
   };
 
-  let currentPhase = 'drugs';
+  let currentPhase = 'public';
   let currentSection = null;
-  const PHASES = ['drugs', 'k9', 'shock', 'vitals'];
+  const PHASES = ['public', 'drugs', 'k9', 'shock', 'vitals'];
 
   function initNavigation() {
     document.querySelectorAll('.phase-btn').forEach(btn => {
@@ -847,7 +1304,7 @@
   }
 
   function handleHashChange() {
-    const hash = window.location.hash.slice(1) || 'drugs';
+    const hash = window.location.hash.slice(1) || 'public';
     const parts = hash.split('/');
     const phase = parts[0];
     const section = parts[1] || null;

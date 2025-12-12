@@ -12,6 +12,579 @@
   // ==========================================================================
 
   const CONTENT = {
+    general: {
+      title: 'General First Aid',
+      subtitle: 'Essential skills for anyone - no medical training required',
+      color: '#10b981',
+      sections: [
+        {
+          id: 'gen-overview',
+          title: 'Start Here',
+          keywords: ['first aid', 'basics', 'emergency', 'help', 'start', 'beginner'],
+          content: `
+            <div class="alert alert-info">
+              <strong>You can save a life.</strong> Most emergencies require simple actions done quickly and correctly. Stay calm, assess the situation, and act.
+            </div>
+            <div class="card">
+              <div class="card-title">The Three Rules</div>
+              <ol>
+                <li><strong>Scene Safety</strong> - Do not become the next casualty. Check for hazards (traffic, fire, downed power lines, attackers)</li>
+                <li><strong>Call for Help</strong> - Dial 911 (or local emergency) immediately. Put on speaker if alone</li>
+                <li><strong>Stop the Bleeding</strong> - Most preventable deaths are from blood loss. Apply pressure</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Initial Assessment (30 Seconds)</div>
+              <ol>
+                <li><strong>Are they conscious?</strong> Tap shoulder, ask "Are you okay?"</li>
+                <li><strong>Are they breathing?</strong> Look at chest, listen, feel for breath</li>
+                <li><strong>Are they bleeding?</strong> Look for blood - check under clothes, under body</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">What to Say to 911</div>
+              <ol>
+                <li>Your location (address, landmarks, what you see)</li>
+                <li>What happened (car accident, fall, gunshot, etc.)</li>
+                <li>How many people are injured</li>
+                <li>Are they breathing? Conscious? Bleeding?</li>
+                <li>Your name and phone number</li>
+              </ol>
+              <p><strong>Stay on the line.</strong> The dispatcher will guide you.</p>
+            </div>
+            <div class="alert alert-success">
+              <strong>Good Samaritan Laws</strong> protect people who help in emergencies. You cannot be sued for trying to save someone's life if you act in good faith and within your abilities.
+            </div>
+          `
+        },
+        {
+          id: 'gen-bleeding',
+          title: 'Bleeding Control',
+          keywords: ['bleeding', 'blood', 'hemorrhage', 'wound', 'cut', 'pressure', 'tourniquet'],
+          content: `
+            <div class="alert alert-critical">
+              <strong>A person can bleed to death in 3-5 minutes.</strong> Do not wait for help. Act now.
+            </div>
+            <div class="card">
+              <div class="card-title">Stop the Bleed - Three Steps</div>
+              <ol>
+                <li><strong>CALL 911</strong> - Get help coming</li>
+                <li><strong>FIND the bleeding</strong> - Remove/cut clothing to expose wound</li>
+                <li><strong>STOP the bleeding</strong> - Use one of three methods below</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Method 1: Direct Pressure</div>
+              <p><strong>For most wounds:</strong></p>
+              <ol>
+                <li>Place clean cloth, gauze, or your bare hand directly on wound</li>
+                <li>Push HARD with both hands - it should hurt them</li>
+                <li>Hold pressure continuously for 10 minutes minimum</li>
+                <li>Do NOT lift to check - you break the clot forming</li>
+                <li>If blood soaks through, add more material ON TOP (do not remove)</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Method 2: Wound Packing</div>
+              <p><strong>For deep wounds (stab, gunshot, severe laceration):</strong></p>
+              <ol>
+                <li>Stuff clean cloth or gauze INTO the wound</li>
+                <li>Pack it tight - push material to the bottom of wound first</li>
+                <li>Keep packing until wound is completely full</li>
+                <li>Apply direct pressure on top</li>
+                <li>Hold for 3 minutes minimum</li>
+              </ol>
+              <div class="alert alert-warning" style="margin-top: 0.5rem;">
+                <strong>Improvised packing:</strong> T-shirt, towel, cloth, feminine pads, diapers - anything absorbent
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Method 3: Tourniquet</div>
+              <p><strong>For life-threatening limb bleeding that won't stop:</strong></p>
+              <ol>
+                <li>Place 2-3 inches ABOVE the wound (between wound and heart)</li>
+                <li>Wrap tight and secure</li>
+                <li>Twist windlass/stick until bleeding STOPS</li>
+                <li>Secure the windlass in place</li>
+                <li>Note the time - write on patient's forehead if needed</li>
+              </ol>
+              <div class="drug-dose">
+                <strong>Improvised Tourniquet:</strong> Belt, strap, torn cloth (2"+ wide) + stick/pen for windlass. NEVER use wire, rope, or narrow cord.
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Where NOT to Use Tourniquet</div>
+              <ul>
+                <li>Neck (use direct pressure only)</li>
+                <li>Torso/chest/abdomen (pack wound, apply pressure)</li>
+                <li>Groin/armpit (pack wound deeply, apply pressure)</li>
+              </ul>
+            </div>
+            <div class="alert alert-info">
+              <strong>Myth:</strong> "Tourniquets cause amputation." <strong>Fact:</strong> Modern data shows tourniquets can stay on for hours without limb loss. A loose tourniquet is dangerous - a tight one saves lives.
+            </div>
+          `
+        },
+        {
+          id: 'gen-wounds',
+          title: 'Wound Care',
+          keywords: ['wound', 'cut', 'laceration', 'puncture', 'scrape', 'abrasion', 'cleaning', 'bandage', 'dressing'],
+          content: `
+            <div class="card">
+              <div class="card-title">Basic Wound Care Steps</div>
+              <ol>
+                <li><strong>Stop bleeding first</strong> (if any)</li>
+                <li><strong>Wash your hands</strong> or use gloves if available</li>
+                <li><strong>Clean the wound</strong> with clean water - flush thoroughly</li>
+                <li><strong>Remove debris</strong> gently with clean tweezers if visible</li>
+                <li><strong>Apply antibiotic ointment</strong> (optional but helps)</li>
+                <li><strong>Cover with clean bandage</strong></li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Cleaning Solutions (Best to Worst)</div>
+              <ol>
+                <li>Sterile saline or wound wash</li>
+                <li>Clean drinking water (bottled preferred)</li>
+                <li>Tap water (if clean source)</li>
+                <li>Boiled and cooled water</li>
+                <li>Diluted povidone-iodine (Betadine)</li>
+              </ol>
+              <div class="alert alert-warning" style="margin-top: 0.5rem;">
+                <strong>Do NOT use:</strong> Hydrogen peroxide (damages tissue), rubbing alcohol (painful, damages tissue), or full-strength iodine on open wounds
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Signs of Infection (Watch For)</div>
+              <ul>
+                <li>Increasing pain after 24 hours</li>
+                <li>Redness spreading beyond wound edge</li>
+                <li>Warmth and swelling increasing</li>
+                <li>Pus or foul-smelling drainage</li>
+                <li>Red streaks moving toward heart</li>
+                <li>Fever</li>
+              </ul>
+              <p style="color: var(--accent);"><strong>Any of these = seek medical care immediately.</strong></p>
+            </div>
+            <div class="card">
+              <div class="card-title">Sutures/Stitches - When Needed</div>
+              <p>Seek professional closure if:</p>
+              <ul>
+                <li>Wound edges won't stay together</li>
+                <li>Cut is >1/2 inch deep</li>
+                <li>Cut is on face, hands, or over a joint</li>
+                <li>Wound is gaping open</li>
+                <li>Bleeding won't stop with pressure</li>
+              </ul>
+              <p><strong>Time limit:</strong> Stitches work best within 6-8 hours of injury. After 24 hours, most wounds are left open to heal.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Butterfly Strips (Improvised Closure)</div>
+              <ol>
+                <li>Clean and dry wound completely</li>
+                <li>Apply benzoin or let skin dry (helps adhesive stick)</li>
+                <li>Place strip on one side of wound, pull edges together, secure other side</li>
+                <li>Space strips 1/4 inch apart</li>
+                <li>Apply strips perpendicular to wound direction</li>
+              </ol>
+              <p><strong>Improvised:</strong> Medical tape cut into strips works if nothing else available</p>
+            </div>
+          `
+        },
+        {
+          id: 'gen-burns',
+          title: 'Burns',
+          keywords: ['burn', 'fire', 'scald', 'thermal', 'chemical', 'sunburn', 'blister'],
+          content: `
+            <div class="card">
+              <div class="card-title">Burn Severity</div>
+              <div class="table-wrapper">
+                <table>
+                  <thead><tr><th>Degree</th><th>Appearance</th><th>Treatment</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>1st (Superficial)</strong></td><td>Red, dry, painful (like sunburn)</td><td>Cool water, aloe, OTC pain relief</td></tr>
+                    <tr><td><strong>2nd (Partial)</strong></td><td>Blisters, wet, very painful</td><td>Cool water, loose covering, may need medical care</td></tr>
+                    <tr><td><strong>3rd (Full)</strong></td><td>White/brown/black, dry, may not hurt</td><td>Emergency - call 911</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Immediate Burn Care</div>
+              <ol>
+                <li><strong>Stop the burning</strong> - Remove from heat source, remove hot clothing</li>
+                <li><strong>Cool with water</strong> - Run cool (not ice cold) water for 10-20 minutes</li>
+                <li><strong>Remove jewelry</strong> - Rings, watches, bracelets before swelling</li>
+                <li><strong>Cover loosely</strong> - Clean, dry bandage or cling wrap</li>
+                <li><strong>Pain relief</strong> - Ibuprofen or acetaminophen</li>
+              </ol>
+            </div>
+            <div class="alert alert-critical">
+              <strong>Do NOT:</strong>
+              <ul style="margin: 0.25rem 0 0 0;">
+                <li>Apply ice (causes more damage)</li>
+                <li>Pop blisters (infection risk)</li>
+                <li>Apply butter, oil, or grease (traps heat)</li>
+                <li>Use fluffy cotton (sticks to wound)</li>
+                <li>Remove stuck clothing (cut around it)</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">When to Seek Emergency Care</div>
+              <ul>
+                <li>Burns larger than palm of hand</li>
+                <li>Burns on face, hands, feet, genitals, or over joints</li>
+                <li>All electrical burns (damage is internal)</li>
+                <li>Chemical burns</li>
+                <li>Burns that go all around a limb</li>
+                <li>Burns in someone under 5 or over 60</li>
+                <li>Difficulty breathing (airway burns)</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Chemical Burns</div>
+              <ol>
+                <li>Brush off dry chemicals first (before water)</li>
+                <li>Flush with large amounts of water for 20+ minutes</li>
+                <li>Remove contaminated clothing while flushing</li>
+                <li>Continue flushing during transport if possible</li>
+              </ol>
+              <p><strong>Eye exposure:</strong> Flush from inner corner outward. Hold eyelids open. Flush for 20+ minutes.</p>
+            </div>
+          `
+        },
+        {
+          id: 'gen-fractures',
+          title: 'Fractures & Sprains',
+          keywords: ['fracture', 'break', 'broken bone', 'sprain', 'strain', 'splint', 'immobilize', 'dislocation'],
+          content: `
+            <div class="card">
+              <div class="card-title">Signs of Fracture</div>
+              <ul>
+                <li>Pain that increases with movement</li>
+                <li>Swelling and bruising</li>
+                <li>Deformity (looks wrong compared to other side)</li>
+                <li>Unable to bear weight or use limb</li>
+                <li>Grinding sensation</li>
+                <li>Bone visible through skin (open fracture - emergency)</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Basic Splinting Principles</div>
+              <ol>
+                <li><strong>Immobilize the joint above AND below</strong> the injury</li>
+                <li><strong>Pad bony areas</strong> to prevent pressure sores</li>
+                <li><strong>Check circulation before and after</strong> - pulse, color, sensation</li>
+                <li><strong>Elevate if possible</strong> to reduce swelling</li>
+                <li><strong>Apply ice</strong> wrapped in cloth (20 min on, 20 min off)</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Improvised Splints</div>
+              <ul>
+                <li><strong>Arm:</strong> Magazines, newspapers, boards, cardboard rolled</li>
+                <li><strong>Leg:</strong> Boards, ski poles, hiking sticks, another person's leg</li>
+                <li><strong>Finger:</strong> Popsicle stick, pen, tape to adjacent finger</li>
+                <li><strong>Sling:</strong> Belt, scarf, shirt tied behind neck</li>
+              </ul>
+              <p><strong>Binding:</strong> Torn cloth strips, belts, rope, tape, shoe laces</p>
+            </div>
+            <div class="card">
+              <div class="card-title">RICE for Sprains</div>
+              <ul>
+                <li><strong>R</strong>est - Stop using the injured area</li>
+                <li><strong>I</strong>ce - 20 minutes on, 20 minutes off</li>
+                <li><strong>C</strong>ompression - Elastic bandage, wrap snug (not tight)</li>
+                <li><strong>E</strong>levation - Raise above heart level when possible</li>
+              </ul>
+            </div>
+            <div class="alert alert-critical">
+              <strong>Call 911 Immediately If:</strong>
+              <ul style="margin: 0.25rem 0 0 0;">
+                <li>Bone visible through skin</li>
+                <li>Severe deformity</li>
+                <li>No pulse below injury</li>
+                <li>Numbness or tingling below injury</li>
+                <li>Blue or white skin below injury</li>
+                <li>Suspected spine, pelvis, or hip fracture</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Suspected Spine Injury</div>
+              <p><strong>If mechanism suggests spine injury (fall, dive, car accident):</strong></p>
+              <ol>
+                <li>DO NOT MOVE unless immediate danger (fire, collapse)</li>
+                <li>Tell patient not to move their head or neck</li>
+                <li>Place hands on both sides of head to stabilize</li>
+                <li>Keep head, neck, and spine in line</li>
+                <li>Wait for professional help with proper equipment</li>
+              </ol>
+            </div>
+          `
+        },
+        {
+          id: 'gen-cpr',
+          title: 'CPR & Choking',
+          keywords: ['cpr', 'cardiac arrest', 'heart', 'choking', 'heimlich', 'rescue breathing', 'aed'],
+          content: `
+            <div class="alert alert-critical">
+              <strong>For unresponsive, not breathing normally:</strong> Call 911, start CPR immediately. Push hard and fast.
+            </div>
+            <div class="card">
+              <div class="card-title">Hands-Only CPR (Adults)</div>
+              <ol>
+                <li>Call 911 (speaker phone)</li>
+                <li>Place heel of hand on center of chest (between nipples)</li>
+                <li>Place other hand on top, fingers interlaced</li>
+                <li>Keep arms straight, shoulders over hands</li>
+                <li>Push HARD - at least 2 inches deep</li>
+                <li>Push FAST - 100-120 compressions per minute (beat of "Stayin' Alive")</li>
+                <li>Let chest fully recoil between compressions</li>
+                <li>Do not stop until help arrives or patient responds</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Using an AED</div>
+              <ol>
+                <li>Turn on AED (it will give voice instructions)</li>
+                <li>Expose chest completely (dry if wet)</li>
+                <li>Apply pads as shown in pictures on pads</li>
+                <li>Plug in connector if needed</li>
+                <li>"Analyzing" - DO NOT TOUCH patient</li>
+                <li>If shock advised - "Clear!" - push button</li>
+                <li>Immediately resume CPR for 2 minutes</li>
+                <li>Follow AED prompts</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Choking - Conscious Adult</div>
+              <p><strong>If person CAN cough, speak, or breathe:</strong> Encourage coughing, do not intervene</p>
+              <p><strong>If person CANNOT cough, speak, or breathe:</strong></p>
+              <ol>
+                <li>Stand behind person, wrap arms around waist</li>
+                <li>Make fist with one hand, place above navel, below ribs</li>
+                <li>Grab fist with other hand</li>
+                <li>Pull sharply inward and upward (J-shaped motion)</li>
+                <li>Repeat until object comes out or person becomes unconscious</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Choking - Unconscious Adult</div>
+              <ol>
+                <li>Lower person to ground on their back</li>
+                <li>Call 911 if not done</li>
+                <li>Start CPR</li>
+                <li>Before giving breaths, look in mouth for object</li>
+                <li>If visible, sweep out with finger</li>
+                <li>Continue CPR</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Choking - Infant (Under 1 Year)</div>
+              <ol>
+                <li>Place baby face-down on forearm, head lower than body</li>
+                <li>Support head with hand (jaw, not throat)</li>
+                <li>Give 5 firm back blows between shoulder blades</li>
+                <li>Turn baby face-up on other forearm</li>
+                <li>Give 5 chest thrusts with 2 fingers on breastbone</li>
+                <li>Alternate back blows and chest thrusts until clear</li>
+              </ol>
+            </div>
+          `
+        },
+        {
+          id: 'gen-environmental',
+          title: 'Heat & Cold',
+          keywords: ['heat', 'cold', 'hypothermia', 'hyperthermia', 'heatstroke', 'frostbite', 'dehydration'],
+          content: `
+            <div class="card">
+              <div class="card-title">Heat Exhaustion</div>
+              <p><strong>Signs:</strong> Heavy sweating, weakness, cool/pale/clammy skin, fast/weak pulse, nausea, fainting</p>
+              <p><strong>Treatment:</strong></p>
+              <ol>
+                <li>Move to cool area (shade, AC)</li>
+                <li>Lie down, elevate legs</li>
+                <li>Remove excess clothing</li>
+                <li>Apply cool, wet cloths</li>
+                <li>Sip water slowly</li>
+                <li>If vomiting or no improvement in 30 min: call 911</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Heat Stroke (EMERGENCY)</div>
+              <p><strong>Signs:</strong> High temp (>103°F), hot/red/dry OR damp skin, fast/strong pulse, confusion, unconsciousness</p>
+              <div class="alert alert-critical" style="margin-top: 0.5rem;">
+                <strong>Call 911 immediately.</strong> This is life-threatening.
+              </div>
+              <p><strong>While waiting:</strong></p>
+              <ol>
+                <li>Move to coolest area possible</li>
+                <li>Cool rapidly: cold water immersion is best</li>
+                <li>Or: ice packs to neck, armpits, groin</li>
+                <li>Spray with water and fan</li>
+                <li>Do NOT give fluids if unconscious</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Hypothermia</div>
+              <p><strong>Signs:</strong> Shivering (stops in severe cases), confusion, slurred speech, drowsiness, weak pulse, slow breathing</p>
+              <p><strong>Treatment:</strong></p>
+              <ol>
+                <li>Move to warm area</li>
+                <li>Remove wet clothing</li>
+                <li>Warm center of body first (chest, neck, head, groin)</li>
+                <li>Use skin-to-skin contact under blankets</li>
+                <li>Give warm drinks if conscious (no alcohol)</li>
+                <li>Handle gently - sudden movement can cause cardiac arrest</li>
+              </ol>
+              <div class="alert alert-warning" style="margin-top: 0.5rem;">
+                <strong>Do NOT:</strong> Rub extremities, use direct heat (heating pad, hot water), give alcohol
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Frostbite</div>
+              <p><strong>Signs:</strong> White/grayish-yellow skin, waxy feel, numbness, hard or waxy texture</p>
+              <p><strong>Treatment:</strong></p>
+              <ol>
+                <li>Get to warm area</li>
+                <li>Do NOT rub or massage</li>
+                <li>Immerse in warm (not hot) water (100-105°F)</li>
+                <li>Do NOT use dry heat</li>
+                <li>Do NOT walk on frostbitten feet unless necessary</li>
+                <li>Loosely bandage with dry, sterile dressing</li>
+                <li>Seek medical care</li>
+              </ol>
+            </div>
+          `
+        },
+        {
+          id: 'gen-allergic',
+          title: 'Allergic Reactions',
+          keywords: ['allergy', 'allergic', 'anaphylaxis', 'epipen', 'epinephrine', 'bee sting', 'swelling'],
+          content: `
+            <div class="card">
+              <div class="card-title">Mild Allergic Reaction</div>
+              <p><strong>Signs:</strong> Hives, itching, mild swelling, runny nose</p>
+              <p><strong>Treatment:</strong></p>
+              <ul>
+                <li>Remove allergen if possible (stinger, food)</li>
+                <li>Antihistamine (Benadryl/diphenhydramine 25-50mg)</li>
+                <li>Monitor for worsening</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Anaphylaxis (SEVERE - EMERGENCY)</div>
+              <p><strong>Signs:</strong></p>
+              <ul>
+                <li>Difficulty breathing, wheezing</li>
+                <li>Swelling of throat, tongue, lips</li>
+                <li>Widespread hives</li>
+                <li>Dizziness, confusion</li>
+                <li>Rapid or weak pulse</li>
+                <li>Nausea, vomiting</li>
+                <li>Feeling of doom</li>
+              </ul>
+              <div class="alert alert-critical" style="margin-top: 0.5rem;">
+                <strong>This can kill in minutes. Act immediately.</strong>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Using an EpiPen</div>
+              <ol>
+                <li>Call 911</li>
+                <li>Remove blue safety cap</li>
+                <li>Hold orange tip against outer thigh (through clothes is OK)</li>
+                <li>Push firmly until click</li>
+                <li>Hold for 10 seconds</li>
+                <li>Remove and massage area</li>
+                <li>Note time given</li>
+                <li>Second dose in 5-15 min if no improvement</li>
+                <li>Lay person down, elevate legs (unless breathing trouble)</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Bee/Wasp Stings</div>
+              <ol>
+                <li>Remove stinger immediately (scrape, don't squeeze)</li>
+                <li>Wash with soap and water</li>
+                <li>Apply cold pack</li>
+                <li>Take antihistamine for itching</li>
+                <li>Watch for signs of anaphylaxis for 30+ minutes</li>
+              </ol>
+            </div>
+            <div class="alert alert-info">
+              <strong>If someone has severe allergies:</strong> They may carry epinephrine. Ask them or check medical alert bracelet. Help them use it if they can't.
+            </div>
+          `
+        },
+        {
+          id: 'gen-poison',
+          title: 'Poisoning',
+          keywords: ['poison', 'overdose', 'toxic', 'ingestion', 'narcan', 'naloxone', 'drugs'],
+          content: `
+            <div class="card">
+              <div class="card-title">First Steps for Poisoning</div>
+              <ol>
+                <li>Call <strong>Poison Control: 1-800-222-1222</strong> (US)</li>
+                <li>Identify what was taken, how much, and when</li>
+                <li>Save container/substance if possible</li>
+                <li>Do NOT induce vomiting unless instructed</li>
+                <li>Do NOT give anything by mouth unless instructed</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Signs of Poisoning</div>
+              <ul>
+                <li>Burns or redness around mouth/lips</li>
+                <li>Breath smells chemical</li>
+                <li>Vomiting, nausea, abdominal pain</li>
+                <li>Difficulty breathing</li>
+                <li>Confusion, drowsiness</li>
+                <li>Seizures</li>
+                <li>Open containers nearby</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Opioid Overdose</div>
+              <p><strong>Signs:</strong> Pinpoint pupils, unconscious, slow/shallow/no breathing, blue lips</p>
+              <ol>
+                <li>Call 911</li>
+                <li>Give Narcan (Naloxone) if available:
+                  <ul>
+                    <li>Nasal: spray one nostril</li>
+                    <li>Inject: IM into outer thigh</li>
+                  </ul>
+                </li>
+                <li>If no response in 2-3 min, give second dose</li>
+                <li>Start CPR if not breathing</li>
+                <li>Place in recovery position when breathing</li>
+                <li>Stay with them - Narcan wears off</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Inhaled Poison (Gas, Fumes)</div>
+              <ol>
+                <li>Get to fresh air immediately</li>
+                <li>Open windows/doors if safe</li>
+                <li>Do NOT enter area if you smell gas/fumes</li>
+                <li>Call 911</li>
+                <li>Begin CPR if not breathing</li>
+              </ol>
+            </div>
+            <div class="card">
+              <div class="card-title">Skin Exposure</div>
+              <ol>
+                <li>Remove contaminated clothing carefully</li>
+                <li>Brush off dry chemicals before water</li>
+                <li>Flush skin with large amounts of water for 20+ min</li>
+                <li>Wash gently with soap and water</li>
+                <li>Call Poison Control</li>
+              </ol>
+            </div>
+          `
+        }
+      ]
+    },
     cuf: {
       title: 'Care Under Fire',
       subtitle: 'Actions while under effective hostile fire',
@@ -1190,9 +1763,9 @@
   // STATE
   // ==========================================================================
 
-  let currentPhase = 'cuf';
+  let currentPhase = 'general';
   let currentSection = null;
-  const PHASES = ['cuf', 'tfc', 'tacevac', 'procedures', 'tools'];
+  const PHASES = ['general', 'cuf', 'tfc', 'tacevac', 'procedures', 'tools'];
 
   // ==========================================================================
   // SEARCH
@@ -1310,7 +1883,7 @@
   }
 
   function handleHashChange() {
-    const hash = window.location.hash.slice(1) || 'cuf';
+    const hash = window.location.hash.slice(1) || 'general';
     const [phase, section] = hash.split('/');
     if (CONTENT[phase]) {
       currentPhase = phase;
