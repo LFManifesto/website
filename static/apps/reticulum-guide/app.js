@@ -974,19 +974,29 @@ sudo usermod -a -G dialout $USER
   // ==========================================================================
 
   function init() {
-    buildNavigation();
-    initSearch();
-    initMobile();
-    initOfflineIndicator();
-    showSection('getting-started');
+    try {
+      buildNavigation();
+      initSearch();
+      initMobile();
+      initOfflineIndicator();
+      showSection('getting-started');
 
-    // Handle keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        document.getElementById('searchInput').focus();
+      // Handle keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          document.getElementById('searchInput').focus();
+        }
+      });
+    } catch (error) {
+      console.error('[App] Init error:', error);
+      // Still try to show content even if search fails
+      try {
+        showSection('getting-started');
+      } catch (e) {
+        document.getElementById('contentArea').innerHTML = '<div style="padding: 2rem; color: red;">Error loading app: ' + error.message + '</div>';
       }
-    });
+    }
   }
 
   // ==========================================================================
@@ -1459,7 +1469,12 @@ sudo usermod -a -G dialout $USER
   // ==========================================================================
 
   function initSearch() {
-    // Build search index
+    // Build search index - only if Fuse is available
+    if (typeof Fuse === 'undefined') {
+      console.warn('[App] Fuse.js not loaded, search disabled');
+      return;
+    }
+
     const searchData = sections.map(s => ({
       id: s.id,
       title: s.title,
@@ -1475,6 +1490,8 @@ sudo usermod -a -G dialout $USER
     // Desktop search
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
+
+    if (!searchInput || !searchResults) return;
 
     searchInput.addEventListener('input', () => {
       const query = searchInput.value.trim();
