@@ -1,7 +1,7 @@
 /**
  * Reticulum Field Reference
- * Version 3.0 - Dec 12, 2025
- * Added: NomadNet Pages, GitHub Repos, Navigation buttons
+ * Version 3.1 - Dec 12, 2025
+ * Added: HF Propagation Calculator, NomadNet Pages, GitHub Repos, Navigation buttons
  * Updated: All transport nodes verified from live rnstatus
  */
 
@@ -529,8 +529,9 @@
   ];
 
   const toolsData = [
-    { id: 'link-budget', title: 'Link Budget Calculator', icon: 'signal' },
-    { id: 'airtime', title: 'Airtime Calculator', icon: 'clock' },
+    { id: 'hf-prop', title: 'HF Propagation', icon: 'globe' },
+    { id: 'link-budget', title: 'LoRa Link Budget', icon: 'signal' },
+    { id: 'airtime', title: 'LoRa Airtime', icon: 'clock' },
     { id: 'config-gen', title: 'Config Generator', icon: 'file' }
   ];
 
@@ -778,7 +779,10 @@
   function showTool(toolId) {
     const content = document.getElementById('contentArea');
 
-    if (toolId === 'link-budget') {
+    if (toolId === 'hf-prop') {
+      content.innerHTML = getHFPropHTML();
+      initHFProp();
+    } else if (toolId === 'link-budget') {
       content.innerHTML = getLinkBudgetHTML();
       initLinkBudget();
     } else if (toolId === 'airtime') {
@@ -945,6 +949,348 @@
       document.getElementById('configResult').innerHTML = `<div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>${escapeHtml(t.gen(vals))}</div>`;
       document.getElementById('configResult').style.display = 'block';
     });
+  }
+
+  // HF Propagation Calculator
+  function getHFPropHTML() {
+    return `
+      <div class="section-header">
+        <div class="section-number">Tool</div>
+        <h1 class="section-title">HF Propagation Calculator</h1>
+        <p class="section-description">Band selection for FreeDV DATAC over Reticulum HF links. Enter Maidenhead grid squares to get recommendations.</p>
+      </div>
+
+      <div class="content-card">
+        <h3>Solar Conditions</h3>
+        <div id="solarStatus" class="calc-result">
+          <div class="result-label">Loading solar data from HamQSL...</div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Path Analysis</h3>
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label>Your Grid Square</label>
+            <input type="text" id="txGrid" value="FN31" maxlength="6" placeholder="e.g., FN31" style="text-transform: uppercase;">
+          </div>
+          <div class="calc-field">
+            <label>Destination Grid Square</label>
+            <input type="text" id="rxGrid" value="EM12" maxlength="6" placeholder="e.g., EM12" style="text-transform: uppercase;">
+          </div>
+        </div>
+        <button class="calc-button" id="hfCalcBtn">Calculate</button>
+      </div>
+
+      <div id="hfResults" style="display:none;">
+        <div class="content-card">
+          <h3>Path Details</h3>
+          <div id="pathDetails"></div>
+        </div>
+
+        <div class="content-card">
+          <h3>Recommended Bands</h3>
+          <p style="color: var(--text-muted); margin-bottom: 1rem;">Based on distance, local time, and current solar conditions:</p>
+          <div id="bandRecommendations"></div>
+        </div>
+
+        <div class="content-card">
+          <h3>FreeDV DATAC Modes</h3>
+          <table class="quick-ref-table">
+            <thead>
+              <tr><th>Mode</th><th>Speed</th><th>Target SNR</th><th>Bandwidth</th><th>Use When</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>DATAC1</strong></td><td>122.5 bytes/sec</td><td>5 dB</td><td>1.7 kHz</td><td>Good to excellent conditions</td></tr>
+              <tr><td><strong>DATAC3</strong></td><td>40 bytes/sec</td><td>0 dB</td><td>500 Hz</td><td>Fair conditions, high QRM</td></tr>
+              <tr><td><strong>DATAC4</strong></td><td>11 bytes/sec</td><td>-4 dB</td><td>250 Hz</td><td>Poor conditions, weak signals</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box" style="margin-top: 1rem;">
+            <div class="info-box-title">Mode Selection</div>
+            <p>Start with DATAC1. If packet loss exceeds 10%, drop to DATAC3, then DATAC4. FreeDV DATAC1 has 10dB PAPR - set radio power conservatively.</p>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h3>Power Recommendation</h3>
+          <div id="powerRec"></div>
+        </div>
+
+        <div class="content-card">
+          <h3>Expected Transmission Times</h3>
+          <p style="color: var(--text-muted); margin-bottom: 1rem;">Reticulum adds ~67 bytes overhead (encryption + routing):</p>
+          <div id="txTimes"></div>
+        </div>
+      </div>
+    `;
+  }
+
+  function initHFProp() {
+    // Fetch solar data
+    fetchSolarData();
+
+    document.getElementById('hfCalcBtn').addEventListener('click', calculateHFProp);
+  }
+
+  function fetchSolarData() {
+    const solarDiv = document.getElementById('solarStatus');
+
+    // Use a CORS proxy or fallback to defaults
+    fetch('https://www.hamqsl.com/solarxml.php')
+      .then(response => response.text())
+      .then(xmlText => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlText, 'text/xml');
+        const solar = xml.querySelector('solardata');
+
+        if (solar) {
+          const solarFlux = solar.querySelector('solarflux')?.textContent || 'N/A';
+          const kIndex = solar.querySelector('kindex')?.textContent || 'N/A';
+          const aIndex = solar.querySelector('aindex')?.textContent || 'N/A';
+          const updated = solar.querySelector('updated')?.textContent || 'Unknown';
+
+          window.hfSolarData = {
+            solarFlux: parseFloat(solarFlux) || 100,
+            kIndex: parseFloat(kIndex) || 3
+          };
+
+          const condition = assessConditions(window.hfSolarData.solarFlux, window.hfSolarData.kIndex);
+
+          solarDiv.innerHTML = `
+            <div class="result-label">Updated: ${updated}</div>
+            <div class="result-label">Solar Flux: ${solarFlux} | K-index: ${kIndex} | A-index: ${aIndex}</div>
+            <div class="result-value" style="color: ${condition.color}">${condition.text}</div>
+          `;
+        } else {
+          throw new Error('Invalid XML');
+        }
+      })
+      .catch(() => {
+        window.hfSolarData = { solarFlux: 100, kIndex: 3 };
+        solarDiv.innerHTML = `
+          <div class="result-label">Unable to fetch live data. Using defaults:</div>
+          <div class="result-label">Solar Flux: 100 | K-index: 3</div>
+          <div class="result-value" style="color: var(--accent-yellow)">FAIR - Normal conditions (estimated)</div>
+        `;
+      });
+  }
+
+  function assessConditions(sf, k) {
+    if (k >= 5) return { text: 'POOR - High geomagnetic disturbance', color: 'var(--accent)' };
+    if (k >= 4) return { text: 'FAIR - Moderate disturbance', color: 'var(--accent-yellow)' };
+    if (sf > 150) return { text: 'EXCELLENT - High solar flux', color: 'var(--accent-green)' };
+    if (sf > 100) return { text: 'GOOD - Favorable propagation', color: 'var(--accent-green)' };
+    return { text: 'FAIR - Normal conditions', color: 'var(--accent-yellow)' };
+  }
+
+  function maidenheadToLatLon(grid) {
+    const g = grid.trim().toUpperCase();
+    if (g.length < 4) return null;
+
+    let lon = (g.charCodeAt(0) - 65) * 20 - 180;
+    let lat = (g.charCodeAt(1) - 65) * 10 - 90;
+    lon += parseInt(g[2]) * 2;
+    lat += parseInt(g[3]) * 1;
+
+    if (g.length >= 6) {
+      lon += (g.charCodeAt(4) - 65) * (5.0/60.0);
+      lat += (g.charCodeAt(5) - 65) * (2.5/60.0);
+    }
+
+    lon += 1.0;
+    lat += 0.5;
+
+    return { lat, lon };
+  }
+
+  function haversineDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  function calculateHFProp() {
+    const txGrid = document.getElementById('txGrid').value.trim().toUpperCase();
+    const rxGrid = document.getElementById('rxGrid').value.trim().toUpperCase();
+
+    const txPos = maidenheadToLatLon(txGrid);
+    const rxPos = maidenheadToLatLon(rxGrid);
+
+    if (!txPos || !rxPos) {
+      alert('Invalid grid square. Use format like FN31 or EM12iq');
+      return;
+    }
+
+    const distance = haversineDistance(txPos.lat, txPos.lon, rxPos.lat, rxPos.lon);
+    const now = new Date();
+    const utcHour = now.getUTCHours();
+    const midLon = (txPos.lon + rxPos.lon) / 2;
+    const localHour = (utcHour + Math.round(midLon / 15) + 24) % 24;
+
+    const solar = window.hfSolarData || { solarFlux: 100, kIndex: 3 };
+
+    // Path details
+    document.getElementById('pathDetails').innerHTML = `
+      <table class="quick-ref-table">
+        <tbody>
+          <tr><td>From</td><td><strong>${txGrid}</strong> (${txPos.lat.toFixed(2)}°N, ${txPos.lon.toFixed(2)}°E)</td></tr>
+          <tr><td>To</td><td><strong>${rxGrid}</strong> (${rxPos.lat.toFixed(2)}°N, ${rxPos.lon.toFixed(2)}°E)</td></tr>
+          <tr><td>Distance</td><td><strong>${Math.round(distance)} km</strong></td></tr>
+          <tr><td>UTC Time</td><td>${now.getUTCHours().toString().padStart(2,'0')}:${now.getUTCMinutes().toString().padStart(2,'0')}</td></tr>
+          <tr><td>Path Midpoint Local</td><td>~${localHour.toString().padStart(2,'0')}:00</td></tr>
+        </tbody>
+      </table>
+    `;
+
+    // Band recommendations
+    const bands = selectBands(distance, localHour, solar.solarFlux, solar.kIndex);
+    let bandHTML = '';
+    bands.slice(0, 3).forEach((band, i) => {
+      const viability = assessBandViability(band.freq, solar.solarFlux, solar.kIndex);
+      bandHTML += `
+        <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; margin-bottom: 0.75rem; border-left: 3px solid ${viability.color};">
+          <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">
+            ${i+1}. ${band.name} - ${band.freq.toFixed(3)} MHz
+            <span style="float: right; color: var(--text-muted);">Score: ${band.score}/100</span>
+          </div>
+          <div style="color: var(--text-secondary); font-size: 0.9rem;">${band.reason}</div>
+          <div style="color: ${viability.color}; font-size: 0.85rem; margin-top: 0.25rem;">${viability.text}</div>
+        </div>
+      `;
+    });
+    document.getElementById('bandRecommendations').innerHTML = bandHTML;
+
+    // Power recommendation
+    const power = recommendPower(distance);
+    document.getElementById('powerRec').innerHTML = `
+      <div style="font-size: 1.25rem; color: var(--accent-green); margin-bottom: 0.5rem;">${power.watts}</div>
+      <div style="color: var(--text-muted);">${power.reason}</div>
+      <div class="info-box warning" style="margin-top: 1rem;">
+        <div class="info-box-title">Warning</div>
+        <p>FreeDV DATAC1 has 10dB PAPR (high peak-to-average). Set radio power conservatively. Monitor ALC - should barely nudge.</p>
+      </div>
+    `;
+
+    // TX times
+    document.getElementById('txTimes').innerHTML = `
+      <table class="quick-ref-table">
+        <thead><tr><th>Message</th><th>DATAC1</th><th>DATAC3</th><th>DATAC4</th></tr></thead>
+        <tbody>
+          <tr><td>50 chars (117 bytes)</td><td>~1.0 sec</td><td>~2.9 sec</td><td>~10.6 sec</td></tr>
+          <tr><td>100 chars (167 bytes)</td><td>~1.4 sec</td><td>~4.2 sec</td><td>~15.2 sec</td></tr>
+          <tr><td>200 chars (267 bytes)</td><td>~2.2 sec</td><td>~6.7 sec</td><td>~24.3 sec</td></tr>
+          <tr><td>500 chars (567 bytes)</td><td>~4.6 sec</td><td>~14.2 sec</td><td>~51.5 sec</td></tr>
+        </tbody>
+      </table>
+    `;
+
+    document.getElementById('hfResults').style.display = 'block';
+  }
+
+  function selectBands(distance, localHour, sf, k) {
+    const bands = [];
+    const isNight = localHour >= 21 || localHour < 6;
+    const isDay = localHour >= 9 && localHour < 18;
+    const isTwilight = !isNight && !isDay;
+
+    if (distance < 500) {
+      // NVIS
+      if (isNight) {
+        bands.push({ name: '80m', freq: 3.583, reason: 'NVIS night - primary', score: 100 });
+        bands.push({ name: '40m', freq: 7.080, reason: 'NVIS night - secondary', score: 85 });
+      } else if (isDay) {
+        bands.push({ name: '40m', freq: 7.080, reason: 'NVIS day - primary', score: 100 });
+        bands.push({ name: '30m', freq: 10.142, reason: 'NVIS/Skip day - consider', score: 75 });
+      } else {
+        bands.push({ name: '40m', freq: 7.080, reason: 'NVIS twilight - primary', score: 95 });
+        bands.push({ name: '80m', freq: 3.583, reason: 'NVIS twilight - secondary', score: 80 });
+      }
+    } else if (distance < 2000) {
+      // Regional
+      if (isNight) {
+        bands.push({ name: '40m', freq: 7.080, reason: 'Night skip - primary', score: 100 });
+        bands.push({ name: '80m', freq: 3.583, reason: 'Night skip - shorter range', score: 80 });
+        bands.push({ name: '30m', freq: 10.142, reason: 'Night/Day transition', score: 70 });
+      } else if (isDay) {
+        bands.push({ name: '30m', freq: 10.142, reason: 'Day propagation - primary', score: 100 });
+        bands.push({ name: '20m', freq: 14.080, reason: 'Day propagation (check MUF)', score: sf > 100 ? 85 : 60 });
+        bands.push({ name: '40m', freq: 7.080, reason: 'Day (absorption likely)', score: 50 });
+      } else {
+        bands.push({ name: '40m', freq: 7.080, reason: 'Twilight - best bet', score: 95 });
+        bands.push({ name: '30m', freq: 10.142, reason: 'Twilight - good', score: 90 });
+        bands.push({ name: '20m', freq: 14.080, reason: 'Twilight - possible', score: sf > 100 ? 70 : 50 });
+      }
+    } else if (distance < 5000) {
+      // Long distance
+      if (isDay) {
+        bands.push({ name: '20m', freq: 14.080, reason: 'Day long distance - primary', score: sf > 100 ? 100 : 70 });
+        bands.push({ name: '17m', freq: 18.108, reason: 'Day long distance - if SF>120', score: sf > 120 ? 90 : 50 });
+        bands.push({ name: '30m', freq: 10.142, reason: 'Day/Night transition', score: 75 });
+      } else if (isNight) {
+        bands.push({ name: '40m', freq: 7.080, reason: 'Night long distance - primary', score: 100 });
+        bands.push({ name: '30m', freq: 10.142, reason: 'Night long distance - good', score: 90 });
+        bands.push({ name: '20m', freq: 14.080, reason: 'Night (gray line possible)', score: 70 });
+      } else {
+        bands.push({ name: '20m', freq: 14.080, reason: 'Gray line enhancement!', score: 100 });
+        bands.push({ name: '40m', freq: 7.080, reason: 'Gray line - excellent', score: 95 });
+        bands.push({ name: '30m', freq: 10.142, reason: 'Gray line - very good', score: 90 });
+      }
+    } else {
+      // DX >5000km
+      if (isDay) {
+        bands.push({ name: '20m', freq: 14.080, reason: 'Day DX - primary if SF>100', score: sf > 100 ? 100 : 60 });
+        bands.push({ name: '17m', freq: 18.108, reason: 'Day DX - needs SF>130', score: sf > 130 ? 85 : 40 });
+        bands.push({ name: '15m', freq: 21.080, reason: 'Day DX - needs SF>150', score: sf > 150 ? 70 : 20 });
+      } else if (isNight) {
+        bands.push({ name: '20m', freq: 14.080, reason: 'Night DX - best bet', score: 100 });
+        bands.push({ name: '30m', freq: 10.142, reason: 'Night DX - good', score: 85 });
+        bands.push({ name: '40m', freq: 7.080, reason: 'Night DX (if quiet band)', score: 70 });
+      } else {
+        bands.push({ name: '20m', freq: 14.080, reason: 'Gray line DX - BEST!', score: 100 });
+        bands.push({ name: '17m', freq: 18.108, reason: 'Gray line DX - excellent', score: sf > 120 ? 95 : 70 });
+        bands.push({ name: '30m', freq: 10.142, reason: 'Gray line DX - very good', score: 90 });
+      }
+    }
+
+    // Apply K-index penalties
+    bands.forEach(b => {
+      if (k >= 5) b.score -= 30;
+      else if (k >= 4) b.score -= 15;
+      if (b.freq > 18 && sf < 100) b.score -= 30;
+      else if (b.freq > 14 && sf < 80) b.score -= 20;
+      b.score = Math.max(b.score, 10);
+    });
+
+    bands.sort((a, b) => b.score - a.score);
+    return bands;
+  }
+
+  function assessBandViability(freq, sf, k) {
+    if (freq > 18) {
+      if (sf < 100) return { text: 'MARGINAL - Solar flux too low', color: 'var(--accent-yellow)' };
+      if (sf < 130) return { text: 'FAIR - Possible but not ideal', color: 'var(--accent-yellow)' };
+      if (k >= 5) return { text: 'POOR - Geomagnetic storm', color: 'var(--accent)' };
+      return { text: 'GOOD - Conditions support this band', color: 'var(--accent-green)' };
+    } else if (freq > 14) {
+      if (sf < 80) return { text: 'MARGINAL - Low solar flux', color: 'var(--accent-yellow)' };
+      if (k >= 5) return { text: 'POOR - Geomagnetic storm', color: 'var(--accent)' };
+      return { text: 'GOOD - Should work well', color: 'var(--accent-green)' };
+    } else {
+      if (k >= 6) return { text: 'FAIR - Severe disturbance', color: 'var(--accent-yellow)' };
+      return { text: 'GOOD - Lower bands less affected', color: 'var(--accent-green)' };
+    }
+  }
+
+  function recommendPower(distance) {
+    if (distance < 500) return { watts: '5-10 watts', reason: 'NVIS propagation is efficient' };
+    if (distance < 2000) return { watts: '10-25 watts', reason: 'Regional skip propagation' };
+    if (distance < 5000) return { watts: '25-50 watts', reason: 'Long distance propagation' };
+    return { watts: '50-100 watts', reason: 'DX propagation (may need more)' };
   }
 
   // ==========================================================================
