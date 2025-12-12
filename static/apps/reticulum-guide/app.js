@@ -1,1061 +1,487 @@
 /**
  * Reticulum Field Reference
- * Version 2.0 - Complete Rewrite
- * Light Fighter Manifesto L.L.C.
- *
- * Beginner-friendly guide with accurate technical information
- * sourced from official Reticulum documentation.
+ * Version 2.1 - Following Field Guide pattern
  */
 
 (function() {
   'use strict';
 
   // ==========================================================================
-  // CONTENT DATA - All guide sections with accurate information
-  // ==========================================================================
-
-  const sections = [
-    {
-      id: 'getting-started',
-      title: 'Getting Started',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-      content: `
-        <div class="section-header">
-          <div class="section-number">Section 1</div>
-          <h1 class="section-title">Getting Started</h1>
-          <p class="section-description">What Reticulum is, why you need it, and your first steps.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>What is Reticulum?</h3>
-          <p>Reticulum is a cryptography-based networking stack that enables secure, private communications over any medium. It works over WiFi, LoRa radio, packet radio, serial connections, and the internet - all at the same time.</p>
-
-          <h4>Key Features</h4>
-          <ul>
-            <li><strong>Zero Configuration</strong> - Works out of the box with automatic peer discovery</li>
-            <li><strong>End-to-End Encryption</strong> - All communications are encrypted by default</li>
-            <li><strong>Works Anywhere</strong> - Runs on Raspberry Pi, laptops, phones, even microcontrollers</li>
-            <li><strong>Low Bandwidth</strong> - Operates on links as slow as 5 bits per second</li>
-            <li><strong>No Internet Required</strong> - Build mesh networks that work offline</li>
-          </ul>
-        </div>
-
-        <div class="content-card">
-          <h3>The Reticulum Ecosystem</h3>
-          <p>Reticulum is the foundation. Several applications build on top of it:</p>
-
-          <div class="table-wrapper">
-            <table class="quick-ref-table">
-              <thead>
-                <tr><th>Application</th><th>Purpose</th><th>Interface</th></tr>
-              </thead>
-              <tbody>
-                <tr><td><code>rnsd</code></td><td>Network daemon - keeps Reticulum running</td><td>Background service</td></tr>
-                <tr><td><strong>NomadNet</strong></td><td>Messaging, pages, file sharing</td><td>Terminal (text UI)</td></tr>
-                <tr><td><strong>Sideband</strong></td><td>Messaging, voice, maps, telemetry</td><td>Graphical (Android/Desktop)</td></tr>
-                <tr><td><code>lxmd</code></td><td>Message propagation node</td><td>Background service</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>Quick Start (5 Minutes)</h3>
-          <p>Get Reticulum running on your system:</p>
-
-          <h4>Step 1: Install</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install rns</div>
-
-          <div class="info-box warning">
-            <div class="info-box-title">Note</div>
-            <p>On newer Debian/Ubuntu systems, use <code>pipx install rns</code> instead. See the Installation section for details.</p>
-          </div>
-
-          <h4>Step 2: Start the Daemon</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>rnsd</div>
-          <p>First run creates a default config at <code>~/.reticulum/config</code></p>
-
-          <h4>Step 3: Check Status</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>rnstatus</div>
-          <p>Shows your active interfaces and connected peers.</p>
-
-          <h4>Step 4: Install an Application</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install nomadnet
-nomadnet</div>
-          <p>NomadNet gives you encrypted messaging and network browsing in your terminal.</p>
-        </div>
-      `
-    },
-    {
-      id: 'installation',
-      title: 'Installation',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
-      content: `
-        <div class="section-header">
-          <div class="section-number">Section 2</div>
-          <h1 class="section-title">Installation</h1>
-          <p class="section-description">Platform-specific installation instructions.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>Requirements</h3>
-          <ul>
-            <li>Python 3.7 or newer</li>
-            <li>pip (Python package manager)</li>
-            <li>No root access required - runs entirely in userspace</li>
-          </ul>
-        </div>
-
-        <div class="content-card">
-          <h3>Raspberry Pi (Recommended)</h3>
-          <p>Use Raspberry Pi OS 64-bit for best performance.</p>
-
-          <h4>Install Dependencies</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>sudo apt update
-sudo apt install python3 python3-pip python3-dev build-essential</div>
-
-          <h4>Install Reticulum</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install rns --break-system-packages</div>
-
-          <h4>Install Applications</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install nomadnet --break-system-packages
-pip install lxmf --break-system-packages</div>
-
-          <div class="info-box">
-            <div class="info-box-title">Why --break-system-packages?</div>
-            <p>Debian 12+ restricts pip to prevent conflicts with system packages. This flag is safe for user-installed Python packages.</p>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>Debian / Ubuntu (Modern)</h3>
-          <p>For Debian 12 (Bookworm), Ubuntu 23.04+, and similar systems that use PEP 668.</p>
-
-          <h4>Option A: Use pipx (Recommended)</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>sudo apt install pipx
-pipx ensurepath
-pipx install rns
-pipx install nomadnet
-pipx install lxmf</div>
-          <p>Log out and back in for PATH changes to take effect.</p>
-
-          <h4>Option B: Allow pip System-Wide</h4>
-          <p>Edit <code>~/.config/pip/pip.conf</code>:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[global]
-break-system-packages = true</div>
-          <p>Then install normally with <code>pip install rns</code></p>
-        </div>
-
-        <div class="content-card">
-          <h3>macOS</h3>
-          <p>Requires Python 3.7+ (install from python.org or via Homebrew).</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip3 install rns</div>
-
-          <p>If you get permission errors:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip3 install rns --break-system-packages</div>
-
-          <p>Add to your PATH if commands not found:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>export PATH=$PATH:~/Library/Python/3.9/bin</div>
-        </div>
-
-        <div class="content-card">
-          <h3>Windows</h3>
-
-          <h4>Step 1: Install Python</h4>
-          <p>Download Python 3.12+ from <strong>python.org</strong></p>
-          <p><strong>Important:</strong> Check "Add Python to PATH" during installation!</p>
-
-          <h4>Step 2: Open Command Prompt</h4>
-          <p>Press Win+R, type <code>cmd</code>, press Enter</p>
-
-          <h4>Step 3: Install Reticulum</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install rns</div>
-        </div>
-
-        <div class="content-card">
-          <h3>Android (Termux)</h3>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pkg update && pkg upgrade
-pkg install python python-cryptography
-pip install rns nomadnet</div>
-
-          <div class="info-box">
-            <div class="info-box-title">Alternative</div>
-            <p>For a graphical interface on Android, install <strong>Sideband</strong> from the releases page - no Termux required.</p>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>Verify Installation</h3>
-          <p>After installing, test that everything works:</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Start the daemon
-rnsd
-
-# In another terminal, check status
-rnstatus</div>
-
-          <p>You should see output showing your active interfaces. If <code>rnsd</code> is not found, reboot or add pip's bin directory to your PATH.</p>
-        </div>
-      `
-    },
-    {
-      id: 'configuration',
-      title: 'Configuration',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
-      content: `
-        <div class="section-header">
-          <div class="section-number">Section 3</div>
-          <h1 class="section-title">Configuration</h1>
-          <p class="section-description">Understanding config files and basic setup.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>Configuration Locations</h3>
-          <p>Reticulum searches for config files in this order:</p>
-
-          <div class="table-wrapper">
-            <table class="quick-ref-table">
-              <thead>
-                <tr><th>Priority</th><th>Location</th><th>Notes</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>1</td><td><code>/etc/reticulum/</code></td><td>System-wide config</td></tr>
-                <tr><td>2</td><td><code>~/.config/reticulum/</code></td><td>XDG standard location</td></tr>
-                <tr><td>3</td><td><code>~/.reticulum/</code></td><td>Default (created automatically)</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p>First run creates <code>~/.reticulum/config</code> with sensible defaults and one active local interface.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>Config File Structure</h3>
-          <p>The config file has two main sections:</p>
-
-          <h4>[reticulum] - General Settings</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[reticulum]
-  # Enable shared transport (allows routing through this node)
-  enable_transport = no
-
-  # Share your identity (for remote management)
-  share_instance = yes
-
-  # Shared instance port
-  shared_instance_port = 37428
-
-  # Interface mode (for all interfaces by default)
-  # Options: full, gateway, boundary, access_point, roaming
-  interface_mode = full</div>
-
-          <h4>[interfaces] - Network Connections</h4>
-          <p>Each interface connects Reticulum to a network. You can have many interfaces active at once.</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[interfaces]
-
-# Local auto-discovery (finds other Reticulum nodes on LAN)
-[[Default Interface]]
-  type = AutoInterface
-  enabled = yes
-
-# Connect to a public transport node
-[[RNS Testnet Amsterdam]]
-  type = TCPClientInterface
-  enabled = yes
-  target_host = amsterdam.connect.reticulum.network
-  target_port = 4965</div>
-        </div>
-
-        <div class="content-card">
-          <h3>View Example Config</h3>
-          <p>See a complete example configuration with all options documented:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>rnsd --exampleconfig</div>
-        </div>
-
-        <div class="content-card">
-          <h3>Application Config Locations</h3>
-
-          <div class="table-wrapper">
-            <table class="quick-ref-table">
-              <thead>
-                <tr><th>Application</th><th>Config Directory</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Reticulum</td><td><code>~/.reticulum/</code></td></tr>
-                <tr><td>NomadNet</td><td><code>~/.nomadnetwork/</code></td></tr>
-                <tr><td>Sideband</td><td><code>~/.sideband/</code></td></tr>
-                <tr><td>LXMF (lxmd)</td><td><code>~/.lxmd/</code></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>Enable Transport</h3>
-          <p>To allow your node to route traffic for other nodes (recommended for always-on servers):</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[reticulum]
-  enable_transport = yes</div>
-
-          <div class="info-box">
-            <div class="info-box-title">When to Enable Transport</div>
-            <p>Enable this on Raspberry Pi or server nodes that are always running. Leave disabled on mobile devices to save battery.</p>
-          </div>
-        </div>
-      `
-    },
-    {
-      id: 'interfaces',
-      title: 'Interfaces',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
-      content: `
-        <div class="section-header">
-          <div class="section-number">Section 4</div>
-          <h1 class="section-title">Interfaces</h1>
-          <p class="section-description">Connect Reticulum to different networks and radios.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>Interface Types</h3>
-          <p>Reticulum supports many interface types. Here are the most common:</p>
-
-          <div class="table-wrapper">
-            <table class="quick-ref-table">
-              <thead>
-                <tr><th>Interface</th><th>Use Case</th><th>Requirements</th></tr>
-              </thead>
-              <tbody>
-                <tr><td><strong>AutoInterface</strong></td><td>Local network discovery</td><td>LAN/WiFi</td></tr>
-                <tr><td><strong>TCPClientInterface</strong></td><td>Connect to remote nodes</td><td>Internet</td></tr>
-                <tr><td><strong>TCPServerInterface</strong></td><td>Accept incoming connections</td><td>Public IP or tunnel</td></tr>
-                <tr><td><strong>UDPInterface</strong></td><td>Local broadcast</td><td>LAN</td></tr>
-                <tr><td><strong>I2PInterface</strong></td><td>Anonymous connections</td><td>I2P router</td></tr>
-                <tr><td><strong>RNodeInterface</strong></td><td>LoRa radio</td><td>RNode hardware</td></tr>
-                <tr><td><strong>KISSInterface</strong></td><td>Packet radio TNC</td><td>TNC hardware</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>AutoInterface (LAN Discovery)</h3>
-          <p>Automatically discovers other Reticulum nodes on your local network. Enabled by default.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[Default Interface]]
-  type = AutoInterface
-  enabled = yes</div>
-
-          <h4>Advanced Options</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[Default Interface]]
-  type = AutoInterface
-  enabled = yes
-  group_id = reticulum
-  discovery_scope = link
-  discovery_port = 29716
-  data_port = 42671</div>
-
-          <div class="info-box">
-            <div class="info-box-title">Group ID</div>
-            <p>Nodes with the same <code>group_id</code> will discover each other. Change this to create isolated networks.</p>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>TCPClientInterface (Connect to Server)</h3>
-          <p>Connect to a remote Reticulum node over the internet.</p>
-
-          <h4>Connect to Public Testnet</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[RNS Testnet Amsterdam]]
-  type = TCPClientInterface
-  enabled = yes
-  target_host = amsterdam.connect.reticulum.network
-  target_port = 4965</div>
-
-          <h4>Connect to a Specific Server</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[My Server]]
-  type = TCPClientInterface
-  enabled = yes
-  target_host = 192.168.1.100
-  target_port = 4242</div>
-        </div>
-
-        <div class="content-card">
-          <h3>TCPServerInterface (Accept Connections)</h3>
-          <p>Allow other nodes to connect to your server.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[TCP Server]]
-  type = TCPServerInterface
-  enabled = yes
-  listen_ip = 0.0.0.0
-  listen_port = 4242</div>
-
-          <div class="info-box warning">
-            <div class="info-box-title">Firewall</div>
-            <p>Open port 4242 TCP in your firewall and router for external connections.</p>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>I2PInterface (Anonymous)</h3>
-          <p>Connect through the I2P anonymous network. Requires an I2P router (i2pd or Java I2P).</p>
-
-          <h4>Basic Setup</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[I2P]]
-  type = I2PInterface
-  enabled = yes
-  connectable = no</div>
-
-          <h4>Accept Incoming (Run a Node)</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[I2P]]
-  type = I2PInterface
-  enabled = yes
-  connectable = yes</div>
-
-          <h4>Connect to Known Peers</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[I2P]]
-  type = I2PInterface
-  enabled = yes
-  peers = 5urvjicpzi7q3ybztsef4i5ow2aq4soktfj7zedz53s47r54jnqq.b32.i2p</div>
-        </div>
-
-        <div class="content-card">
-          <h3>RNodeInterface (LoRa Radio)</h3>
-          <p>Connect via LoRa radio using RNode hardware. This enables long-range, off-grid communications.</p>
-
-          <h4>Basic RNode Configuration</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[RNode LoRa]]
-  type = RNodeInterface
-  enabled = yes
-  port = /dev/ttyUSB0
-  frequency = 915000000
-  bandwidth = 125000
-  txpower = 17
-  spreadingfactor = 8
-  codingrate = 5</div>
-
-          <div class="table-wrapper">
-            <table class="quick-ref-table">
-              <thead>
-                <tr><th>Parameter</th><th>Description</th><th>Common Values</th></tr>
-              </thead>
-              <tbody>
-                <tr><td><code>frequency</code></td><td>Center frequency (Hz)</td><td>915000000 (US), 868000000 (EU)</td></tr>
-                <tr><td><code>bandwidth</code></td><td>Channel bandwidth (Hz)</td><td>125000, 250000, 500000</td></tr>
-                <tr><td><code>txpower</code></td><td>Transmit power (dBm)</td><td>2-17 (check local regulations)</td></tr>
-                <tr><td><code>spreadingfactor</code></td><td>LoRa SF (7-12)</td><td>8 balanced, 12 max range</td></tr>
-                <tr><td><code>codingrate</code></td><td>Error correction (5-8)</td><td>5 fast, 8 robust</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>KISSInterface (Packet Radio)</h3>
-          <p>Connect via any KISS-compatible TNC (Terminal Node Controller) for packet radio.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[Packet Radio]]
-  type = KISSInterface
-  enabled = yes
-  port = /dev/ttyUSB1
-  speed = 115200
-  preamble = 150
-  txtail = 10
-  persistence = 200
-  slottime = 20</div>
-        </div>
-
-        <div class="content-card">
-          <h3>UDPInterface (LAN Broadcast)</h3>
-          <p>Simple broadcast over local network. Useful for testing.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[[UDP Interface]]
-  type = UDPInterface
-  enabled = yes
-  listen_ip = 0.0.0.0
-  listen_port = 4242
-  forward_ip = 255.255.255.255
-  forward_port = 4242</div>
-        </div>
-      `
-    },
-    {
-      id: 'nomadnet',
-      title: 'NomadNet',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
-      content: `
-        <div class="section-header">
-          <div class="section-number">Section 5</div>
-          <h1 class="section-title">NomadNet</h1>
-          <p class="section-description">Terminal-based messaging and network browser.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>What is NomadNet?</h3>
-          <p>NomadNet is a terminal application that provides encrypted messaging, node browsing, and file sharing over Reticulum. It works on any bandwidth - even 300 bps radio links.</p>
-
-          <h4>Features</h4>
-          <ul>
-            <li>End-to-end encrypted messaging</li>
-            <li>Distributed message store (messages wait for offline users)</li>
-            <li>Browse pages hosted on other nodes</li>
-            <li>Share files securely</li>
-            <li>Works entirely offline with LoRa/packet radio</li>
-          </ul>
-        </div>
-
-        <div class="content-card">
-          <h3>Installation</h3>
-
-          <h4>Standard Install</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install nomadnet</div>
-
-          <h4>With pipx (Recommended)</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pipx install nomadnet</div>
-        </div>
-
-        <div class="content-card">
-          <h3>Running NomadNet</h3>
-
-          <h4>Interactive Mode</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>nomadnet</div>
-          <p>Opens the full text interface with messaging, network browser, and settings.</p>
-
-          <h4>Daemon Mode</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>nomadnet --daemon</div>
-          <p>Runs in background without UI. Your node stays online and stores messages.</p>
-
-          <h4>View Help</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>nomadnet --help</div>
-        </div>
-
-        <div class="content-card">
-          <h3>First Run</h3>
-          <p>On first launch, NomadNet creates <code>~/.nomadnetwork/</code> and generates your identity.</p>
-
-          <h4>Navigation</h4>
-          <div class="table-wrapper">
-            <table class="quick-ref-table">
-              <thead>
-                <tr><th>Key</th><th>Action</th></tr>
-              </thead>
-              <tbody>
-                <tr><td><code>Tab</code></td><td>Switch between sections</td></tr>
-                <tr><td><code>Ctrl+U</code></td><td>Discover nodes (in Network section)</td></tr>
-                <tr><td><code>Ctrl+G</code></td><td>Go to address</td></tr>
-                <tr><td><code>Ctrl+C</code></td><td>Exit</td></tr>
-                <tr><td><code>?</code></td><td>Help</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>Test Nodes</h3>
-          <p>After connecting to the testnet, try visiting these nodes:</p>
-
-          <div class="table-wrapper">
-            <table class="quick-ref-table">
-              <thead>
-                <tr><th>Node</th><th>Address Hash</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Dublin Hub</td><td><code>abb3ebcd03cb2388a838e70c001291f9</code></td></tr>
-                <tr><td>Frankfurt Hub</td><td><code>ea6a715f814bdc37e56f80c34da6ad51</code></td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p>Use <code>Ctrl+G</code> and paste an address to visit.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>Configuration</h3>
-          <p>Config file: <code>~/.nomadnetwork/config</code></p>
-
-          <h4>Key Settings</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[node]
-# Enable your node to host pages
-enable_node = yes
-
-# Node name shown to visitors
-node_name = My Node
-
-# Announce your node on the network
-announce_at_start = yes</div>
-        </div>
-
-        <div class="content-card">
-          <h3>Hosting Pages</h3>
-          <p>NomadNet can host pages written in a simple markup language. Pages go in:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>~/.nomadnetwork/storage/pages/</div>
-
-          <h4>Example Page (index.mu)</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>&gt;Welcome to My Node
-
-This is a simple page hosted on Reticulum.
-
-&gt;\`!Links:\`!
-&gt;&gt;Dublin Hub|abb3ebcd03cb2388a838e70c001291f9</div>
-        </div>
-      `
-    },
-    {
-      id: 'sideband',
-      title: 'Sideband',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
-      content: `
-        <div class="section-header">
-          <div class="section-number">Section 6</div>
-          <h1 class="section-title">Sideband</h1>
-          <p class="section-description">Graphical messaging client for Android and desktop.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>What is Sideband?</h3>
-          <p>Sideband is a graphical LXMF messaging client that runs on Android, Linux, macOS, and Windows. It provides encrypted messaging, voice calls, file sharing, and telemetry.</p>
-
-          <h4>Features</h4>
-          <ul>
-            <li>End-to-end encrypted messaging</li>
-            <li>Voice calls over LoRa</li>
-            <li>Image and file transfers</li>
-            <li>Location sharing with offline maps</li>
-            <li>Telemetry and sensor data</li>
-            <li>Works without Google services (Android)</li>
-          </ul>
-        </div>
-
-        <div class="content-card">
-          <h3>Installation</h3>
-
-          <h4>Android</h4>
-          <p>Download the APK from the Sideband releases page. No Google Play required.</p>
-          <ul>
-            <li>Download the <code>.apk</code> file</li>
-            <li>Enable "Install from unknown sources" in Android settings</li>
-            <li>Install the APK</li>
-          </ul>
-
-          <h4>Linux</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install sbapp</div>
-          <p>Then run <code>sideband</code> from terminal.</p>
-
-          <h4>macOS</h4>
-          <p>Download the disk image from releases, or install via pip:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip3 install sbapp</div>
-
-          <h4>Windows</h4>
-          <p>Download the pre-built ZIP from releases, or use pip with Python 3.12:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install sbapp</div>
-        </div>
-
-        <div class="content-card">
-          <h3>Configuration</h3>
-          <p>Sideband stores its config in <code>~/.sideband/</code></p>
-          <p>Reticulum interfaces are configured in <code>~/.reticulum/config</code> as usual.</p>
-
-          <div class="info-box">
-            <div class="info-box-title">Tip</div>
-            <p>Sideband can run its own Reticulum instance or connect to an existing rnsd daemon.</p>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>Connecting</h3>
-          <p>By default, Sideband tries to connect to a local rnsd instance. To connect directly:</p>
-
-          <ol>
-            <li>Open Sideband settings</li>
-            <li>Go to Connectivity</li>
-            <li>Configure interfaces (TCP, LoRa, etc.)</li>
-          </ol>
-
-          <p>Or run rnsd separately and Sideband will automatically use it.</p>
-        </div>
-      `
-    },
-    {
-      id: 'utilities',
-      title: 'Utilities',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
-      content: `
-        <div class="section-header">
-          <div class="section-number">Section 7</div>
-          <h1 class="section-title">Utilities</h1>
-          <p class="section-description">Command-line tools included with Reticulum.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>rnsd - Network Daemon</h3>
-          <p>Runs Reticulum as a persistent service. Required for other programs to use the network.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Start daemon
-rnsd
-
-# Start as service (logs to file)
-rnsd -s
-
-# Show example config
-rnsd --exampleconfig</div>
-        </div>
-
-        <div class="content-card">
-          <h3>rnstatus - View Status</h3>
-          <p>Shows the status of all configured interfaces (like <code>ifconfig</code>).</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Show all interfaces
-rnstatus
-
-# Filter by interface name
-rnstatus rnode
-
-# JSON output (for scripts)
-rnstatus -j</div>
-        </div>
-
-        <div class="content-card">
-          <h3>rnpath - Path Discovery</h3>
-          <p>Look up and display paths to destinations on the network.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Find path to a destination
-rnpath &lt;destination_hash&gt;
-
-# Show all known paths
-rnpath -t</div>
-        </div>
-
-        <div class="content-card">
-          <h3>rnprobe - Connectivity Test</h3>
-          <p>Test connectivity to a destination (like <code>ping</code>). The destination must support probe replies.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Probe a destination
-rnprobe &lt;destination_name&gt; &lt;destination_hash&gt;
-
-# Probe with larger packet
-rnprobe &lt;destination_hash&gt; -s 256</div>
-        </div>
-
-        <div class="content-card">
-          <h3>rncp - File Transfer</h3>
-          <p>Transfer files securely between Reticulum nodes.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Receive files (run on receiving machine)
-rncp --listen
-
-# Send a file
-rncp file.tar.gz &lt;destination_hash&gt;
-
-# Fetch a file from remote
-rncp --fetch remote_file.txt &lt;destination_hash&gt;</div>
-        </div>
-
-        <div class="content-card">
-          <h3>rnx - Remote Command</h3>
-          <p>Execute commands on remote systems.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Listen for commands (on remote machine)
-rnx --listen
-
-# Execute a command
-rnx &lt;destination_hash&gt; "ls -la"
-
-# Interactive shell
-rnx &lt;destination_hash&gt; -x</div>
-
-          <div class="info-box warning">
-            <div class="info-box-title">Security</div>
-            <p>Only allow remote command execution from trusted identities. Configure allowed identities in rnx settings.</p>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <h3>rnid - Identity Management</h3>
-          <p>Generate and manage Reticulum identities, encrypt/decrypt files.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Generate new identity
-rnid -g ./my_identity
-
-# Show identity info
-rnid -i ./my_identity -p
-
-# Encrypt a file for a destination
-rnid -i &lt;destination_hash&gt; -e file.txt
-
-# Decrypt a file
-rnid -i ./my_identity -d file.txt.rfe</div>
-        </div>
-
-        <div class="content-card">
-          <h3>rnodeconf - RNode Configuration</h3>
-          <p>Inspect and configure RNode LoRa hardware.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Show device info
-rnodeconf -i
-
-# Automatic setup
-rnodeconf -a
-
-# Update firmware
-rnodeconf -u</div>
-        </div>
-
-        <div class="content-card">
-          <h3>lxmd - LXMF Daemon</h3>
-          <p>Run an LXMF message propagation node.</p>
-
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Run as propagation node
-lxmd --propagation-node
-
-# Show example config
-lxmd --exampleconfig
-
-# Run with inbound message handler
-lxmd --on-inbound /path/to/handler.sh</div>
-        </div>
-      `
-    },
-    {
-      id: 'troubleshooting',
-      title: 'Troubleshooting',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
-      content: `
-        <div class="section-header">
-          <div class="section-number">Section 8</div>
-          <h1 class="section-title">Troubleshooting</h1>
-          <p class="section-description">Common issues and solutions.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>"Command not found" after pip install</h3>
-          <p><strong>Cause:</strong> pip installs commands to a directory not in your PATH.</p>
-
-          <h4>Solution 1: Reboot</h4>
-          <p>Log out and back in, or reboot. Many systems update PATH on login.</p>
-
-          <h4>Solution 2: Add to PATH</h4>
-          <p>Add pip's bin directory to your PATH:</p>
-
-          <p><strong>Linux/macOS:</strong></p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>export PATH=$PATH:~/.local/bin</div>
-          <p>Add to <code>~/.bashrc</code> or <code>~/.zshrc</code> to make permanent.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>"externally-managed-environment" Error</h3>
-          <p><strong>Cause:</strong> Newer Debian/Ubuntu systems block pip to protect system packages (PEP 668).</p>
-
-          <h4>Solution 1: Use pipx</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>sudo apt install pipx
-pipx ensurepath
-pipx install rns</div>
-
-          <h4>Solution 2: Use break-system-packages flag</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>pip install rns --break-system-packages</div>
-
-          <h4>Solution 3: Configure pip globally</h4>
-          <p>Create/edit <code>~/.config/pip/pip.conf</code>:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>[global]
-break-system-packages = true</div>
-        </div>
-
-        <div class="content-card">
-          <h3>No Interfaces Showing</h3>
-          <p><strong>Cause:</strong> No interfaces enabled in config, or rnsd not running.</p>
-
-          <h4>Check rnsd is running</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>ps aux | grep rnsd</div>
-
-          <h4>Check config file</h4>
-          <p>Ensure at least one interface has <code>enabled = yes</code> in <code>~/.reticulum/config</code></p>
-
-          <h4>Reset config</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>mv ~/.reticulum/config ~/.reticulum/config.bak
-rnsd</div>
-          <p>This creates a fresh default config.</p>
-        </div>
-
-        <div class="content-card">
-          <h3>Cannot Connect to Remote Nodes</h3>
-          <p><strong>Cause:</strong> Firewall, wrong port, or network issues.</p>
-
-          <h4>Check connectivity</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Test basic connection
-nc -zv amsterdam.connect.reticulum.network 4965</div>
-
-          <h4>Check firewall</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Allow outbound TCP on common ports
-sudo ufw allow out 4965/tcp</div>
-        </div>
-
-        <div class="content-card">
-          <h3>RNode Not Detected</h3>
-          <p><strong>Cause:</strong> Wrong serial port, permissions, or device not in bootloader.</p>
-
-          <h4>Find the correct port</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># List serial devices
-ls /dev/tty*
-
-# On Linux, usually /dev/ttyUSB0 or /dev/ttyACM0</div>
-
-          <h4>Fix permissions</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button># Add user to dialout group
-sudo usermod -a -G dialout $USER
-
-# Log out and back in for changes to take effect</div>
-        </div>
-
-        <div class="content-card">
-          <h3>Messages Not Delivered</h3>
-          <p><strong>Cause:</strong> Recipient offline with no propagation node, or no route.</p>
-
-          <h4>Check path exists</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>rnpath &lt;destination_hash&gt;</div>
-
-          <h4>Enable propagation</h4>
-          <p>Messages to offline users need a propagation node. Run lxmd on an always-on server:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>lxmd --propagation-node</div>
-        </div>
-
-        <div class="content-card">
-          <h3>High Latency / Slow Performance</h3>
-          <p><strong>Cause:</strong> Multi-hop routing, slow interfaces, or high network load.</p>
-
-          <h4>Check interface speeds</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>rnstatus</div>
-          <p>Look at the bitrate of each interface.</p>
-
-          <h4>Reduce LoRa spreading factor</h4>
-          <p>Lower SF = faster but shorter range. In config:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>spreadingfactor = 7</div>
-        </div>
-
-        <div class="content-card">
-          <h3>Getting Help</h3>
-          <ul>
-            <li><strong>Reticulum Manual:</strong> markqvist.github.io/Reticulum/manual/</li>
-            <li><strong>GitHub Issues:</strong> github.com/markqvist/Reticulum/issues</li>
-            <li><strong>Matrix:</strong> #reticulum:matrix.org</li>
-          </ul>
-        </div>
-      `
-    }
-  ];
-
-  // Tools/Calculators
-  const tools = [
-    {
-      id: 'link-budget',
-      title: 'Link Budget Calculator',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>'
-    },
-    {
-      id: 'airtime',
-      title: 'Airtime Calculator',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
-    },
-    {
-      id: 'config-gen',
-      title: 'Config Generator',
-      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
-    }
-  ];
-
-  // ==========================================================================
-  // STATE
+  // State
   // ==========================================================================
 
   const state = {
-    currentSection: 'getting-started',
-    fuse: null
+    sections: [],
+    tools: [],
+    searchIndex: null,
+    currentSection: null,
+    isOffline: !navigator.onLine
   };
 
   // ==========================================================================
-  // INITIALIZATION
+  // Data - All sections embedded
   // ==========================================================================
 
-  function init() {
-    try {
-      buildNavigation();
-      initSearch();
-      initMobile();
-      initOfflineIndicator();
-      showSection('getting-started');
+  const sectionData = [
+    {
+      id: 'getting-started',
+      number: '1',
+      title: 'Getting Started',
+      icon: 'clock',
+      description: 'What Reticulum is, why you need it, and your first steps.',
+      content: [
+        { type: 'heading', level: 3, text: 'What is Reticulum?' },
+        { type: 'paragraph', text: 'Reticulum is a cryptography-based networking stack that enables secure, private communications over any medium. It works over WiFi, LoRa radio, packet radio, serial connections, and the internet - all at the same time.' },
+        { type: 'heading', level: 4, text: 'Key Features' },
+        { type: 'list', items: [
+          '<strong>Zero Configuration</strong> - Works out of the box with automatic peer discovery',
+          '<strong>End-to-End Encryption</strong> - All communications are encrypted by default',
+          '<strong>Works Anywhere</strong> - Runs on Raspberry Pi, laptops, phones, even microcontrollers',
+          '<strong>Low Bandwidth</strong> - Operates on links as slow as 5 bits per second',
+          '<strong>No Internet Required</strong> - Build mesh networks that work offline'
+        ]},
+        { type: 'heading', level: 3, text: 'The Reticulum Ecosystem' },
+        { type: 'table', headers: ['Application', 'Purpose', 'Interface'], rows: [
+          ['<code>rnsd</code>', 'Network daemon - keeps Reticulum running', 'Background service'],
+          ['<strong>NomadNet</strong>', 'Messaging, pages, file sharing', 'Terminal (text UI)'],
+          ['<strong>Sideband</strong>', 'Messaging, voice, maps, telemetry', 'Graphical (Android/Desktop)'],
+          ['<code>lxmd</code>', 'Message propagation node', 'Background service']
+        ]},
+        { type: 'heading', level: 3, text: 'Quick Start (5 Minutes)' },
+        { type: 'paragraph', text: 'Get Reticulum running on your system:' },
+        { type: 'heading', level: 4, text: 'Step 1: Install' },
+        { type: 'code', text: 'pip install rns' },
+        { type: 'info', title: 'Note', text: 'On newer Debian/Ubuntu systems, use <code>pipx install rns</code> instead. See the Installation section for details.' },
+        { type: 'heading', level: 4, text: 'Step 2: Start the Daemon' },
+        { type: 'code', text: 'rnsd' },
+        { type: 'paragraph', text: 'First run creates a default config at <code>~/.reticulum/config</code>' },
+        { type: 'heading', level: 4, text: 'Step 3: Check Status' },
+        { type: 'code', text: 'rnstatus' },
+        { type: 'paragraph', text: 'Shows your active interfaces and connected peers.' },
+        { type: 'heading', level: 4, text: 'Step 4: Install an Application' },
+        { type: 'code', text: 'pip install nomadnet\nnomadnet' },
+        { type: 'paragraph', text: 'NomadNet gives you encrypted messaging and network browsing in your terminal.' }
+      ]
+    },
+    {
+      id: 'installation',
+      number: '2',
+      title: 'Installation',
+      icon: 'download',
+      description: 'Platform-specific installation instructions.',
+      content: [
+        { type: 'heading', level: 3, text: 'Requirements' },
+        { type: 'list', items: [
+          'Python 3.7 or newer',
+          'pip (Python package manager)',
+          'No root access required - runs entirely in userspace'
+        ]},
+        { type: 'heading', level: 3, text: 'Raspberry Pi (Recommended)' },
+        { type: 'paragraph', text: 'Use Raspberry Pi OS 64-bit for best performance.' },
+        { type: 'heading', level: 4, text: 'Install Dependencies' },
+        { type: 'code', text: 'sudo apt update\nsudo apt install python3 python3-pip python3-dev build-essential' },
+        { type: 'heading', level: 4, text: 'Install Reticulum' },
+        { type: 'code', text: 'pip install rns --break-system-packages' },
+        { type: 'heading', level: 4, text: 'Install Applications' },
+        { type: 'code', text: 'pip install nomadnet --break-system-packages\npip install lxmf --break-system-packages' },
+        { type: 'info', title: 'Why --break-system-packages?', text: 'Debian 12+ restricts pip to prevent conflicts with system packages. This flag is safe for user-installed Python packages.' },
+        { type: 'heading', level: 3, text: 'Debian / Ubuntu (Modern)' },
+        { type: 'paragraph', text: 'For Debian 12 (Bookworm), Ubuntu 23.04+, and similar systems that use PEP 668.' },
+        { type: 'heading', level: 4, text: 'Option A: Use pipx (Recommended)' },
+        { type: 'code', text: 'sudo apt install pipx\npipx ensurepath\npipx install rns\npipx install nomadnet\npipx install lxmf' },
+        { type: 'paragraph', text: 'Log out and back in for PATH changes to take effect.' },
+        { type: 'heading', level: 4, text: 'Option B: Allow pip System-Wide' },
+        { type: 'paragraph', text: 'Edit <code>~/.config/pip/pip.conf</code>:' },
+        { type: 'code', text: '[global]\nbreak-system-packages = true' },
+        { type: 'paragraph', text: 'Then install normally with <code>pip install rns</code>' },
+        { type: 'heading', level: 3, text: 'macOS' },
+        { type: 'paragraph', text: 'Requires Python 3.7+ (install from python.org or via Homebrew).' },
+        { type: 'code', text: 'pip3 install rns' },
+        { type: 'paragraph', text: 'If you get permission errors:' },
+        { type: 'code', text: 'pip3 install rns --break-system-packages' },
+        { type: 'paragraph', text: 'Add to your PATH if commands not found:' },
+        { type: 'code', text: 'export PATH=$PATH:~/Library/Python/3.9/bin' },
+        { type: 'heading', level: 3, text: 'Windows' },
+        { type: 'heading', level: 4, text: 'Step 1: Install Python' },
+        { type: 'paragraph', text: 'Download Python 3.12+ from <strong>python.org</strong>' },
+        { type: 'paragraph', text: '<strong>Important:</strong> Check "Add Python to PATH" during installation!' },
+        { type: 'heading', level: 4, text: 'Step 2: Open Command Prompt' },
+        { type: 'paragraph', text: 'Press Win+R, type <code>cmd</code>, press Enter' },
+        { type: 'heading', level: 4, text: 'Step 3: Install Reticulum' },
+        { type: 'code', text: 'pip install rns' },
+        { type: 'heading', level: 3, text: 'Android (Termux)' },
+        { type: 'code', text: 'pkg update && pkg upgrade\npkg install python python-cryptography\npip install rns nomadnet' },
+        { type: 'info', title: 'Alternative', text: 'For a graphical interface on Android, install <strong>Sideband</strong> from the releases page - no Termux required.' },
+        { type: 'heading', level: 3, text: 'Verify Installation' },
+        { type: 'paragraph', text: 'After installing, test that everything works:' },
+        { type: 'code', text: '# Start the daemon\nrnsd\n\n# In another terminal, check status\nrnstatus' },
+        { type: 'paragraph', text: 'You should see output showing your active interfaces. If <code>rnsd</code> is not found, reboot or add pip\'s bin directory to your PATH.' }
+      ]
+    },
+    {
+      id: 'configuration',
+      number: '3',
+      title: 'Configuration',
+      icon: 'settings',
+      description: 'Understanding config files and basic setup.',
+      content: [
+        { type: 'heading', level: 3, text: 'Configuration Locations' },
+        { type: 'paragraph', text: 'Reticulum searches for config files in this order:' },
+        { type: 'table', headers: ['Priority', 'Location', 'Notes'], rows: [
+          ['1', '<code>/etc/reticulum/</code>', 'System-wide config'],
+          ['2', '<code>~/.config/reticulum/</code>', 'XDG standard location'],
+          ['3', '<code>~/.reticulum/</code>', 'Default (created automatically)']
+        ]},
+        { type: 'paragraph', text: 'First run creates <code>~/.reticulum/config</code> with sensible defaults and one active local interface.' },
+        { type: 'heading', level: 3, text: 'Config File Structure' },
+        { type: 'paragraph', text: 'The config file has two main sections:' },
+        { type: 'heading', level: 4, text: '[reticulum] - General Settings' },
+        { type: 'code', text: '[reticulum]\n  # Enable shared transport (allows routing through this node)\n  enable_transport = no\n\n  # Share your identity (for remote management)\n  share_instance = yes\n\n  # Shared instance port\n  shared_instance_port = 37428\n\n  # Interface mode (for all interfaces by default)\n  # Options: full, gateway, boundary, access_point, roaming\n  interface_mode = full' },
+        { type: 'heading', level: 4, text: '[interfaces] - Network Connections' },
+        { type: 'paragraph', text: 'Each interface connects Reticulum to a network. You can have many interfaces active at once.' },
+        { type: 'code', text: '[interfaces]\n\n# Local auto-discovery (finds other Reticulum nodes on LAN)\n[[Default Interface]]\n  type = AutoInterface\n  enabled = yes\n\n# Connect to a public transport node\n[[RNS Testnet Amsterdam]]\n  type = TCPClientInterface\n  enabled = yes\n  target_host = amsterdam.connect.reticulum.network\n  target_port = 4965' },
+        { type: 'heading', level: 3, text: 'View Example Config' },
+        { type: 'paragraph', text: 'See a complete example configuration with all options documented:' },
+        { type: 'code', text: 'rnsd --exampleconfig' },
+        { type: 'heading', level: 3, text: 'Application Config Locations' },
+        { type: 'table', headers: ['Application', 'Config Directory'], rows: [
+          ['Reticulum', '<code>~/.reticulum/</code>'],
+          ['NomadNet', '<code>~/.nomadnetwork/</code>'],
+          ['Sideband', '<code>~/.sideband/</code>'],
+          ['LXMF (lxmd)', '<code>~/.lxmd/</code>']
+        ]},
+        { type: 'heading', level: 3, text: 'Enable Transport' },
+        { type: 'paragraph', text: 'To allow your node to route traffic for other nodes (recommended for always-on servers):' },
+        { type: 'code', text: '[reticulum]\n  enable_transport = yes' },
+        { type: 'info', title: 'When to Enable Transport', text: 'Enable this on Raspberry Pi or server nodes that are always running. Leave disabled on mobile devices to save battery.' }
+      ]
+    },
+    {
+      id: 'interfaces',
+      number: '4',
+      title: 'Interfaces',
+      icon: 'monitor',
+      description: 'Connect Reticulum to different networks and radios.',
+      content: [
+        { type: 'heading', level: 3, text: 'Interface Types' },
+        { type: 'paragraph', text: 'Reticulum supports many interface types. Here are the most common:' },
+        { type: 'table', headers: ['Interface', 'Use Case', 'Requirements'], rows: [
+          ['<strong>AutoInterface</strong>', 'Local network discovery', 'LAN/WiFi'],
+          ['<strong>TCPClientInterface</strong>', 'Connect to remote nodes', 'Internet'],
+          ['<strong>TCPServerInterface</strong>', 'Accept incoming connections', 'Public IP or tunnel'],
+          ['<strong>UDPInterface</strong>', 'Local broadcast', 'LAN'],
+          ['<strong>I2PInterface</strong>', 'Anonymous connections', 'I2P router'],
+          ['<strong>RNodeInterface</strong>', 'LoRa radio', 'RNode hardware'],
+          ['<strong>KISSInterface</strong>', 'Packet radio TNC', 'TNC hardware']
+        ]},
+        { type: 'heading', level: 3, text: 'AutoInterface (LAN Discovery)' },
+        { type: 'paragraph', text: 'Automatically discovers other Reticulum nodes on your local network. Enabled by default.' },
+        { type: 'code', text: '[[Default Interface]]\n  type = AutoInterface\n  enabled = yes' },
+        { type: 'heading', level: 4, text: 'Advanced Options' },
+        { type: 'code', text: '[[Default Interface]]\n  type = AutoInterface\n  enabled = yes\n  group_id = reticulum\n  discovery_scope = link\n  discovery_port = 29716\n  data_port = 42671' },
+        { type: 'info', title: 'Group ID', text: 'Nodes with the same <code>group_id</code> will discover each other. Change this to create isolated networks.' },
+        { type: 'heading', level: 3, text: 'TCPClientInterface (Connect to Server)' },
+        { type: 'paragraph', text: 'Connect to a remote Reticulum node over the internet.' },
+        { type: 'heading', level: 4, text: 'Connect to Public Testnet' },
+        { type: 'code', text: '[[RNS Testnet Amsterdam]]\n  type = TCPClientInterface\n  enabled = yes\n  target_host = amsterdam.connect.reticulum.network\n  target_port = 4965' },
+        { type: 'heading', level: 4, text: 'Connect to a Specific Server' },
+        { type: 'code', text: '[[My Server]]\n  type = TCPClientInterface\n  enabled = yes\n  target_host = 192.168.1.100\n  target_port = 4242' },
+        { type: 'heading', level: 3, text: 'TCPServerInterface (Accept Connections)' },
+        { type: 'paragraph', text: 'Allow other nodes to connect to your server.' },
+        { type: 'code', text: '[[TCP Server]]\n  type = TCPServerInterface\n  enabled = yes\n  listen_ip = 0.0.0.0\n  listen_port = 4242' },
+        { type: 'info', title: 'Firewall', text: 'Open port 4242 TCP in your firewall and router for external connections.', warning: true },
+        { type: 'heading', level: 3, text: 'I2PInterface (Anonymous)' },
+        { type: 'paragraph', text: 'Connect through the I2P anonymous network. Requires an I2P router (i2pd or Java I2P).' },
+        { type: 'heading', level: 4, text: 'Basic Setup' },
+        { type: 'code', text: '[[I2P]]\n  type = I2PInterface\n  enabled = yes\n  connectable = no' },
+        { type: 'heading', level: 4, text: 'Accept Incoming (Run a Node)' },
+        { type: 'code', text: '[[I2P]]\n  type = I2PInterface\n  enabled = yes\n  connectable = yes' },
+        { type: 'heading', level: 3, text: 'RNodeInterface (LoRa Radio)' },
+        { type: 'paragraph', text: 'Connect via LoRa radio using RNode hardware. This enables long-range, off-grid communications.' },
+        { type: 'heading', level: 4, text: 'Basic RNode Configuration' },
+        { type: 'code', text: '[[RNode LoRa]]\n  type = RNodeInterface\n  enabled = yes\n  port = /dev/ttyUSB0\n  frequency = 915000000\n  bandwidth = 125000\n  txpower = 17\n  spreadingfactor = 8\n  codingrate = 5' },
+        { type: 'table', headers: ['Parameter', 'Description', 'Common Values'], rows: [
+          ['<code>frequency</code>', 'Center frequency (Hz)', '915000000 (US), 868000000 (EU)'],
+          ['<code>bandwidth</code>', 'Channel bandwidth (Hz)', '125000, 250000, 500000'],
+          ['<code>txpower</code>', 'Transmit power (dBm)', '2-17 (check local regulations)'],
+          ['<code>spreadingfactor</code>', 'LoRa SF (7-12)', '8 balanced, 12 max range'],
+          ['<code>codingrate</code>', 'Error correction (5-8)', '5 fast, 8 robust']
+        ]}
+      ]
+    },
+    {
+      id: 'nomadnet',
+      number: '5',
+      title: 'NomadNet',
+      icon: 'message',
+      description: 'Terminal-based messaging and network browser.',
+      content: [
+        { type: 'heading', level: 3, text: 'What is NomadNet?' },
+        { type: 'paragraph', text: 'NomadNet is a terminal application that provides encrypted messaging, node browsing, and file sharing over Reticulum. It works on any bandwidth - even 300 bps radio links.' },
+        { type: 'heading', level: 4, text: 'Features' },
+        { type: 'list', items: [
+          'End-to-end encrypted messaging',
+          'Distributed message store (messages wait for offline users)',
+          'Browse pages hosted on other nodes',
+          'Share files securely',
+          'Works entirely offline with LoRa/packet radio'
+        ]},
+        { type: 'heading', level: 3, text: 'Installation' },
+        { type: 'heading', level: 4, text: 'Standard Install' },
+        { type: 'code', text: 'pip install nomadnet' },
+        { type: 'heading', level: 4, text: 'With pipx (Recommended)' },
+        { type: 'code', text: 'pipx install nomadnet' },
+        { type: 'heading', level: 3, text: 'Running NomadNet' },
+        { type: 'heading', level: 4, text: 'Interactive Mode' },
+        { type: 'code', text: 'nomadnet' },
+        { type: 'paragraph', text: 'Opens the full text interface with messaging, network browser, and settings.' },
+        { type: 'heading', level: 4, text: 'Daemon Mode' },
+        { type: 'code', text: 'nomadnet --daemon' },
+        { type: 'paragraph', text: 'Runs in background without UI. Your node stays online and stores messages.' },
+        { type: 'heading', level: 3, text: 'Navigation' },
+        { type: 'table', headers: ['Key', 'Action'], rows: [
+          ['<code>Tab</code>', 'Switch between sections'],
+          ['<code>Ctrl+U</code>', 'Discover nodes (in Network section)'],
+          ['<code>Ctrl+G</code>', 'Go to address'],
+          ['<code>Ctrl+C</code>', 'Exit'],
+          ['<code>?</code>', 'Help']
+        ]},
+        { type: 'heading', level: 3, text: 'Test Nodes' },
+        { type: 'paragraph', text: 'After connecting to the testnet, try visiting these nodes:' },
+        { type: 'table', headers: ['Node', 'Address Hash'], rows: [
+          ['Dublin Hub', '<code>abb3ebcd03cb2388a838e70c001291f9</code>'],
+          ['Frankfurt Hub', '<code>ea6a715f814bdc37e56f80c34da6ad51</code>']
+        ]},
+        { type: 'paragraph', text: 'Use <code>Ctrl+G</code> and paste an address to visit.' }
+      ]
+    },
+    {
+      id: 'sideband',
+      number: '6',
+      title: 'Sideband',
+      icon: 'phone',
+      description: 'Graphical messaging client for Android and desktop.',
+      content: [
+        { type: 'heading', level: 3, text: 'What is Sideband?' },
+        { type: 'paragraph', text: 'Sideband is a graphical LXMF messaging client that runs on Android, Linux, macOS, and Windows. It provides encrypted messaging, voice calls, file sharing, and telemetry.' },
+        { type: 'heading', level: 4, text: 'Features' },
+        { type: 'list', items: [
+          'End-to-end encrypted messaging',
+          'Voice calls over LoRa',
+          'Image and file transfers',
+          'Location sharing with offline maps',
+          'Telemetry and sensor data',
+          'Works without Google services (Android)'
+        ]},
+        { type: 'heading', level: 3, text: 'Installation' },
+        { type: 'heading', level: 4, text: 'Android' },
+        { type: 'paragraph', text: 'Download the APK from the Sideband releases page. No Google Play required.' },
+        { type: 'list', items: [
+          'Download the <code>.apk</code> file',
+          'Enable "Install from unknown sources" in Android settings',
+          'Install the APK'
+        ]},
+        { type: 'heading', level: 4, text: 'Linux' },
+        { type: 'code', text: 'pip install sbapp' },
+        { type: 'paragraph', text: 'Then run <code>sideband</code> from terminal.' },
+        { type: 'heading', level: 4, text: 'macOS' },
+        { type: 'paragraph', text: 'Download the disk image from releases, or install via pip:' },
+        { type: 'code', text: 'pip3 install sbapp' },
+        { type: 'heading', level: 4, text: 'Windows' },
+        { type: 'paragraph', text: 'Download the pre-built ZIP from releases, or use pip with Python 3.12:' },
+        { type: 'code', text: 'pip install sbapp' },
+        { type: 'heading', level: 3, text: 'Configuration' },
+        { type: 'paragraph', text: 'Sideband stores its config in <code>~/.sideband/</code>' },
+        { type: 'paragraph', text: 'Reticulum interfaces are configured in <code>~/.reticulum/config</code> as usual.' },
+        { type: 'info', title: 'Tip', text: 'Sideband can run its own Reticulum instance or connect to an existing rnsd daemon.' }
+      ]
+    },
+    {
+      id: 'utilities',
+      number: '7',
+      title: 'Utilities',
+      icon: 'tool',
+      description: 'Command-line tools included with Reticulum.',
+      content: [
+        { type: 'heading', level: 3, text: 'rnsd - Network Daemon' },
+        { type: 'paragraph', text: 'Runs Reticulum as a persistent service. Required for other programs to use the network.' },
+        { type: 'code', text: '# Start daemon\nrnsd\n\n# Start as service (logs to file)\nrnsd -s\n\n# Show example config\nrnsd --exampleconfig' },
+        { type: 'heading', level: 3, text: 'rnstatus - View Status' },
+        { type: 'paragraph', text: 'Shows the status of all configured interfaces (like <code>ifconfig</code>).' },
+        { type: 'code', text: '# Show all interfaces\nrnstatus\n\n# Filter by interface name\nrnstatus rnode\n\n# JSON output (for scripts)\nrnstatus -j' },
+        { type: 'heading', level: 3, text: 'rnpath - Path Discovery' },
+        { type: 'paragraph', text: 'Look up and display paths to destinations on the network.' },
+        { type: 'code', text: '# Find path to a destination\nrnpath <destination_hash>\n\n# Show all known paths\nrnpath -t' },
+        { type: 'heading', level: 3, text: 'rnprobe - Connectivity Test' },
+        { type: 'paragraph', text: 'Test connectivity to a destination (like <code>ping</code>). The destination must support probe replies.' },
+        { type: 'code', text: '# Probe a destination\nrnprobe <destination_name> <destination_hash>\n\n# Probe with larger packet\nrnprobe <destination_hash> -s 256' },
+        { type: 'heading', level: 3, text: 'rncp - File Transfer' },
+        { type: 'paragraph', text: 'Transfer files securely between Reticulum nodes.' },
+        { type: 'code', text: '# Receive files (run on receiving machine)\nrncp --listen\n\n# Send a file\nrncp file.tar.gz <destination_hash>\n\n# Fetch a file from remote\nrncp --fetch remote_file.txt <destination_hash>' },
+        { type: 'heading', level: 3, text: 'rnx - Remote Command' },
+        { type: 'paragraph', text: 'Execute commands on remote systems.' },
+        { type: 'code', text: '# Listen for commands (on remote machine)\nrnx --listen\n\n# Execute a command\nrnx <destination_hash> "ls -la"\n\n# Interactive shell\nrnx <destination_hash> -x' },
+        { type: 'info', title: 'Security', text: 'Only allow remote command execution from trusted identities. Configure allowed identities in rnx settings.', warning: true },
+        { type: 'heading', level: 3, text: 'rnid - Identity Management' },
+        { type: 'paragraph', text: 'Generate and manage Reticulum identities, encrypt/decrypt files.' },
+        { type: 'code', text: '# Generate new identity\nrnid -g ./my_identity\n\n# Show identity info\nrnid -i ./my_identity -p\n\n# Encrypt a file for a destination\nrnid -i <destination_hash> -e file.txt\n\n# Decrypt a file\nrnid -i ./my_identity -d file.txt.rfe' },
+        { type: 'heading', level: 3, text: 'lxmd - LXMF Daemon' },
+        { type: 'paragraph', text: 'Run an LXMF message propagation node.' },
+        { type: 'code', text: '# Run as propagation node\nlxmd --propagation-node\n\n# Show example config\nlxmd --exampleconfig' }
+      ]
+    },
+    {
+      id: 'troubleshooting',
+      number: '8',
+      title: 'Troubleshooting',
+      icon: 'alert',
+      description: 'Common issues and solutions.',
+      content: [
+        { type: 'heading', level: 3, text: '"Command not found" after pip install' },
+        { type: 'paragraph', text: '<strong>Cause:</strong> pip installs commands to a directory not in your PATH.' },
+        { type: 'heading', level: 4, text: 'Solution 1: Reboot' },
+        { type: 'paragraph', text: 'Log out and back in, or reboot. Many systems update PATH on login.' },
+        { type: 'heading', level: 4, text: 'Solution 2: Add to PATH' },
+        { type: 'paragraph', text: 'Add pip\'s bin directory to your PATH:' },
+        { type: 'paragraph', text: '<strong>Linux/macOS:</strong>' },
+        { type: 'code', text: 'export PATH=$PATH:~/.local/bin' },
+        { type: 'paragraph', text: 'Add to <code>~/.bashrc</code> or <code>~/.zshrc</code> to make permanent.' },
+        { type: 'heading', level: 3, text: '"externally-managed-environment" Error' },
+        { type: 'paragraph', text: '<strong>Cause:</strong> Newer Debian/Ubuntu systems block pip to protect system packages (PEP 668).' },
+        { type: 'heading', level: 4, text: 'Solution 1: Use pipx' },
+        { type: 'code', text: 'sudo apt install pipx\npipx ensurepath\npipx install rns' },
+        { type: 'heading', level: 4, text: 'Solution 2: Use break-system-packages flag' },
+        { type: 'code', text: 'pip install rns --break-system-packages' },
+        { type: 'heading', level: 3, text: 'No Interfaces Showing' },
+        { type: 'paragraph', text: '<strong>Cause:</strong> No interfaces enabled in config, or rnsd not running.' },
+        { type: 'heading', level: 4, text: 'Check rnsd is running' },
+        { type: 'code', text: 'ps aux | grep rnsd' },
+        { type: 'heading', level: 4, text: 'Reset config' },
+        { type: 'code', text: 'mv ~/.reticulum/config ~/.reticulum/config.bak\nrnsd' },
+        { type: 'paragraph', text: 'This creates a fresh default config.' },
+        { type: 'heading', level: 3, text: 'RNode Not Detected' },
+        { type: 'paragraph', text: '<strong>Cause:</strong> Wrong serial port, permissions, or device not in bootloader.' },
+        { type: 'heading', level: 4, text: 'Find the correct port' },
+        { type: 'code', text: '# List serial devices\nls /dev/tty*\n\n# On Linux, usually /dev/ttyUSB0 or /dev/ttyACM0' },
+        { type: 'heading', level: 4, text: 'Fix permissions' },
+        { type: 'code', text: '# Add user to dialout group\nsudo usermod -a -G dialout $USER\n\n# Log out and back in for changes to take effect' },
+        { type: 'heading', level: 3, text: 'Getting Help' },
+        { type: 'list', items: [
+          '<strong>Reticulum Manual:</strong> markqvist.github.io/Reticulum/manual/',
+          '<strong>GitHub Issues:</strong> github.com/markqvist/Reticulum/issues',
+          '<strong>Matrix:</strong> #reticulum:matrix.org'
+        ]}
+      ]
+    }
+  ];
 
-      // Handle keyboard shortcuts
-      document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-          e.preventDefault();
-          document.getElementById('searchInput').focus();
-        }
-      });
-    } catch (error) {
-      console.error('[App] Init error:', error);
-      // Still try to show content even if search fails
-      try {
-        showSection('getting-started');
-      } catch (e) {
-        document.getElementById('contentArea').innerHTML = '<div style="padding: 2rem; color: red;">Error loading app: ' + error.message + '</div>';
-      }
+  const toolsData = [
+    { id: 'link-budget', title: 'Link Budget Calculator', icon: 'signal' },
+    { id: 'airtime', title: 'Airtime Calculator', icon: 'clock' },
+    { id: 'config-gen', title: 'Config Generator', icon: 'file' }
+  ];
+
+  // ==========================================================================
+  // Initialization
+  // ==========================================================================
+
+  function loadData() {
+    state.sections = sectionData;
+    state.tools = toolsData;
+    initializeApp();
+  }
+
+  function initializeApp() {
+    buildSidebar();
+    initSearch();
+    initMobileMenu();
+    initKeyboardShortcuts();
+    initOfflineIndicator();
+    handleInitialRoute();
+  }
+
+  function handleInitialRoute() {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      navigateToHash(hash);
+    } else {
+      showWelcome();
     }
   }
 
   // ==========================================================================
-  // NAVIGATION
+  // Sidebar Navigation
   // ==========================================================================
 
-  function buildNavigation() {
-    const sidebarNav = document.getElementById('sidebarNav');
-    const sidebarTools = document.getElementById('sidebarTools');
+  function buildSidebar() {
+    const nav = document.getElementById('sidebarNav');
+    const toolsNav = document.getElementById('sidebarTools');
 
-    // Build section navigation
-    sidebarNav.innerHTML = sections.map(section => `
+    const icons = {
+      clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+      download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+      settings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>',
+      monitor: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+      message: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+      phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+      tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+      alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+      signal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
+      file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
+    };
+
+    nav.innerHTML = state.sections.map(section => `
       <li class="sidebar-nav-item">
         <a href="#${section.id}" class="sidebar-nav-link" data-section="${section.id}">
-          ${section.icon}
-          ${section.title}
+          ${icons[section.icon] || icons.signal}
+          <span>${section.number}. ${section.title}</span>
         </a>
       </li>
     `).join('');
 
-    // Build tools navigation
-    sidebarTools.innerHTML = tools.map(tool => `
+    toolsNav.innerHTML = state.tools.map(tool => `
       <li class="sidebar-nav-item">
         <a href="#${tool.id}" class="sidebar-nav-link" data-tool="${tool.id}">
-          ${tool.icon}
-          ${tool.title}
+          ${icons[tool.icon] || icons.tool}
+          <span>${tool.title}</span>
         </a>
       </li>
     `).join('');
 
-    // Add click handlers
-    document.querySelectorAll('[data-section]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        showSection(link.dataset.section);
-        closeSidebar();
-      });
-    });
+    nav.addEventListener('click', handleNavClick);
+    toolsNav.addEventListener('click', handleNavClick);
 
-    document.querySelectorAll('[data-tool]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        showTool(link.dataset.tool);
-        closeSidebar();
-      });
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.slice(1);
+      if (hash) navigateToHash(hash);
     });
   }
 
-  function showSection(sectionId) {
-    const section = sections.find(s => s.id === sectionId);
-    if (!section) return;
+  function handleNavClick(e) {
+    const link = e.target.closest('.sidebar-nav-link');
+    if (!link) return;
 
-    state.currentSection = sectionId;
-    updateActiveNav(sectionId);
+    e.preventDefault();
+    const sectionId = link.dataset.section;
+    const toolId = link.dataset.tool;
 
-    const contentArea = document.getElementById('contentArea');
-    contentArea.innerHTML = section.content;
+    window.location.hash = sectionId || toolId;
+    closeMobileMenu();
+  }
 
-    window.scrollTo(0, 0);
+  function navigateToHash(hash) {
+    const section = state.sections.find(s => s.id === hash);
+    if (section) {
+      showSection(section);
+      updateActiveNav(hash);
+      return;
+    }
+
+    const tool = state.tools.find(t => t.id === hash);
+    if (tool) {
+      showTool(hash);
+      updateActiveNav(hash);
+    }
   }
 
   function updateActiveNav(activeId) {
@@ -1068,281 +494,234 @@ sudo usermod -a -G dialout $USER
   }
 
   // ==========================================================================
-  // TOOLS / CALCULATORS
+  // Content Rendering
+  // ==========================================================================
+
+  function showWelcome() {
+    const content = document.getElementById('contentArea');
+    content.innerHTML = `
+      <div class="section-header">
+        <div class="section-number">Light Fighter Manifesto</div>
+        <h1 class="section-title">Reticulum Field Reference</h1>
+        <p class="section-description">Complete beginner's guide to Reticulum mesh networking, NomadNet, and LXMF messaging. Select a section from the sidebar or search above.</p>
+      </div>
+
+      <div class="content-card">
+        <h3>Sections</h3>
+        <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+          ${state.sections.map(section => `
+            <a href="#${section.id}" style="display: flex; gap: 1rem; padding: 1rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+              <div style="color: var(--accent); font-weight: 700; font-size: 1.5rem; min-width: 2rem;">${section.number}</div>
+              <div>
+                <div style="color: var(--text-primary); font-weight: 600;">${section.title}</div>
+                <div style="color: var(--text-muted); font-size: 0.9rem;">${section.description}</div>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Interactive Tools</h3>
+        <div style="display: grid; gap: 0.75rem; margin-top: 1rem;">
+          ${state.tools.map(tool => `
+            <a href="#${tool.id}" style="display: flex; gap: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; text-decoration: none; transition: background 0.2s;">
+              <div style="color: var(--text-primary); font-weight: 600;">${tool.title}</div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  function showSection(section) {
+    const content = document.getElementById('contentArea');
+    content.innerHTML = `
+      <div class="section-header">
+        <div class="section-number">Section ${section.number}</div>
+        <h1 class="section-title">${section.title}</h1>
+        <p class="section-description">${section.description}</p>
+      </div>
+
+      ${renderContent(section.content)}
+    `;
+    window.scrollTo(0, 0);
+  }
+
+  function renderContent(contentArray) {
+    return contentArray.map(item => {
+      switch (item.type) {
+        case 'paragraph':
+          return `<div class="content-card"><p>${item.text}</p></div>`;
+
+        case 'heading':
+          return `<h${item.level} style="margin-top: 2rem; margin-bottom: 1rem;">${item.text}</h${item.level}>`;
+
+        case 'list':
+          return `<div class="content-card"><ul>${item.items.map(i => `<li>${i}</li>`).join('')}</ul></div>`;
+
+        case 'table':
+          return `
+            <div class="content-card" style="overflow-x: auto;">
+              <table class="quick-ref-table">
+                <thead><tr>${item.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+                <tbody>${item.rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody>
+              </table>
+            </div>
+          `;
+
+        case 'code':
+          return `<div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>${escapeHtml(item.text)}</div>`;
+
+        case 'info':
+          return `
+            <div class="info-box${item.warning ? ' warning' : ''}">
+              <div class="info-box-title">${item.title}</div>
+              <p>${item.text}</p>
+            </div>
+          `;
+
+        default:
+          return '';
+      }
+    }).join('');
+  }
+
+  function escapeHtml(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // ==========================================================================
+  // Tools
   // ==========================================================================
 
   function showTool(toolId) {
-    updateActiveNav(toolId);
-    const contentArea = document.getElementById('contentArea');
+    const content = document.getElementById('contentArea');
 
-    switch (toolId) {
-      case 'link-budget':
-        contentArea.innerHTML = getLinkBudgetContent();
-        initLinkBudgetCalc();
-        break;
-      case 'airtime':
-        contentArea.innerHTML = getAirtimeContent();
-        initAirtimeCalc();
-        break;
-      case 'config-gen':
-        contentArea.innerHTML = getConfigGenContent();
-        initConfigGen();
-        break;
+    if (toolId === 'link-budget') {
+      content.innerHTML = getLinkBudgetHTML();
+      initLinkBudget();
+    } else if (toolId === 'airtime') {
+      content.innerHTML = getAirtimeHTML();
+      initAirtime();
+    } else if (toolId === 'config-gen') {
+      content.innerHTML = getConfigGenHTML();
+      initConfigGen();
     }
 
     window.scrollTo(0, 0);
   }
 
-  function getLinkBudgetContent() {
+  function getLinkBudgetHTML() {
     return `
       <div class="section-header">
         <div class="section-number">Tool</div>
         <h1 class="section-title">LoRa Link Budget Calculator</h1>
-        <p class="section-description">Estimate signal strength and link margin for LoRa communications.</p>
+        <p class="section-description">Estimate signal strength and link margin.</p>
       </div>
-
-      <div class="calculator">
-        <h3>Parameters</h3>
-        <div class="calc-grid">
-          <div class="calc-field">
-            <label>TX Power (dBm)</label>
-            <input type="number" id="txPower" value="17" min="0" max="30">
-          </div>
-          <div class="calc-field">
-            <label>TX Antenna Gain (dBi)</label>
-            <input type="number" id="txGain" value="2" step="0.5">
-          </div>
-          <div class="calc-field">
-            <label>RX Antenna Gain (dBi)</label>
-            <input type="number" id="rxGain" value="2" step="0.5">
-          </div>
-          <div class="calc-field">
-            <label>Frequency (MHz)</label>
-            <select id="frequency">
-              <option value="433">433 MHz</option>
-              <option value="868">868 MHz (EU)</option>
-              <option value="915" selected>915 MHz (US)</option>
-            </select>
-          </div>
-          <div class="calc-field">
-            <label>Distance (km)</label>
-            <input type="number" id="distance" value="5" min="0.1" step="0.1">
-          </div>
-          <div class="calc-field">
-            <label>Spreading Factor</label>
-            <select id="sf">
-              <option value="7">SF7 (fastest)</option>
-              <option value="8" selected>SF8</option>
-              <option value="9">SF9</option>
-              <option value="10">SF10</option>
-              <option value="11">SF11</option>
-              <option value="12">SF12 (longest range)</option>
-            </select>
-          </div>
-          <div class="calc-field">
-            <label>Bandwidth (kHz)</label>
-            <select id="bw">
-              <option value="125" selected>125 kHz</option>
-              <option value="250">250 kHz</option>
-              <option value="500">500 kHz</option>
-            </select>
-          </div>
-        </div>
-        <button class="calc-button" id="calcLinkBudget">Calculate</button>
-        <div id="linkBudgetResult"></div>
-      </div>
-
       <div class="content-card">
-        <h3>Understanding Results</h3>
-        <ul>
-          <li><strong>EIRP:</strong> Effective radiated power (TX power + antenna gain)</li>
-          <li><strong>Path Loss:</strong> Signal loss over distance (free-space, add 10-30 dB for obstacles)</li>
-          <li><strong>Link Margin:</strong> Safety buffer above receiver sensitivity. >10 dB is reliable.</li>
-        </ul>
+        <div class="calc-grid">
+          <div class="calc-field"><label>TX Power (dBm)</label><input type="number" id="txPower" value="17"></div>
+          <div class="calc-field"><label>TX Antenna Gain (dBi)</label><input type="number" id="txGain" value="2" step="0.5"></div>
+          <div class="calc-field"><label>RX Antenna Gain (dBi)</label><input type="number" id="rxGain" value="2" step="0.5"></div>
+          <div class="calc-field"><label>Frequency (MHz)</label><select id="freq"><option value="433">433</option><option value="868">868</option><option value="915" selected>915</option></select></div>
+          <div class="calc-field"><label>Distance (km)</label><input type="number" id="distance" value="5" step="0.1"></div>
+          <div class="calc-field"><label>Spreading Factor</label><select id="sf"><option value="7">SF7</option><option value="8" selected>SF8</option><option value="9">SF9</option><option value="10">SF10</option><option value="11">SF11</option><option value="12">SF12</option></select></div>
+          <div class="calc-field"><label>Bandwidth (kHz)</label><select id="bw"><option value="125" selected>125</option><option value="250">250</option><option value="500">500</option></select></div>
+        </div>
+        <button class="calc-button" id="calcBtn">Calculate</button>
+        <div id="result" class="calc-result" style="display:none;"></div>
       </div>
     `;
   }
 
-  function initLinkBudgetCalc() {
-    document.getElementById('calcLinkBudget').addEventListener('click', () => {
+  function initLinkBudget() {
+    document.getElementById('calcBtn').addEventListener('click', () => {
       const txPower = parseFloat(document.getElementById('txPower').value);
       const txGain = parseFloat(document.getElementById('txGain').value);
       const rxGain = parseFloat(document.getElementById('rxGain').value);
-      const freq = parseFloat(document.getElementById('frequency').value);
+      const freq = parseFloat(document.getElementById('freq').value);
       const distance = parseFloat(document.getElementById('distance').value);
       const sf = parseInt(document.getElementById('sf').value);
       const bw = parseFloat(document.getElementById('bw').value);
 
-      // Free-space path loss
       const fspl = 20 * Math.log10(distance) + 20 * Math.log10(freq) + 32.44;
       const eirp = txPower + txGain;
       const rxPower = eirp - fspl + rxGain;
-
-      // Receiver sensitivity approximation
       const snrRequired = { 7: -7.5, 8: -10, 9: -12.5, 10: -15, 11: -17.5, 12: -20 };
       const sensitivity = -174 + 10 * Math.log10(bw * 1000) + 6 + snrRequired[sf];
       const margin = rxPower - sensitivity;
 
-      let marginClass = margin > 20 ? 'var(--accent-green)' : margin > 10 ? 'var(--accent-yellow)' : 'var(--accent)';
-      let marginText = margin > 20 ? 'Excellent - very reliable' : margin > 10 ? 'Good - reliable' : margin > 0 ? 'Marginal - may be unreliable' : 'No link possible';
-
-      document.getElementById('linkBudgetResult').innerHTML = `
-        <div class="calc-result">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-            <div>
-              <div class="result-label">EIRP</div>
-              <div class="result-value">${eirp.toFixed(1)} dBm</div>
-            </div>
-            <div>
-              <div class="result-label">Path Loss</div>
-              <div class="result-value">${fspl.toFixed(1)} dB</div>
-            </div>
-            <div>
-              <div class="result-label">RX Power</div>
-              <div class="result-value">${rxPower.toFixed(1)} dBm</div>
-            </div>
-            <div>
-              <div class="result-label">Sensitivity</div>
-              <div class="result-value">${sensitivity.toFixed(1)} dBm</div>
-            </div>
-          </div>
-          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-            <div class="result-label">Link Margin</div>
-            <div class="result-value" style="color: ${marginClass}">${margin.toFixed(1)} dB</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">${marginText}</div>
-          </div>
-        </div>
+      document.getElementById('result').innerHTML = `
+        <div class="result-label">EIRP: ${eirp.toFixed(1)} dBm | Path Loss: ${fspl.toFixed(1)} dB</div>
+        <div class="result-label">RX Power: ${rxPower.toFixed(1)} dBm | Sensitivity: ${sensitivity.toFixed(1)} dBm</div>
+        <div class="result-value" style="color: ${margin > 10 ? 'var(--accent-green)' : 'var(--accent)'}">Link Margin: ${margin.toFixed(1)} dB</div>
       `;
+      document.getElementById('result').style.display = 'block';
     });
   }
 
-  function getAirtimeContent() {
+  function getAirtimeHTML() {
     return `
       <div class="section-header">
         <div class="section-number">Tool</div>
         <h1 class="section-title">LoRa Airtime Calculator</h1>
         <p class="section-description">Calculate time-on-air for LoRa packets.</p>
       </div>
-
-      <div class="calculator">
-        <h3>Parameters</h3>
-        <div class="calc-grid">
-          <div class="calc-field">
-            <label>Payload Size (bytes)</label>
-            <input type="number" id="payloadSize" value="50" min="1" max="255">
-          </div>
-          <div class="calc-field">
-            <label>Spreading Factor</label>
-            <select id="airtimeSf">
-              <option value="7">SF7</option>
-              <option value="8" selected>SF8</option>
-              <option value="9">SF9</option>
-              <option value="10">SF10</option>
-              <option value="11">SF11</option>
-              <option value="12">SF12</option>
-            </select>
-          </div>
-          <div class="calc-field">
-            <label>Bandwidth (kHz)</label>
-            <select id="airtimeBw">
-              <option value="125" selected>125 kHz</option>
-              <option value="250">250 kHz</option>
-              <option value="500">500 kHz</option>
-            </select>
-          </div>
-          <div class="calc-field">
-            <label>Coding Rate</label>
-            <select id="airtimeCr">
-              <option value="5" selected>4/5</option>
-              <option value="6">4/6</option>
-              <option value="7">4/7</option>
-              <option value="8">4/8</option>
-            </select>
-          </div>
-        </div>
-        <button class="calc-button" id="calcAirtime">Calculate</button>
-        <div id="airtimeResult"></div>
-      </div>
-
       <div class="content-card">
-        <h3>Reticulum Packet Sizes</h3>
-        <div class="table-wrapper">
-          <table class="quick-ref-table">
-            <thead><tr><th>Packet Type</th><th>Typical Size</th></tr></thead>
-            <tbody>
-              <tr><td>Minimum packet</td><td>~35 bytes</td></tr>
-              <tr><td>Announce</td><td>~150 bytes</td></tr>
-              <tr><td>Link establishment</td><td>~297 bytes (3 packets)</td></tr>
-              <tr><td>Maximum single packet</td><td>500 bytes</td></tr>
-            </tbody>
-          </table>
+        <div class="calc-grid">
+          <div class="calc-field"><label>Payload (bytes)</label><input type="number" id="payload" value="50"></div>
+          <div class="calc-field"><label>Spreading Factor</label><select id="sf2"><option value="7">SF7</option><option value="8" selected>SF8</option><option value="9">SF9</option><option value="10">SF10</option><option value="11">SF11</option><option value="12">SF12</option></select></div>
+          <div class="calc-field"><label>Bandwidth (kHz)</label><select id="bw2"><option value="125" selected>125</option><option value="250">250</option><option value="500">500</option></select></div>
+          <div class="calc-field"><label>Coding Rate</label><select id="cr"><option value="5" selected>4/5</option><option value="6">4/6</option><option value="7">4/7</option><option value="8">4/8</option></select></div>
         </div>
+        <button class="calc-button" id="calcBtn2">Calculate</button>
+        <div id="result2" class="calc-result" style="display:none;"></div>
       </div>
     `;
   }
 
-  function initAirtimeCalc() {
-    document.getElementById('calcAirtime').addEventListener('click', () => {
-      const payload = parseInt(document.getElementById('payloadSize').value);
-      const sf = parseInt(document.getElementById('airtimeSf').value);
-      const bw = parseFloat(document.getElementById('airtimeBw').value) * 1000;
-      const cr = parseInt(document.getElementById('airtimeCr').value);
+  function initAirtime() {
+    document.getElementById('calcBtn2').addEventListener('click', () => {
+      const payload = parseInt(document.getElementById('payload').value);
+      const sf = parseInt(document.getElementById('sf2').value);
+      const bw = parseFloat(document.getElementById('bw2').value) * 1000;
+      const cr = parseInt(document.getElementById('cr').value);
 
       const symbolTime = Math.pow(2, sf) / bw;
       const preambleTime = 12.25 * symbolTime;
       const de = sf >= 11 ? 1 : 0;
       const payloadSymbols = 8 + Math.max(Math.ceil((8 * payload - 4 * sf + 28 + 16) / (4 * (sf - 2 * de))) * cr, 0);
-      const payloadTime = payloadSymbols * symbolTime;
-      const totalTime = preambleTime + payloadTime;
-      const dataRate = (payload * 8) / totalTime;
+      const totalTime = (preambleTime + payloadSymbols * symbolTime) * 1000;
 
-      document.getElementById('airtimeResult').innerHTML = `
-        <div class="calc-result">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-            <div>
-              <div class="result-label">Symbol Time</div>
-              <div class="result-value">${(symbolTime * 1000).toFixed(2)} ms</div>
-            </div>
-            <div>
-              <div class="result-label">Payload Symbols</div>
-              <div class="result-value">${payloadSymbols}</div>
-            </div>
-            <div>
-              <div class="result-label">Total Airtime</div>
-              <div class="result-value">${(totalTime * 1000).toFixed(1)} ms</div>
-            </div>
-            <div>
-              <div class="result-label">Data Rate</div>
-              <div class="result-value">${dataRate > 1000 ? (dataRate / 1000).toFixed(2) + ' kbps' : dataRate.toFixed(0) + ' bps'}</div>
-            </div>
-          </div>
-        </div>
+      document.getElementById('result2').innerHTML = `
+        <div class="result-label">Payload Symbols: ${payloadSymbols}</div>
+        <div class="result-value">Airtime: ${totalTime.toFixed(1)} ms</div>
       `;
+      document.getElementById('result2').style.display = 'block';
     });
   }
 
-  function getConfigGenContent() {
+  function getConfigGenHTML() {
     return `
       <div class="section-header">
         <div class="section-number">Tool</div>
         <h1 class="section-title">Config Generator</h1>
-        <p class="section-description">Generate interface configurations for common scenarios.</p>
+        <p class="section-description">Generate interface configurations.</p>
       </div>
-
-      <div class="calculator">
-        <h3>Interface Type</h3>
-        <div class="calc-field" style="max-width: 300px;">
-          <select id="interfaceType">
-            <option value="tcp-client">TCP Client (connect to server)</option>
-            <option value="tcp-server">TCP Server (accept connections)</option>
-            <option value="auto">Auto Interface (LAN discovery)</option>
-            <option value="i2p">I2P Interface (anonymous)</option>
+      <div class="content-card">
+        <div class="calc-field" style="margin-bottom:1rem;">
+          <label>Interface Type</label>
+          <select id="ifType">
+            <option value="tcp-client">TCP Client</option>
+            <option value="tcp-server">TCP Server</option>
+            <option value="auto">Auto Interface</option>
             <option value="rnode">RNode LoRa</option>
           </select>
         </div>
-        <div id="configFields" style="margin-top: 1rem;"></div>
-        <button class="calc-button" id="generateConfig" style="margin-top: 1rem;">Generate</button>
-        <div id="configResult"></div>
+        <div id="configFields"></div>
+        <button class="calc-button" id="genBtn">Generate</button>
+        <div id="configResult" style="display:none;"></div>
       </div>
     `;
   }
@@ -1350,316 +729,189 @@ sudo usermod -a -G dialout $USER
   function initConfigGen() {
     const templates = {
       'tcp-client': {
-        fields: [
-          { id: 'name', label: 'Interface Name', value: 'Remote Server' },
-          { id: 'host', label: 'Target Host', value: 'amsterdam.connect.reticulum.network' },
-          { id: 'port', label: 'Target Port', value: '4965' }
-        ],
-        generate: (v) => `[[${v.name}]]
-  type = TCPClientInterface
-  enabled = yes
-  target_host = ${v.host}
-  target_port = ${v.port}`
+        fields: [{ id: 'host', label: 'Host', value: 'amsterdam.connect.reticulum.network' }, { id: 'port', label: 'Port', value: '4965' }],
+        gen: v => `[[Remote Server]]\n  type = TCPClientInterface\n  enabled = yes\n  target_host = ${v.host}\n  target_port = ${v.port}`
       },
       'tcp-server': {
-        fields: [
-          { id: 'name', label: 'Interface Name', value: 'TCP Server' },
-          { id: 'ip', label: 'Listen IP', value: '0.0.0.0' },
-          { id: 'port', label: 'Listen Port', value: '4242' }
-        ],
-        generate: (v) => `[[${v.name}]]
-  type = TCPServerInterface
-  enabled = yes
-  listen_ip = ${v.ip}
-  listen_port = ${v.port}`
+        fields: [{ id: 'port', label: 'Port', value: '4242' }],
+        gen: v => `[[TCP Server]]\n  type = TCPServerInterface\n  enabled = yes\n  listen_ip = 0.0.0.0\n  listen_port = ${v.port}`
       },
       'auto': {
-        fields: [
-          { id: 'name', label: 'Interface Name', value: 'Default Interface' },
-          { id: 'group', label: 'Group ID', value: 'reticulum' }
-        ],
-        generate: (v) => `[[${v.name}]]
-  type = AutoInterface
-  enabled = yes
-  group_id = ${v.group}`
-      },
-      'i2p': {
-        fields: [
-          { id: 'name', label: 'Interface Name', value: 'I2P' },
-          { id: 'connectable', label: 'Accept Incoming', type: 'select', options: ['yes', 'no'], value: 'no' }
-        ],
-        generate: (v) => `[[${v.name}]]
-  type = I2PInterface
-  enabled = yes
-  connectable = ${v.connectable}`
+        fields: [{ id: 'group', label: 'Group ID', value: 'reticulum' }],
+        gen: v => `[[Default Interface]]\n  type = AutoInterface\n  enabled = yes\n  group_id = ${v.group}`
       },
       'rnode': {
-        fields: [
-          { id: 'name', label: 'Interface Name', value: 'RNode LoRa' },
-          { id: 'port', label: 'Serial Port', value: '/dev/ttyUSB0' },
-          { id: 'freq', label: 'Frequency (Hz)', value: '915000000' },
-          { id: 'bw', label: 'Bandwidth (Hz)', value: '125000' },
-          { id: 'txpower', label: 'TX Power (dBm)', value: '17' },
-          { id: 'sf', label: 'Spreading Factor', value: '8' }
-        ],
-        generate: (v) => `[[${v.name}]]
-  type = RNodeInterface
-  enabled = yes
-  port = ${v.port}
-  frequency = ${v.freq}
-  bandwidth = ${v.bw}
-  txpower = ${v.txpower}
-  spreadingfactor = ${v.sf}
-  codingrate = 5`
+        fields: [{ id: 'port', label: 'Serial Port', value: '/dev/ttyUSB0' }, { id: 'freq', label: 'Frequency (Hz)', value: '915000000' }],
+        gen: v => `[[RNode LoRa]]\n  type = RNodeInterface\n  enabled = yes\n  port = ${v.port}\n  frequency = ${v.freq}\n  bandwidth = 125000\n  txpower = 17\n  spreadingfactor = 8\n  codingrate = 5`
       }
     };
 
-    const typeSelect = document.getElementById('interfaceType');
     const fieldsDiv = document.getElementById('configFields');
+    const typeSelect = document.getElementById('ifType');
 
     function renderFields(type) {
-      const template = templates[type];
-      if (!template) return;
-
-      fieldsDiv.innerHTML = `
-        <div class="calc-grid">
-          ${template.fields.map(f => `
-            <div class="calc-field">
-              <label>${f.label}</label>
-              ${f.type === 'select'
-                ? `<select id="cfg_${f.id}">${f.options.map(o => `<option value="${o}" ${o === f.value ? 'selected' : ''}>${o}</option>`).join('')}</select>`
-                : `<input type="text" id="cfg_${f.id}" value="${f.value}">`
-              }
-            </div>
-          `).join('')}
-        </div>
-      `;
+      const t = templates[type];
+      fieldsDiv.innerHTML = `<div class="calc-grid">${t.fields.map(f => `<div class="calc-field"><label>${f.label}</label><input type="text" id="cfg_${f.id}" value="${f.value}"></div>`).join('')}</div>`;
     }
 
-    typeSelect.addEventListener('change', () => {
-      renderFields(typeSelect.value);
-      document.getElementById('configResult').innerHTML = '';
-    });
-
+    typeSelect.addEventListener('change', () => { renderFields(typeSelect.value); document.getElementById('configResult').style.display = 'none'; });
     renderFields(typeSelect.value);
 
-    document.getElementById('generateConfig').addEventListener('click', () => {
+    document.getElementById('genBtn').addEventListener('click', () => {
       const type = typeSelect.value;
-      const template = templates[type];
-      if (!template) return;
-
+      const t = templates[type];
       const vals = {};
-      template.fields.forEach(f => {
-        vals[f.id] = document.getElementById(`cfg_${f.id}`).value;
-      });
-
-      const config = template.generate(vals);
-
-      document.getElementById('configResult').innerHTML = `
-        <div class="calc-result" style="margin-top: 1rem;">
-          <div class="result-label">Add to ~/.reticulum/config under [interfaces]:</div>
-          <div class="code-block" style="margin-top: 0.5rem;"><button class="copy-btn" onclick="copyCode(this)">Copy</button>${config}</div>
-        </div>
-      `;
+      t.fields.forEach(f => { vals[f.id] = document.getElementById(`cfg_${f.id}`).value; });
+      document.getElementById('configResult').innerHTML = `<div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>${escapeHtml(t.gen(vals))}</div>`;
+      document.getElementById('configResult').style.display = 'block';
     });
   }
 
   // ==========================================================================
-  // SEARCH
+  // Search
   // ==========================================================================
 
   function initSearch() {
-    // Build search index - only if Fuse is available
-    if (typeof Fuse === 'undefined') {
-      console.warn('[App] Fuse.js not loaded, search disabled');
-      return;
-    }
-
-    const searchData = sections.map(s => ({
-      id: s.id,
-      title: s.title,
-      content: s.content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ')
-    }));
-
-    state.fuse = new Fuse(searchData, {
-      keys: ['title', 'content'],
-      threshold: 0.3,
-      includeMatches: true
-    });
-
-    // Desktop search
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
 
-    if (!searchInput || !searchResults) return;
+    if (!searchInput || typeof Fuse === 'undefined') return;
 
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.trim();
-      if (query.length < 2) {
-        searchResults.classList.remove('active');
-        return;
-      }
+    const searchItems = [];
+    state.sections.forEach(section => {
+      const textParts = [section.title, section.description];
+      section.content.forEach(c => {
+        if (c.text) textParts.push(c.text);
+        if (c.items) textParts.push(c.items.join(' '));
+      });
+      searchItems.push({ id: section.id, title: section.title, number: section.number, content: textParts.join(' ') });
+    });
 
-      const results = state.fuse.search(query).slice(0, 8);
+    state.searchIndex = new Fuse(searchItems, { keys: ['title', 'content'], threshold: 0.3 });
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.trim();
+      if (query.length < 2) { searchResults.classList.remove('active'); return; }
+
+      const results = state.searchIndex.search(query).slice(0, 8);
       if (results.length === 0) {
         searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
       } else {
         searchResults.innerHTML = results.map(r => `
-          <div class="search-result-item" data-section="${r.item.id}">
-            <div class="search-result-title">${r.item.title}</div>
-            <div class="search-result-section">Guide</div>
+          <div class="search-result-item" data-id="${r.item.id}">
+            <div class="search-result-title">${r.item.number}. ${r.item.title}</div>
           </div>
         `).join('');
       }
-
       searchResults.classList.add('active');
 
-      searchResults.querySelectorAll('.search-result-item[data-section]').forEach(item => {
+      searchResults.querySelectorAll('.search-result-item').forEach(item => {
         item.addEventListener('click', () => {
-          showSection(item.dataset.section);
-          searchInput.value = '';
+          window.location.hash = item.dataset.id;
           searchResults.classList.remove('active');
+          searchInput.value = '';
         });
       });
     });
 
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.search-container')) {
-        searchResults.classList.remove('active');
-      }
+      if (!e.target.closest('.search-container')) searchResults.classList.remove('active');
     });
+  }
 
-    // Mobile search
+  // ==========================================================================
+  // Mobile Menu
+  // ==========================================================================
+
+  function initMobileMenu() {
+    const toggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    if (toggle) toggle.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('visible'); });
+    if (overlay) overlay.addEventListener('click', closeMobileMenu);
+
     const mobileSearchBtn = document.getElementById('mobileSearchBtn');
     const mobileSearchOverlay = document.getElementById('mobileSearchOverlay');
     const mobileSearchClose = document.getElementById('mobileSearchClose');
     const mobileSearchInput = document.getElementById('mobileSearchInput');
     const mobileSearchResults = document.getElementById('mobileSearchResults');
 
-    mobileSearchBtn.addEventListener('click', () => {
-      mobileSearchOverlay.classList.add('visible');
-      mobileSearchInput.focus();
-    });
+    if (mobileSearchBtn) mobileSearchBtn.addEventListener('click', () => { mobileSearchOverlay.classList.add('visible'); mobileSearchInput.focus(); });
+    if (mobileSearchClose) mobileSearchClose.addEventListener('click', () => { mobileSearchOverlay.classList.remove('visible'); });
 
-    mobileSearchClose.addEventListener('click', () => {
-      mobileSearchOverlay.classList.remove('visible');
-      mobileSearchInput.value = '';
-      mobileSearchResults.innerHTML = '';
-    });
-
-    mobileSearchInput.addEventListener('input', () => {
-      const query = mobileSearchInput.value.trim();
-      if (query.length < 2) {
-        mobileSearchResults.innerHTML = '';
-        return;
-      }
-
-      const results = state.fuse.search(query).slice(0, 10);
-      if (results.length === 0) {
-        mobileSearchResults.innerHTML = '<div class="search-result-item">No results found</div>';
-      } else {
-        mobileSearchResults.innerHTML = results.map(r => `
-          <div class="search-result-item" data-section="${r.item.id}">
-            <div class="search-result-title">${r.item.title}</div>
-            <div class="search-result-section">Guide</div>
-          </div>
-        `).join('');
-      }
-
-      mobileSearchResults.querySelectorAll('.search-result-item[data-section]').forEach(item => {
-        item.addEventListener('click', () => {
-          showSection(item.dataset.section);
-          mobileSearchOverlay.classList.remove('visible');
-          mobileSearchInput.value = '';
-          mobileSearchResults.innerHTML = '';
+    if (mobileSearchInput && state.searchIndex) {
+      mobileSearchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        if (query.length < 2) { mobileSearchResults.innerHTML = ''; return; }
+        const results = state.searchIndex.search(query).slice(0, 10);
+        mobileSearchResults.innerHTML = results.map(r => `<a href="#${r.item.id}" class="search-result-item" style="display:block;padding:1rem;border-bottom:1px solid var(--border-subtle);text-decoration:none;"><div style="color:var(--text-primary);font-weight:500;">${r.item.title}</div></a>`).join('');
+        mobileSearchResults.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => { mobileSearchOverlay.classList.remove('visible'); mobileSearchInput.value = ''; });
         });
       });
-    });
+    }
   }
 
-  // ==========================================================================
-  // MOBILE
-  // ==========================================================================
-
-  function initMobile() {
-    const menuToggle = document.getElementById('menuToggle');
+  function closeMobileMenu() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
-
-    menuToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('visible');
-    });
-
-    overlay.addEventListener('click', closeSidebar);
-  }
-
-  function closeSidebar() {
-    document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('sidebarOverlay').classList.remove('visible');
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('visible');
   }
 
   // ==========================================================================
-  // OFFLINE INDICATOR
+  // Keyboard Shortcuts
+  // ==========================================================================
+
+  function initKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const input = document.getElementById('searchInput');
+        if (input) input.focus();
+      }
+    });
+  }
+
+  // ==========================================================================
+  // Offline Support
   // ==========================================================================
 
   function initOfflineIndicator() {
     const indicator = document.getElementById('offlineIndicator');
+    if (!indicator) return;
 
-    function updateStatus() {
-      if (!navigator.onLine) {
-        indicator.classList.add('visible');
-      } else {
-        indicator.classList.remove('visible');
-      }
+    function update() {
+      state.isOffline = !navigator.onLine;
+      indicator.classList.toggle('visible', state.isOffline);
     }
 
-    window.addEventListener('online', updateStatus);
-    window.addEventListener('offline', updateStatus);
-    updateStatus();
+    window.addEventListener('online', update);
+    window.addEventListener('offline', update);
+    update();
   }
 
   // ==========================================================================
-  // UTILITY FUNCTIONS
+  // Global Copy Function
   // ==========================================================================
 
-  // Global copy function for code blocks
   window.copyCode = function(btn) {
-    const codeBlock = btn.parentElement;
-    const code = codeBlock.textContent.replace('Copy', '').trim();
-
+    const code = btn.parentElement.textContent.replace('Copy', '').trim();
     navigator.clipboard.writeText(code).then(() => {
       btn.textContent = 'Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = 'Copy';
-        btn.classList.remove('copied');
-      }, 2000);
-    }).catch(() => {
-      // Fallback for older browsers
-      const textarea = document.createElement('textarea');
-      textarea.value = code;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      btn.textContent = 'Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = 'Copy';
-        btn.classList.remove('copied');
-      }, 2000);
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
     });
   };
 
   // ==========================================================================
-  // START
+  // Start
   // ==========================================================================
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', loadData);
   } else {
-    init();
+    loadData();
   }
 
 })();
