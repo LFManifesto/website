@@ -981,7 +981,18 @@
   <!-- Fuse.js for search -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
-  <!-- App loading -->
+  <!-- Clear any old broken service workers for this app -->
+  <script>
+    if ('serviceWorker' in navigator && !sessionStorage.getItem('rns-cleaned')) {
+      navigator.serviceWorker.getRegistrations().then(regs => {
+        regs.forEach(reg => { if (reg.scope.includes('reticulum-guide')) reg.unregister(); });
+      });
+      caches.keys().then(names => {
+        names.filter(n => n.startsWith('reticulum-guide-')).forEach(n => caches.delete(n));
+      });
+      sessionStorage.setItem('rns-cleaned', '1');
+    }
+  </script>
   <script src="app.js"></script>
 </body>
 </html>
