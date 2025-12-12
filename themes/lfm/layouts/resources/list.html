@@ -31,6 +31,37 @@
       <div class="resource-code">
         <code>tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion:18081</code>
       </div>
+      <details class="resource-details">
+        <summary>Connection Guide</summary>
+        <div class="resource-details-content">
+          <p><strong>Requirements:</strong> Your wallet must support Tor. This is a .onion address and requires Tor to connect.</p>
+
+          <p><strong>Feather Wallet (Desktop):</strong></p>
+          <ol>
+            <li>Go to File → Settings → Network</li>
+            <li>Under "Proxy", select "Tor" (Feather has Tor built-in)</li>
+            <li>Go to File → Settings → Node</li>
+            <li>Add custom node: <code>tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion:18081</code></li>
+            <li>Select it and click "Connect"</li>
+          </ol>
+
+          <p><strong>Cake Wallet (Mobile):</strong></p>
+          <ol>
+            <li>Go to Settings → Connection and sync</li>
+            <li>Enable "Connect to node through Tor"</li>
+            <li>Tap "Manage nodes" → Add (+)</li>
+            <li>Enter address: <code>tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion</code></li>
+            <li>Port: <code>18081</code></li>
+            <li>Save and select the node</li>
+          </ol>
+
+          <p><strong>Monero CLI:</strong></p>
+          <pre>monero-wallet-cli --daemon-address tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion:18081 --proxy 127.0.0.1:9050</pre>
+          <p class="resource-card-note">Requires Tor running locally (port 9050). Install via your package manager or Tor Browser.</p>
+
+          <p><strong>Note:</strong> Tor connections are slower than clearnet. Initial sync may take 30-60 seconds. This is normal.</p>
+        </div>
+      </details>
     </div>
 
     <div class="resource-card">
