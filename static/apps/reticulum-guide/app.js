@@ -1,8 +1,8 @@
 /**
  * Reticulum Field Reference
- * Version 3.2 - Dec 12, 2025
- * Added: HF Propagation Calculator, NomadNet Pages, GitHub Repos, Navigation buttons
- * Updated: Manual solar input, clickable URLs, all transport nodes verified
+ * Version 3.3 - Dec 12, 2025
+ * Added: LXST Voice Streaming section, HF Propagation Calculator, NomadNet Pages
+ * Updated: 12 sections total, comprehensive beginner guide
  */
 
 (function() {
@@ -47,7 +47,8 @@
           ['<code>rnsd</code>', 'Network daemon - keeps Reticulum running', 'Background service'],
           ['<strong>NomadNet</strong>', 'Messaging, pages, file sharing', 'Terminal (text UI)'],
           ['<strong>Sideband</strong>', 'Messaging, voice, maps, telemetry', 'Graphical (Android/Desktop)'],
-          ['<code>lxmd</code>', 'Message propagation node', 'Background service']
+          ['<code>lxmd</code>', 'Message propagation node', 'Background service'],
+          ['<strong>LXST</strong>', 'Real-time audio/voice streaming', 'Library + rnphone example']
         ]},
         { type: 'heading', level: 3, text: 'Quick Start (5 Minutes)' },
         { type: 'paragraph', text: 'Get Reticulum running on your system:' },
@@ -85,12 +86,12 @@
         { type: 'heading', level: 4, text: 'Install Reticulum' },
         { type: 'code', text: 'pip install rns --break-system-packages' },
         { type: 'heading', level: 4, text: 'Install Applications' },
-        { type: 'code', text: 'pip install nomadnet --break-system-packages\npip install lxmf --break-system-packages' },
+        { type: 'code', text: 'pip install nomadnet --break-system-packages\npip install lxmf --break-system-packages\npip install lxst --break-system-packages  # Voice streaming' },
         { type: 'info', title: 'Why --break-system-packages?', text: 'Debian 12+ restricts pip to prevent conflicts with system packages. This flag is safe for user-installed Python packages.' },
         { type: 'heading', level: 3, text: 'Debian / Ubuntu (Modern)' },
         { type: 'paragraph', text: 'For Debian 12 (Bookworm), Ubuntu 23.04+, and similar systems that use PEP 668.' },
         { type: 'heading', level: 4, text: 'Option A: Use pipx (Recommended)' },
-        { type: 'code', text: 'sudo apt install pipx\npipx ensurepath\npipx install rns\npipx install nomadnet\npipx install lxmf' },
+        { type: 'code', text: 'sudo apt install pipx\npipx ensurepath\npipx install rns\npipx install nomadnet\npipx install lxmf\npipx install lxst  # Voice streaming' },
         { type: 'paragraph', text: 'Log out and back in for PATH changes to take effect.' },
         { type: 'heading', level: 4, text: 'Option B: Allow pip System-Wide' },
         { type: 'paragraph', text: 'Edit <code>~/.config/pip/pip.conf</code>:' },
@@ -359,8 +360,45 @@
       ]
     },
     {
-      id: 'utilities',
+      id: 'lxst',
       number: '8',
+      title: 'LXST Voice Streaming',
+      icon: 'signal',
+      description: 'Real-time audio and voice calls over Reticulum.',
+      content: [
+        { type: 'heading', level: 3, text: 'What is LXST?' },
+        { type: 'paragraph', text: 'LXST (Lightweight Extensible Signal Transport) is a real-time streaming protocol for audio and voice over Reticulum. It provides end-to-end encrypted voice calls with sub-10ms latency.' },
+        { type: 'heading', level: 4, text: 'Key Features' },
+        { type: 'list', items: [
+          '<strong>End-to-End Encryption</strong> - All streams encrypted with forward secrecy',
+          '<strong>Ultra-Low Latency</strong> - Under 10ms end-to-end',
+          '<strong>Multiple Codecs</strong> - OPUS (4.5-96 kbps), Codec2 (700-3200 bps for HF/LoRa)',
+          '<strong>Works on Any Link</strong> - Adapts to available bandwidth automatically',
+          '<strong>Voice Calls</strong> - Real-time telephony over mesh networks'
+        ]},
+        { type: 'heading', level: 3, text: 'Codec Options' },
+        { type: 'table', headers: ['Codec', 'Bitrate', 'Use Case'], rows: [
+          ['OPUS', '4.5 - 96 kbps', 'Internet, WiFi, high-bandwidth links'],
+          ['Codec2', '700 - 3200 bps', 'HF radio, LoRa, extremely low bandwidth'],
+          ['Raw PCM', 'Variable', 'Local testing, high-quality requirements']
+        ]},
+        { type: 'info', title: 'Codec2 for Radio', text: 'Codec2 at 700-1200 bps enables voice over HF radio and LoRa links where OPUS would be impossible. Quality is lower but intelligible.' },
+        { type: 'heading', level: 3, text: 'Installation' },
+        { type: 'code', text: 'pip install lxst' },
+        { type: 'heading', level: 4, text: 'Raspberry Pi Dependencies' },
+        { type: 'paragraph', text: 'For audio I/O and Codec2 support on Raspberry Pi:' },
+        { type: 'code', text: 'sudo apt install python3-pyaudio codec2\npip install smbus2 rpi-gpio' },
+        { type: 'heading', level: 3, text: 'Using rnphone' },
+        { type: 'paragraph', text: 'LXST includes <code>rnphone</code>, a command-line voice call application:' },
+        { type: 'code', text: '# Start rnphone and wait for calls\nrnphone\n\n# Call a specific destination\nrnphone <destination_hash>' },
+        { type: 'heading', level: 3, text: 'Integration with Sideband' },
+        { type: 'paragraph', text: 'Sideband uses LXST for voice calls. If you have LXST installed, Sideband can make encrypted voice calls over any Reticulum link - including LoRa and HF radio.' },
+        { type: 'info', title: 'Development Status', text: 'LXST is in early alpha. APIs may change. Check the <a href="https://github.com/markqvist/LXST" target="_blank" rel="noopener">GitHub repository</a> for the latest documentation.' }
+      ]
+    },
+    {
+      id: 'utilities',
+      number: '9',
       title: 'Utilities',
       icon: 'tool',
       description: 'Command-line tools included with Reticulum.',
@@ -394,7 +432,7 @@
     },
     {
       id: 'public-nodes',
-      number: '9',
+      number: '10',
       title: 'Public Nodes',
       icon: 'globe',
       description: 'Connect to the global Reticulum network.',
@@ -441,7 +479,7 @@
     },
     {
       id: 'github-repos',
-      number: '10',
+      number: '11',
       title: 'GitHub Resources',
       icon: 'code',
       description: 'Official repositories and community projects.',
@@ -453,6 +491,7 @@
           ['<strong>NomadNet</strong>', 'Terminal messaging client', '<a href="https://github.com/markqvist/NomadNet" target="_blank" rel="noopener">github.com/markqvist/NomadNet</a>'],
           ['<strong>Sideband</strong>', 'Graphical messaging client', '<a href="https://github.com/markqvist/Sideband" target="_blank" rel="noopener">github.com/markqvist/Sideband</a>'],
           ['<strong>LXMF</strong>', 'Messaging protocol', '<a href="https://github.com/markqvist/LXMF" target="_blank" rel="noopener">github.com/markqvist/LXMF</a>'],
+          ['<strong>LXST</strong>', 'Real-time audio streaming (voice calls)', '<a href="https://github.com/markqvist/LXST" target="_blank" rel="noopener">github.com/markqvist/LXST</a>'],
           ['<strong>RNode</strong>', 'LoRa hardware firmware', '<a href="https://github.com/markqvist/RNode_Firmware" target="_blank" rel="noopener">github.com/markqvist/RNode_Firmware</a>'],
           ['<strong>LoRaMon</strong>', 'LoRa traffic monitor', '<a href="https://github.com/markqvist/LoRaMon" target="_blank" rel="noopener">github.com/markqvist/LoRaMon</a>']
         ]},
@@ -485,7 +524,7 @@
     },
     {
       id: 'troubleshooting',
-      number: '11',
+      number: '12',
       title: 'Troubleshooting',
       icon: 'alert',
       description: 'Common issues and solutions.',
