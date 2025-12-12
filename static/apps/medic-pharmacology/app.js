@@ -1295,6 +1295,7 @@
   }
 
   function setPhase(phase) {
+    if (!CONTENT[phase]) return;
     currentPhase = phase;
     currentSection = null;
     document.querySelectorAll('.phase-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.phase === phase));

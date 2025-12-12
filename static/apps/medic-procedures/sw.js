@@ -1,8 +1,8 @@
-const CACHE_NAME = 'lf-medic-procedures-v2';
+const CACHE_NAME = 'lf-medic-procedures-v3';
 const urlsToCache = [
   './',
   './index.html',
-  './app.js',
+  './app.js?v=3',
   './manifest.json'
 ];
 
