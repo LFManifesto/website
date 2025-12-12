@@ -1,6 +1,6 @@
 # LFM Article Writing Guide
 
-**Last Updated:** December 11, 2025
+**Last Updated:** December 12, 2025
 **Parent Context:** `/Users/user/Claude-Work/Projects/www.lightfightermanifesto.org/.claude/CLAUDE.md`
 
 This document establishes the baseline format and style for all Light Fighter Manifesto articles.
@@ -101,7 +101,12 @@ When expanding content from LFM Volumes, always:
 |--------|--------|---------------|
 | Vol III | disruptor_26 | ([@Sentinel_Society](https://instagram.com/Sentinel_Society) / [@Disruptor26](https://instagram.com/Disruptor26)) |
 | Vol III | N. | (no public handle) |
-| Vol IV | editor | (no public handle) |
+| Vol IV | LFM (self) | Do NOT reference "the editor" - use "Volume IV" directly |
+
+**IMPORTANT:** For Volume IV content, we are the editor. Do not write "the editor described..." as it reads awkwardly. Instead:
+- Use: "Volume IV documented..."
+- Use: Direct quotes without attribution
+- Use: "Volume IV called it..."
 
 ---
 
@@ -132,6 +137,75 @@ Always search for:
 - "[topic] lawsuit court ruling" for legal precedents
 - "[topic] statistics market size" for quantitative data
 - "[technology] capabilities limitations" for technical accuracy
+
+---
+
+## Readability and Pacing
+
+### Target Metrics
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| **Word Count** | 1,800-2,500 | ~7-10 minute read |
+| **Flesch Reading Ease** | 50-65 | Higher = easier; 30-50 is "difficult" |
+| **Grade Level** | 10-11 | Appropriate for educated adults |
+| **Avg Sentence Length** | 10-15 words | Short sentences maintain LFM punch |
+| **Difficult Words** | <25% | Some technical jargon unavoidable |
+
+### Sentence Length Rules
+
+1. **Break up sentences over 30 words.** If a sentence requires a breath to read aloud, split it.
+
+2. **Vary rhythm.** Mix short punchy sentences (5-10 words) with medium explanatory ones (15-20 words).
+
+3. **Technical sentences need simplification.** If explaining a complex concept:
+   - Break into multiple sentences
+   - Lead with the simple version, then add detail
+   - Example: "The baseband processor handles all cellular communication. This chip operates below the operating system. You cannot control it."
+
+### Patterns to Avoid
+
+**Jargon stacking** - Do not pile technical terms in one sentence:
+```
+BAD:  "IMSI-catchers, cell-site simulators, and Stingrays force IMEI/IMSI identification via
+       rogue BTS spoofing."
+GOOD: "These devices mimic cell towers. Your phone connects automatically. It gives up its
+       unique identifier without you knowing."
+```
+
+**Run-on explanations** - Break up compound sentences:
+```
+BAD:  "Originally developed for battlefields in Iraq and Afghanistan under the program name
+       'Gorgon Stare,' these systems use multiple advanced sensors to detect and track every
+       vehicle and individual moving within an entire city-sized area simultaneously."
+GOOD: "The military developed these under the program name 'Gorgon Stare' for battlefields
+       in Iraq and Afghanistan. Multiple sensors track every vehicle and person moving within
+       an entire city. Simultaneously."
+```
+
+**Passive constructions with long modifiers:**
+```
+BAD:  "The growth is driven by demand from police departments, intelligence agencies, and
+       national security operations."
+GOOD: "Police departments, intelligence agencies, and national security operations are all buying."
+```
+
+### Section Pacing
+
+1. **Vary section patterns.** Do not repeat: intro → quote source → statistics → legal challenge for every section.
+
+2. **Insert action vignettes.** Break up exposition with narrative moments (the stairwell scene, the robot rescue).
+
+3. **Front-load the interesting parts.** The first 150 words determine if readers continue.
+
+4. **Tighten closings.** Do not re-summarize the entire article. Trust readers got it.
+
+### Redundancy Checks
+
+Before publishing, search for:
+- Repeated phrases (Ctrl+F the source name - if it appears 6+ times, vary attribution)
+- Concepts explained twice in different sections
+- Closing sections that restate body content
 
 ---
 
@@ -252,19 +326,37 @@ Use 4-6 tags per article. Include "Ukraine" if article references Ukraine confli
 
 Before committing:
 
+### Content
 - [ ] Front matter complete (title, date, description, author, tags)
 - [ ] Historical anchor opening
-- [ ] Volume source attributed with author handle
+- [ ] Volume source attributed correctly (no "the editor" for Vol IV)
 - [ ] Direct quotes woven throughout
 - [ ] External research included with current data
 - [ ] No inline links in body text
 - [ ] Sources section complete
 - [ ] Tools section with LFM apps first
-- [ ] Closing returns to opening thread
+- [ ] Closing returns to opening thread (without re-summarizing)
 - [ ] Hero image in place with alt text
 - [ ] All external links verified working
+
+### Style
 - [ ] No emojis, no exclamation points
 - [ ] "do not" instead of "don't"
+- [ ] No sentences over 30 words
+- [ ] Technical jargon explained in plain terms
+- [ ] Source attribution varied (not repetitive "X wrote...")
+
+### Readability
+- [ ] Word count: 1,800-2,500 words
+- [ ] No repeated concepts across sections
+- [ ] Closing section is tight (not a summary)
+- [ ] Section patterns varied (not all following same structure)
+
+### Fact-Checking
+- [ ] Statistics verified with current sources (2024-2025)
+- [ ] Numbers are accurate (camera counts, market sizes, etc.)
+- [ ] Legal cases cited correctly (court, date, ruling)
+- [ ] Technical specifications verified
 
 ---
 
@@ -272,20 +364,23 @@ Before committing:
 
 These articles exemplify the current style template:
 
-1. **The Guerrilla Medic in the Drone Age** - Medical, Volume III expansion
+1. **The Guerrilla Medic in the Drone Age** (~1,900 words, Flesch 50.6)
    - Historical anchor: Hannibal Barca crossing the Alps
    - Source: disruptor_26, Volume III
    - Closes with: Hannibal quote on pain and death
+   - Technical sections moved to end
 
-2. **Quick Kill: Rapid Engagement Techniques for Snipers** - Marksmanship, Volume III expansion
+2. **Quick Kill: Rapid Engagement Techniques for Snipers** (~1,400 words, Flesch 64.5)
    - Historical anchor: Simo Häyhä, Winter War
    - Source: N., Volume III
    - Closes with: "Häyhä had days. This sniper has seconds."
+   - Technical reference sections (Danger Space, Wind Width) at end
 
-3. **The Digital Panopticon: Urban Operations in Surveilled Cities** - Surveillance, Volume IV expansion
+3. **The Digital Panopticon: Urban Operations in Surveilled Cities** (~2,900 words, Flesch 47.8)
    - Historical anchor: Jeremy Bentham's Panopticon (1791)
-   - Source: editor, Volume IV
+   - Source: Volume IV (no "editor" attribution)
    - Closes with: "Stop believing."
+   - Narrative vignette breaks up exposition (MARTA surveillance scene)
 
 ---
 
