@@ -1413,16 +1413,9 @@
   }
 
   function init() {
-    console.log('[LF Medic Pharmacology] init() - CONTENT keys:', Object.keys(CONTENT));
-    console.log('[LF Medic Pharmacology] PHASES:', PHASES);
-    try {
-      initNavigation();
-      initSearch();
-      initOfflineSupport();
-      console.log('[LF Medic Pharmacology] init() complete, currentPhase:', currentPhase);
-    } catch(e) {
-      console.error('[LF Medic Pharmacology] ERROR:', e);
-    }
+    initNavigation();
+    initSearch();
+    initOfflineSupport();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

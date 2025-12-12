@@ -1939,16 +1939,9 @@
   // ==========================================================================
 
   function init() {
-    console.log('[LF Medic Procedures] init() - CONTENT keys:', Object.keys(CONTENT));
-    console.log('[LF Medic Procedures] PHASES:', PHASES);
-    try {
-      initNavigation();
-      initSearch();
-      initOfflineSupport();
-      console.log('[LF Medic Procedures] init() complete, currentPhase:', currentPhase);
-    } catch(e) {
-      console.error('[LF Medic Procedures] ERROR:', e);
-    }
+    initNavigation();
+    initSearch();
+    initOfflineSupport();
   }
 
   if (document.readyState === 'loading') {
