@@ -38,6 +38,10 @@
 /apps/*/sw.js
   Cache-Control: no-cache, no-store, must-revalidate
 
+# App JavaScript - never cache (force fresh on every load)
+/apps/*/app.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
 # RSS feeds
 /feed.xml
   Cache-Control: public, max-age=3600

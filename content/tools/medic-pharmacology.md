@@ -1,20 +1,31 @@
 ---
 title: "LF Medic - Pharmacology"
 date: 2025-12-11
-description: "Drug dosages, pain protocols, antibiotics, emergency medications, K9 dosages, shock classification, and vital signs reference. Based on Ranger Medic Handbook 2019."
+description: "OTC medications, natural remedies, pharmacy requests, pediatric dosing, plus military drug protocols and K9 dosages. For civilians and combat medics."
 icon: "pills"
-tags: ["medical", "reference", "pharmacology", "drugs"]
+tags: ["medical", "reference", "pharmacology", "drugs", "first-aid"]
 app_url: "/apps/medic-pharmacology/"
 weight: 5
 ---
 
-Light Fighter Medic - Pharmacology is a comprehensive drug reference for field medics. Includes human and K9 dosages, shock classification, and vital signs. Designed for rapid access with search and offline support.
+Light Fighter Medic - Pharmacology is a comprehensive medication reference for everyone. Covers over-the-counter drugs, natural alternatives, and pharmacy requests for civilians, plus military protocols for combat medics. Works offline after first load.
 
 <div class="tool-app">
   <a href="/apps/medic-pharmacology/" class="tool-launch-btn">Open Pharmacology App</a>
 </div>
 
-## Drug Reference
+## Public Access (NEW)
+
+Essential medication knowledge for anyone:
+
+- **OTC Medications** - Pain relievers, allergy meds, cold/flu, digestive, topical treatments with proper dosing
+- **Pharmacy Requests** - What antibiotics and critical meds to ask for in austere situations
+- **Natural Remedies** - Evidence-based alternatives: honey for wounds, willow bark for pain, garlic for infection
+- **Field Medicine** - Medicinal plant identification, improvised supplies, oral rehydration solution
+- **Medicine Stockpile** - Three-tier kit recommendations from basic to austere
+- **Pediatric Dosing** - Weight-based charts for Tylenol, Advil, Benadryl
+
+## Military Drug Reference
 
 **Quick Reference** - Common medications at a glance: pain, antibiotics, critical meds.
 
@@ -34,8 +45,6 @@ Light Fighter Medic - Pharmacology is a comprehensive drug reference for field m
 
 **Altitude & Environment** - Acetazolamide, Dexamethasone, Malarone, Albuterol
 
-**GI & Other** - Cimetidine, Docusate, Bisacodyl, Benzonatate, Cetirizine, Bupivacaine
-
 ## K9 Dosages
 
 Military Working Dog pharmacology:
@@ -44,43 +53,30 @@ Military Working Dog pharmacology:
 - **Ketamine:** 75-150mg (2-5mg/kg) IM - primary K9 analgesic
 - **Naloxone:** 1mg (0.02-0.04mg/kg) IV/IM
 - **Diazepam:** 0.5-1mg/kg IV or 1-2mg/kg rectally for seizures
-- **Buffered Aspirin:** 10-25mg/kg PO q8-12h
 
 ## Shock Classification
 
-Classes of hemorrhagic shock (I-IV) with:
-- Blood loss volumes and percentages
-- Vital sign changes
-- Mental status indicators
-- Fluid replacement guidelines
-
-**Resuscitation Endpoints:**
-- Palpable radial pulse
-- Improved mental status
-- SBP 90-100 mmHg (hemorrhagic shock)
-- SBP >110 mmHg (TBI)
+Classes of hemorrhagic shock (I-IV) with blood loss volumes, vital sign changes, mental status indicators, and fluid replacement guidelines.
 
 ## Vitals & Conversions
 
 - **Normal Adult Vitals** - HR, RR, BP, SpO2, Temp
-- **AVPU Scale** - Quick mental status assessment
 - **Glasgow Coma Scale** - Eye, Verbal, Motor scoring
-- **Weight Conversions** - kg to lbs
-- **Temperature Conversions** - F to C
+- **Weight/Temperature Conversions**
 - **IV Fluid Rates** - Drip calculations
 - **Burn Resuscitation** - Rule of Ten
 
 ## Features
 
 - **Search** - Find drugs by name or indication
-- **Back Button** - Navigate back to apps index
 - **Swipe Navigation** - Switch sections with swipe gestures
 - **Works Offline** - Full offline support after first load
+- **Mobile Optimized** - Readable in any conditions
 
 ## Source
 
-Based on Ranger Medic Handbook 2019 and CoTCCC Guidelines.
+Based on Ranger Medic Handbook 2019, CoTCCC Guidelines, and standard pharmacology references.
 
 ## Related
 
-See also: [LF Medic - Procedures](/tools/tccc/) for TCCC phases, surgical procedures, and field tools.
+See also: [LF Medic - Procedures](/tools/tccc/) for first aid basics, TCCC phases, and surgical procedures.
