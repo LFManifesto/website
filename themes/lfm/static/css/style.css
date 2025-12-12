@@ -2357,86 +2357,212 @@ audio {
   font-style: italic;
 }
 
-.connection-guide {
-  max-width: 100%;
-}
-
-.connection-guide-intro {
+/* Monero Node Connection Guide */
+.monero-guide-intro {
   font-size: 1rem;
   color: var(--text-secondary);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  max-width: 600px;
 }
 
-.connection-guide-grid {
+.monero-guide-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
 }
 
-.connection-guide-card {
+.monero-guide-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: var(--space-lg);
+  transition: border-color 0.2s ease;
 }
 
-.connection-guide-card h3 {
-  font-size: 1.1rem;
+.monero-guide-card:hover {
+  border-color: var(--accent);
+}
+
+.monero-guide-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.monero-guide-icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--accent);
+  flex-shrink: 0;
+}
+
+.monero-guide-card-header h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.monero-guide-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background-color: var(--bg-secondary);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.monero-guide-card ol {
+  margin: 0 0 var(--space-md) 0;
+  padding-left: var(--space-lg);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.monero-guide-card ol li {
+  margin-bottom: var(--space-xs);
+}
+
+.monero-guide-card ol li strong {
   color: var(--text-primary);
 }
 
-.connection-guide-card ol {
-  margin: 0;
-  padding-left: var(--space-lg);
-  font-size: 0.9rem;
-  line-height: 1.7;
-}
-
-.connection-guide-card ol li {
-  margin-bottom: var(--space-sm);
-}
-
-.connection-guide-card code {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--accent);
-  background-color: var(--bg-secondary);
-  padding: 2px 6px;
-  border-radius: 3px;
-  word-break: break-all;
-}
-
-.connection-guide-card pre {
+.monero-guide-address {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 4px;
+  border-radius: 6px;
   padding: var(--space-md);
-  overflow-x: auto;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  line-height: 1.5;
   margin-bottom: var(--space-md);
 }
 
-.connection-guide-note {
+.monero-guide-address code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  word-break: break-all;
+  display: block;
+}
+
+.monero-guide-port {
+  display: block;
+  margin-top: var(--space-sm);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.monero-guide-port code {
+  display: inline;
+  font-size: 0.85rem;
+}
+
+.monero-guide-step-final {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.monero-guide-cli {
+  margin-bottom: var(--space-md);
+}
+
+.monero-guide-cli pre {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: var(--space-md);
+  margin: 0;
+  overflow-x: auto;
+}
+
+.monero-guide-cli code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  line-height: 1.6;
+}
+
+.monero-guide-cli-note {
   font-size: 0.85rem;
   color: var(--text-muted);
-  font-style: italic;
+  margin: 0;
+}
+
+.monero-guide-footer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.monero-guide-footer svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.monero-guide-footer p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .monero-guide-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
 }
 
 @media (max-width: 768px) {
-  .connection-guide-grid {
-    grid-template-columns: 1fr;
+  .monero-guide-intro {
+    font-size: 0.9rem;
   }
 
-  .connection-guide-card {
+  .monero-guide-card {
     padding: var(--space-md);
   }
 
-  .connection-guide-card pre {
-    font-size: 0.7rem;
+  .monero-guide-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .monero-guide-card ol {
+    font-size: 0.85rem;
+    padding-left: var(--space-md);
+  }
+
+  .monero-guide-address {
     padding: var(--space-sm);
+  }
+
+  .monero-guide-address code {
+    font-size: 0.65rem;
+  }
+
+  .monero-guide-cli pre {
+    padding: var(--space-sm);
+  }
+
+  .monero-guide-cli code {
+    font-size: 0.7rem;
+  }
+
+  .monero-guide-footer {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .monero-guide-footer p {
+    font-size: 0.85rem;
   }
 }
 
