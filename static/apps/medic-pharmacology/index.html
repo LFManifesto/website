@@ -445,6 +445,16 @@
 
   <div class="offline-indicator" id="offlineIndicator">Offline Mode - Data Cached</div>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js"></script>
+  <script>
+    // Auto-reload when service worker updates
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('message', event => {
+        if (event.data && event.data.type === 'SW_UPDATED') {
+          window.location.reload();
+        }
+      });
+    }
+  </script>
 </body>
 </html>
