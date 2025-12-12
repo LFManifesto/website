@@ -1931,9 +1931,7 @@
     window.addEventListener('online', updateStatus);
     window.addEventListener('offline', updateStatus);
     updateStatus();
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
-    }
+    // SW disabled - caches cleared on page load to fix update issues
   }
 
   // ==========================================================================
