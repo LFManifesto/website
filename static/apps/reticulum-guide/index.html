@@ -887,13 +887,13 @@
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
   <!-- App JavaScript -->
-  <script src="app.js?v=2.0"></script>
+  <script src="app.js?v=2.1"></script>
 
   <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js?v=2')
+        navigator.serviceWorker.register('sw.js?v=3')
           .then(function(registration) {
             console.log('[App] ServiceWorker registered:', registration.scope);
             setInterval(function() { registration.update(); }, 60000);

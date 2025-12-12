@@ -3,7 +3,7 @@
  * Version 2.0 - Complete Rewrite
  */
 
-const CACHE_NAME = 'reticulum-guide-v2';
+const CACHE_NAME = 'reticulum-guide-v3';
 const ASSETS = [
   '/apps/reticulum-guide/',
   '/apps/reticulum-guide/index.html',
