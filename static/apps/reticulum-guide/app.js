@@ -590,13 +590,12 @@ announce_at_start = yes</div>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>~/.nomadnetwork/storage/pages/</div>
 
           <h4>Example Page (index.mu)</h4>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>#!/usr/bin/env python3
-print(">Welcome to My Node")
-print("")
-print("This is a simple page hosted on Reticulum.")
-print("")
-print(">`!Links:`!")
-print(">>Dublin Hub|abb3ebcd03cb2388a838e70c001291f9")</div>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>&gt;Welcome to My Node
+
+This is a simple page hosted on Reticulum.
+
+&gt;\`!Links:\`!
+&gt;&gt;Dublin Hub|abb3ebcd03cb2388a838e70c001291f9</div>
         </div>
       `
     },
