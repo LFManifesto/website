@@ -4,7 +4,7 @@
 <p class="tools-notice">These applications are optimized for desktop and tablet displays.</p>
 
 <div class="tools-grid">
-  {{ range .Pages }}
+  {{ range .Pages.ByTitle }}
   <a href="{{ .Permalink }}" class="tool-card">
     <div class="tool-card-icon">
       {{ partial "tool-icon.html" .Params.icon }}

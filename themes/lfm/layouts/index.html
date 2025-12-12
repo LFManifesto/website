@@ -18,43 +18,36 @@
   <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
 </div>
 
-<!-- Latest Podcast Episode -->
-{{ $podcasts := where .Site.RegularPages "Section" "podcast" }}
-{{ with (first 1 $podcasts) }}
+<!-- Get the Zines -->
 <section class="home-section">
   <div class="section-header">
     <h2 class="section-title">
-      <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-      Latest Episode
+      <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Get the Zines
     </h2>
-    <a href="/podcast/" class="section-link">All Episodes &rarr;</a>
+    <a href="/shop/" class="section-link">Visit Shop &rarr;</a>
   </div>
-  {{ range . }}
   <div class="home-card">
-    {{ with .Params.episode }}
-    <span class="home-card-label">Episode {{ . }}</span>
-    {{ end }}
-    <h3 class="home-card-title">
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
-    </h3>
-    <span class="home-card-meta">{{ .Date.Format "January 2, 2006" }}</span>
-    <p class="home-card-desc">{{ .Description }}</p>
-    {{ with .Params.audio }}
-    <div class="audio-player">
-      <audio controls preload="metadata">
-        <source src="{{ . }}" type="audio/mpeg">
-      </audio>
-    </div>
-    {{ end }}
-    {{ with .Params.buzzsprout_id }}
-    <div class="audio-player">
-      <iframe src="https://www.buzzsprout.com/{{ $.Site.Params.buzzsprout_id }}/{{ . }}?client_source=small_player&iframe=true" loading="lazy" width="100%" height="200" frameborder="0" scrolling="no" title="Light Fighter Manifesto"></iframe>
-    </div>
-    {{ end }}
+    <p class="home-card-desc">Four volumes. No ads. No filler. Field guides written by subject matter experts with direct experience. Intelligence gathering, communications infrastructure, unconventional operations.</p>
+    <p class="home-card-meta">10,000+ copies sold worldwide</p>
+    <a href="/shop/" class="btn btn-primary">Browse Volumes</a>
   </div>
-  {{ end }}
 </section>
-{{ end }}
+
+<!-- Apps -->
+<section class="home-section">
+  <div class="section-header">
+    <h2 class="section-title">
+      <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Apps
+    </h2>
+    <a href="/tools/" class="section-link">View All &rarr;</a>
+  </div>
+  <div class="home-card">
+    <p class="home-card-desc">Nine interactive field tools. Medical references, communications guides, calculators, and training simulators. Offline-capable. No tracking. No ads.</p>
+    <a href="/tools/" class="btn btn-primary">Browse Apps</a>
+  </div>
+</section>
 
 <!-- Latest Articles -->
 {{ $articles := where .Site.RegularPages "Section" "articles" }}
@@ -79,79 +72,37 @@
 </section>
 {{ end }}
 
-<!-- Get the Zines -->
-<section class="home-section">
-  <div class="section-header">
-    <h2 class="section-title">
-      <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      Get the Zines
-    </h2>
-    <a href="/shop/" class="section-link">Visit Shop &rarr;</a>
-  </div>
-  <div class="home-card">
-    <p class="home-card-desc">Four volumes. No ads. No filler. Field guides written by subject matter experts with direct experience. Intelligence gathering, communications infrastructure, unconventional operations.</p>
-    <p class="home-card-meta">10,000+ copies sold worldwide</p>
-    <a href="/shop/" class="btn btn-primary">Browse Volumes</a>
-  </div>
-</section>
-
-<!-- Apps -->
-<section class="home-section">
-  <div class="section-header">
-    <h2 class="section-title">
-      <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      Apps
-    </h2>
-    <a href="/tools/" class="section-link">All Apps &rarr;</a>
-  </div>
-  <div class="home-card">
-    <h3 class="home-card-title">Light Fighter Guide</h3>
-    <p class="home-card-desc">Interactive field reference covering drones, communications, SIGINT, marksmanship, and mission planning. Features full-text search, interactive checklists, and nine calculation tools. Works offline.</p>
-    <a href="/apps/field-guide/" class="btn btn-primary">Open Field Guide</a>
-  </div>
-</section>
-
-<!-- Active Projects -->
-<section class="home-section">
-  <div class="section-header">
-    <h2 class="section-title">
-      <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      Active Projects
-    </h2>
-    <a href="/projects/" class="section-link">View All &rarr;</a>
-  </div>
-  <div class="home-card">
-    <p class="home-card-desc">Open collaboration on communications and field operations. We pay for contributions in Monero.</p>
-    <div class="home-projects-list">
-      <div class="home-project-item">
-        <strong>LFM-Reticulum</strong> - Encrypted mesh over HF radio, Monero transactions over mesh
-      </div>
-      <div class="home-project-item">
-        <strong>LFM-Unmanned Systems</strong> - FPV platforms, counter-UAS, build documentation
-      </div>
-      <div class="home-project-item">
-        <strong>LFM-Guerrilla Tech</strong> - AI-assisted field ops, medical, SIGINT
-      </div>
-    </div>
-    <a href="/projects/" class="btn btn-primary">Contribute</a>
-  </div>
-</section>
-
-<!-- Join the Community -->
+<!-- Get Involved -->
 <section class="home-section">
   <div class="section-header">
     <h2 class="section-title">
       <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Join the Community
+      Get Involved
     </h2>
   </div>
   <div class="home-card">
-    <h3 class="home-card-title">LFM Matrix Server</h3>
-    <p class="home-card-desc">Connect with the Light Fighter community on our self-hosted Matrix server. Decentralized, encrypted, and free from corporate surveillance.</p>
+    <h3 class="home-card-title">Join the Community</h3>
+    <p class="home-card-desc">Connect on our self-hosted Matrix server. Decentralized, encrypted, free from corporate surveillance.</p>
     <div class="home-card-code">
       <code>matrix.lightfightermanifesto.net</code>
     </div>
-    <a href="https://matrix.to/#/#General:matrix.lightfightermanifesto.net" target="_blank" rel="noopener" class="btn btn-secondary">Join Matrix</a>
+    <a href="https://matrix.to/#/#General:matrix.lightfightermanifesto.net" target="_blank" rel="noopener" class="btn btn-primary">Join Matrix</a>
+  </div>
+  <div class="home-card">
+    <h3 class="home-card-title">Contribute</h3>
+    <p class="home-card-desc">Open collaboration on communications and field operations. We pay for contributions in Monero.</p>
+    <div class="home-projects-list">
+      <div class="home-project-item">
+        <strong>LFM-Reticulum</strong> - Encrypted mesh over HF, Monero over mesh
+      </div>
+      <div class="home-project-item">
+        <strong>LFM-Unmanned Systems</strong> - FPV platforms, counter-UAS
+      </div>
+      <div class="home-project-item">
+        <strong>LFM-Guerrilla Tech</strong> - AI field ops, medical, SIGINT
+      </div>
+    </div>
+    <a href="/projects/" class="btn btn-secondary">View Projects</a>
   </div>
 </section>
 
