@@ -981,18 +981,46 @@
   <!-- Fuse.js for search -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
+  <!-- Error display fallback -->
+  <script>
+    window.onerror = function(msg, url, line, col, error) {
+      var content = document.getElementById('contentArea');
+      if (content) {
+        content.innerHTML = '<div style="padding:2rem;color:#c92a2a;">' +
+          '<h2>Loading Error</h2>' +
+          '<p>Error: ' + msg + '</p>' +
+          '<p>Location: ' + url + ' (line ' + line + ')</p>' +
+          '<p><button onclick="location.reload(true)" style="padding:0.5rem 1rem;background:#c92a2a;color:white;border:none;cursor:pointer;">Force Reload</button></p>' +
+          '</div>';
+      }
+      return false;
+    };
+  </script>
+
   <!-- Clear any old broken service workers for this app -->
   <script>
-    if ('serviceWorker' in navigator && !sessionStorage.getItem('rns-cleaned')) {
-      navigator.serviceWorker.getRegistrations().then(regs => {
-        regs.forEach(reg => { if (reg.scope.includes('reticulum-guide')) reg.unregister(); });
-      });
-      caches.keys().then(names => {
-        names.filter(n => n.startsWith('reticulum-guide-')).forEach(n => caches.delete(n));
-      });
-      sessionStorage.setItem('rns-cleaned', '1');
-    }
+    (function() {
+      // Always clear service workers and caches on load to ensure fresh content
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          regs.forEach(function(reg) {
+            if (reg.scope.includes('reticulum-guide')) {
+              reg.unregister();
+            }
+          });
+        });
+        if ('caches' in window) {
+          caches.keys().then(function(names) {
+            names.forEach(function(n) {
+              if (n.startsWith('reticulum-guide-')) {
+                caches.delete(n);
+              }
+            });
+          });
+        }
+      }
+    })();
   </script>
-  <script src="app.js"></script>
+  <script src="app.js?v=3.4"></script>
 </body>
 </html>

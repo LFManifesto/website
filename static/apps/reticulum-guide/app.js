@@ -1,6 +1,7 @@
 /**
  * Reticulum Field Reference
- * Version 3.3 - Dec 12, 2025
+ * Version 3.4 - Dec 12, 2025
+ * Fixed: Improved error handling and initialization
  * Added: LXST Voice Streaming section, HF Propagation Calculator, NomadNet Pages
  * Updated: 12 sections total, comprehensive beginner guide
  */
@@ -8,11 +9,13 @@
 (function() {
   'use strict';
 
+  console.log('[RNS Guide] Script starting...');
+
   // ==========================================================================
   // State
   // ==========================================================================
 
-  const state = {
+  var state = {
     sections: [],
     tools: [],
     searchIndex: null,
@@ -1481,10 +1484,24 @@
   // Start
   // ==========================================================================
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadData);
-  } else {
-    loadData();
+  console.log('[RNS Guide] Document readyState:', document.readyState);
+
+  try {
+    if (document.readyState === 'loading') {
+      console.log('[RNS Guide] Adding DOMContentLoaded listener');
+      document.addEventListener('DOMContentLoaded', loadData);
+    } else {
+      console.log('[RNS Guide] DOM ready, calling loadData directly');
+      loadData();
+    }
+  } catch (e) {
+    console.error('[RNS Guide] Startup error:', e);
+    var content = document.getElementById('contentArea');
+    if (content) {
+      content.innerHTML = '<div style="padding:2rem;color:#c92a2a;">Startup error: ' + e.message + '</div>';
+    }
   }
+
+  console.log('[RNS Guide] Script parsed successfully');
 
 })();
