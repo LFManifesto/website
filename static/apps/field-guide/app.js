@@ -138,6 +138,9 @@
   }
 
   function navigateToHash(hash) {
+    // Scroll to top when navigating
+    window.scrollTo(0, 0);
+
     // Find section and subsection
     for (const section of state.sections) {
       if (section.id === hash) {
