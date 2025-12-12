@@ -981,23 +981,7 @@
   <!-- Fuse.js for search -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
-  <!-- Cache clearing and app loading -->
-  <script>
-    (async function() {
-      if ('serviceWorker' in navigator) {
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        const cacheNames = await caches.keys();
-        if (registrations.length > 0 || cacheNames.length > 0) {
-          for (const reg of registrations) await reg.unregister();
-          await Promise.all(cacheNames.map(name => caches.delete(name)));
-          window.location.reload();
-          return;
-        }
-      }
-      const script = document.createElement('script');
-      script.src = 'app.js';
-      document.body.appendChild(script);
-    })();
-  </script>
+  <!-- App loading -->
+  <script src="app.js"></script>
 </body>
 </html>

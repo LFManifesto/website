@@ -445,30 +445,7 @@
 
   <div class="offline-indicator" id="offlineIndicator">Offline Mode - Data Cached</div>
 
-  <script>
-    // Force clear old service workers and caches before loading app
-    (async function() {
-      if ('serviceWorker' in navigator) {
-        // Unregister all service workers
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        for (const reg of registrations) {
-          await reg.unregister();
-        }
-        // Clear all caches
-        const cacheNames = await caches.keys();
-        await Promise.all(cacheNames.map(name => caches.delete(name)));
-        // If we had old SW, reload to get fresh content
-        if (registrations.length > 0 || cacheNames.length > 0) {
-          console.log('[LF Medic] Cleared old caches, reloading...');
-          window.location.reload();
-          return;
-        }
-      }
-      // Load app.js dynamically after cache clear
-      const script = document.createElement('script');
-      script.src = 'app.js';
-      document.body.appendChild(script);
-    })();
-  </script>
+  <!-- App loading -->
+  <script src="app.js"></script>
 </body>
 </html>
