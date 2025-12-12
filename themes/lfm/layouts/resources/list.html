@@ -188,38 +188,59 @@
 <!-- LFM Monero Node Connection Guide -->
 <section class="resource-section">
   <h2 class="resource-section-title">
-    <svg class="resource-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+    <svg class="resource-icon" viewBox="0 0 256 256" fill="currentColor"><path d="M127.998 0C57.318 0 0 57.317 0 127.999c0 14.127 2.29 27.716 6.518 40.43H44.8V60.733l83.2 83.2 83.2-83.2v107.695h38.282c4.228-12.714 6.518-26.303 6.518-40.43C256 57.317 198.681 0 127.998 0z"/><path d="M108.867 163.062l-36.31-36.311v67.765H18.623c22.47 36.863 63.051 61.484 109.375 61.484s86.905-24.621 109.375-61.484h-53.934v-67.765l-36.31 36.311-19.13 19.13-19.132-19.13z"/></svg>
     Connecting to LFM Monero Node
   </h2>
 
-  <div class="monero-guide">
-    <p>Our node is only accessible via Tor. Your wallet must support Tor connections to use this .onion address.</p>
+  <p class="resource-section-intro">Our node is Tor-only. Your wallet must support Tor to connect.</p>
 
-    <h3>Feather Wallet (Desktop)</h3>
-    <ol>
-      <li>Go to <strong>File → Settings → Network</strong></li>
-      <li>Under "Proxy", select <strong>Tor</strong> (Feather has Tor built-in)</li>
-      <li>Go to <strong>File → Settings → Node</strong></li>
-      <li>Add custom node: <code>tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion:18081</code></li>
-      <li>Select it and click <strong>Connect</strong></li>
-    </ol>
+  <div class="resource-grid">
+    <div class="resource-card">
+      <div class="resource-card-header">
+        <svg class="resource-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <h3>Feather Wallet (Desktop)</h3>
+      </div>
+      <div class="resource-join-steps">
+        <p><strong>Step 1:</strong> File → Settings → Network → select Tor</p>
+        <p><strong>Step 2:</strong> File → Settings → Node → Add custom node</p>
+        <p><strong>Step 3:</strong> Enter address, select it, click Connect</p>
+      </div>
+      <div class="resource-code">
+        <code>tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion:18081</code>
+      </div>
+    </div>
 
-    <h3>Cake Wallet (Mobile)</h3>
-    <ol>
-      <li>Go to <strong>Settings → Connection and sync</strong></li>
-      <li>Enable <strong>"Connect to node through Tor"</strong></li>
-      <li>Tap <strong>Manage nodes → Add (+)</strong></li>
-      <li>Address: <code>tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion</code></li>
-      <li>Port: <code>18081</code></li>
-      <li>Save and select the node</li>
-    </ol>
+    <div class="resource-card">
+      <div class="resource-card-header">
+        <svg class="resource-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <h3>Cake Wallet (Mobile)</h3>
+      </div>
+      <div class="resource-join-steps">
+        <p><strong>Step 1:</strong> Settings → Connection and sync</p>
+        <p><strong>Step 2:</strong> Enable "Connect to node through Tor"</p>
+        <p><strong>Step 3:</strong> Manage nodes → Add (+) → Enter address</p>
+      </div>
+      <div class="resource-code">
+        <code>tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion</code>
+      </div>
+      <p class="resource-card-note">Port: 18081</p>
+    </div>
 
-    <h3>Monero CLI</h3>
-    <pre>monero-wallet-cli --daemon-address tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion:18081 --proxy 127.0.0.1:9050</pre>
-    <p class="monero-guide-note">Requires Tor running locally on port 9050. Install via your package manager or run Tor Browser.</p>
-
-    <p class="monero-guide-note"><strong>Note:</strong> Tor connections are slower than clearnet. Initial sync may take 30-60 seconds. This is normal.</p>
+    <div class="resource-card">
+      <div class="resource-card-header">
+        <svg class="resource-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        <h3>Monero CLI</h3>
+      </div>
+      <p class="resource-card-desc">Requires Tor running locally (port 9050).</p>
+      <div class="resource-config">
+        <pre>monero-wallet-cli \
+  --daemon-address tnm23vptv53qmqrt57rhy7ogmjvqfaicq4t3qju4axfd6v7rmq5cgxyd.onion:18081 \
+  --proxy 127.0.0.1:9050</pre>
+      </div>
+    </div>
   </div>
+
+  <p class="resource-card-note" style="margin-top: var(--space-lg);">Tor connections are slower than clearnet. Initial sync may take 30-60 seconds.</p>
 </section>
 
 {{ end }}
