@@ -981,35 +981,23 @@
   <!-- Fuse.js for search -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
-  <!-- App JavaScript -->
-  <script src="app.js?v=3.3"></script>
-
-  <!-- Service Worker Registration -->
+  <!-- Cache clearing and app loading -->
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js?v=7')
-          .then(function(registration) {
-            console.log('[App] ServiceWorker registered:', registration.scope);
-            setInterval(function() { registration.update(); }, 60000);
-          })
-          .catch(function(error) {
-            console.log('[App] ServiceWorker registration failed:', error);
-          });
-      });
-
-      navigator.serviceWorker.addEventListener('message', function(event) {
-        if (event.data && event.data.type === 'SW_UPDATED') {
-          console.log('[App] New version available:', event.data.version);
+    (async function() {
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        const cacheNames = await caches.keys();
+        if (registrations.length > 0 || cacheNames.length > 0) {
+          for (const reg of registrations) await reg.unregister();
+          await Promise.all(cacheNames.map(name => caches.delete(name)));
           window.location.reload();
+          return;
         }
-      });
-
-      navigator.serviceWorker.addEventListener('controllerchange', function() {
-        console.log('[App] Controller changed, reloading...');
-        window.location.reload();
-      });
-    }
+      }
+      const script = document.createElement('script');
+      script.src = 'app.js';
+      document.body.appendChild(script);
+    })();
   </script>
 </body>
 </html>
