@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Reticulum Field Reference - Offline-capable quick reference for mesh networking, NomadNet, and LXMF">
+  <meta name="description" content="Reticulum Field Reference - Complete beginner's guide to Reticulum mesh networking, NomadNet, and LXMF messaging.">
   <meta name="author" content="Light Fighter Manifesto L.L.C.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a0a0a">
@@ -16,48 +16,82 @@
   <link rel="icon" type="image/png" href="/images/logo.png">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
   <style>
+    /* ==========================================================================
+       Reticulum Field Reference Styles
+       Mobile-first design matching Light Fighter Guide patterns
+       ========================================================================== */
+
     :root {
       --bg-primary: #0a0a0a;
       --bg-secondary: #111111;
       --bg-tertiary: #1a1a1a;
       --bg-card: #141414;
       --bg-card-hover: #1c1c1c;
+
       --text-primary: #f0f0f0;
       --text-secondary: #b8b8b8;
       --text-muted: #888888;
+
       --accent: #c92a2a;
       --accent-hover: #e03131;
       --accent-subtle: rgba(201, 42, 42, 0.1);
       --accent-green: #2a9d8f;
       --accent-blue: #4a9eff;
       --accent-yellow: #f4a261;
+
       --border-color: #2a2a2a;
       --border-subtle: #1f1f1f;
-      --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+
+      --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+
       --nav-height: 56px;
       --sidebar-width: 280px;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
       --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     body {
       font-family: var(--font-primary);
-      background: var(--bg-primary);
+      background-color: var(--bg-primary);
       color: var(--text-primary);
       line-height: 1.6;
       min-height: 100vh;
+      min-height: 100dvh;
       overflow-x: hidden;
     }
 
-    /* Layout */
-    .app-container { display: flex; flex-direction: column; min-height: 100vh; }
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
 
     /* Header */
     .app-header {
@@ -66,409 +100,821 @@
       left: 0;
       right: 0;
       height: var(--nav-height);
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 100;
       display: flex;
       align-items: center;
-      padding: 0 1rem;
-      z-index: 100;
-      gap: 1rem;
+      padding: 0 var(--space-md);
+      gap: var(--space-md);
     }
+
     .menu-toggle {
       display: none;
       background: none;
       border: none;
-      color: var(--text-primary);
-      padding: 0.5rem;
+      padding: var(--space-sm);
       cursor: pointer;
-    }
-    .menu-toggle svg { width: 24px; height: 24px; }
-    .app-title {
-      font-size: 1.1rem;
-      font-weight: 600;
       color: var(--text-primary);
+      min-width: 44px;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
     }
+
+    .menu-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+
+    .app-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .app-title:hover { color: var(--accent); }
     .app-title span { color: var(--accent); }
-    .header-search {
+
+    .header-spacer { flex: 1; }
+
+    /* Search */
+    .search-container {
       flex: 1;
       max-width: 400px;
-      margin-left: auto;
+      position: relative;
     }
-    .header-search input {
+
+    .search-input {
       width: 100%;
-      background: var(--bg-tertiary);
+      padding: var(--space-sm) var(--space-md);
+      padding-left: 36px;
+      background-color: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 0.5rem 1rem;
       color: var(--text-primary);
-      font-size: 0.9rem;
+      font-size: 16px; /* Prevents iOS zoom */
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .header-search input:focus {
+
+    .search-input:focus {
       outline: none;
       border-color: var(--accent);
-    }
-    .header-search input::placeholder { color: var(--text-muted); }
-
-    /* Main Layout */
-    .app-main {
-      display: flex;
-      padding-top: var(--nav-height);
-      flex: 1;
+      box-shadow: 0 0 0 3px var(--accent-subtle);
     }
 
-    /* Sidebar */
-    .sidebar {
-      width: var(--sidebar-width);
-      background: var(--bg-secondary);
-      border-right: 1px solid var(--border-color);
-      height: calc(100vh - var(--nav-height));
-      position: fixed;
-      top: var(--nav-height);
-      left: 0;
-      overflow-y: auto;
-      padding: 1rem 0;
-      transition: transform 0.3s ease;
-    }
-    .sidebar-section { margin-bottom: 1.5rem; }
-    .sidebar-title {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      padding: 0 1rem;
-      margin-bottom: 0.5rem;
-    }
-    .sidebar-nav { list-style: none; }
-    .sidebar-nav li a {
-      display: block;
-      padding: 0.5rem 1rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: all 0.15s;
-      border-left: 3px solid transparent;
-    }
-    .sidebar-nav li a:hover {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
-    }
-    .sidebar-nav li a.active {
-      background: var(--accent-subtle);
-      color: var(--accent);
-      border-left-color: var(--accent);
-    }
-    .sidebar-nav li.sub-item a {
-      padding-left: 2rem;
-      font-size: 0.85rem;
+    .search-input::placeholder { color: var(--text-muted); }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-muted);
+      pointer-events: none;
     }
 
-    /* Content */
-    .content {
-      flex: 1;
-      margin-left: var(--sidebar-width);
-      padding: 2rem;
-      max-width: 900px;
-    }
-    .content-header {
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .content-header h1 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .content-header p {
-      color: var(--text-secondary);
-    }
-
-    /* Section */
-    .section {
-      margin-bottom: 2.5rem;
-    }
-    .section h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .section h2::before {
-      content: '';
-      width: 4px;
-      height: 1.25rem;
-      background: var(--accent);
-      border-radius: 2px;
-    }
-    .section h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: var(--text-primary); }
-    .section h4 { font-size: 1rem; margin: 1.25rem 0 0.5rem; color: var(--text-secondary); }
-    .section p { margin-bottom: 1rem; color: var(--text-secondary); }
-    .section ul, .section ol { margin: 0 0 1rem 1.5rem; color: var(--text-secondary); }
-    .section li { margin-bottom: 0.25rem; }
-    .section strong { color: var(--text-primary); }
-
-    /* Tables */
-    .section table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-    }
-    .section th, .section td {
-      padding: 0.75rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .section th {
-      background: var(--bg-tertiary);
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .section td { color: var(--text-secondary); }
-    .section td code {
-      background: var(--bg-tertiary);
-      padding: 0.1rem 0.3rem;
-      border-radius: 3px;
-      font-size: 0.85em;
-    }
-
-    /* Code blocks */
-    .section pre {
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 1rem;
-      overflow-x: auto;
-      margin: 1rem 0;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-    .section code {
-      font-family: var(--font-mono);
-      color: var(--accent-green);
-    }
-    .section pre code { color: var(--text-primary); }
-
-    /* Alerts */
-    .alert {
-      padding: 1rem;
-      border-radius: 6px;
-      margin: 1rem 0;
-      border-left: 4px solid;
-    }
-    .alert-info {
-      background: rgba(74, 158, 255, 0.1);
-      border-color: var(--accent-blue);
-    }
-    .alert-warning {
-      background: rgba(244, 162, 97, 0.1);
-      border-color: var(--accent-yellow);
-    }
-    .alert-critical {
-      background: rgba(201, 42, 42, 0.1);
-      border-color: var(--accent);
-    }
-
-    /* Key Points */
-    .key-points {
-      display: grid;
-      gap: 0.75rem;
-      margin: 1rem 0;
-    }
-    .key-point {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      background: var(--bg-tertiary);
-      border-radius: 6px;
-      border-left: 3px solid var(--accent);
-    }
-    .key-point .label { font-weight: 500; color: var(--text-primary); }
-    .key-point .value { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.9rem; }
-
-    /* Calculators */
-    .calculator {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    .calculator h3 {
-      margin: 0 0 1rem;
-      font-size: 1.1rem;
-      color: var(--text-primary);
-    }
-    .calc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .calc-field label {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.25rem;
-    }
-    .calc-field input, .calc-field select {
-      width: 100%;
-      padding: 0.5rem;
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--text-primary);
-      font-size: 0.9rem;
-    }
-    .calc-field input:focus, .calc-field select:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    .calc-button {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .calc-button:hover { background: var(--accent-hover); }
-    .calc-result {
-      margin-top: 1rem;
-      padding: 1rem;
-      background: var(--bg-tertiary);
-      border-radius: 6px;
-      font-family: var(--font-mono);
-    }
-    .calc-result .result-label { color: var(--text-muted); font-size: 0.85rem; }
-    .calc-result .result-value { font-size: 1.25rem; color: var(--accent-green); margin-top: 0.25rem; }
-
-    /* Search Results */
     .search-results {
       position: absolute;
-      top: 100%;
+      top: calc(100% + 4px);
       left: 0;
       right: 0;
-      background: var(--bg-secondary);
+      background-color: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: 6px;
       max-height: 400px;
       overflow-y: auto;
       display: none;
+      box-shadow: var(--shadow-lg);
       z-index: 200;
     }
+
     .search-results.active { display: block; }
-    .search-result {
-      padding: 0.75rem 1rem;
+
+    .search-result-item {
+      padding: var(--space-md);
       border-bottom: 1px solid var(--border-subtle);
       cursor: pointer;
+      transition: background-color 0.15s;
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
     }
-    .search-result:hover { background: var(--bg-tertiary); }
-    .search-result-title { font-weight: 500; color: var(--text-primary); }
-    .search-result-section { font-size: 0.8rem; color: var(--text-muted); }
 
-    /* Mobile */
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      .sidebar {
-        transform: translateX(-100%);
-        z-index: 150;
-      }
-      .sidebar.open { transform: translateX(0); }
-      .sidebar-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.5);
-        z-index: 140;
-      }
-      .sidebar-overlay.active { display: block; }
-      .content { margin-left: 0; padding: 1rem; }
-      .header-search { display: none; }
-      .app-title { font-size: 1rem; }
-      .calc-grid { grid-template-columns: 1fr; }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover, .search-result-item.selected { background-color: var(--bg-card-hover); }
+
+    .search-result-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .search-result-section {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Back Link */
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: var(--space-sm);
+      border-radius: 4px;
+      transition: color 0.2s, background-color 0.2s;
+      min-width: 44px;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .back-link:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-tertiary);
+    }
+
+    .back-link svg { width: 16px; height: 16px; }
+
+    /* Main Layout */
+    .app-main {
+      display: flex;
+      margin-top: var(--nav-height);
+      min-height: calc(100vh - var(--nav-height));
+      min-height: calc(100dvh - var(--nav-height));
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background-color: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      padding: var(--space-lg) 0;
+      z-index: 50;
+    }
+
+    .sidebar-section { margin-bottom: var(--space-lg); }
+
+    .sidebar-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0 var(--space-lg) var(--space-sm);
+    }
+
+    .sidebar-nav { list-style: none; }
+
+    .sidebar-nav-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-lg);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.15s;
+      border-left: 3px solid transparent;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .sidebar-nav-link:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-tertiary);
+    }
+
+    .sidebar-nav-link.active {
+      color: var(--accent);
+      background-color: var(--accent-subtle);
+      border-left-color: var(--accent);
+    }
+
+    .sidebar-nav-link svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      padding: var(--space-xl);
+      max-width: 900px;
+    }
+
+    /* Section Header */
+    .section-header {
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-number {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-description {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    /* Content Cards */
+    .content-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .content-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: var(--space-md);
+      color: var(--text-primary);
+    }
+
+    .content-card h4 {
+      font-size: 1rem;
+      margin: var(--space-lg) 0 var(--space-sm);
+      color: var(--text-primary);
+    }
+
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: var(--space-md);
+    }
+
+    .content-card ul, .content-card ol {
+      margin-left: var(--space-lg);
+      margin-bottom: var(--space-md);
+      color: var(--text-secondary);
+    }
+
+    .content-card li { margin-bottom: var(--space-sm); }
+
+    /* Code Blocks */
+    .code-block {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: var(--space-md);
+      margin: var(--space-md) 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: pre;
+      color: var(--text-secondary);
+    }
+
+    .code-block code { color: var(--accent-green); }
+
+    /* Inline Code */
+    code {
+      font-family: var(--font-mono);
+      background-color: var(--bg-tertiary);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      color: var(--accent-green);
+    }
+
+    /* Tables */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: var(--space-md) 0;
+    }
+
+    .quick-ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 400px;
+    }
+
+    .quick-ref-table th,
+    .quick-ref-table td {
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+
+    .quick-ref-table th {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background-color: var(--bg-secondary);
+      white-space: nowrap;
+    }
+
+    .quick-ref-table td {
+      color: var(--text-secondary);
+    }
+
+    .quick-ref-table tr:hover td {
+      background-color: var(--bg-tertiary);
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background-color: var(--accent-subtle);
+      border: 1px solid var(--accent);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+
+    .info-box-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .info-box p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .info-box.warning {
+      background-color: rgba(244, 162, 97, 0.1);
+      border-color: var(--accent-yellow);
+    }
+
+    .info-box.warning .info-box-title { color: var(--accent-yellow); }
+
+    .info-box.success {
+      background-color: rgba(42, 157, 143, 0.1);
+      border-color: var(--accent-green);
+    }
+
+    .info-box.success .info-box-title { color: var(--accent-green); }
+
+    /* Calculator Styles */
+    .calculator {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+
+    .calculator h3 {
+      margin: 0 0 var(--space-md);
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .calc-field label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .calc-field input, .calc-field select {
+      width: 100%;
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-size: 16px; /* Prevents iOS zoom */
+      min-height: 44px;
+    }
+
+    .calc-field input:focus, .calc-field select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .calc-button {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: var(--space-md) var(--space-xl);
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s;
+      min-height: 48px;
+      font-size: 0.9rem;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .calc-button:hover { background-color: var(--accent-hover); }
+
+    .calc-result {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      background-color: var(--bg-tertiary);
+      border-radius: 6px;
+      font-family: var(--font-mono);
+    }
+
+    .calc-result .result-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .calc-result .result-value {
+      font-size: 1.25rem;
+      color: var(--accent-green);
+      margin-top: var(--space-xs);
+    }
+
+    /* Copy Button */
+    .copy-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      float: right;
+      margin-left: var(--space-sm);
+      min-height: 32px;
+      min-width: 60px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .copy-btn:hover { color: var(--text-primary); border-color: var(--accent); }
+    .copy-btn.copied { color: var(--accent-green); border-color: var(--accent-green); }
+
+    /* Mobile Search Button */
+    .mobile-search-btn {
+      display: none;
+      background: none;
+      border: none;
+      padding: var(--space-sm);
+      cursor: pointer;
+      color: var(--text-primary);
+      min-width: 44px;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-search-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+    }
+
+    /* Mobile Search Overlay */
+    .mobile-search-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--bg-primary);
+      z-index: 200;
+      padding: var(--space-md);
+      flex-direction: column;
+    }
+
+    .mobile-search-overlay.visible { display: flex; }
+
+    .mobile-search-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .mobile-search-close {
+      background: none;
+      border: none;
+      padding: var(--space-sm);
+      cursor: pointer;
+      color: var(--text-primary);
+      min-width: 44px;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-search-close svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+
+    .mobile-search-input {
+      flex: 1;
+      padding: var(--space-md);
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 16px;
+    }
+
+    .mobile-search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .mobile-search-results {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    /* Sidebar Overlay (Mobile) */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 40;
+    }
+
+    /* Offline Indicator */
+    .offline-indicator {
+      position: fixed;
+      bottom: var(--space-lg);
+      right: var(--space-lg);
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: none;
+      align-items: center;
+      gap: var(--space-sm);
+      z-index: 100;
+    }
+
+    .offline-indicator.visible { display: flex; }
+
+    .offline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent);
     }
 
     /* Loading */
     .loading {
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 200px;
+      justify-content: center;
+      padding: var(--space-xl);
       color: var(--text-muted);
+    }
+
+    .loading-spinner {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--border-color);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: var(--space-md);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+      .menu-toggle { display: block; }
+      .mobile-search-btn { display: block; }
+
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay.visible { display: block; }
+
+      .content-area {
+        margin-left: 0;
+        padding: var(--space-lg) var(--space-md);
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      .search-container { display: none; }
+
+      .section-title { font-size: 1.5rem; }
+
+      .back-link span { display: none; }
+
+      /* Larger touch targets */
+      .sidebar-nav-link {
+        padding: var(--space-md) var(--space-lg);
+        min-height: 48px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .section-title { font-size: 1.25rem; }
+
+      .content-card { padding: var(--space-md); }
+
+      .calc-grid { grid-template-columns: 1fr; }
+
+      .quick-ref-table { font-size: 0.8rem; }
+
+      .quick-ref-table th,
+      .quick-ref-table td {
+        padding: var(--space-xs) var(--space-sm);
+      }
+
+      .quick-ref-table th { font-size: 0.65rem; }
+    }
+
+    /* Print Styles */
+    @media print {
+      .app-header, .sidebar, .menu-toggle, .copy-btn, .calc-button { display: none; }
+      .content-area { margin-left: 0; max-width: 100%; }
+      body { background: white; color: black; }
+      .content-card { border: 1px solid #ccc; break-inside: avoid; }
     }
   </style>
 </head>
 <body>
   <div class="app-container">
+    <!-- Header -->
     <header class="app-header">
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
       </button>
-      <div class="app-title"><span>Reticulum</span> Field Reference</div>
-      <div class="header-search">
-        <input type="text" id="searchInput" placeholder="Search..." autocomplete="off">
+
+      <a href="/apps/reticulum-guide/" class="app-title"><span>Reticulum</span> Field Reference</a>
+
+      <div class="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search guide... (Ctrl+K)" autocomplete="off">
         <div class="search-results" id="searchResults"></div>
       </div>
+
+      <div class="header-spacer"></div>
+
+      <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      <a href="/tools/" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Back to Apps</span>
+      </a>
     </header>
 
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
+    <!-- Main -->
     <main class="app-main">
-      <nav class="sidebar" id="sidebar">
-        <div class="sidebar-section">
-          <div class="sidebar-title">Reticulum Core</div>
-          <ul class="sidebar-nav" id="navOverview"></ul>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-title">Interfaces</div>
-          <ul class="sidebar-nav" id="navInterfaces"></ul>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-title">Hardware</div>
-          <ul class="sidebar-nav" id="navHardware"></ul>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-title">NomadNet</div>
-          <ul class="sidebar-nav" id="navNomadnet"></ul>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-title">LXMF</div>
-          <ul class="sidebar-nav" id="navLxmf"></ul>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-title">Utilities</div>
-          <ul class="sidebar-nav" id="navUtilities"></ul>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-title">Troubleshooting</div>
-          <ul class="sidebar-nav" id="navTroubleshooting"></ul>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-title">Calculators</div>
-          <ul class="sidebar-nav">
-            <li><a href="#" data-calc="link-budget">LoRa Link Budget</a></li>
-            <li><a href="#" data-calc="airtime">Airtime Calculator</a></li>
-            <li><a href="#" data-calc="config-gen">Config Generator</a></li>
-          </ul>
-        </div>
-      </nav>
+      <!-- Sidebar Overlay (mobile) -->
+      <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-      <div class="content" id="content">
-        <div class="loading">Loading...</div>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <nav>
+          <div class="sidebar-section">
+            <h2 class="sidebar-title">Guide</h2>
+            <ul class="sidebar-nav" id="sidebarNav">
+              <!-- Populated by JavaScript -->
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <h2 class="sidebar-title">Tools</h2>
+            <ul class="sidebar-nav" id="sidebarTools">
+              <!-- Populated by JavaScript -->
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <div class="content-area" id="contentArea">
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          Loading guide...
+        </div>
       </div>
     </main>
+
+    <!-- Offline Indicator -->
+    <div class="offline-indicator" id="offlineIndicator">
+      <span class="offline-dot"></span>
+      Offline Mode
+    </div>
   </div>
 
-  <script src="app.js?v=1.0"></script>
+  <!-- Mobile Search Overlay -->
+  <div class="mobile-search-overlay" id="mobileSearchOverlay">
+    <div class="mobile-search-header">
+      <button class="mobile-search-close" id="mobileSearchClose" aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <input type="text" class="mobile-search-input" id="mobileSearchInput" placeholder="Search guide..." autocomplete="off">
+    </div>
+    <div class="mobile-search-results" id="mobileSearchResults"></div>
+  </div>
+
+  <!-- Fuse.js for search -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
+  <!-- App JavaScript -->
+  <script src="app.js?v=2.0"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js?v=2')
+          .then(function(registration) {
+            console.log('[App] ServiceWorker registered:', registration.scope);
+            setInterval(function() { registration.update(); }, 60000);
+          })
+          .catch(function(error) {
+            console.log('[App] ServiceWorker registration failed:', error);
+          });
+      });
+
+      navigator.serviceWorker.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'SW_UPDATED') {
+          console.log('[App] New version available:', event.data.version);
+          window.location.reload();
+        }
+      });
+
+      navigator.serviceWorker.addEventListener('controllerchange', function() {
+        console.log('[App] Controller changed, reloading...');
+        window.location.reload();
+      });
+    }
+  </script>
 </body>
 </html>
