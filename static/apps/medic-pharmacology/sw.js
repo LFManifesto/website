@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lf-medic-pharmacology-v1';
+const CACHE_NAME = 'lf-medic-pharmacology-v2';
 const urlsToCache = [
   './',
   './index.html',
